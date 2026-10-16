@@ -1,0 +1,937 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-10-16T18:25:08.092413Z",
+  "windowStart": "2026-10-12",
+  "windowEnd": "2026-10-25",
+  "studios": [
+    {
+      "id": "bdc",
+      "name": "Broadway Dance Center",
+      "shortName": "BDC",
+      "address": "322 W 45th St, 3rd Fl",
+      "neighborhood": "Hell's Kitchen",
+      "color": "0xFFC62828",
+      "lat": 40.7598,
+      "lng": -73.9891,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "-308",
+      "scheduleUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "steps",
+      "name": "Steps on Broadway",
+      "shortName": "Steps",
+      "address": "2121 Broadway, 3rd Fl",
+      "neighborhood": "Upper West Side",
+      "color": "0xFF3949AB",
+      "lat": 40.7806,
+      "lng": -73.981,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "-308",
+      "scheduleUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "ailey",
+      "name": "Ailey Extension",
+      "shortName": "Ailey",
+      "address": "405 W 55th St",
+      "neighborhood": "Hell's Kitchen",
+      "color": "0xFFF9A825",
+      "lat": 40.7668,
+      "lng": -73.9867,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "ailey",
+      "scheduleUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "peridance",
+      "name": "Peridance Center",
+      "shortName": "Peridance",
+      "address": "126 E 13th St",
+      "neighborhood": "Union Square",
+      "color": "0xFF00897B",
+      "lat": 40.7334,
+      "lng": -73.9887,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "38909",
+      "scheduleUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "pmt",
+      "name": "PMT House of Dance",
+      "shortName": "PMT",
+      "address": "28 W 25th St, 2nd Fl",
+      "neighborhood": "Flatiron",
+      "color": "0xFF7B1FA2",
+      "lat": 40.7437,
+      "lng": -73.9905,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "pmt",
+      "scheduleUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    }
+  ],
+  "templates": [
+    {
+      "id": "bdc_basic_ballet",
+      "studioId": "bdc",
+      "title": "Basic Ballet",
+      "matchPatterns": [
+        "Basic Ballet",
+        "Ballet - Basic"
+      ],
+      "rawLevelLabel": "BASIC",
+      "tier": "zeroExperience",
+      "primaryGenre": "ballet",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 1,
+          "startMin": 540,
+          "durationMin": 90,
+          "regularInstructor": "Dana R."
+        },
+        {
+          "weekday": 3,
+          "startMin": 540,
+          "durationMin": 90,
+          "regularInstructor": "Dana R."
+        },
+        {
+          "weekday": 6,
+          "startMin": 600,
+          "durationMin": 90,
+          "regularInstructor": "Lena M."
+        }
+      ],
+      "description": "An introduction to ballet vocabulary at the barre and in the center: posture, turnout, pliés, tendus and simple across-the-floor combinations.",
+      "prerequisiteNotes": "No prior experience required.",
+      "attireNotes": "Form-fitting clothing; ballet slippers or socks. Hair secured away from the face.",
+      "catalogUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "bdc_basic_jazz",
+      "studioId": "bdc",
+      "title": "Basic Jazz",
+      "matchPatterns": [
+        "Basic Jazz",
+        "Jazz - Basic"
+      ],
+      "rawLevelLabel": "BASIC",
+      "tier": "zeroExperience",
+      "primaryGenre": "jazzTheater",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 2,
+          "startMin": 1080,
+          "durationMin": 90,
+          "regularInstructor": "Marcus T."
+        },
+        {
+          "weekday": 4,
+          "startMin": 1080,
+          "durationMin": 90,
+          "regularInstructor": "Marcus T."
+        }
+      ],
+      "description": "Isolations, basic jazz walks, pas de bourrée, simple turns and a short combination.",
+      "prerequisiteNotes": "No prior experience required.",
+      "attireNotes": "Jazz shoes or sneakers; clothing you can move in.",
+      "catalogUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "bdc_basic_hiphop",
+      "studioId": "bdc",
+      "title": "Basic Hip Hop",
+      "matchPatterns": [
+        "Basic Hip Hop",
+        "Hip Hop - Basic"
+      ],
+      "rawLevelLabel": "BASIC",
+      "tier": "zeroExperience",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 1,
+          "startMin": 1110,
+          "durationMin": 90,
+          "regularInstructor": "Jay K."
+        },
+        {
+          "weekday": 5,
+          "startMin": 1140,
+          "durationMin": 90,
+          "regularInstructor": "Jay K."
+        }
+      ],
+      "description": "Grooves, bounce and rock, foundational party steps and a beginner-paced combo.",
+      "prerequisiteNotes": "No prior experience required.",
+      "attireNotes": "Comfortable clothes you can move in; clean sneakers.",
+      "catalogUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "steps_basic_tap",
+      "studioId": "steps",
+      "title": "Basic Tap",
+      "matchPatterns": [
+        "Basic Tap",
+        "Tap - Basic"
+      ],
+      "rawLevelLabel": "BASIC",
+      "tier": "zeroExperience",
+      "primaryGenre": "tap",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 1,
+          "startMin": 1080,
+          "durationMin": 90,
+          "regularInstructor": "Gwen H."
+        },
+        {
+          "weekday": 6,
+          "startMin": 720,
+          "durationMin": 90,
+          "regularInstructor": "Gwen H."
+        }
+      ],
+      "description": "Toe, heel, shuffle, flap and ball-change—building rhythm from scratch.",
+      "prerequisiteNotes": "No prior experience required.",
+      "attireNotes": "Tap shoes (loaners sometimes available—call ahead).",
+      "catalogUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "steps_basic_ballet",
+      "studioId": "steps",
+      "title": "Basic Ballet",
+      "matchPatterns": [
+        "Basic Ballet",
+        "Ballet - Basic"
+      ],
+      "rawLevelLabel": "BASIC",
+      "tier": "zeroExperience",
+      "primaryGenre": "ballet",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 2,
+          "startMin": 600,
+          "durationMin": 90,
+          "regularInstructor": "Irina S."
+        },
+        {
+          "weekday": 4,
+          "startMin": 600,
+          "durationMin": 90,
+          "regularInstructor": "Irina S."
+        },
+        {
+          "weekday": 7,
+          "startMin": 660,
+          "durationMin": 90,
+          "regularInstructor": "Paul D."
+        }
+      ],
+      "description": "Slow-paced barre with detailed alignment cues, followed by simple center work.",
+      "prerequisiteNotes": "No prior experience required.",
+      "attireNotes": "Form-fitting clothing; ballet slippers or socks.",
+      "catalogUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "ailey_intro_horton",
+      "studioId": "ailey",
+      "title": "Intro to Horton",
+      "matchPatterns": [
+        "Intro to Horton",
+        "Intro Horton"
+      ],
+      "rawLevelLabel": "INTRO",
+      "tier": "zeroExperience",
+      "primaryGenre": "contemporaryModern",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 1,
+          "startMin": 1110,
+          "durationMin": 90,
+          "regularInstructor": "Keisha W."
+        },
+        {
+          "weekday": 6,
+          "startMin": 660,
+          "durationMin": 90,
+          "regularInstructor": "Keisha W."
+        }
+      ],
+      "description": "Flat backs, lateral T, fortifications and the foundational shapes of Horton modern technique.",
+      "prerequisiteNotes": "For students who have never taken a dance class.",
+      "attireNotes": "Form-fitting clothing; barefoot or socks.",
+      "catalogUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "ailey_absbeg_ballet",
+      "studioId": "ailey",
+      "title": "Absolute Beginner Ballet",
+      "matchPatterns": [
+        "Absolute Beginner Ballet",
+        "Abs Beg Ballet",
+        "Intro to Ballet"
+      ],
+      "rawLevelLabel": "ABS BEG",
+      "tier": "zeroExperience",
+      "primaryGenre": "ballet",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 2,
+          "startMin": 1110,
+          "durationMin": 90,
+          "regularInstructor": "Elena F."
+        },
+        {
+          "weekday": 7,
+          "startMin": 720,
+          "durationMin": 90,
+          "regularInstructor": "Elena F."
+        }
+      ],
+      "description": "Barre fundamentals with plenty of repetition and individual corrections.",
+      "prerequisiteNotes": "Little to no prior experience.",
+      "attireNotes": "Form-fitting clothing; ballet slippers or socks.",
+      "catalogUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "pmt_basic_house",
+      "studioId": "pmt",
+      "title": "Basic House",
+      "matchPatterns": [
+        "Basic House",
+        "House - Basic"
+      ],
+      "rawLevelLabel": "BASIC",
+      "tier": "zeroExperience",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 2,
+          "startMin": 1140,
+          "durationMin": 75,
+          "regularInstructor": "Rico S."
+        },
+        {
+          "weekday": 6,
+          "startMin": 900,
+          "durationMin": 75,
+          "regularInstructor": "Rico S."
+        }
+      ],
+      "description": "Jacking, the basic box, shuffles and loose footwork to house music.",
+      "prerequisiteNotes": "No prior experience required.",
+      "attireNotes": "Sneakers with smooth soles; loose clothing.",
+      "catalogUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "pmt_basic_hiphop",
+      "studioId": "pmt",
+      "title": "Basic Hip Hop",
+      "matchPatterns": [
+        "Basic Hip Hop",
+        "Hip Hop - Basic"
+      ],
+      "rawLevelLabel": "BASIC",
+      "tier": "zeroExperience",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [
+        {
+          "weekday": 1,
+          "startMin": 1170,
+          "durationMin": 75,
+          "regularInstructor": "Bea N."
+        },
+        {
+          "weekday": 4,
+          "startMin": 1170,
+          "durationMin": 75,
+          "regularInstructor": "Bea N."
+        }
+      ],
+      "description": "Hip hop foundations and grooves at a slower pace.",
+      "prerequisiteNotes": "No prior experience required.",
+      "attireNotes": "Comfortable clothes you can move in; clean sneakers.",
+      "catalogUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    }
+  ],
+  "series": [
+    {
+      "id": "peri_ws_ballet_fall",
+      "templateId": "peri_absbeg_ballet_ws",
+      "studioId": "peridance",
+      "title": "Absolute Beginner Ballet Workshop",
+      "startDate": "2026-10-05",
+      "sessionCount": 6,
+      "weekday": 1,
+      "startMin": 1050,
+      "durationMin": 90,
+      "instructor": "Anna K.",
+      "enrollmentOpen": false,
+      "price": "$165 / 6 wks",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peri_ws_hiphop",
+      "templateId": "peri_absbeg_hiphop_ws",
+      "studioId": "peridance",
+      "title": "Absolute Beginner Hip Hop Workshop",
+      "startDate": "2026-10-24",
+      "sessionCount": 5,
+      "weekday": 6,
+      "startMin": 960,
+      "durationMin": 75,
+      "instructor": "Jules R.",
+      "enrollmentOpen": true,
+      "price": "$140 / 5 wks",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_ws_tap",
+      "templateId": "steps_absbeg_tap_series",
+      "studioId": "steps",
+      "title": "Absolute Beginner Tap Series",
+      "startDate": "2026-10-29",
+      "sessionCount": 4,
+      "weekday": 4,
+      "startMin": 1140,
+      "durationMin": 90,
+      "instructor": "Gwen H.",
+      "enrollmentOpen": true,
+      "price": "$120 / 4 wks",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "bdc_basic_ballet_2026-10-12_540",
+      "templateId": "bdc_basic_ballet",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-12",
+      "startMin": 540,
+      "endMin": 630,
+      "tz": "America/New_York",
+      "instructor": "Dana R.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "steps_basic_tap_2026-10-12_1080",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-12",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Gwen H.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "bdc_basic_hiphop_2026-10-12_1110",
+      "templateId": "bdc_basic_hiphop",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-12",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Jay K.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "ailey_intro_horton_2026-10-12_1110",
+      "templateId": "ailey_intro_horton",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-12",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Keisha W.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "pmt_basic_hiphop_2026-10-12_1170",
+      "templateId": "pmt_basic_hiphop",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-12",
+      "startMin": 1170,
+      "endMin": 1245,
+      "tz": "America/New_York",
+      "instructor": "Bea N.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "steps_basic_ballet_2026-10-13_600",
+      "templateId": "steps_basic_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-13",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Irina S.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "bdc_basic_jazz_2026-10-13_1080",
+      "templateId": "bdc_basic_jazz",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-13",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Marcus T.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "ailey_absbeg_ballet_2026-10-13_1110",
+      "templateId": "ailey_absbeg_ballet",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-13",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Elena F.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "pmt_basic_house_2026-10-13_1140",
+      "templateId": "pmt_basic_house",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-13",
+      "startMin": 1140,
+      "endMin": 1215,
+      "tz": "America/New_York",
+      "instructor": "Rico S.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "bdc_basic_ballet_2026-10-14_540",
+      "templateId": "bdc_basic_ballet",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-14",
+      "startMin": 540,
+      "endMin": 630,
+      "tz": "America/New_York",
+      "instructor": "Dana R.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "steps_basic_ballet_2026-10-15_600",
+      "templateId": "steps_basic_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-15",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Irina S.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "bdc_basic_jazz_2026-10-15_1080",
+      "templateId": "bdc_basic_jazz",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-15",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Marcus T.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "pmt_basic_hiphop_2026-10-15_1170",
+      "templateId": "pmt_basic_hiphop",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-15",
+      "startMin": 1170,
+      "endMin": 1245,
+      "tz": "America/New_York",
+      "instructor": "Bea N.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "bdc_basic_hiphop_2026-10-16_1140",
+      "templateId": "bdc_basic_hiphop",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-16",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Jay K.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "bdc_basic_ballet_2026-10-17_600",
+      "templateId": "bdc_basic_ballet",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-17",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Lena M.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "ailey_intro_horton_2026-10-17_660",
+      "templateId": "ailey_intro_horton",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-17",
+      "startMin": 660,
+      "endMin": 750,
+      "tz": "America/New_York",
+      "instructor": "Guest Artist",
+      "isSubstitute": true,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "steps_basic_tap_2026-10-17_720",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 720,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Gwen H.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "pmt_basic_house_2026-10-17_900",
+      "templateId": "pmt_basic_house",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-17",
+      "startMin": 900,
+      "endMin": 975,
+      "tz": "America/New_York",
+      "instructor": "Rico S.",
+      "isSubstitute": false,
+      "status": "cancelled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "steps_basic_ballet_2026-10-18_660",
+      "templateId": "steps_basic_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 660,
+      "endMin": 750,
+      "tz": "America/New_York",
+      "instructor": "Paul D.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "ailey_absbeg_ballet_2026-10-18_720",
+      "templateId": "ailey_absbeg_ballet",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-18",
+      "startMin": 720,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Elena F.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "bdc_basic_ballet_2026-10-19_540",
+      "templateId": "bdc_basic_ballet",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-19",
+      "startMin": 540,
+      "endMin": 630,
+      "tz": "America/New_York",
+      "instructor": "Dana R.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "steps_basic_tap_2026-10-19_1080",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Guest Artist",
+      "isSubstitute": true,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "bdc_basic_hiphop_2026-10-19_1110",
+      "templateId": "bdc_basic_hiphop",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-19",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Jay K.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "ailey_intro_horton_2026-10-19_1110",
+      "templateId": "ailey_intro_horton",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-19",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Keisha W.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "pmt_basic_hiphop_2026-10-19_1170",
+      "templateId": "pmt_basic_hiphop",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-19",
+      "startMin": 1170,
+      "endMin": 1245,
+      "tz": "America/New_York",
+      "instructor": "Bea N.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "steps_basic_ballet_2026-10-20_600",
+      "templateId": "steps_basic_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Irina S.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "bdc_basic_jazz_2026-10-20_1080",
+      "templateId": "bdc_basic_jazz",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-20",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Marcus T.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "ailey_absbeg_ballet_2026-10-20_1110",
+      "templateId": "ailey_absbeg_ballet",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-20",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Elena F.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "pmt_basic_house_2026-10-20_1140",
+      "templateId": "pmt_basic_house",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-20",
+      "startMin": 1140,
+      "endMin": 1215,
+      "tz": "America/New_York",
+      "instructor": "Rico S.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "bdc_basic_ballet_2026-10-21_540",
+      "templateId": "bdc_basic_ballet",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-21",
+      "startMin": 540,
+      "endMin": 630,
+      "tz": "America/New_York",
+      "instructor": "Dana R.",
+      "isSubstitute": false,
+      "status": "cancelled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "steps_basic_ballet_2026-10-22_600",
+      "templateId": "steps_basic_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Irina S.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "bdc_basic_jazz_2026-10-22_1080",
+      "templateId": "bdc_basic_jazz",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-22",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Marcus T.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "pmt_basic_hiphop_2026-10-22_1170",
+      "templateId": "pmt_basic_hiphop",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-22",
+      "startMin": 1170,
+      "endMin": 1245,
+      "tz": "America/New_York",
+      "instructor": "Bea N.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "bdc_basic_hiphop_2026-10-23_1140",
+      "templateId": "bdc_basic_hiphop",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-23",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Jay K.",
+      "isSubstitute": false,
+      "status": "removed",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "bdc_basic_ballet_2026-10-24_600",
+      "templateId": "bdc_basic_ballet",
+      "studioId": "bdc",
+      "serviceDate": "2026-10-24",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Lena M.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "ailey_intro_horton_2026-10-24_660",
+      "templateId": "ailey_intro_horton",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-24",
+      "startMin": 660,
+      "endMin": 750,
+      "tz": "America/New_York",
+      "instructor": "Keisha W.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "steps_basic_tap_2026-10-24_720",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-24",
+      "startMin": 720,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Gwen H.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "pmt_basic_house_2026-10-24_900",
+      "templateId": "pmt_basic_house",
+      "studioId": "pmt",
+      "serviceDate": "2026-10-24",
+      "startMin": 900,
+      "endMin": 975,
+      "tz": "America/New_York",
+      "instructor": "Rico S.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "steps_basic_ballet_2026-10-25_660",
+      "templateId": "steps_basic_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-25",
+      "startMin": 660,
+      "endMin": 750,
+      "tz": "America/New_York",
+      "instructor": "Paul D.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "ailey_absbeg_ballet_2026-10-25_720",
+      "templateId": "ailey_absbeg_ballet",
+      "studioId": "ailey",
+      "serviceDate": "2026-10-25",
+      "startMin": 720,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Elena F.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.ailey.org/extension"
+    }
+  ],
+  "unmatchedReviewQueue": []
+}

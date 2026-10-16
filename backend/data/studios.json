@@ -1,0 +1,69 @@
+{
+  "studios": [
+    {
+      "id": "bdc",
+      "name": "Broadway Dance Center",
+      "shortName": "BDC",
+      "address": "322 W 45th St, 3rd Fl",
+      "neighborhood": "Hell's Kitchen",
+      "color": "0xFFC62828",
+      "lat": 40.7598,
+      "lng": -73.9891,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "-308",
+      "scheduleUrl": "https://www.broadwaydancecenter.com/schedule"
+    },
+    {
+      "id": "steps",
+      "name": "Steps on Broadway",
+      "shortName": "Steps",
+      "address": "2121 Broadway, 3rd Fl",
+      "neighborhood": "Upper West Side",
+      "color": "0xFF3949AB",
+      "lat": 40.7806,
+      "lng": -73.9810,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "-308",
+      "scheduleUrl": "https://www.stepsnyc.com/classes"
+    },
+    {
+      "id": "ailey",
+      "name": "Ailey Extension",
+      "shortName": "Ailey",
+      "address": "405 W 55th St",
+      "neighborhood": "Hell's Kitchen",
+      "color": "0xFFF9A825",
+      "lat": 40.7668,
+      "lng": -73.9867,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "ailey",
+      "scheduleUrl": "https://www.ailey.org/extension"
+    },
+    {
+      "id": "peridance",
+      "name": "Peridance Center",
+      "shortName": "Peridance",
+      "address": "126 E 13th St",
+      "neighborhood": "Union Square",
+      "color": "0xFF00897B",
+      "lat": 40.7334,
+      "lng": -73.9887,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "38909",
+      "scheduleUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "pmt",
+      "name": "PMT House of Dance",
+      "shortName": "PMT",
+      "address": "28 W 25th St, 2nd Fl",
+      "neighborhood": "Flatiron",
+      "color": "0xFF7B1FA2",
+      "lat": 40.7437,
+      "lng": -73.9905,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "pmt",
+      "scheduleUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+name: Build and Publish NYC Dance Calendar Feed
+
+on:
+  schedule:
+    # Run every 3 hours between 7am and 11pm Eastern (approx 11:00 UTC to 03:00 UTC)
+    - cron: '0 10,13,16,19,22,1 * * *'
+  workflow_dispatch:
+
+jobs:
+  build-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run Feed Aggregator
+        run: |
+          python3 backend/src/build_feed.py
+
+      - name: Deploy static feed to GitHub Pages / Release artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nyc-dance-schedule-feed
+          path: backend/data/schedule.json
