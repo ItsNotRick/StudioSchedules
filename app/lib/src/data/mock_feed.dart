@@ -478,6 +478,14 @@ const _subPool = ['Alex Q.', 'Brooke Y.', 'Chris Z.', 'Devon U.'];
 class MockFeed {
   MockFeed._(this.today, this.windowStart, this.sessions, this.series);
 
+  factory MockFeed.fromData({
+    required ServiceDate today,
+    required ServiceDate windowStart,
+    required List<ClassSession> sessions,
+    required List<WorkshopSeries> series,
+  }) =>
+      MockFeed._(today, windowStart, sessions, series);
+
   factory MockFeed.build(ServiceDate today) {
     final week0 = today.startOfWeek;
     final sessions = <ClassSession>[];
