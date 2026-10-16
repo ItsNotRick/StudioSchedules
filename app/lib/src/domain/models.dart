@@ -51,7 +51,8 @@ enum Genre {
   hipHopStreet('Hip-Hop / Street', Icons.graphic_eq),
   commercialHeels('Commercial / Heels', Icons.star_outline),
   africanDiaspora('African / Afro-diasporic', Icons.public),
-  worldCultural('World / Cultural', Icons.language);
+  worldCultural('World / Cultural', Icons.language),
+  other('Other', Icons.category_outlined);
 
   const Genre(this.label, this.icon);
   final String label;

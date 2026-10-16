@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-10-16T20:19:44.171798+00:00",
+  "generatedAt": "2026-10-16T20:55:18.376509+00:00",
   "windowStart": "2026-10-12",
   "windowEnd": "2026-10-25",
   "studios": [
@@ -483,7 +483,7 @@
       "catalogUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/332035?tab=book"
     },
     {
-      "id": "bdc_hipHopStreet_basic_jump",
+      "id": "bdc_other_basic_jump",
       "studioId": "bdc",
       "title": "Basic JUMPS AND TURNS",
       "matchPatterns": [
@@ -491,7 +491,7 @@
       ],
       "rawLevelLabel": "BASIC",
       "tier": "zeroExperience",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "other",
       "tags": [],
       "slots": [],
       "description": "Basic JUMPS AND TURNS at BDC.",
@@ -738,7 +738,7 @@
       "catalogUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/330493?tab=book"
     },
     {
-      "id": "bdc_hipHopStreet_beg_jumps_",
+      "id": "bdc_other_beg_jumps_",
       "studioId": "bdc",
       "title": "Beg JUMPS AND TURNS",
       "matchPatterns": [
@@ -746,7 +746,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "other",
       "tags": [],
       "slots": [],
       "description": "Beg JUMPS AND TURNS at BDC.",
@@ -1299,7 +1299,7 @@
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
-      "id": "steps_hipHopStreet_open_count",
+      "id": "steps_other_open_count",
       "studioId": "steps",
       "title": "Open Countertechnique",
       "matchPatterns": [
@@ -1307,7 +1307,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "other",
       "tags": [],
       "slots": [],
       "description": "Open Countertechnique at STEPS.",
@@ -1435,7 +1435,7 @@
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
-      "id": "steps_hipHopStreet_adv/beg_po",
+      "id": "steps_ballet_adv/beg_po",
       "studioId": "steps",
       "title": "Adv/Beg Pointe",
       "matchPatterns": [
@@ -1443,7 +1443,7 @@
       ],
       "rawLevelLabel": "ADV/BEG",
       "tier": "advancedBeginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "ballet",
       "tags": [],
       "slots": [],
       "description": "Adv/Beg Pointe at STEPS.",
@@ -1486,7 +1486,7 @@
       "catalogUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836462&sDate=10/1/2026&studioid=851&sType=-117"
     },
     {
-      "id": "ailey_hipHopStreet_beg_ny_sty",
+      "id": "ailey_worldCultural_beg_ny_sty",
       "studioId": "ailey",
       "title": "Beg NY Style Mambo (Beginner)",
       "matchPatterns": [
@@ -1494,7 +1494,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "worldCultural",
       "tags": [],
       "slots": [],
       "description": "Beg NY Style Mambo (Beginner) at AILEY.",
@@ -1690,7 +1690,7 @@
       "catalogUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836501&sDate=10/2/2026&studioid=851&sType=-117"
     },
     {
-      "id": "ailey_hipHopStreet_beg_limón_",
+      "id": "ailey_contemporaryModern_beg_limón_",
       "studioId": "ailey",
       "title": "Beg Limón (Beginner)",
       "matchPatterns": [
@@ -1698,7 +1698,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "contemporaryModern",
       "tags": [],
       "slots": [],
       "description": "Beg Limón (Beginner) at AILEY.",
@@ -2013,7 +2013,7 @@
       "catalogUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836510&sDate=10/7/2026&studioid=851&sType=-117"
     },
     {
-      "id": "ailey_hipHopStreet_open_limón",
+      "id": "ailey_contemporaryModern_open_limón",
       "studioId": "ailey",
       "title": "Open Limón",
       "matchPatterns": [
@@ -2021,7 +2021,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "contemporaryModern",
       "tags": [],
       "slots": [],
       "description": "Open Limón at AILEY.",
@@ -2370,7 +2370,7 @@
       "catalogUrl": "https://www.peridance.com/open-classes"
     },
     {
-      "id": "peridance_hipHopStreet_open_zena_",
+      "id": "peridance_other_open_zena_",
       "studioId": "peridance",
       "title": "Open Zena Rommett Floor-Barre ®",
       "matchPatterns": [
@@ -2378,7 +2378,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "other",
       "tags": [],
       "slots": [],
       "description": "Open Zena Rommett Floor-Barre ® at PERIDANCE.",
@@ -2387,7 +2387,7 @@
       "catalogUrl": "https://www.peridance.com/open-classes"
     },
     {
-      "id": "peridance_hipHopStreet_open_stret",
+      "id": "peridance_other_open_stret",
       "studioId": "peridance",
       "title": "Open Stretch",
       "matchPatterns": [
@@ -2395,7 +2395,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "other",
       "tags": [],
       "slots": [],
       "description": "Open Stretch at PERIDANCE.",
@@ -2506,7 +2506,7 @@
       "catalogUrl": "https://www.peridance.com/open-classes"
     },
     {
-      "id": "peridance_hipHopStreet_open_brazi",
+      "id": "peridance_worldCultural_open_brazi",
       "studioId": "peridance",
       "title": "Open Brazilian Samba",
       "matchPatterns": [
@@ -2514,7 +2514,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "worldCultural",
       "tags": [],
       "slots": [],
       "description": "Open Brazilian Samba at PERIDANCE.",
@@ -2812,7 +2812,7 @@
       "catalogUrl": "https://www.pmthouseofdance.com/sign-up-for-classes"
     },
     {
-      "id": "pmt_hipHopStreet_open_barre",
+      "id": "pmt_other_open_barre",
       "studioId": "pmt",
       "title": "Open Barre",
       "matchPatterns": [
@@ -2820,7 +2820,7 @@
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
+      "primaryGenre": "other",
       "tags": [],
       "slots": [],
       "description": "Open Barre at PMT.",
@@ -3394,7 +3394,7 @@
     },
     {
       "id": "ailey_2026-10-14_1110_openlim",
-      "templateId": "ailey_hipHopStreet_open_limón",
+      "templateId": "ailey_contemporaryModern_open_limón",
       "studioId": "ailey",
       "serviceDate": "2026-10-14",
       "startMin": 1110,
@@ -3524,7 +3524,7 @@
     },
     {
       "id": "ailey_2026-10-15_1080_begnys",
-      "templateId": "ailey_hipHopStreet_beg_ny_sty",
+      "templateId": "ailey_worldCultural_beg_ny_sty",
       "studioId": "ailey",
       "serviceDate": "2026-10-15",
       "startMin": 1080,
@@ -3823,7 +3823,7 @@
     },
     {
       "id": "bdc_2026-10-16_1005_basicjump",
-      "templateId": "bdc_hipHopStreet_basic_jump",
+      "templateId": "bdc_other_basic_jump",
       "studioId": "bdc",
       "serviceDate": "2026-10-16",
       "startMin": 1005,
@@ -4291,7 +4291,7 @@
     },
     {
       "id": "ailey_2026-10-17_660_beglimó",
-      "templateId": "ailey_hipHopStreet_beg_limón_",
+      "templateId": "ailey_contemporaryModern_beg_limón_",
       "studioId": "ailey",
       "serviceDate": "2026-10-17",
       "startMin": 660,
@@ -4440,7 +4440,7 @@
       "startMin": 765,
       "endMin": 855,
       "tz": "America/New_York",
-      "instructor": "Staff",
+      "instructor": "JoLea Maffei",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -4954,7 +4954,7 @@
     },
     {
       "id": "bdc_2026-10-17_1110_begjumps",
-      "templateId": "bdc_hipHopStreet_beg_jumps_",
+      "templateId": "bdc_other_beg_jumps_",
       "studioId": "bdc",
       "serviceDate": "2026-10-17",
       "startMin": 1110,
@@ -5175,7 +5175,7 @@
     },
     {
       "id": "pmt_2026-10-18_690_open_b",
-      "templateId": "pmt_hipHopStreet_open_barre",
+      "templateId": "pmt_other_open_barre",
       "studioId": "pmt",
       "serviceDate": "2026-10-18",
       "startMin": 690,
@@ -5617,7 +5617,7 @@
     },
     {
       "id": "steps_2026-10-18_945_F6HEXgcb",
-      "templateId": "steps_hipHopStreet_open_count",
+      "templateId": "steps_other_open_count",
       "studioId": "steps",
       "serviceDate": "2026-10-18",
       "startMin": 945,
@@ -6657,7 +6657,7 @@
     },
     {
       "id": "bdc_2026-10-20_630_begjumps",
-      "templateId": "bdc_hipHopStreet_beg_jumps_",
+      "templateId": "bdc_other_beg_jumps_",
       "studioId": "bdc",
       "serviceDate": "2026-10-20",
       "startMin": 630,
@@ -6735,7 +6735,7 @@
     },
     {
       "id": "peri_2026-10-20_630_SYAjnhZq",
-      "templateId": "peridance_hipHopStreet_open_zena_",
+      "templateId": "peridance_other_open_zena_",
       "studioId": "peridance",
       "serviceDate": "2026-10-20",
       "startMin": 630,
@@ -6878,7 +6878,7 @@
     },
     {
       "id": "peri_2026-10-20_780_SYAjniwB",
-      "templateId": "peridance_hipHopStreet_open_stret",
+      "templateId": "peridance_other_open_stret",
       "studioId": "peridance",
       "serviceDate": "2026-10-20",
       "startMin": 780,
@@ -7827,7 +7827,7 @@
     },
     {
       "id": "steps_2026-10-21_750_F6HE3GTN",
-      "templateId": "steps_hipHopStreet_adv/beg_po",
+      "templateId": "steps_ballet_adv/beg_po",
       "studioId": "steps",
       "serviceDate": "2026-10-21",
       "startMin": 750,
@@ -7905,7 +7905,7 @@
     },
     {
       "id": "bdc_2026-10-21_810_begjumps",
-      "templateId": "bdc_hipHopStreet_beg_jumps_",
+      "templateId": "bdc_other_beg_jumps_",
       "studioId": "bdc",
       "serviceDate": "2026-10-21",
       "startMin": 810,
@@ -7996,7 +7996,7 @@
     },
     {
       "id": "peri_2026-10-21_870_SYAjnjds",
-      "templateId": "peridance_hipHopStreet_open_stret",
+      "templateId": "peridance_other_open_stret",
       "studioId": "peridance",
       "serviceDate": "2026-10-21",
       "startMin": 870,
@@ -8321,7 +8321,7 @@
     },
     {
       "id": "ailey_2026-10-21_1110_openlim",
-      "templateId": "ailey_hipHopStreet_open_limón",
+      "templateId": "ailey_contemporaryModern_open_limón",
       "studioId": "ailey",
       "serviceDate": "2026-10-21",
       "startMin": 1110,
@@ -8477,7 +8477,7 @@
     },
     {
       "id": "peri_2026-10-21_1170_SYAjntbg",
-      "templateId": "peridance_hipHopStreet_open_brazi",
+      "templateId": "peridance_worldCultural_open_brazi",
       "studioId": "peridance",
       "serviceDate": "2026-10-21",
       "startMin": 1170,
@@ -8698,7 +8698,7 @@
     },
     {
       "id": "peri_2026-10-22_630_SYAjon7K",
-      "templateId": "peridance_hipHopStreet_open_zena_",
+      "templateId": "peridance_other_open_zena_",
       "studioId": "peridance",
       "serviceDate": "2026-10-22",
       "startMin": 630,
@@ -9088,7 +9088,7 @@
     },
     {
       "id": "ailey_2026-10-22_1080_begnys",
-      "templateId": "ailey_hipHopStreet_beg_ny_sty",
+      "templateId": "ailey_worldCultural_beg_ny_sty",
       "studioId": "ailey",
       "serviceDate": "2026-10-22",
       "startMin": 1080,
@@ -9452,7 +9452,7 @@
     },
     {
       "id": "bdc_2026-10-23_630_begjumps",
-      "templateId": "bdc_hipHopStreet_beg_jumps_",
+      "templateId": "bdc_other_beg_jumps_",
       "studioId": "bdc",
       "serviceDate": "2026-10-23",
       "startMin": 630,
@@ -9660,7 +9660,7 @@
     },
     {
       "id": "bdc_2026-10-23_1005_basicjump",
-      "templateId": "bdc_hipHopStreet_basic_jump",
+      "templateId": "bdc_other_basic_jump",
       "studioId": "bdc",
       "serviceDate": "2026-10-23",
       "startMin": 1005,
@@ -9972,7 +9972,7 @@
     },
     {
       "id": "ailey_2026-10-24_660_beglimó",
-      "templateId": "ailey_hipHopStreet_beg_limón_",
+      "templateId": "ailey_contemporaryModern_beg_limón_",
       "studioId": "ailey",
       "serviceDate": "2026-10-24",
       "startMin": 660,
@@ -10323,7 +10323,7 @@
     },
     {
       "id": "bdc_2026-10-24_1110_begjumps",
-      "templateId": "bdc_hipHopStreet_beg_jumps_",
+      "templateId": "bdc_other_beg_jumps_",
       "studioId": "bdc",
       "serviceDate": "2026-10-24",
       "startMin": 1110,
@@ -10492,7 +10492,7 @@
     },
     {
       "id": "pmt_2026-10-25_690_open_b",
-      "templateId": "pmt_hipHopStreet_open_barre",
+      "templateId": "pmt_other_open_barre",
       "studioId": "pmt",
       "serviceDate": "2026-10-25",
       "startMin": 690,
@@ -11454,7 +11454,7 @@
     },
     {
       "id": "bdc_2026-10-27_630_begjumps",
-      "templateId": "bdc_hipHopStreet_beg_jumps_",
+      "templateId": "bdc_other_beg_jumps_",
       "studioId": "bdc",
       "serviceDate": "2026-10-27",
       "startMin": 630,
@@ -11701,7 +11701,7 @@
     },
     {
       "id": "ailey_2026-10-28_1110_openlim",
-      "templateId": "ailey_hipHopStreet_open_limón",
+      "templateId": "ailey_contemporaryModern_open_limón",
       "studioId": "ailey",
       "serviceDate": "2026-10-28",
       "startMin": 1110,
@@ -11792,7 +11792,7 @@
     },
     {
       "id": "ailey_2026-10-29_1080_begnys",
-      "templateId": "ailey_hipHopStreet_beg_ny_sty",
+      "templateId": "ailey_worldCultural_beg_ny_sty",
       "studioId": "ailey",
       "serviceDate": "2026-10-29",
       "startMin": 1080,
@@ -11987,7 +11987,7 @@
     },
     {
       "id": "ailey_2026-10-31_660_beglimó",
-      "templateId": "ailey_hipHopStreet_beg_limón_",
+      "templateId": "ailey_contemporaryModern_beg_limón_",
       "studioId": "ailey",
       "serviceDate": "2026-10-31",
       "startMin": 660,
@@ -12118,7 +12118,7 @@
   ],
   "scraperStats": {
     "bdc": 431,
-    "steps": 500,
+    "steps": 496,
     "ailey": 413,
     "peridance": 125,
     "pmt": 86

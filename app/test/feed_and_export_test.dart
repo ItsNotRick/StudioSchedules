@@ -96,5 +96,19 @@ void main() {
 
     expect(immediateSame, isNotEmpty, reason: 'Same-studio immediate classes should be found');
   });
+
+  test('Genre.other catch-all is recognized and populated in live feed', () async {
+    final repo = FeedRepository();
+    final feed = await repo.loadFeed();
+
+    final otherTemplates = feed.sessions
+        .map((s) => templatesById[s.templateId])
+        .where((tpl) => tpl?.primaryGenre == Genre.other)
+        .toList();
+
+    expect(otherTemplates, isNotEmpty, reason: 'Feed must contain classes classified under Other');
+    final titles = otherTemplates.map((t) => t!.title).toSet();
+    expect(titles.any((t) => t.toLowerCase().contains('jump') || t.toLowerCase().contains('stretch') || t.toLowerCase().contains('barre')), isTrue);
+  });
 }
 

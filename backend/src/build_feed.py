@@ -70,19 +70,23 @@ def classify_session(raw_title: str) -> Tuple[bool, str]:
 
 def infer_genre(title: str) -> str:
     t = title.lower()
-    if "ballet" in t:
+    if "ballet" in t or "pointe" in t:
         return "ballet"
     if "tap" in t:
         return "tap"
-    if "contemporary" in t or "modern" in t or "horton" in t or "graham" in t or "lyrical" in t or "dunham" in t:
+    if "contemporary" in t or "modern" in t or "horton" in t or "graham" in t or "lyrical" in t or "dunham" in t or "limón" in t or "limon" in t or "cunningham" in t or "taylor" in t:
         return "contemporaryModern"
-    if "jazz" in t or "theater" in t or "broadway" in t:
+    if "jazz" in t or "theater" in t or "theatre" in t or "broadway" in t:
         return "jazzTheater"
     if "heels" in t or "commercial" in t:
         return "commercialHeels"
     if "african" in t or "haitian" in t or "diaspora" in t or "afro" in t:
         return "africanDiaspora"
-    return "hipHopStreet"
+    if "world" in t or "flamenco" in t or "belly" in t or "samba" in t or "tango" in t or "salsa" in t or "bachata" in t or "mambo" in t or "folk" in t or "capoeira" in t or "cultural" in t:
+        return "worldCultural"
+    if any(k in t for k in ["hip hop", "hip-hop", "hiphop", "street", "break", "popping", "locking", "waacking", "vogue", "voguing", "house", "choreo", "urban", "groove", "krump", "freestyle", "dancehall", "reggaeton", "moptop", "litefeet"]):
+        return "hipHopStreet"
+    return "other"
 
 def infer_tier(title: str) -> Tuple[str, str]:
     t = title.lower()

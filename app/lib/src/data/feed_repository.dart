@@ -67,11 +67,19 @@ class FeedRepository {
           orElse: () => Tier.beginner,
         );
 
-        final genreKey = m['primaryGenre'] as String? ?? 'hipHopStreet';
+        final genreKey = m['primaryGenre'] as String? ?? 'other';
         final primaryGenre = Genre.values.firstWhere(
           (g) => g.name == genreKey,
-          orElse: () => Genre.hipHopStreet,
+          orElse: () => Genre.other,
         );
+
+        final rawTags = m['tags'] as List<dynamic>? ?? [];
+        final tags = rawTags
+            .map((t) => Genre.values.firstWhere(
+                  (g) => g.name == t.toString(),
+                  orElse: () => Genre.other,
+                ))
+            .toSet();
 
         final rawSlots = m['slots'] as List<dynamic>? ?? [];
         final slots = rawSlots.map((s) {
@@ -91,6 +99,7 @@ class FeedRepository {
           rawLevelLabel: m['rawLevelLabel'] as String? ?? 'BEGINNER',
           tier: tier,
           primaryGenre: primaryGenre,
+          tags: tags,
           slots: slots,
           description: m['description'] as String? ?? '',
           prerequisiteNotes: m['prerequisiteNotes'] as String?,
