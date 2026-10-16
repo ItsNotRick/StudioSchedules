@@ -74,9 +74,9 @@ def infer_genre(title: str) -> str:
         return "ballet"
     if "tap" in t:
         return "tap"
-    if "contemporary" in t or "modern" in t or "horton" in t or "graham" in t or "lyrical" in t:
+    if "contemporary" in t or "modern" in t or "horton" in t or "graham" in t or "lyrical" in t or "dunham" in t:
         return "contemporaryModern"
-    if "jazz" in t or "theater" in t:
+    if "jazz" in t or "theater" in t or "broadway" in t:
         return "jazzTheater"
     if "heels" in t or "commercial" in t:
         return "commercialHeels"

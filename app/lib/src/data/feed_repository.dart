@@ -11,18 +11,30 @@ class FeedRepository {
 
   Future<MockFeed> loadFeed() async {
     try {
-      String? jsonStr;
+      final assetJsonStr = await rootBundle.loadString('assets/feed/schedule.json');
+      String jsonStr = assetJsonStr;
 
-      // 1. Try local SQLite offline cache first if database is available
       if (database != null) {
-        jsonStr = await database!.getFeedJson('latest');
-      }
+        final cachedJsonStr = await database!.getFeedJson('latest');
+        if (cachedJsonStr != null && cachedJsonStr.isNotEmpty) {
+          try {
+            final cachedData = json.decode(cachedJsonStr) as Map<String, dynamic>;
+            final assetData = json.decode(assetJsonStr) as Map<String, dynamic>;
+            final cachedGen = DateTime.tryParse(cachedData['generatedAt'] as String? ?? '');
+            final assetGen = DateTime.tryParse(assetData['generatedAt'] as String? ?? '');
 
-      // 2. If no local cache yet, load bundled static JSON feed and cache it
-      if (jsonStr == null || jsonStr.isEmpty) {
-        jsonStr = await rootBundle.loadString('assets/feed/schedule.json');
-        if (database != null) {
-          await database!.saveFeedJson('latest', jsonStr);
+            if (cachedGen != null && assetGen != null && cachedGen.isAfter(assetGen)) {
+              jsonStr = cachedJsonStr;
+            } else {
+              // Asset is newer or updated: persist to SQLite cache
+              await database!.saveFeedJson('latest', assetJsonStr);
+              jsonStr = assetJsonStr;
+            }
+          } catch (_) {
+            jsonStr = assetJsonStr;
+          }
+        } else {
+          await database!.saveFeedJson('latest', assetJsonStr);
         }
       }
 

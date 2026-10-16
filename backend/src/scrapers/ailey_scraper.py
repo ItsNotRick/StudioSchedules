@@ -1,119 +1,140 @@
 """
 Ailey Extension live schedule scraper.
-Fetches https://ailey.org/classes, parses EventCard components across the
-Next.js server-rendered schedule, extracts class title, technique, time, level,
-instructor, substitute status, and direct Mindbody booking URLs.
+Fetches https://ailey.org/calendar?view=month&classType=studio,
+parses the Next.js stream payload for all live classes, and extracts
+class title, level, start/end time, instructor, substitute status,
+and direct Mindbody booking URLs.
+Supports rolling multi-month coverage for full 14-day windows.
 """
 
 import re
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional
 
-AILEY_CLASSES_URL = "https://ailey.org/classes"
+AILEY_CALENDAR_URL = "https://ailey.org/calendar?view=month&classType=studio"
 
-def parse_time_to_minutes(time_str: str) -> Optional[int]:
-    m = re.match(r'([0-9]{1,2}):([0-9]{2})\s*(am|pm)', time_str.strip().lower())
-    if not m:
-        return None
-    h = int(m.group(1))
-    mins = int(m.group(2))
-    ampm = m.group(3)
-    if ampm == 'pm' and h != 12:
-        h += 12
-    elif ampm == 'am' and h == 12:
-        h = 0
-    return h * 60 + mins
-
-def scrape_ailey_schedule() -> List[Dict[str, Any]]:
+def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
     req = urllib.request.Request(
-        AILEY_CLASSES_URL,
-        headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+            "Referer": "https://ailey.org/"
+        }
     )
     with urllib.request.urlopen(req, timeout=15) as resp:
         html = resp.read().decode("utf-8")
 
-    cards = html.split("EventCard_container__")
+    sep = chr(92) + '\"title' + chr(92) + '\":' + chr(92) + '\"'
     sessions: List[Dict[str, Any]] = []
 
-    year = datetime.now().year
+    for p in html.split("self.__next_f.push([1,"):
+        if "instructor" in p and len(p) > 200000:
+            blocks = p.split(sep)
+            for i in range(1, len(blocks)):
+                b = blocks[i]
+                title_end = b.find(chr(92) + '\"')
+                if title_end == -1:
+                    continue
+                title = b[:title_end].strip()
 
-    for card in cards[1:]:
-        # Title
-        title_m = re.search(r'<a[^>]*class="[^"]*EventCard_title[^"]*"[^>]*>([^<]+)</a>', card)
-        if not title_m:
-            continue
-        raw_title = title_m.group(1).strip()
+                clean_b = b.replace(chr(92), "")
+                start_m = re.search(r'\"start\":\s*\"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\"', clean_b)
+                if not start_m:
+                    continue
+                start_iso = start_m.group(1)
 
-        # Date & Booking URL
-        date_url_m = re.search(r'href="(https://clients\.mindbodyonline\.com/ws\.asp\?[^\"]+)"', card)
-        booking_url = date_url_m.group(1).replace("&amp;", "&") if date_url_m else "https://ailey.org/classes"
+                end_m = re.search(r'\"end\":\s*\"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\"', clean_b)
+                end_iso = end_m.group(1) if end_m else ""
 
-        # Date parsing from sDate param in booking_url (e.g. sDate=10/16/2026)
-        sdate_m = re.search(r'sDate=([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})', booking_url)
-        if sdate_m:
-            m_num = int(sdate_m.group(1))
-            d_num = int(sdate_m.group(2))
-            y_num = int(sdate_m.group(3))
-            service_date = f"{y_num}-{m_num:02d}-{d_num:02d}"
-        else:
-            # Fallback to dateSpan text like "Oct 16"
-            date_span_m = re.search(r'class="EventCard_dateSpan[^\"]*">([^<]+)</span>', card)
-            if date_span_m:
+                if '"canceled":true' in clean_b:
+                    continue
+
+                inst_m = re.search(r'\"instructor\":\s*\"([^\"]+)\"', clean_b)
+                instructor = inst_m.group(1).strip() if inst_m else "Staff"
+
+                lvl_m = re.search(r'\"level\":\s*\"([^\"]*)\"', clean_b)
+                level = lvl_m.group(1).strip() if lvl_m else ""
+
+                is_sub = '"isSubstitute\":true' in clean_b
+
+                # Mindbody URL is located in the cta href in the preceding block tail
+                prev_tail = blocks[i-1][-500:]
+                url_m = re.search(r'https://clients\.mindbodyonline\.com[^\"]+', prev_tail.replace(r'\u0026', '&').replace(chr(92), ""))
+                booking_url = url_m.group(0) if url_m else "https://ailey.org/classes"
+
                 try:
-                    dt = datetime.strptime(f"{date_span_m.group(1).strip()} {year}", "%b %d %Y")
-                    service_date = dt.strftime("%Y-%m-%d")
+                    s_dt = datetime.fromisoformat(start_iso)
+                    e_dt = datetime.fromisoformat(end_iso) if end_iso else s_dt
                 except Exception:
-                    service_date = datetime.now().strftime("%Y-%m-%d")
-            else:
-                service_date = datetime.now().strftime("%Y-%m-%d")
+                    continue
 
-        # Time
-        time_m = re.search(r'class="InfoEyebrow_content[^\"]*">([0-9]{1,2}:[0-9]{2}\s*(?:AM|PM))</p>', card, re.I)
-        time_str = time_m.group(1).strip() if time_m else "12:00PM"
-        start_min = parse_time_to_minutes(time_str) or 720
-        end_min = start_min + 90  # Ailey classes standard duration: 75-90 min
+                service_date = s_dt.strftime("%Y-%m-%d")
+                start_min = s_dt.hour * 60 + s_dt.minute
+                end_min = e_dt.hour * 60 + e_dt.minute
+                if end_min <= start_min:
+                    end_min = start_min + 90
 
-        # Instructor and substitute check
-        inst_m = re.search(r'class="EventCard_instructor[^\"]*">(.*?)</p>', card)
-        is_sub = False
-        teacher = "Staff"
-        if inst_m:
-            raw_inst = inst_m.group(1)
-            is_sub = "(sub)" in raw_inst.lower()
-            clean_inst = re.sub(r'<[^>]+>|<!--.*?-->|\(sub\)', '', raw_inst).strip()
-            clean_inst = clean_inst.replace("&#x27;", "'").replace("&amp;", "&")
-            teacher = clean_inst if clean_inst else "Staff"
+                clean_title = title.replace("&#x27;", "'").replace("&amp;", "&").strip()
+                full_title = f"{clean_title} ({level.title()})" if level and level.lower() != "open" else clean_title
 
-        # Level tag
-        level_m = re.search(r'EventCard_level[^\"]*\"[^>]*>([^<]+)</div>', card)
-        level_label = level_m.group(1).strip() if level_m else ""
+                session_id = f"ailey_{service_date}_{start_min}_{clean_title[:8].replace(' ', '').lower()}"
 
-        clean_title = raw_title.replace("&#x27;", "'").replace("&amp;", "&")
-        full_title = f"{clean_title} ({level_label})" if level_label and level_label != "Open" else clean_title
-
-        # Stable Session ID
-        session_id = f"ailey_{service_date}_{start_min}_{raw_title[:8].replace(' ', '').lower()}"
-
-        sessions.append({
-            "id": session_id,
-            "studioId": "ailey",
-            "rawClassTitle": full_title,
-            "rawLevel": level_label,
-            "serviceDate": service_date,
-            "startMin": start_min,
-            "endMin": end_min,
-            "tz": "America/New_York",
-            "instructor": teacher,
-            "isSubstitute": is_sub,
-            "bookingUrl": booking_url
-        })
+                sessions.append({
+                    "id": session_id,
+                    "studioId": "ailey",
+                    "rawClassTitle": full_title,
+                    "rawLevel": level,
+                    "serviceDate": service_date,
+                    "startMin": start_min,
+                    "endMin": end_min,
+                    "tz": "America/New_York",
+                    "instructor": instructor,
+                    "isSubstitute": is_sub,
+                    "bookingUrl": booking_url
+                })
+            break
 
     return sessions
 
+def scrape_ailey_schedule() -> List[Dict[str, Any]]:
+    all_sessions: List[Dict[str, Any]] = []
+    seen = set()
+
+    # 1. Scrape current month
+    try:
+        current_month = _fetch_month_classes(AILEY_CALENDAR_URL)
+        for s in current_month:
+            if s["id"] not in seen:
+                seen.add(s["id"])
+                all_sessions.append(s)
+    except Exception as e:
+        print(f"Error fetching current month from Ailey: {e}")
+
+    # 2. Check if we need next month (e.g. today is past the 20th of the month)
+    today = datetime.now()
+    if today.day >= 18:
+        # Compute first day of next month
+        if today.month == 12:
+            next_month_start = f"{today.year + 1}-01-01"
+        else:
+            next_month_start = f"{today.year}-{today.month + 1:02d}-01"
+        next_url = f"{AILEY_CALENDAR_URL}&start={next_month_start}"
+        try:
+            next_month = _fetch_month_classes(next_url)
+            for s in next_month:
+                if s["id"] not in seen:
+                    seen.add(s["id"])
+                    all_sessions.append(s)
+        except Exception as e:
+            print(f"Error fetching next month from Ailey: {e}")
+
+    all_sessions.sort(key=lambda s: (s["serviceDate"], s["startMin"]))
+    return all_sessions
+
 if __name__ == "__main__":
     results = scrape_ailey_schedule()
-    print(f"Scraped {len(results)} live classes from Ailey Extension:")
+    print(f"Scraped {len(results)} live classes from Alvin Ailey Extension:")
     for s in results[:10]:
         sub_str = " [SUB]" if s["isSubstitute"] else ""
-        print(f"  [{s['serviceDate']} {s['startMin']//60}:{s['startMin']%60:02d}] {s['rawClassTitle']} | {s['instructor']}{sub_str}")
+        print(f"  [{s['serviceDate']} {s['startMin']//60:02d}:{s['startMin']%60:02d}] {s['rawClassTitle']} | {s['instructor']}{sub_str}")

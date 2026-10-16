@@ -29,6 +29,22 @@ void main() {
       expect(tpl, isNotNull, reason: 'Template ${s.templateId} must be resolved');
       expect(tpl!.studioId, equals(s.studioId));
     }
+
+    // Verify Ailey has live sessions populated
+    final aileySessions = feed.sessions.where((s) => s.studioId == StudioId.ailey).toList();
+    expect(aileySessions.length, greaterThan(50), reason: 'Ailey should have full month of classes');
+
+    // Verify PMT has sessions in next week (>= 2026-10-19)
+    final pmtNextWeek = feed.sessions
+        .where((s) => s.studioId == StudioId.pmt && s.serviceDate.compareTo(ServiceDate(2026, 10, 19)) >= 0)
+        .toList();
+    expect(pmtNextWeek, isNotEmpty, reason: 'PMT must populate next week classes');
+
+    // Verify BDC has sessions in next week (>= 2026-10-19)
+    final bdcNextWeek = feed.sessions
+        .where((s) => s.studioId == StudioId.bdc && s.serviceDate.compareTo(ServiceDate(2026, 10, 19)) >= 0)
+        .toList();
+    expect(bdcNextWeek, isNotEmpty, reason: 'BDC must populate next week classes');
   });
 
   test('CalendarExportService cleans week labels correctly', () {
