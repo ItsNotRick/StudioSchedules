@@ -46,30 +46,22 @@ class FilterState {
   const FilterState({
     required this.studios,
     required this.genres,
-    required this.entryOnly,
   });
 
   final Set<StudioId> studios;
   final Set<Genre> genres; // empty = all genres
-  final bool entryOnly;
-
-  Set<Tier> get tiers =>
-      entryOnly ? {Tier.zeroExperience} : Tier.values.toSet();
 
   FilterState copyWith({
     Set<StudioId>? studios,
     Set<Genre>? genres,
-    bool? entryOnly,
   }) =>
       FilterState(
         studios: studios ?? this.studios,
         genres: genres ?? this.genres,
-        entryOnly: entryOnly ?? this.entryOnly,
       );
 
   bool acceptsTemplate(ClassTemplate t) =>
       studios.contains(t.studioId) &&
-      tiers.contains(t.tier) &&
       (genres.isEmpty || t.allGenres.any(genres.contains));
 }
 
@@ -78,7 +70,6 @@ class Filter extends Notifier<FilterState> {
   FilterState build() => FilterState(
         studios: StudioId.values.toSet(),
         genres: const {},
-        entryOnly: false, // show all beginner classes (Zero Experience, Beg, Adv Beg) by default
       );
 
   void toggleStudio(StudioId id) {
@@ -92,8 +83,6 @@ class Filter extends Notifier<FilterState> {
     s.contains(g) ? s.remove(g) : s.add(g);
     state = state.copyWith(genres: s);
   }
-
-  void setEntryOnly(bool v) => state = state.copyWith(entryOnly: v);
 }
 
 final filterProvider = NotifierProvider<Filter, FilterState>(Filter.new);

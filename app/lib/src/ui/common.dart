@@ -333,13 +333,6 @@ class FilterRail extends ConsumerWidget {
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         children: [
-          FilterChip(
-            avatar: const Icon(Icons.spa_outlined, size: 16),
-            label: const Text('Zero-experience only'),
-            selected: f.entryOnly,
-            onSelected: n.setEntryOnly,
-          ),
-          const VerticalDivider(width: 16),
           for (final s in StudioId.values)
             Padding(
               padding: const EdgeInsets.only(right: 6),

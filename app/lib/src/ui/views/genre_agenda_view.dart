@@ -60,7 +60,7 @@ class _GenreAgendaViewState extends ConsumerState<GenreAgendaView> {
           const SliverFillRemaining(
             hasScrollBody: false,
             child: EmptyState('No classes match your filters on this day.\n'
-                'Try turning off "Zero-experience only".'),
+                'Try selecting more studios or genres.'),
           ),
         for (final g in genres) ...[
           SliverToBoxAdapter(
