@@ -23,39 +23,41 @@ def scrape_peridance_schedule() -> List[Dict[str, Any]]:
     quote_str = chr(92) + chr(34)
     q = re.escape(quote_str)
 
-    # In Mindbody Branded Web, classes are serialized in JSON blocks:
-    # {"id":"cinst_...","name":"...","startDateTime":"...","duration":90,"endDateTime":"...","staff":[{"displayLabel":"..."}],"cancelled":false}
-    sess_re = re.compile(
-        rf'{q}id{q}:{q}(cinst_[^{q}]+){q},'
-        rf'{q}name{q}:{q}([^{q}]+){q}.*?'
-        rf'{q}startDateTime{q}:{q}([^{q}]+){q},'
-        rf'{q}duration{q}:([0-9]+),.*?'
-        rf'{q}displayLabel{q}:{q}([^{q}]+){q}'
-    )
-
-    # Check for cancellation
-    cancel_pat = re.compile(rf'{q}id{q}:{q}(cinst_[^{q}]+){q}.*?{q}cancelled{q}:true')
-    cancelled_ids = set(cancel_pat.findall(html))
-
+    chunks = re.split(rf'{q}id{q}:{q}(cinst_[^{q}]+){q}', html)
     sessions: List[Dict[str, Any]] = []
     seen_ids = set()
 
-    for m in sess_re.finditer(html):
-        cid, name, sdt, dur_str, instructor = m.groups()
+    for i in range(1, len(chunks), 2):
+        cid = chunks[i]
+        chunk = chunks[i + 1]
+
         if cid in seen_ids:
             continue
         seen_ids.add(cid)
 
-        if cid in cancelled_ids:
+        # Check for cancellation within this class instance only
+        if f"{q}cancelled{q}:true" in chunk:
             continue
 
-        dur = int(dur_str)
+        name_m = re.search(rf'{q}name{q}:{q}([^{q}]+){q}', chunk)
+        if not name_m:
+            continue
+        name = name_m.group(1).replace(r"\"", '"').strip()
 
-        # Parse UTC timestamp
+        sdt_m = re.search(rf'{q}startDateTime{q}:{q}([^{q}]+){q}', chunk)
+        if not sdt_m:
+            continue
+        sdt = sdt_m.group(1)
+
+        dur_m = re.search(rf'{q}duration{q}:([0-9]+)', chunk)
+        dur = int(dur_m.group(1)) if dur_m else 90
+
+        inst_m = re.search(rf'{q}displayLabel{q}:{q}([^{q}]+){q}', chunk)
+        instructor = inst_m.group(1).replace(r"\"", '"').strip() if inst_m else "Staff"
+
         try:
             clean_sdt = sdt.split(".")[0].replace("Z", "")
             dt_utc = datetime.strptime(clean_sdt, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
-            # America/New_York is UTC-4 during EDT
             edt = timezone(timedelta(hours=-4))
             dt_local = dt_utc.astimezone(edt)
             service_date = dt_local.strftime("%Y-%m-%d")
@@ -66,21 +68,17 @@ def scrape_peridance_schedule() -> List[Dict[str, Any]]:
 
         is_sub = "sub" in instructor.lower()
 
-        clean_instructor = instructor.replace(r"\"", '"').strip()
-        # Clean up any trailing studio affiliation text, e.g. "Peniel Guerrier | DJONIBA DANCE CENTRE"
-        clean_name = name.replace(r"\"", '"').strip()
-
         session_id = f"peri_{service_date}_{start_min}_{cid[-8:]}"
 
         sessions.append({
             "id": session_id,
             "studioId": "peridance",
-            "rawClassTitle": clean_name,
+            "rawClassTitle": name,
             "serviceDate": service_date,
             "startMin": start_min,
             "endMin": start_min + dur,
             "tz": "America/New_York",
-            "instructor": clean_instructor,
+            "instructor": instructor,
             "isSubstitute": is_sub,
             "bookingUrl": "https://www.peridance.com/open-classes"
         })

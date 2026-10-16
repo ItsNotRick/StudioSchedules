@@ -45,6 +45,16 @@ void main() {
         .where((s) => s.studioId == StudioId.bdc && s.serviceDate.compareTo(ServiceDate(2026, 10, 19)) >= 0)
         .toList();
     expect(bdcNextWeek, isNotEmpty, reason: 'BDC must populate next week classes');
+
+    // Verify Peridance has Beg Choreography at 5:30 PM (1050 min) on October 16
+    final periChoreo = feed.sessions.where(
+      (s) =>
+          s.studioId == StudioId.peridance &&
+          s.serviceDate == const ServiceDate(2026, 10, 16) &&
+          s.startMin == 1050,
+    ).toList();
+    expect(periChoreo, isNotEmpty, reason: 'Peridance must have Beg Choreography at 5:30 PM on Oct 16');
+    expect(periChoreo.any((s) => s.instructor.contains('Bo Belza')), isTrue);
   });
 
   test('CalendarExportService cleans week labels correctly', () {

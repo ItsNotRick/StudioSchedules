@@ -78,7 +78,7 @@ class Filter extends Notifier<FilterState> {
   FilterState build() => FilterState(
         studios: StudioId.values.toSet(),
         genres: const {},
-        entryOnly: true, // default: zero-experience tier only
+        entryOnly: false, // show all beginner classes (Zero Experience, Beg, Adv Beg) by default
       );
 
   void toggleStudio(StudioId id) {

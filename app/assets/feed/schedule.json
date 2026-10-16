@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generatedAt": "2026-10-16T20:08:46.985605+00:00",
+  "generatedAt": "2026-10-16T20:19:44.171798+00:00",
   "windowStart": "2026-10-12",
   "windowEnd": "2026-10-25",
   "studios": [
@@ -1027,23 +1027,6 @@
       "catalogUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/345170?tab=book"
     },
     {
-      "id": "steps_hipHopStreet_open_hip_h",
-      "studioId": "steps",
-      "title": "Open Hip Hop",
-      "matchPatterns": [
-        "Open Hip Hop"
-      ],
-      "rawLevelLabel": "BEGINNER",
-      "tier": "beginner",
-      "primaryGenre": "hipHopStreet",
-      "tags": [],
-      "slots": [],
-      "description": "Open Hip Hop at STEPS.",
-      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
-      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
-      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
-    },
-    {
       "id": "steps_tap_beg_tap",
       "studioId": "steps",
       "title": "Beg Tap",
@@ -1061,18 +1044,120 @@
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
-      "id": "steps_jazzTheater_intro_jazz",
+      "id": "steps_hipHopStreet_open_hip_h",
       "studioId": "steps",
-      "title": "Intro Jazz Workshop",
+      "title": "Open Hip Hop",
       "matchPatterns": [
-        "Intro Jazz Workshop"
+        "Open Hip Hop"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [],
+      "description": "Open Hip Hop at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_tap_adv/beg_br",
+      "studioId": "steps",
+      "title": "Adv/Beg Broadway Tap",
+      "matchPatterns": [
+        "Adv/Beg Broadway Tap"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
+      "primaryGenre": "tap",
+      "tags": [],
+      "slots": [],
+      "description": "Adv/Beg Broadway Tap at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_tap_intro_tap_",
+      "studioId": "steps",
+      "title": "Intro Tap Workshop",
+      "matchPatterns": [
+        "Intro Tap Workshop"
       ],
       "rawLevelLabel": "INTRO",
       "tier": "zeroExperience",
+      "primaryGenre": "tap",
+      "tags": [],
+      "slots": [],
+      "description": "Intro Tap Workshop at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_contemporaryModern_adv/beg_co",
+      "studioId": "steps",
+      "title": "Adv/Beg Contemporary Fusion",
+      "matchPatterns": [
+        "Adv/Beg Contemporary Fusion"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
+      "primaryGenre": "contemporaryModern",
+      "tags": [],
+      "slots": [],
+      "description": "Adv/Beg Contemporary Fusion at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_ballet_adv/beg_ba",
+      "studioId": "steps",
+      "title": "Adv/Beg Ballet",
+      "matchPatterns": [
+        "Adv/Beg Ballet"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
+      "primaryGenre": "ballet",
+      "tags": [],
+      "slots": [],
+      "description": "Adv/Beg Ballet at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_jazzTheater_adv/beg_ja",
+      "studioId": "steps",
+      "title": "Adv/Beg Jazz",
+      "matchPatterns": [
+        "Adv/Beg Jazz"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
       "primaryGenre": "jazzTheater",
       "tags": [],
       "slots": [],
-      "description": "Intro Jazz Workshop at STEPS.",
+      "description": "Adv/Beg Jazz at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_contemporaryModern_adv/beg_mo",
+      "studioId": "steps",
+      "title": "Adv/Beg Modern/Horton",
+      "matchPatterns": [
+        "Adv/Beg Modern/Horton"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
+      "primaryGenre": "contemporaryModern",
+      "tags": [],
+      "slots": [],
+      "description": "Adv/Beg Modern/Horton at STEPS.",
       "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
       "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -1095,6 +1180,108 @@
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
+      "id": "steps_contemporaryModern_intro_cont",
+      "studioId": "steps",
+      "title": "Intro Contemporary Wksp",
+      "matchPatterns": [
+        "Intro Contemporary Wksp"
+      ],
+      "rawLevelLabel": "INTRO",
+      "tier": "zeroExperience",
+      "primaryGenre": "contemporaryModern",
+      "tags": [],
+      "slots": [],
+      "description": "Intro Contemporary Wksp at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_ballet_intro_ball",
+      "studioId": "steps",
+      "title": "Intro Ballet Workshop",
+      "matchPatterns": [
+        "Intro Ballet Workshop"
+      ],
+      "rawLevelLabel": "INTRO",
+      "tier": "zeroExperience",
+      "primaryGenre": "ballet",
+      "tags": [],
+      "slots": [],
+      "description": "Intro Ballet Workshop at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_jazzTheater_intro_jazz",
+      "studioId": "steps",
+      "title": "Intro Jazz Workshop",
+      "matchPatterns": [
+        "Intro Jazz Workshop"
+      ],
+      "rawLevelLabel": "INTRO",
+      "tier": "zeroExperience",
+      "primaryGenre": "jazzTheater",
+      "tags": [],
+      "slots": [],
+      "description": "Intro Jazz Workshop at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_hipHopStreet_beg_hip_ho",
+      "studioId": "steps",
+      "title": "Beg Hip Hop",
+      "matchPatterns": [
+        "Beg Hip Hop"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [],
+      "description": "Beg Hip Hop at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "title": "Adv/Beg Theater Jazz",
+      "matchPatterns": [
+        "Adv/Beg Theater Jazz"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
+      "primaryGenre": "jazzTheater",
+      "tags": [],
+      "slots": [],
+      "description": "Adv/Beg Theater Jazz at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_jazzTheater_beg_jazz",
+      "studioId": "steps",
+      "title": "Beg Jazz",
+      "matchPatterns": [
+        "Beg Jazz"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "jazzTheater",
+      "tags": [],
+      "slots": [],
+      "description": "Beg Jazz at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_jazzTheater_beg_theate",
       "studioId": "steps",
       "title": "Beg Theater Dance",
@@ -1107,6 +1294,23 @@
       "tags": [],
       "slots": [],
       "description": "Beg Theater Dance at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_hipHopStreet_open_count",
+      "studioId": "steps",
+      "title": "Open Countertechnique",
+      "matchPatterns": [
+        "Open Countertechnique"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [],
+      "description": "Open Countertechnique at STEPS.",
       "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
       "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -1146,18 +1350,69 @@
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
-      "id": "steps_jazzTheater_beg_jazz",
+      "id": "steps_jazzTheater_intro_thea",
       "studioId": "steps",
-      "title": "Beg Jazz",
+      "title": "Intro Theater Dance/Jazz Workshop",
       "matchPatterns": [
-        "Beg Jazz"
+        "Intro Theater Dance/Jazz Workshop"
       ],
-      "rawLevelLabel": "BEGINNER",
-      "tier": "beginner",
+      "rawLevelLabel": "INTRO",
+      "tier": "zeroExperience",
       "primaryGenre": "jazzTheater",
       "tags": [],
       "slots": [],
-      "description": "Beg Jazz at STEPS.",
+      "description": "Intro Theater Dance/Jazz Workshop at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_jazzTheater_adv/beg_pr",
+      "studioId": "steps",
+      "title": "Adv/Beg Precision Jazz",
+      "matchPatterns": [
+        "Adv/Beg Precision Jazz"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
+      "primaryGenre": "jazzTheater",
+      "tags": [],
+      "slots": [],
+      "description": "Adv/Beg Precision Jazz at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_tap_beg_broadw",
+      "studioId": "steps",
+      "title": "Beg Broadway Tap",
+      "matchPatterns": [
+        "Beg Broadway Tap"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "tap",
+      "tags": [],
+      "slots": [],
+      "description": "Beg Broadway Tap at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_jazzTheater_adv/beg_st",
+      "studioId": "steps",
+      "title": "Adv/Beg Street Jazz",
+      "matchPatterns": [
+        "Adv/Beg Street Jazz"
+      ],
+      "rawLevelLabel": "ADV/BEG",
+      "tier": "advancedBeginner",
+      "primaryGenre": "jazzTheater",
+      "tags": [],
+      "slots": [],
+      "description": "Adv/Beg Street Jazz at STEPS.",
       "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
       "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -1180,18 +1435,35 @@
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
-      "id": "steps_tap_adv/beg_br",
+      "id": "steps_hipHopStreet_adv/beg_po",
       "studioId": "steps",
-      "title": "Adv/Beg Broadway Tap",
+      "title": "Adv/Beg Pointe",
       "matchPatterns": [
-        "Adv/Beg Broadway Tap"
+        "Adv/Beg Pointe"
       ],
       "rawLevelLabel": "ADV/BEG",
       "tier": "advancedBeginner",
-      "primaryGenre": "tap",
+      "primaryGenre": "hipHopStreet",
       "tags": [],
       "slots": [],
-      "description": "Adv/Beg Broadway Tap at STEPS.",
+      "description": "Adv/Beg Pointe at STEPS.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_contemporaryModern_beg_modern",
+      "studioId": "steps",
+      "title": "Beg Modern/Horton",
+      "matchPatterns": [
+        "Beg Modern/Horton"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "contemporaryModern",
+      "tags": [],
+      "slots": [],
+      "description": "Beg Modern/Horton at STEPS.",
       "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
       "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
       "catalogUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -1826,6 +2098,23 @@
       "catalogUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836452&sDate=10/23/2026&studioid=851&sType=-117"
     },
     {
+      "id": "peridance_hipHopStreet_beg_choreo",
+      "studioId": "peridance",
+      "title": "Beg Choreography",
+      "matchPatterns": [
+        "Beg Choreography"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [],
+      "description": "Beg Choreography at PERIDANCE.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "peridance_hipHopStreet_beg_founda",
       "studioId": "peridance",
       "title": "Beg Foundations of Hip Hop",
@@ -2047,23 +2336,6 @@
       "catalogUrl": "https://www.peridance.com/open-classes"
     },
     {
-      "id": "peridance_hipHopStreet_adv_beg_ch",
-      "studioId": "peridance",
-      "title": "Adv Beg Choreography",
-      "matchPatterns": [
-        "Adv Beg Choreography"
-      ],
-      "rawLevelLabel": "ADV/BEG",
-      "tier": "advancedBeginner",
-      "primaryGenre": "hipHopStreet",
-      "tags": [],
-      "slots": [],
-      "description": "Adv Beg Choreography at PERIDANCE.",
-      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
-      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
-      "catalogUrl": "https://www.peridance.com/open-classes"
-    },
-    {
       "id": "peridance_contemporaryModern_beg_graham",
       "studioId": "peridance",
       "title": "Beg Graham",
@@ -2110,6 +2382,23 @@
       "tags": [],
       "slots": [],
       "description": "Open Zena Rommett Floor-Barre ® at PERIDANCE.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peridance_hipHopStreet_open_stret",
+      "studioId": "peridance",
+      "title": "Open Stretch",
+      "matchPatterns": [
+        "Open Stretch"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [],
+      "description": "Open Stretch at PERIDANCE.",
       "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
       "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
       "catalogUrl": "https://www.peridance.com/open-classes"
@@ -2166,18 +2455,35 @@
       "catalogUrl": "https://www.peridance.com/open-classes"
     },
     {
-      "id": "peridance_hipHopStreet_open_stret",
+      "id": "peridance_contemporaryModern_beg_horton",
       "studioId": "peridance",
-      "title": "Open Stretch",
+      "title": "Beg Horton",
       "matchPatterns": [
-        "Open Stretch"
+        "Beg Horton"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "contemporaryModern",
+      "tags": [],
+      "slots": [],
+      "description": "Beg Horton at PERIDANCE.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peridance_hipHopStreet_beg_poppin",
+      "studioId": "peridance",
+      "title": "Beg Popping",
+      "matchPatterns": [
+        "Beg Popping"
       ],
       "rawLevelLabel": "BEGINNER",
       "tier": "beginner",
       "primaryGenre": "hipHopStreet",
       "tags": [],
       "slots": [],
-      "description": "Open Stretch at PERIDANCE.",
+      "description": "Beg Popping at PERIDANCE.",
       "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
       "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
       "catalogUrl": "https://www.peridance.com/open-classes"
@@ -2195,6 +2501,23 @@
       "tags": [],
       "slots": [],
       "description": "Open Afrobeats at PERIDANCE.",
+      "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+      "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+      "catalogUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peridance_hipHopStreet_open_brazi",
+      "studioId": "peridance",
+      "title": "Open Brazilian Samba",
+      "matchPatterns": [
+        "Open Brazilian Samba"
+      ],
+      "rawLevelLabel": "BEGINNER",
+      "tier": "beginner",
+      "primaryGenre": "hipHopStreet",
+      "tags": [],
+      "slots": [],
+      "description": "Open Brazilian Samba at PERIDANCE.",
       "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
       "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
       "catalogUrl": "https://www.peridance.com/open-classes"
@@ -3551,6 +3874,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/322197?tab=book"
     },
     {
+      "id": "peri_2026-10-16_1050_SYAjmw34",
+      "templateId": "peridance_hipHopStreet_beg_choreo",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-16",
+      "startMin": 1050,
+      "endMin": 1140,
+      "tz": "America/New_York",
+      "instructor": "Bo Belza",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "peri_2026-10-16_1050_SYAjnCuf",
       "templateId": "peridance_hipHopStreet_beg_founda",
       "studioId": "peridance",
@@ -3562,6 +3898,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-16_1080_F6HEeRj5",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-16",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Tamii Sakurai",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-16_1080_absbeg",
@@ -3707,6 +4056,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/339714?tab=book"
     },
     {
+      "id": "steps_2026-10-16_1140_F6HEjTk9",
+      "templateId": "steps_tap_adv/beg_br",
+      "studioId": "steps",
+      "serviceDate": "2026-10-16",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-16_1140_begafro",
       "templateId": "ailey_africanDiaspora_beg_afro'd",
       "studioId": "ailey",
@@ -3746,6 +4108,19 @@
       "bookingUrl": "https://www.peridance.com/open-classes"
     },
     {
+      "id": "steps_2026-10-16_1170_F6HF8LC7",
+      "templateId": "steps_tap_intro_tap_",
+      "studioId": "steps",
+      "serviceDate": "2026-10-16",
+      "startMin": 1170,
+      "endMin": 1260,
+      "tz": "America/New_York",
+      "instructor": "Nicole Ohr",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "pmt_2026-10-16_1170_beginn",
       "templateId": "pmt_hipHopStreet_beginner_h",
       "studioId": "pmt",
@@ -3770,6 +4145,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.pmthouseofdance.com/sign-up-for-classes"
+    },
+    {
+      "id": "steps_2026-10-16_1200_F6HFAUnb",
+      "templateId": "steps_contemporaryModern_adv/beg_co",
+      "studioId": "steps",
+      "serviceDate": "2026-10-16",
+      "startMin": 1200,
+      "endMin": 1290,
+      "tz": "America/New_York",
+      "instructor": "Brynlie Helmich",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "peri_2026-10-16_1200_SYAjog2L",
@@ -3822,6 +4210,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/329885?tab=book"
+    },
+    {
+      "id": "steps_2026-10-17_570_F6HF1Gyq",
+      "templateId": "steps_ballet_adv/beg_ba",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 570,
+      "endMin": 660,
+      "tz": "America/New_York",
+      "instructor": "Cornell Callender",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-17_600_introto",
@@ -3883,7 +4284,7 @@
       "startMin": 660,
       "endMin": 750,
       "tz": "America/New_York",
-      "instructor": "Kat Ponza",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -3967,6 +4368,32 @@
       "bookingUrl": "https://www.peridance.com/open-classes"
     },
     {
+      "id": "steps_2026-10-17_735_F6HE5aEt",
+      "templateId": "steps_jazzTheater_adv/beg_ja",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 735,
+      "endMin": 825,
+      "tz": "America/New_York",
+      "instructor": "Emily Bufferd",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-17_750_F6HF4ZnQ",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 750,
+      "endMin": 840,
+      "tz": "America/New_York",
+      "instructor": "Alicia Newcom",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_2026-10-17_750_F6HCQg5z",
       "templateId": "steps_basic_tap",
       "studioId": "steps",
@@ -4000,10 +4427,36 @@
       "startMin": 750,
       "endMin": 840,
       "tz": "America/New_York",
-      "instructor": "Martell Ruffin",
-      "isSubstitute": false,
+      "instructor": "Christian Warner",
+      "isSubstitute": true,
       "status": "scheduled",
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836505&sDate=10/17/2026&studioid=851&sType=-117"
+    },
+    {
+      "id": "steps_2026-10-17_765_F6HDUG6T",
+      "templateId": "steps_contemporaryModern_adv/beg_mo",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 765,
+      "endMin": 855,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-17_765_F6HDU2yZ",
+      "templateId": "steps_ballet_beg_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 765,
+      "endMin": 855,
+      "tz": "America/New_York",
+      "instructor": "Temple Kemezis",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "pmt_2026-10-17_780_adv._b",
@@ -4078,10 +4531,36 @@
       "startMin": 810,
       "endMin": 900,
       "tz": "America/New_York",
-      "instructor": "Dareon Blowe",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-17_825_F6HF8LeZ",
+      "templateId": "steps_contemporaryModern_intro_cont",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 825,
+      "endMin": 915,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-17_840_F6HDqeez",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 840,
+      "endMin": 930,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-17_840_beghip",
@@ -4095,6 +4574,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836479&sDate=10/17/2026&studioid=851&sType=-117"
+    },
+    {
+      "id": "steps_2026-10-17_870_F6HF8Lrm",
+      "templateId": "steps_ballet_intro_ball",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 870,
+      "endMin": 960,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "pmt_2026-10-17_870_adv._b",
@@ -4188,6 +4680,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/330212?tab=book"
     },
     {
+      "id": "steps_2026-10-17_930_F6HEgYUk",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 930,
+      "endMin": 1020,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-17_930_absbeg",
       "templateId": "ailey_hipHopStreet_abs_beg_hi",
       "studioId": "ailey",
@@ -4251,6 +4756,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.pmthouseofdance.com/sign-up-for-classes"
+    },
+    {
+      "id": "steps_2026-10-17_975_F6HCEYjb",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 975,
+      "endMin": 1065,
+      "tz": "America/New_York",
+      "instructor": "Alexander MacDonald",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-17_990_begdanc",
@@ -4383,6 +4901,32 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/330453?tab=book"
     },
     {
+      "id": "steps_2026-10-17_1035_F6HCpS1Z",
+      "templateId": "steps_hipHopStreet_beg_hip_ho",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 1035,
+      "endMin": 1125,
+      "tz": "America/New_York",
+      "instructor": "Paolo Slice Penala",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-17_1050_F6HF8Mwq",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-17",
+      "startMin": 1050,
+      "endMin": 1140,
+      "tz": "America/New_York",
+      "instructor": "Dougie Robbins",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "pmt_2026-10-17_1050_adv._b",
       "templateId": "pmt_contemporaryModern_adv._beg._",
       "studioId": "pmt",
@@ -4446,6 +4990,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/346620?tab=book"
+    },
+    {
+      "id": "steps_2026-10-18_600_F6HFA8w5",
+      "templateId": "steps_basic_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-18_600_begball",
@@ -4552,6 +5109,19 @@
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836450&sDate=10/18/2026&studioid=851&sType=-117"
     },
     {
+      "id": "steps_2026-10-18_660_F6HE9kyW",
+      "templateId": "steps_contemporaryModern_adv/beg_co",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 660,
+      "endMin": 750,
+      "tz": "America/New_York",
+      "instructor": "Sam Lobel",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-18_660_ages6-8",
       "templateId": "ailey_hipHopStreet_ages_6_8_i",
       "studioId": "ailey",
@@ -4598,7 +5168,7 @@
       "startMin": 690,
       "endMin": 780,
       "tz": "America/New_York",
-      "instructor": "Vive _",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -4682,6 +5252,45 @@
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146838249&sDate=10/18/2026&studioid=851&sType=-117"
     },
     {
+      "id": "steps_2026-10-18_750_F6HC8SA2",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 750,
+      "endMin": 840,
+      "tz": "America/New_York",
+      "instructor": "Alice Baum",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-18_765_F6HEADkq",
+      "templateId": "steps_hipHopStreet_beg_hip_ho",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 765,
+      "endMin": 855,
+      "tz": "America/New_York",
+      "instructor": "Amy Mitchell",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-18_780_F6HCN8Gg",
+      "templateId": "steps_jazzTheater_beg_jazz",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 780,
+      "endMin": 870,
+      "tz": "America/New_York",
+      "instructor": "IngaMarie Gerson",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-18_780_advbeg",
       "templateId": "ailey_contemporaryModern_adv_beg_cu",
       "studioId": "ailey",
@@ -4696,7 +5305,33 @@
     },
     {
       "id": "peri_2026-10-18_780_SYAjogi1",
-      "templateId": "peridance_hipHopStreet_adv_beg_ch",
+      "templateId": "peridance_hipHopStreet_beg_choreo",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-18",
+      "startMin": 780,
+      "endMin": 870,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peri_2026-10-18_780_SYAjodyK",
+      "templateId": "peridance_contemporaryModern_beg_graham",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-18",
+      "startMin": 780,
+      "endMin": 870,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peri_2026-10-18_780_SYAjoC3q",
+      "templateId": "peridance_ballet_open_balle",
       "studioId": "peridance",
       "serviceDate": "2026-10-18",
       "startMin": 780,
@@ -4838,6 +5473,45 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/326406?tab=book"
     },
     {
+      "id": "steps_2026-10-18_840_F6HEYk3z",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 840,
+      "endMin": 930,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-18_840_F6HF2Hvn",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 840,
+      "endMin": 930,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-18_870_F6HC8G8A",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 870,
+      "endMin": 960,
+      "tz": "America/New_York",
+      "instructor": "Lisa Biagini",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_2026-10-18_870_F6HEP4Gj",
       "templateId": "steps_jazzTheater_beg_theate",
       "studioId": "steps",
@@ -4845,7 +5519,7 @@
       "startMin": 870,
       "endMin": 960,
       "tz": "America/New_York",
-      "instructor": "Roberta Mathes",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -4942,6 +5616,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/331367?tab=book"
     },
     {
+      "id": "steps_2026-10-18_945_F6HEXgcb",
+      "templateId": "steps_hipHopStreet_open_count",
+      "studioId": "steps",
+      "serviceDate": "2026-10-18",
+      "startMin": 945,
+      "endMin": 1035,
+      "tz": "America/New_York",
+      "instructor": "Griffin Massey",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_2026-10-18_960_F6HF2gRu",
       "templateId": "steps_africanDiaspora_open_afro_",
       "studioId": "steps",
@@ -4962,7 +5649,7 @@
       "startMin": 960,
       "endMin": 1050,
       "tz": "America/New_York",
-      "instructor": "Chad Eastman",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -5072,6 +5759,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/317934?tab=book"
     },
     {
+      "id": "steps_2026-10-19_540_F6HEzzHR",
+      "templateId": "steps_ballet_beg_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 540,
+      "endMin": 630,
+      "tz": "America/New_York",
+      "instructor": "Kathy Sullivan",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "bdc_2026-10-19_630_begballet",
       "templateId": "bdc_ballet_beg_ballet",
       "studioId": "bdc",
@@ -5122,6 +5822,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/332813?tab=book"
+    },
+    {
+      "id": "steps_2026-10-19_630_F6HEd5YD",
+      "templateId": "steps_ballet_adv/beg_ba",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 630,
+      "endMin": 720,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "peri_2026-10-19_690_SYAjmxSS",
@@ -5202,6 +5915,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/349422?tab=book"
     },
     {
+      "id": "steps_2026-10-19_720_F6HC6c3i",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 720,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Germaine Goodson",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_2026-10-19_720_F6HF42s1",
       "templateId": "steps_jazzTheater_beg_theate",
       "studioId": "steps",
@@ -5209,7 +5935,20 @@
       "startMin": 720,
       "endMin": 810,
       "tz": "America/New_York",
-      "instructor": "Jenna Kulacz",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-19_765_F6HDuW2a",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 765,
+      "endMin": 855,
+      "tz": "America/New_York",
+      "instructor": "Sydney Burtis",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -5278,6 +6017,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/320578?tab=book"
+    },
+    {
+      "id": "steps_2026-10-19_825_F6HC6n6b",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 825,
+      "endMin": 915,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "peri_2026-10-19_870_SYAjneo7",
@@ -5371,6 +6123,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/321158?tab=book"
     },
     {
+      "id": "steps_2026-10-19_930_F6HCSaEG",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 930,
+      "endMin": 1020,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "peri_2026-10-19_960_SYAjnc3Q",
       "templateId": "peridance_hipHopStreet_open_dance",
       "studioId": "peridance",
@@ -5378,10 +6143,23 @@
       "startMin": 960,
       "endMin": 1050,
       "tz": "America/New_York",
-      "instructor": "Quinn Brown",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-19_990_F6HCLRot",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 990,
+      "endMin": 1080,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "bdc_2026-10-19_1005_begballe",
@@ -5462,6 +6240,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/337037?tab=book"
     },
     {
+      "id": "steps_2026-10-19_1080_F6HFAJfe",
+      "templateId": "steps_hipHopStreet_open_hip_h",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-19_1080_begball",
       "templateId": "ailey_ballet_beg_ballet",
       "studioId": "ailey",
@@ -5527,6 +6318,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/321855?tab=book"
     },
     {
+      "id": "steps_2026-10-19_1110_F6HEqkao",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Tommy Wasiuta",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-19_1110_advbeg",
       "templateId": "ailey_ballet_adv_beg_ba",
       "studioId": "ailey",
@@ -5573,7 +6377,7 @@
       "startMin": 1110,
       "endMin": 1200,
       "tz": "America/New_York",
-      "instructor": "Masumi Kambayashi",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -5618,6 +6422,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/321919?tab=book"
     },
     {
+      "id": "steps_2026-10-19_1140_F6HCRXZd",
+      "templateId": "steps_jazzTheater_adv/beg_ja",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Plu Sayampol",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-19_1140_beghort",
       "templateId": "ailey_contemporaryModern_beg_horton",
       "studioId": "ailey",
@@ -5655,6 +6472,45 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836507&sDate=10/19/2026&studioid=851&sType=-117"
+    },
+    {
+      "id": "peri_2026-10-19_1140_SYAjoM7k",
+      "templateId": "peridance_hipHopStreet_beg_hip_ho",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-19",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-19_1170_F6HFAUD2",
+      "templateId": "steps_ballet_beg_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 1170,
+      "endMin": 1260,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-19_1170_F6HF8MUN",
+      "templateId": "steps_jazzTheater_intro_thea",
+      "studioId": "steps",
+      "serviceDate": "2026-10-19",
+      "startMin": 1170,
+      "endMin": 1260,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-19_1170_absbeg",
@@ -5774,6 +6630,19 @@
       "bookingUrl": "https://www.peridance.com/open-classes"
     },
     {
+      "id": "steps_2026-10-20_600_F6HEgyH8",
+      "templateId": "steps_jazzTheater_adv/beg_pr",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-20_600_begball",
       "templateId": "ailey_ballet_beg_ballet",
       "studioId": "ailey",
@@ -5852,6 +6721,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/322635?tab=book"
     },
     {
+      "id": "steps_2026-10-20_630_F6HEt52y",
+      "templateId": "steps_ballet_adv/beg_ba",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 630,
+      "endMin": 720,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "peri_2026-10-20_630_SYAjnhZq",
       "templateId": "peridance_hipHopStreet_open_zena_",
       "studioId": "peridance",
@@ -5863,6 +6745,32 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-20_660_F6HCPp9u",
+      "templateId": "steps_tap_adv/beg_br",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 660,
+      "endMin": 750,
+      "tz": "America/New_York",
+      "instructor": "Andrew Black",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-20_690_F6HEVmcU",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 690,
+      "endMin": 780,
+      "tz": "America/New_York",
+      "instructor": "Daniel Booda",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "peri_2026-10-20_690_SYAjn4eY",
@@ -5956,6 +6864,32 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/323353?tab=book"
     },
     {
+      "id": "steps_2026-10-20_750_F6HDGVQL",
+      "templateId": "steps_tap_beg_broadw",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 750,
+      "endMin": 840,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "peri_2026-10-20_780_SYAjniwB",
+      "templateId": "peridance_hipHopStreet_open_stret",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-20",
+      "startMin": 780,
+      "endMin": 870,
+      "tz": "America/New_York",
+      "instructor": "Diego Funes",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "bdc_2026-10-20_810_basicball",
       "templateId": "bdc_basic_ballet",
       "studioId": "bdc",
@@ -6015,6 +6949,32 @@
       "startMin": 810,
       "endMin": 900,
       "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-20_840_F6HCTdkk",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 840,
+      "endMin": 930,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-20_870_F6HEWSGU",
+      "templateId": "steps_contemporaryModern_adv/beg_co",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 870,
+      "endMin": 960,
+      "tz": "America/New_York",
       "instructor": "LaQuet",
       "isSubstitute": false,
       "status": "scheduled",
@@ -6041,7 +7001,20 @@
       "startMin": 870,
       "endMin": 960,
       "tz": "America/New_York",
-      "instructor": "Dianna Warren",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peri_2026-10-20_870_SYAjoHaG",
+      "templateId": "peridance_hipHopStreet_moptop_uni",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-20",
+      "startMin": 870,
+      "endMin": 960,
+      "tz": "America/New_York",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -6151,6 +7124,19 @@
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
+      "id": "peri_2026-10-20_960_SYAjn5LD",
+      "templateId": "peridance_ballet_open_balle",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-20",
+      "startMin": 960,
+      "endMin": 1050,
+      "tz": "America/New_York",
+      "instructor": "Dianna Warren",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "peri_2026-10-20_960_SYAjnL8m",
       "templateId": "peridance_hipHopStreet_open_house",
       "studioId": "peridance",
@@ -6158,7 +7144,7 @@
       "startMin": 960,
       "endMin": 1050,
       "tz": "America/New_York",
-      "instructor": "James Kho",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -6249,10 +7235,23 @@
       "startMin": 1065,
       "endMin": 1155,
       "tz": "America/New_York",
-      "instructor": "Jeffrey Gugliotti",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-20_1080_F6HEsNvY",
+      "templateId": "steps_tap_adv/beg_br",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-20_1080_begball",
@@ -6279,6 +7278,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/324292?tab=book"
+    },
+    {
+      "id": "steps_2026-10-20_1110_F6HDpW9c",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-20_1110_absbeg",
@@ -6372,6 +7384,32 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/324914?tab=book"
     },
     {
+      "id": "peri_2026-10-20_1125_SYAjonzB",
+      "templateId": "peridance_contemporaryModern_beg_contem",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-20",
+      "startMin": 1125,
+      "endMin": 1215,
+      "tz": "America/New_York",
+      "instructor": "Jeffrey Gugliotti",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-20_1140_F6HFDGy2",
+      "templateId": "steps_jazzTheater_adv/beg_st",
+      "studioId": "steps",
+      "serviceDate": "2026-10-20",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Robert Taylor Jr.",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-20_1140_beghip",
       "templateId": "ailey_hipHopStreet_beg_hip_ho",
       "studioId": "ailey",
@@ -6437,6 +7475,19 @@
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836511&sDate=10/20/2026&studioid=851&sType=-117"
     },
     {
+      "id": "peri_2026-10-20_1140_SYAjn6ia",
+      "templateId": "peridance_hipHopStreet_beg_founda",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-20",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Miyabi Wright",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "peri_2026-10-20_1140_SYAjnbMj",
       "templateId": "peridance_hipHopStreet_beg_vogue",
       "studioId": "peridance",
@@ -6444,7 +7495,7 @@
       "startMin": 1140,
       "endMin": 1230,
       "tz": "America/New_York",
-      "instructor": "Ohad Mazor",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -6554,6 +7605,45 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/333065?tab=book"
     },
     {
+      "id": "steps_2026-10-21_540_F6HF15Xa",
+      "templateId": "steps_ballet_beg_ballet",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 540,
+      "endMin": 630,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-21_600_F6HDtwz5",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "peri_2026-10-21_600_SYAjnomw",
+      "templateId": "peridance_contemporaryModern_beg_horton",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-21",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "bdc_2026-10-21_630_basicthea",
       "templateId": "bdc_jazzTheater_basic_thea",
       "studioId": "bdc",
@@ -6606,6 +7696,32 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/325394?tab=book"
     },
     {
+      "id": "steps_2026-10-21_630_F6HESh7_",
+      "templateId": "steps_ballet_adv/beg_ba",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 630,
+      "endMin": 720,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-21_690_F6HEpbEb",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 690,
+      "endMin": 780,
+      "tz": "America/New_York",
+      "instructor": "Yuka Kameda",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "peri_2026-10-21_690_SYAjmy87",
       "templateId": "peridance_ballet_beg_ballet",
       "studioId": "peridance",
@@ -6613,7 +7729,7 @@
       "startMin": 690,
       "endMin": 780,
       "tz": "America/New_York",
-      "instructor": "Sue Samuels",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -6697,6 +7813,45 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/325608?tab=book"
     },
     {
+      "id": "steps_2026-10-21_720_F6HC6h5f",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 720,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-21_750_F6HE3GTN",
+      "templateId": "steps_hipHopStreet_adv/beg_po",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 750,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-21_750_F6HF3jSt",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 750,
+      "endMin": 840,
+      "tz": "America/New_York",
+      "instructor": "Jill Gittleman",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_2026-10-21_780_F6HFCtYz",
       "templateId": "steps_tap_adv/beg_br",
       "studioId": "steps",
@@ -6704,10 +7859,23 @@
       "startMin": 780,
       "endMin": 870,
       "tz": "America/New_York",
-      "instructor": "Violeta Angelova",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "peri_2026-10-21_780_SYAjoq7G",
+      "templateId": "peridance_africanDiaspora_beg_afro_f",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-21",
+      "startMin": 780,
+      "endMin": 870,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
     },
     {
       "id": "bdc_2026-10-21_810_begcontem",
@@ -6762,6 +7930,45 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/337477?tab=book"
     },
     {
+      "id": "steps_2026-10-21_810_F6HEvyCH",
+      "templateId": "steps_jazzTheater_adv/beg_ja",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 810,
+      "endMin": 900,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-21_825_F6HC6s8Y",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 825,
+      "endMin": 915,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "steps_2026-10-21_840_F6HF47ei",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 840,
+      "endMin": 930,
+      "tz": "America/New_York",
+      "instructor": "Krystyna Resavy",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "peri_2026-10-21_870_SYAjn1C9",
       "templateId": "peridance_hipHopStreet_beg_house",
       "studioId": "peridance",
@@ -6775,6 +7982,19 @@
       "bookingUrl": "https://www.peridance.com/open-classes"
     },
     {
+      "id": "peri_2026-10-21_870_SYAjoNV6",
+      "templateId": "peridance_ballet_open_balle",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-21",
+      "startMin": 870,
+      "endMin": 960,
+      "tz": "America/New_York",
+      "instructor": "Cristian Laverde Koenig",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "peri_2026-10-21_870_SYAjnjds",
       "templateId": "peridance_hipHopStreet_open_stret",
       "studioId": "peridance",
@@ -6782,7 +8002,7 @@
       "startMin": 870,
       "endMin": 960,
       "tz": "America/New_York",
-      "instructor": "Sun Kim",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -6853,6 +8073,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/325876?tab=book"
     },
     {
+      "id": "steps_2026-10-21_930_F6HEttir",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 930,
+      "endMin": 1020,
+      "tz": "America/New_York",
+      "instructor": "Derek Mitchell",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_2026-10-21_930_F6HCSezx",
       "templateId": "steps_basic_tap",
       "studioId": "steps",
@@ -6860,10 +8093,23 @@
       "startMin": 930,
       "endMin": 1020,
       "tz": "America/New_York",
-      "instructor": "Lonne Moretton",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "peri_2026-10-21_960_SYAjnrXe",
+      "templateId": "peridance_hipHopStreet_beg_poppin",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-21",
+      "startMin": 960,
+      "endMin": 1050,
+      "tz": "America/New_York",
+      "instructor": "Sun Kim",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
     },
     {
       "id": "pmt_2026-10-21_990_open_r",
@@ -6944,6 +8190,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/342468?tab=book"
     },
     {
+      "id": "steps_2026-10-21_1080_F6HCMHVj",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 1080,
+      "endMin": 1170,
+      "tz": "America/New_York",
+      "instructor": "Lynn Schwab",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-21_1080_begafro",
       "templateId": "ailey_africanDiaspora_beg_afro'd",
       "studioId": "ailey",
@@ -6964,7 +8223,7 @@
       "startMin": 1080,
       "endMin": 1170,
       "tz": "America/New_York",
-      "instructor": "Luciana DaSilva | DJONIBA DANCE CENTRE",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -6994,6 +8253,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.pmthouseofdance.com/sign-up-for-classes"
+    },
+    {
+      "id": "steps_2026-10-21_1110_F6HELBr8",
+      "templateId": "steps_contemporaryModern_beg_modern",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "ailey_2026-10-21_1110_absbeg",
@@ -7061,6 +8333,19 @@
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146838260&sDate=10/21/2026&studioid=851&sType=-117"
     },
     {
+      "id": "peri_2026-10-21_1110_SYAjnVqJ",
+      "templateId": "peridance_contemporaryModern_beg_contem",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-21",
+      "startMin": 1110,
+      "endMin": 1200,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "bdc_2026-10-21_1125_basictap",
       "templateId": "bdc_tap_basic_tap",
       "studioId": "bdc",
@@ -7100,6 +8385,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/326590?tab=book"
     },
     {
+      "id": "steps_2026-10-21_1140_F6HCRcLK",
+      "templateId": "steps_jazzTheater_adv/beg_ja",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-21_1140_begafro",
       "templateId": "ailey_africanDiaspora_beg_afro_b",
       "studioId": "ailey",
@@ -7126,6 +8424,19 @@
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836477&sDate=10/21/2026&studioid=851&sType=-117"
     },
     {
+      "id": "steps_2026-10-21_1170_F6HEUGez",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 1170,
+      "endMin": 1260,
+      "tz": "America/New_York",
+      "instructor": "Jenai Cutcher",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "steps_2026-10-21_1170_F6HDJUZY",
       "templateId": "steps_ballet_beg_ballet",
       "studioId": "steps",
@@ -7133,7 +8444,7 @@
       "startMin": 1170,
       "endMin": 1260,
       "tz": "America/New_York",
-      "instructor": "Mickey Sakai",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
@@ -7165,6 +8476,19 @@
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146837077&sDate=10/21/2026&studioid=851&sType=-117"
     },
     {
+      "id": "peri_2026-10-21_1170_SYAjntbg",
+      "templateId": "peridance_hipHopStreet_open_brazi",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-21",
+      "startMin": 1170,
+      "endMin": 1260,
+      "tz": "America/New_York",
+      "instructor": "Luciana DaSilva | DJONIBA DANCE CENTRE",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
       "id": "peri_2026-10-21_1170_SYAjossz",
       "templateId": "peridance_hipHopStreet_open_vogue",
       "studioId": "peridance",
@@ -7189,6 +8513,19 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.pmthouseofdance.com/sign-up-for-classes"
+    },
+    {
+      "id": "steps_2026-10-21_1200_F6HDWGsF",
+      "templateId": "steps_hipHopStreet_open_hip_h",
+      "studioId": "steps",
+      "serviceDate": "2026-10-21",
+      "startMin": 1200,
+      "endMin": 1290,
+      "tz": "America/New_York",
+      "instructor": "Mickey Sakai",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
     },
     {
       "id": "bdc_2026-10-21_1215_begtheate",
@@ -7256,6 +8593,32 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/332882?tab=book"
     },
     {
+      "id": "peri_2026-10-22_540_SYAjnZHh",
+      "templateId": "peridance_ballet_open_balle",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-22",
+      "startMin": 540,
+      "endMin": 630,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-22_600_F6HEqZaz",
+      "templateId": "steps_jazzTheater_beg_jazz",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 600,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-22_600_begball",
       "templateId": "ailey_ballet_beg_ballet",
       "studioId": "ailey",
@@ -7321,6 +8684,45 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/327024?tab=book"
     },
     {
+      "id": "steps_2026-10-22_630_F6HEtEL7",
+      "templateId": "steps_ballet_adv/beg_ba",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 630,
+      "endMin": 720,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
+      "id": "peri_2026-10-22_630_SYAjon7K",
+      "templateId": "peridance_hipHopStreet_open_zena_",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-22",
+      "startMin": 630,
+      "endMin": 690,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "steps_2026-10-22_690_F6HDPsP4",
+      "templateId": "steps_contemporaryModern_adv/beg_co",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 690,
+      "endMin": 780,
+      "tz": "America/New_York",
+      "instructor": "Mindy Jackson",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "peri_2026-10-22_690_SYAjmypo",
       "templateId": "peridance_ballet_beg_ballet",
       "studioId": "peridance",
@@ -7328,7 +8730,7 @@
       "startMin": 690,
       "endMin": 780,
       "tz": "America/New_York",
-      "instructor": "Lili Tewes",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -7386,6 +8788,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/327492?tab=book"
     },
     {
+      "id": "steps_2026-10-22_720_F6HCECkx",
+      "templateId": "steps_basic_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 720,
+      "endMin": 810,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "bdc_2026-10-22_810_beghip-ho",
       "templateId": "bdc_hipHopStreet_beg_hip_ho",
       "studioId": "bdc",
@@ -7438,6 +8853,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/327672?tab=book"
     },
     {
+      "id": "steps_2026-10-22_810_F6HC73fu",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 810,
+      "endMin": 900,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "pmt_2026-10-22_810_adv._b",
       "templateId": "pmt_jazzTheater_adv._beg._",
       "studioId": "pmt",
@@ -7451,6 +8879,19 @@
       "bookingUrl": "https://www.pmthouseofdance.com/sign-up-for-classes"
     },
     {
+      "id": "steps_2026-10-22_870_F6HEumvB",
+      "templateId": "steps_jazzTheater_adv/beg_th",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 870,
+      "endMin": 960,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "peri_2026-10-22_870_SYAjoJxd",
       "templateId": "peridance_hipHopStreet_moptop_uni",
       "studioId": "peridance",
@@ -7458,7 +8899,20 @@
       "startMin": 870,
       "endMin": 960,
       "tz": "America/New_York",
-      "instructor": "Janiya Jaggers",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peri_2026-10-22_870_SYAjoEpZ",
+      "templateId": "peridance_ballet_open_balle",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-22",
+      "startMin": 870,
+      "endMin": 960,
+      "tz": "America/New_York",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -7490,6 +8944,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/328194?tab=book"
     },
     {
+      "id": "steps_2026-10-22_900_F6HEb3ZE",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 900,
+      "endMin": 990,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "bdc_2026-10-22_915_begballet",
       "templateId": "bdc_ballet_beg_ballet",
       "studioId": "bdc",
@@ -7510,7 +8977,7 @@
       "startMin": 960,
       "endMin": 1050,
       "tz": "America/New_York",
-      "instructor": "GALLIM Dance Company _",
+      "instructor": "Staff",
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://www.peridance.com/open-classes"
@@ -7737,6 +9204,19 @@
       "bookingUrl": "https://bma1914.bma.mindbodyonline.com/siteId/28329/locationId/1/class/328766?tab=book"
     },
     {
+      "id": "steps_2026-10-22_1140_F6HCnYTs",
+      "templateId": "steps_tap_beg_tap",
+      "studioId": "steps",
+      "serviceDate": "2026-10-22",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
+    },
+    {
       "id": "ailey_2026-10-22_1140_advbeg",
       "templateId": "ailey_contemporaryModern_adv_beg_ho",
       "studioId": "ailey",
@@ -7800,6 +9280,32 @@
       "isSubstitute": false,
       "status": "scheduled",
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836481&sDate=10/22/2026&studioid=851&sType=-117"
+    },
+    {
+      "id": "peri_2026-10-22_1140_SYAjodLh",
+      "templateId": "peridance_ballet_beg_ballet",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-22",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
+    },
+    {
+      "id": "peri_2026-10-22_1140_SYAjn7QF",
+      "templateId": "peridance_hipHopStreet_beg_founda",
+      "studioId": "peridance",
+      "serviceDate": "2026-10-22",
+      "startMin": 1140,
+      "endMin": 1230,
+      "tz": "America/New_York",
+      "instructor": "Staff",
+      "isSubstitute": false,
+      "status": "scheduled",
+      "bookingUrl": "https://www.peridance.com/open-classes"
     },
     {
       "id": "ailey_2026-10-22_1170_begvogu",
@@ -8537,8 +10043,8 @@
       "startMin": 750,
       "endMin": 840,
       "tz": "America/New_York",
-      "instructor": "Martell Ruffin",
-      "isSubstitute": false,
+      "instructor": "Christian Warner",
+      "isSubstitute": true,
       "status": "scheduled",
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836505&sDate=10/24/2026&studioid=851&sType=-117"
     },
@@ -10526,8 +12032,8 @@
       "startMin": 750,
       "endMin": 840,
       "tz": "America/New_York",
-      "instructor": "Martell Ruffin",
-      "isSubstitute": false,
+      "instructor": "Christian Warner",
+      "isSubstitute": true,
       "status": "scheduled",
       "bookingUrl": "https://clients.mindbodyonline.com/ws.asp?sclassid=2146836505&sDate=10/31/2026&studioid=851&sType=-117"
     },
@@ -10612,9 +12118,9 @@
   ],
   "scraperStats": {
     "bdc": 431,
-    "steps": 147,
+    "steps": 500,
     "ailey": 413,
-    "peridance": 82,
+    "peridance": 125,
     "pmt": 86
   }
 }
