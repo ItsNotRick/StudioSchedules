@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/mock_feed.dart';
 import '../../domain/models.dart';
 import '../../state/providers.dart';
+import '../../services/calendar_export_service.dart';
 import '../common.dart';
 import '../detail_sheet.dart';
 
@@ -61,13 +62,19 @@ class MyWeekView extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 OutlinedButton.icon(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content:
-                            Text('Exported 14-day schedule to device calendar!'),
-                      ),
-                    );
+                  onPressed: () async {
+                    try {
+                      await CalendarExportService.exportRegimenToCalendar(
+                        regimenSlots: resolvedSlots,
+                        weekLabel: formatDate(weekStart),
+                      );
+                    } catch (e) {
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Calendar export: $e')),
+                        );
+                      }
+                    }
                   },
                   icon: const Icon(Icons.calendar_today, size: 14),
                   label: const Text('Export', style: TextStyle(fontSize: 12)),

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/feed_repository.dart';
 import '../data/mock_feed.dart';
 import '../domain/models.dart';
 
@@ -9,10 +10,27 @@ final todayProvider = Provider<ServiceDate>(
   (ref) => ServiceDate.fromDateTime(DateTime.now()),
 );
 
-/// The fetched feed. In production: CDN `schedule.json` cached in Drift (Q8).
-final feedProvider = Provider<MockFeed>(
-  (ref) => MockFeed.build(ref.watch(todayProvider)),
-);
+class FeedNotifier extends Notifier<MockFeed> {
+  @override
+  MockFeed build() {
+    _load();
+    return MockFeed.build(ref.watch(todayProvider));
+  }
+
+  Future<void> _load() async {
+    final repo = FeedRepository();
+    final realFeed = await repo.loadFeed();
+    state = realFeed;
+  }
+
+  Future<void> refresh() async {
+    final repo = FeedRepository();
+    final realFeed = await repo.loadFeed();
+    state = realFeed;
+  }
+}
+
+final feedProvider = NotifierProvider<FeedNotifier, MockFeed>(FeedNotifier.new);
 
 class SelectedDate extends Notifier<ServiceDate> {
   @override

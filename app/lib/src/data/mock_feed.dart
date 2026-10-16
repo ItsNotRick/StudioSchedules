@@ -469,7 +469,13 @@ final templates = <ClassTemplate>[
   ),
 ];
 
-final templatesById = {for (final t in templates) t.id: t};
+final templatesById = <String, ClassTemplate>{for (final t in templates) t.id: t};
+
+void registerTemplates(List<ClassTemplate> newTemplates) {
+  for (final t in newTemplates) {
+    templatesById[t.id] = t;
+  }
+}
 
 const _subPool = ['Alex Q.', 'Brooke Y.', 'Chris Z.', 'Devon U.'];
 
