@@ -11,6 +11,8 @@ import http.cookiejar
 from datetime import datetime
 from typing import List, Dict, Any
 
+import time
+
 PMT_STUDIO_ID = "727061"
 PMT_MINDBODY_WS_URL = f"https://clients.mindbodyonline.com/classic/ws?studioid={PMT_STUDIO_ID}"
 PMT_MINDBODY_HOME_URL = f"https://clients.mindbodyonline.com/classic/home?studioid={PMT_STUDIO_ID}"
@@ -20,24 +22,38 @@ def scrape_pmt_schedule() -> List[Dict[str, Any]]:
     cj = http.cookiejar.CookieJar()
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cj))
     opener.addheaders = [
-        ("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"),
-        ("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
-        ("Referer", PMT_MINDBODY_WS_URL),
+        ("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"),
+        ("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8"),
+        ("Accept-Language", "en-US,en;q=0.9"),
+        ("Sec-Ch-Ua", '"Chromium";v="122", "Not(A:Brand";v="24", "Google Chrome";v="122"'),
+        ("Sec-Ch-Ua-Mobile", "?0"),
+        ("Sec-Ch-Ua-Platform", '"macOS"'),
+        ("Referer", "https://www.pmthouseofdance.com/"),
     ]
 
-    # Step 1: Handshake with classic/ws to get launch tokens & cookies
-    resp1 = opener.open(PMT_MINDBODY_WS_URL, timeout=15)
-    html1 = resp1.read().decode("utf-8", errors="ignore")
-    fields = {m.group(1): m.group(2) for m in re.finditer(r'<input[^>]+name=["\']([^"\']+)["\'][^>]+value=["\']([^"\']*)["\']', html1)}
+    html3 = ""
+    for attempt in range(3):
+        try:
+            # Step 1: Handshake with classic/ws to get launch tokens & cookies
+            resp1 = opener.open(PMT_MINDBODY_WS_URL, timeout=15)
+            html1 = resp1.read().decode("utf-8", errors="ignore")
+            fields = {m.group(1): m.group(2) for m in re.finditer(r'<input[^>]+name=["\']([^"\']+)["\'][^>]+value=["\']([^"\']*)["\']', html1)}
 
-    # Step 2: POST tokens to home
-    data = urllib.parse.urlencode(fields).encode("utf-8")
-    req2 = urllib.request.Request(PMT_MINDBODY_HOME_URL, data=data)
-    opener.open(req2, timeout=15)
+            # Step 2: POST tokens to home
+            data = urllib.parse.urlencode(fields).encode("utf-8")
+            req2 = urllib.request.Request(PMT_MINDBODY_HOME_URL, data=data)
+            opener.open(req2, timeout=15)
 
-    # Step 3: Fetch weekly class schedule table
-    resp3 = opener.open(PMT_MINDBODY_SCHEDULE_URL, timeout=15)
-    html3 = resp3.read().decode("utf-8", errors="ignore")
+            # Step 3: Fetch weekly class schedule table
+            resp3 = opener.open(PMT_MINDBODY_SCHEDULE_URL, timeout=15)
+            html3 = resp3.read().decode("utf-8", errors="ignore")
+            if '<div id="classSchedule-mainTable"' in html3:
+                break
+        except Exception as e:
+            if attempt < 2:
+                time.sleep(2 * (attempt + 1))
+            else:
+                raise e
 
     idx = html3.find('<div id="classSchedule-mainTable"')
     if idx == -1:

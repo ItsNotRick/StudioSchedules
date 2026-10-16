@@ -6,6 +6,7 @@ instructor, and direct Mindbody booking URLs.
 """
 
 import re
+import html as html_lib
 import urllib.request
 from datetime import datetime
 from typing import List, Dict, Any, Optional
@@ -56,7 +57,7 @@ def scrape_bdc_schedule() -> List[Dict[str, Any]]:
             title_m = re.search(r'class="class-title">([^<]+)</div>', card)
             if not title_m:
                 continue
-            raw_title = title_m.group(1).strip()
+            raw_title = html_lib.unescape(title_m.group(1).strip())
 
             # Teacher
             teach_m = re.search(r'class="bdc-sched-teach">\s*<a[^>]*>([^<]+)</a>', card)

@@ -1,14 +1,13 @@
 """
 Steps on Broadway live schedule scraper.
 Fetches https://go.mindbodyonline.com/book/widgets/schedules/view/00705830e76/schedule,
-extracts session types, staff profiles, and scheduled session instances from the
-Next.js React Server Component payload.
+extracts session names, instructors, times, and duration from the Next.js payload.
 """
 
 import re
 import urllib.request
-from datetime import datetime
-from typing import List, Dict, Any, Optional
+from datetime import datetime, timezone, timedelta
+from typing import List, Dict, Any
 
 STEPS_WIDGET_URL = "https://go.mindbodyonline.com/book/widgets/schedules/view/00705830e76/schedule"
 
@@ -23,55 +22,55 @@ def scrape_steps_schedule() -> List[Dict[str, Any]]:
     quote_str = chr(92) + chr(34)
     q = re.escape(quote_str)
 
-    # 1. Map session types (e.g. "Ballet", "Tap", "Theater Jazz")
-    type_pat = re.compile(f"{q}id{q}:{q}(ctype_[^{q}]+){q},{q}name{q}:{q}([^{q}]+){q}")
-    types_map = {tid: name for tid, name in type_pat.findall(html)}
-
-    # 2. Map staff members
-    staff_pat = re.compile(f"{q}id{q}:{q}(sspec_[^{q}]+){q}.*?{q}displayLabel{q}:{q}([^{q}]+){q}")
-    staff_map = {sid: name for sid, name in staff_pat.findall(html)}
-
-    # 3. Match scheduled sessions
-    sess_pat = re.compile(
-        f"{q}sessionTypeId{q}:{q}(ctype_[^{q}]+){q},"
-        f"{q}startDateTime{q}:{q}([^{q}]+){q},"
-        f"{q}duration{q}:([0-9]+),"
-        f"{q}endDateTime{q}:{q}([^{q}]+){q},"
-        rf"{q}staff{q}:\[{q}([^{q}]+){q}"
+    sess_re = re.compile(
+        rf'{q}id{q}:{q}(cinst_[^{q}]+){q},'
+        rf'{q}name{q}:{q}([^{q}]+){q}.*?'
+        rf'{q}startDateTime{q}:{q}([^{q}]+){q},'
+        rf'{q}duration{q}:([0-9]+),.*?'
+        rf'{q}displayLabel{q}:{q}([^{q}]+){q}'
     )
-    matches = sess_pat.findall(html)
+
+    cancel_pat = re.compile(rf'{q}id{q}:{q}(cinst_[^{q}]+){q}.*?{q}cancelled{q}:true')
+    cancelled_ids = set(cancel_pat.findall(html))
 
     sessions: List[Dict[str, Any]] = []
-    for sid, sdt, dur_str, edt, staff_token in matches:
-        title = types_map.get(sid, "Open Class")
-        teacher = staff_map.get(staff_token, "Staff")
+    seen = set()
+
+    for m in sess_re.finditer(html):
+        cid, name, sdt, dur_str, instructor = m.groups()
+        if cid in seen:
+            continue
+        seen.add(cid)
+
+        if cid in cancelled_ids:
+            continue
+
+        clean_name = name.replace("In-Studio ", "").strip()
         dur = int(dur_str)
 
-        # Parse UTC start time and convert to NY local minutes & serviceDate
         try:
-            # ISO timestamp: e.g. 2026-10-16T19:00:00.0000000Z
-            clean_sdt = sdt.split(".")[0]
-            dt_utc = datetime.strptime(clean_sdt, "%Y-%m-%dT%H:%M:%S")
-            # Eastern Time is UTC-4 in daylight saving / UTC-5 standard
-            # Rough local offset: -4 hours
-            dt_local = dt_utc
+            clean_sdt = sdt.split(".")[0].replace("Z", "")
+            dt_utc = datetime.strptime(clean_sdt, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+            edt = timezone(timedelta(hours=-4))
+            dt_local = dt_utc.astimezone(edt)
             service_date = dt_local.strftime("%Y-%m-%d")
             start_min = dt_local.hour * 60 + dt_local.minute
         except Exception:
             service_date = sdt[:10]
             start_min = 600
 
-        session_id = f"steps_{service_date}_{start_min}_{sid[:10]}"
+        session_id = f"steps_{service_date}_{start_min}_{cid[-8:]}"
 
         sessions.append({
             "id": session_id,
             "studioId": "steps",
-            "rawClassTitle": title,
+            "rawClassTitle": clean_name,
             "serviceDate": service_date,
             "startMin": start_min,
             "endMin": start_min + dur,
             "tz": "America/New_York",
-            "instructor": teacher,
+            "instructor": instructor.strip(),
+            "isSubstitute": False,
             "bookingUrl": "https://www.stepsnyc.com/classes/schedule/"
         })
 
@@ -81,4 +80,4 @@ if __name__ == "__main__":
     results = scrape_steps_schedule()
     print(f"Scraped {len(results)} live classes from Steps on Broadway:")
     for s in results[:10]:
-        print(f"  [{s['serviceDate']} {s['startMin']//60}:{s['startMin']%60:02d}] {s['rawClassTitle']} | {s['instructor']}")
+        print(f"  [{s['serviceDate']} {s['startMin']//60:02d}:{s['startMin']%60:02d}] {s['rawClassTitle']} | {s['instructor']} ({s['endMin']-s['startMin']}m)")

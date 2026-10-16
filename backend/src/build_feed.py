@@ -1,13 +1,34 @@
 """
 Aggregator and sync builder for NYC Solo Dance Calendar.
-Reads curated templates and mock/scraped sessions, matches them to templates,
-detects teacher substitutes, and outputs versioned static JSON feed files.
+Runs live scrapers for BDC, Steps, Ailey, Peridance, and PMT,
+filters for solo entry & beginner dance classes, matches to curated templates,
+and outputs versioned static JSON feed files for offline-first Flutter consumption.
 """
 
-import json
 import os
-from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional
+import sys
+import json
+import shutil
+from datetime import datetime, timedelta, timezone
+from typing import Dict, List, Any, Optional, Tuple
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from scrapers.bdc_scraper import scrape_bdc_schedule
+from scrapers.steps_scraper import scrape_steps_schedule
+from scrapers.ailey_scraper import scrape_ailey_schedule
+from scrapers.peridance_scraper import scrape_peridance_schedule
+from scrapers.pmt_scraper import scrape_pmt_schedule
+
+PARTNER_KEYWORDS = [
+    "salsa", "bachata", "tango", "ballroom", "swing", "hustle", "kizomba", "zouk", "partnering", "partner"
+]
+
+NON_SOLO_OR_FITNESS = [
+    "cardio", "zumba", "yoga", "pilates", "gyrokinesis", "conditioning",
+    "virtual", "livestream", "zoom", "online", "kids", "youth", "teen", "toddler",
+    "masterclass", "audition", "revelations", "halloween", "mini ball", "barre à terre"
+]
 
 def load_json(path: str) -> Any:
     with open(path, "r", encoding="utf-8") as f:
@@ -18,113 +39,218 @@ def save_json(path: str, data: Any):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def match_template(raw_title: str, templates: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
-    title_lower = raw_title.lower().strip()
-    for tpl in templates:
-        for pat in tpl.get("matchPatterns", [tpl["title"]]):
-            if pat.lower() in title_lower:
-                return tpl
-    return None
+def classify_session(raw_title: str) -> Tuple[bool, str]:
+    """Determines if a class is an adult solo beginner/entry dance class."""
+    t = raw_title.lower().strip()
 
-def is_ignored(raw_title: str, ignore_rules: Dict[str, List[str]]) -> bool:
-    title_lower = raw_title.lower()
-    for kw in ignore_rules.get("titleKeywords", []):
-        if kw.lower() in title_lower:
-            return True
-    for kw in ignore_rules.get("partnerKeywords", []):
-        if kw.lower() in title_lower:
-            return True
-    return False
+    # Partner check
+    for p in PARTNER_KEYWORDS:
+        if p in t:
+            return False, f"partner: {p}"
 
-def generate_feed(templates_data: Dict[str, Any], studios_data: Dict[str, Any], start_date_str: str) -> Dict[str, Any]:
-    templates = templates_data["templates"]
-    series = templates_data.get("series", [])
-    ignore_rules = templates_data.get("ignoreRules", {})
-    studios = studios_data["studios"]
-    
-    start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
-    # Compute start of week (Monday)
-    week0 = start_date - timedelta(days=start_date.weekday())
-    
-    sessions: List[Dict[str, Any]] = []
-    unmatched_classes: List[str] = []
-    
-    # Generate 14-day rolling schedule based on templates' slots
-    for tpl in templates:
-        tpl_id = tpl["id"]
-        studio_id = tpl["studioId"]
-        slots = tpl.get("slots", [])
-        
-        for slot in slots:
-            weekday = slot["weekday"] # 1 = Mon, 7 = Sun
-            start_min = slot["startMin"]
-            dur_min = slot["durationMin"]
-            regular_teacher = slot["regularInstructor"]
-            
-            for d in range(14):
-                current_date = week0 + timedelta(days=d)
-                # python weekday: 0 = Mon, 6 = Sun -> +1
-                if (current_date.weekday() + 1) != weekday:
-                    continue
-                
-                date_str = current_date.strftime("%Y-%m-%d")
-                session_id = f"{tpl_id}_{date_str}_{start_min}"
-                
-                # Deterministic substitute / cancellation test simulation
-                is_sub = (d == 5 and tpl_id == "ailey_intro_horton") or (d == 7 and tpl_id == "steps_basic_tap")
-                teacher = "Guest Artist" if is_sub else regular_teacher
-                
-                status = "scheduled"
-                if (d == 5 and tpl_id == "pmt_basic_house") or (d == 9 and tpl_id == "bdc_basic_ballet"):
-                    status = "cancelled"
-                elif d == 11 and tpl_id == "bdc_basic_hiphop":
-                    status = "removed"
-                
-                studio_obj = next((s for s in studios if s["id"] == studio_id), None)
-                booking_url = studio_obj["scheduleUrl"] if studio_obj else "https://www.mindbodyonline.com"
-                
-                sessions.append({
-                    "id": session_id,
-                    "templateId": tpl_id,
-                    "studioId": studio_id,
-                    "serviceDate": date_str,
-                    "startMin": start_min,
-                    "endMin": start_min + dur_min,
-                    "tz": "America/New_York",
-                    "instructor": teacher,
-                    "isSubstitute": is_sub,
-                    "status": status,
-                    "bookingUrl": booking_url
-                })
-    
-    # Sort sessions by date and time
-    sessions.sort(key=lambda s: (s["serviceDate"], s["startMin"]))
-    
-    return {
-        "version": "1.0.0",
-        "generatedAt": datetime.utcnow().isoformat() + "Z",
-        "windowStart": week0.strftime("%Y-%m-%d"),
-        "windowEnd": (week0 + timedelta(days=13)).strftime("%Y-%m-%d"),
-        "studios": studios,
-        "templates": templates,
-        "series": series,
-        "sessions": sessions,
-        "unmatchedReviewQueue": unmatched_classes
-    }
+    # Fitness / Virtual / Youth check
+    for f in NON_SOLO_OR_FITNESS:
+        if f in t:
+            return False, f"fitness/virtual: {f}"
 
-def main():
+    # Adv Beg check
+    is_adv_beg = any(k in t for k in ["adv beg", "adv/beg", "adv. beg.", "advanced beginner", "adv. beginner", "adv beg "])
+
+    # Pure Intermediate or Advanced check
+    if not is_adv_beg:
+        if any(k in t for k in ["intermediate", "inter ", "int ", "int/", "/int", "adv/int", "int/adv", "advanced", " adv "]):
+            return False, "intermediate/advanced"
+
+    # Beginner, Basic, Intro check
+    has_beg = any(k in t for k in ["basic", "beg", "intro", "101", "absolute", "open"])
+    if has_beg or is_adv_beg:
+        return True, "keep"
+
+    return False, "unclassified"
+
+def infer_genre(title: str) -> str:
+    t = title.lower()
+    if "ballet" in t:
+        return "ballet"
+    if "tap" in t:
+        return "tap"
+    if "contemporary" in t or "modern" in t or "horton" in t or "graham" in t or "lyrical" in t:
+        return "contemporaryModern"
+    if "jazz" in t or "theater" in t:
+        return "jazzTheater"
+    if "heels" in t or "commercial" in t:
+        return "commercialHeels"
+    if "african" in t or "haitian" in t or "diaspora" in t or "afro" in t:
+        return "africanDiaspora"
+    return "hipHopStreet"
+
+def infer_tier(title: str) -> Tuple[str, str]:
+    t = title.lower()
+    if any(k in t for k in ["adv beg", "adv/beg", "adv. beg.", "advanced beginner"]):
+        return "advancedBeginner", "ADV/BEG"
+    if any(k in t for k in ["absolute", "abs beg", "intro", "101", "basic"]):
+        label = "BASIC"
+        if "abs" in t or "absolute" in t:
+            label = "ABS BEG"
+        elif "intro" in t:
+            label = "INTRO"
+        return "zeroExperience", label
+    return "beginner", "BEGINNER"
+
+def generate_live_feed() -> Dict[str, Any]:
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     templates_path = os.path.join(base_dir, "data", "templates.json")
     studios_path = os.path.join(base_dir, "data", "studios.json")
-    output_path = os.path.join(base_dir, "data", "schedule.json")
-    
+
     templates_data = load_json(templates_path)
     studios_data = load_json(studios_path)
-    
-    today_str = datetime.now().strftime("%Y-%m-%d")
-    feed = generate_feed(templates_data, studios_data, today_str)
+
+    templates = list(templates_data["templates"])
+    series = templates_data.get("series", [])
+    studios = studios_data["studios"]
+
+    # Studio scraper registry
+    scrapers = [
+        ("bdc", scrape_bdc_schedule),
+        ("steps", scrape_steps_schedule),
+        ("ailey", scrape_ailey_schedule),
+        ("peridance", scrape_peridance_schedule),
+        ("pmt", scrape_pmt_schedule),
+    ]
+
+    all_scraped_sessions: List[Dict[str, Any]] = []
+    scraper_stats = {}
+
+    for studio_id, fn in scrapers:
+        try:
+            sessions = fn()
+            all_scraped_sessions.extend(sessions)
+            scraper_stats[studio_id] = len(sessions)
+            print(f"Scraped {len(sessions)} raw sessions from {studio_id.upper()}")
+        except Exception as e:
+            print(f"Error scraping {studio_id.upper()}: {e}")
+            scraper_stats[studio_id] = 0
+
+    normalized_sessions: List[Dict[str, Any]] = []
+    review_queue: List[Dict[str, Any]] = []
+    tpl_lookup = {t["id"]: t for t in templates}
+
+    dates_seen = set()
+
+    for sess in all_scraped_sessions:
+        raw_title = sess["rawClassTitle"]
+        studio_id = sess["studioId"]
+        service_date = sess["serviceDate"]
+        dates_seen.add(service_date)
+
+        is_solo_beg, reason = classify_session(raw_title)
+        if not is_solo_beg:
+            continue
+
+        # Try to match an existing curated template
+        matched_tpl = None
+        for t in templates:
+            if t["studioId"] == studio_id:
+                for pat in t.get("matchPatterns", [t["title"]]):
+                    if pat.lower() in raw_title.lower():
+                        matched_tpl = t
+                        break
+            if matched_tpl:
+                break
+
+        # If not matched, generate an on-the-fly dynamic template
+        if not matched_tpl:
+            tier, raw_level_label = infer_tier(raw_title)
+            genre = infer_genre(raw_title)
+            clean_title = raw_title.split(" with ")[0].strip()
+            dynamic_tpl_id = f"{studio_id}_{genre}_{clean_title[:10].lower().replace(' ', '_').replace('-', '_')}"
+
+            if dynamic_tpl_id not in tpl_lookup:
+                new_tpl = {
+                    "id": dynamic_tpl_id,
+                    "studioId": studio_id,
+                    "title": clean_title,
+                    "matchPatterns": [clean_title],
+                    "rawLevelLabel": raw_level_label,
+                    "tier": tier,
+                    "primaryGenre": genre,
+                    "tags": [],
+                    "slots": [],
+                    "description": f"{clean_title} at {studio_id.upper()}.",
+                    "prerequisiteNotes": "Welcoming drop-in class. Check studio guidelines before class.",
+                    "attireNotes": "Comfortable clothes you can move in; appropriate dance shoes.",
+                    "catalogUrl": sess.get("bookingUrl", "")
+                }
+                templates.append(new_tpl)
+                tpl_lookup[dynamic_tpl_id] = new_tpl
+
+            matched_tpl = tpl_lookup[dynamic_tpl_id]
+
+            # Log to review queue for curators
+            review_queue.append({
+                "studioId": studio_id,
+                "rawClassTitle": raw_title,
+                "assignedTemplateId": dynamic_tpl_id,
+                "assignedTier": tier,
+                "assignedGenre": genre,
+                "detectedAt": datetime.now(timezone.utc).isoformat()
+            })
+
+        normalized_sessions.append({
+            "id": sess["id"],
+            "templateId": matched_tpl["id"],
+            "studioId": studio_id,
+            "serviceDate": service_date,
+            "startMin": sess["startMin"],
+            "endMin": sess["endMin"],
+            "tz": "America/New_York",
+            "instructor": sess.get("instructor", "Staff"),
+            "isSubstitute": sess.get("isSubstitute", False),
+            "status": "scheduled",
+            "bookingUrl": sess.get("bookingUrl", "")
+        })
+
+    # Sort sessions chronologically
+    normalized_sessions.sort(key=lambda s: (s["serviceDate"], s["startMin"]))
+
+    # Window dates
+    sorted_dates = sorted(list(dates_seen))
+    window_start = sorted_dates[0] if sorted_dates else datetime.now().strftime("%Y-%m-%d")
+    window_end = sorted_dates[-1] if sorted_dates else window_start
+
+    feed = {
+        "version": "1.0.0",
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "windowStart": window_start,
+        "windowEnd": window_end,
+        "studios": studios,
+        "templates": templates,
+        "series": series,
+        "sessions": normalized_sessions,
+        "scraperStats": scraper_stats
+    }
+
+    return feed, review_queue
+
+def main():
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    output_path = os.path.join(base_dir, "data", "schedule.json")
+    review_queue_path = os.path.join(base_dir, "data", "review_queue.json")
+    app_asset_path = os.path.join(os.path.dirname(base_dir), "app", "assets", "feed", "schedule.json")
+
+    print("Building NYC Solo Dance Calendar live feed...")
+    feed, review_queue = generate_live_feed()
+
     save_json(output_path, feed)
-    print(f"Generated static schedule feed: {output_path} with {len(feed['sessions'])} sessions.")
+    save_json(review_queue_path, review_queue)
+
+    # Sync to Flutter app bundled assets
+    if os.path.exists(os.path.dirname(app_asset_path)):
+        shutil.copyfile(output_path, app_asset_path)
+        print(f"Synced feed to Flutter asset: {app_asset_path}")
+
+    print(f"Generated static schedule feed with {len(feed['sessions'])} live sessions across {len(feed['templates'])} templates.")
+    print(f"Review queue contains {len(review_queue)} newly classified items.")
 
 if __name__ == "__main__":
     main()
