@@ -5,7 +5,7 @@
     "assignedTemplateId": "bdc_jazzTheater_adv_beg_ja",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121238+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974274+00:00"
   },
   {
     "studioId": "bdc",
@@ -13,7 +13,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_adv_beg_hi",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121265+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974303+00:00"
   },
   {
     "studioId": "bdc",
@@ -21,7 +21,7 @@
     "assignedTemplateId": "bdc_jazzTheater_beg_theate",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121277+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974320+00:00"
   },
   {
     "studioId": "bdc",
@@ -29,7 +29,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_adv_beg_co",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.121290+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974339+00:00"
   },
   {
     "studioId": "bdc",
@@ -37,7 +37,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_beg_contem",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.121301+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974357+00:00"
   },
   {
     "studioId": "bdc",
@@ -45,7 +45,7 @@
     "assignedTemplateId": "bdc_tap_beg_broadw",
     "assignedTier": "beginner",
     "assignedGenre": "tap",
-    "detectedAt": "2026-10-16T19:50:15.121317+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974379+00:00"
   },
   {
     "studioId": "bdc",
@@ -53,7 +53,7 @@
     "assignedTemplateId": "bdc_jazzTheater_basic_hip_",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121332+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974401+00:00"
   },
   {
     "studioId": "bdc",
@@ -61,7 +61,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_basic_jump",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121346+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974422+00:00"
   },
   {
     "studioId": "bdc",
@@ -69,7 +69,7 @@
     "assignedTemplateId": "bdc_ballet_beg__balle",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.121356+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974436+00:00"
   },
   {
     "studioId": "bdc",
@@ -77,7 +77,7 @@
     "assignedTemplateId": "bdc_tap_basic_tap",
     "assignedTier": "zeroExperience",
     "assignedGenre": "tap",
-    "detectedAt": "2026-10-16T19:50:15.121368+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974453+00:00"
   },
   {
     "studioId": "bdc",
@@ -85,7 +85,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_hip_ho",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121379+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974469+00:00"
   },
   {
     "studioId": "bdc",
@@ -93,7 +93,7 @@
     "assignedTemplateId": "bdc_jazzTheater_basic_cont",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121412+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974501+00:00"
   },
   {
     "studioId": "bdc",
@@ -101,7 +101,7 @@
     "assignedTemplateId": "bdc_jazzTheater_basic_stre",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121427+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974523+00:00"
   },
   {
     "studioId": "bdc",
@@ -109,7 +109,7 @@
     "assignedTemplateId": "bdc_tap_beg_tap",
     "assignedTier": "beginner",
     "assignedGenre": "tap",
-    "detectedAt": "2026-10-16T19:50:15.121436+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974538+00:00"
   },
   {
     "studioId": "bdc",
@@ -117,7 +117,7 @@
     "assignedTemplateId": "bdc_jazzTheater_adv_beg_st",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121449+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974558+00:00"
   },
   {
     "studioId": "bdc",
@@ -125,7 +125,7 @@
     "assignedTemplateId": "bdc_jazzTheater_basic_thea",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121463+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974579+00:00"
   },
   {
     "studioId": "bdc",
@@ -133,7 +133,7 @@
     "assignedTemplateId": "bdc_jazzTheater_adv_beg_co",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121483+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974609+00:00"
   },
   {
     "studioId": "bdc",
@@ -141,7 +141,7 @@
     "assignedTemplateId": "bdc_ballet_beg_ballet",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.121497+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974630+00:00"
   },
   {
     "studioId": "bdc",
@@ -149,7 +149,7 @@
     "assignedTemplateId": "bdc_jazzTheater_beg_street",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121528+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974677+00:00"
   },
   {
     "studioId": "bdc",
@@ -157,7 +157,7 @@
     "assignedTemplateId": "bdc_ballet_beg_pop_ba",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.121539+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974693+00:00"
   },
   {
     "studioId": "bdc",
@@ -165,7 +165,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_adv_beg_re",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121555+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974717+00:00"
   },
   {
     "studioId": "bdc",
@@ -173,7 +173,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_adv_beg_st",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121571+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974741+00:00"
   },
   {
     "studioId": "bdc",
@@ -181,7 +181,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_jumps_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121584+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974761+00:00"
   },
   {
     "studioId": "bdc",
@@ -189,7 +189,7 @@
     "assignedTemplateId": "bdc_jazzTheater_adv_beg_br",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121629+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974827+00:00"
   },
   {
     "studioId": "bdc",
@@ -197,7 +197,7 @@
     "assignedTemplateId": "bdc_jazzTheater_beg_jazz",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.121673+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974893+00:00"
   },
   {
     "studioId": "bdc",
@@ -205,7 +205,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_basic_hip_",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121723+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974967+00:00"
   },
   {
     "studioId": "bdc",
@@ -213,7 +213,7 @@
     "assignedTemplateId": "bdc_commercialHeels_basic_heel",
     "assignedTier": "zeroExperience",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-10-16T19:50:15.121736+00:00"
+    "detectedAt": "2026-10-16T20:08:46.974987+00:00"
   },
   {
     "studioId": "bdc",
@@ -221,7 +221,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_street",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121779+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975051+00:00"
   },
   {
     "studioId": "bdc",
@@ -229,7 +229,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_hip_ho",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.121833+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975127+00:00"
   },
   {
     "studioId": "bdc",
@@ -237,7 +237,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_adv_beg_co",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.121845+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975145+00:00"
   },
   {
     "studioId": "bdc",
@@ -245,7 +245,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_basic_grah",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.121886+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975199+00:00"
   },
   {
     "studioId": "bdc",
@@ -253,7 +253,7 @@
     "assignedTemplateId": "bdc_tap_beg_mechan",
     "assignedTier": "beginner",
     "assignedGenre": "tap",
-    "detectedAt": "2026-10-16T19:50:15.122008+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975380+00:00"
   },
   {
     "studioId": "bdc",
@@ -261,7 +261,7 @@
     "assignedTemplateId": "bdc_jazzTheater_beg_commer",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.122033+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975418+00:00"
   },
   {
     "studioId": "bdc",
@@ -269,7 +269,7 @@
     "assignedTemplateId": "bdc_commercialHeels_beg_heels",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-10-16T19:50:15.122058+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975447+00:00"
   },
   {
     "studioId": "bdc",
@@ -277,7 +277,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_beg_contem",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.122130+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975554+00:00"
   },
   {
     "studioId": "bdc",
@@ -285,7 +285,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_basic_stre",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.122147+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975580+00:00"
   },
   {
     "studioId": "bdc",
@@ -293,7 +293,7 @@
     "assignedTemplateId": "bdc_jazzTheater_beg_broadw",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.122160+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975601+00:00"
   },
   {
     "studioId": "bdc",
@@ -301,7 +301,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_hip_ho",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.122208+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975673+00:00"
   },
   {
     "studioId": "bdc",
@@ -309,7 +309,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.122261+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975759+00:00"
   },
   {
     "studioId": "bdc",
@@ -317,7 +317,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_adv_beg_so",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.122279+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975785+00:00"
   },
   {
     "studioId": "bdc",
@@ -325,7 +325,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_adv_beg_co",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.122406+00:00"
+    "detectedAt": "2026-10-16T20:08:46.975969+00:00"
   },
   {
     "studioId": "bdc",
@@ -333,7 +333,7 @@
     "assignedTemplateId": "bdc_jazzTheater_adv_beg_st",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.122503+00:00"
+    "detectedAt": "2026-10-16T20:08:46.976113+00:00"
   },
   {
     "studioId": "bdc",
@@ -341,7 +341,7 @@
     "assignedTemplateId": "bdc_jazzTheater_beg_40+_co",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.122550+00:00"
+    "detectedAt": "2026-10-16T20:08:46.976184+00:00"
   },
   {
     "studioId": "bdc",
@@ -349,7 +349,7 @@
     "assignedTemplateId": "bdc_africanDiaspora_basic_afro",
     "assignedTier": "zeroExperience",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.122592+00:00"
+    "detectedAt": "2026-10-16T20:08:46.976245+00:00"
   },
   {
     "studioId": "bdc",
@@ -357,7 +357,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_hip_ho",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.122706+00:00"
+    "detectedAt": "2026-10-16T20:08:46.976419+00:00"
   },
   {
     "studioId": "bdc",
@@ -365,7 +365,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_waacki",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.122808+00:00"
+    "detectedAt": "2026-10-16T20:08:46.976568+00:00"
   },
   {
     "studioId": "bdc",
@@ -373,7 +373,7 @@
     "assignedTemplateId": "bdc_jazzTheater_adv_beg_co",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.123074+00:00"
+    "detectedAt": "2026-10-16T20:08:46.976958+00:00"
   },
   {
     "studioId": "bdc",
@@ -381,7 +381,7 @@
     "assignedTemplateId": "bdc_contemporaryModern_adv_beg_co",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.123371+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977401+00:00"
   },
   {
     "studioId": "bdc",
@@ -389,7 +389,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_hip_ho",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.123385+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977423+00:00"
   },
   {
     "studioId": "steps",
@@ -397,7 +397,7 @@
     "assignedTemplateId": "steps_hipHopStreet_open_hip_h",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.123662+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977833+00:00"
   },
   {
     "studioId": "steps",
@@ -405,7 +405,7 @@
     "assignedTemplateId": "steps_tap_beg_tap",
     "assignedTier": "beginner",
     "assignedGenre": "tap",
-    "detectedAt": "2026-10-16T19:50:15.123681+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977860+00:00"
   },
   {
     "studioId": "steps",
@@ -413,7 +413,7 @@
     "assignedTemplateId": "steps_jazzTheater_intro_jazz",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.123706+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977897+00:00"
   },
   {
     "studioId": "steps",
@@ -421,7 +421,7 @@
     "assignedTemplateId": "steps_ballet_beg_ballet",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.123727+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977926+00:00"
   },
   {
     "studioId": "steps",
@@ -429,7 +429,7 @@
     "assignedTemplateId": "steps_jazzTheater_beg_theate",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.123745+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977954+00:00"
   },
   {
     "studioId": "steps",
@@ -437,7 +437,7 @@
     "assignedTemplateId": "steps_africanDiaspora_open_afro_",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.123763+00:00"
+    "detectedAt": "2026-10-16T20:08:46.977984+00:00"
   },
   {
     "studioId": "steps",
@@ -445,7 +445,7 @@
     "assignedTemplateId": "steps_hipHopStreet_intro_stre",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.123775+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978000+00:00"
   },
   {
     "studioId": "steps",
@@ -453,7 +453,7 @@
     "assignedTemplateId": "steps_jazzTheater_beg_theate",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.123796+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978031+00:00"
   },
   {
     "studioId": "steps",
@@ -461,7 +461,7 @@
     "assignedTemplateId": "steps_jazzTheater_beg_jazz",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.123847+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978108+00:00"
   },
   {
     "studioId": "steps",
@@ -469,7 +469,7 @@
     "assignedTemplateId": "steps_commercialHeels_open_heels",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-10-16T19:50:15.123871+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978144+00:00"
   },
   {
     "studioId": "steps",
@@ -477,7 +477,7 @@
     "assignedTemplateId": "steps_tap_adv/beg_br",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "tap",
-    "detectedAt": "2026-10-16T19:50:15.123885+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978165+00:00"
   },
   {
     "studioId": "ailey",
@@ -485,7 +485,7 @@
     "assignedTemplateId": "ailey_ballet_beg_ballet",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.123931+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978234+00:00"
   },
   {
     "studioId": "ailey",
@@ -493,7 +493,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_ny_sty",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.123947+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978258+00:00"
   },
   {
     "studioId": "ailey",
@@ -501,7 +501,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_west_a",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.123957+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978274+00:00"
   },
   {
     "studioId": "ailey",
@@ -509,7 +509,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_abs_beg_hi",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.123972+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978296+00:00"
   },
   {
     "studioId": "ailey",
@@ -517,7 +517,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_adv_beg_ho",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.123981+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978309+00:00"
   },
   {
     "studioId": "ailey",
@@ -525,7 +525,7 @@
     "assignedTemplateId": "ailey_jazzTheater_beg_broadw",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.123991+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978324+00:00"
   },
   {
     "studioId": "ailey",
@@ -533,7 +533,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_contem",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124003+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978340+00:00"
   },
   {
     "studioId": "ailey",
@@ -541,7 +541,7 @@
     "assignedTemplateId": "ailey_commercialHeels_beg_heels_",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-10-16T19:50:15.124013+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978355+00:00"
   },
   {
     "studioId": "ailey",
@@ -549,7 +549,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_hip_ho",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124023+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978371+00:00"
   },
   {
     "studioId": "ailey",
@@ -557,7 +557,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_vogue_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124035+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978387+00:00"
   },
   {
     "studioId": "ailey",
@@ -565,7 +565,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_adv_beg__w",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.124052+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978413+00:00"
   },
   {
     "studioId": "ailey",
@@ -573,7 +573,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_afro'd",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.124068+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978437+00:00"
   },
   {
     "studioId": "ailey",
@@ -581,7 +581,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_intro_to_h",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124080+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978455+00:00"
   },
   {
     "studioId": "ailey",
@@ -589,7 +589,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_limón_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124102+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978486+00:00"
   },
   {
     "studioId": "ailey",
@@ -597,7 +597,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_abs_beg_du",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124114+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978504+00:00"
   },
   {
     "studioId": "ailey",
@@ -605,7 +605,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_horton",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124125+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978520+00:00"
   },
   {
     "studioId": "ailey",
@@ -613,7 +613,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_open_conte",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124136+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978538+00:00"
   },
   {
     "studioId": "ailey",
@@ -621,7 +621,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_house_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124156+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978567+00:00"
   },
   {
     "studioId": "ailey",
@@ -629,7 +629,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_danceh",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124181+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978603+00:00"
   },
   {
     "studioId": "ailey",
@@ -637,7 +637,7 @@
     "assignedTemplateId": "ailey_ballet_adv_beg_ba",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.124212+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978650+00:00"
   },
   {
     "studioId": "ailey",
@@ -645,7 +645,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_ages_6_8_i",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124226+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978671+00:00"
   },
   {
     "studioId": "ailey",
@@ -653,7 +653,7 @@
     "assignedTemplateId": "ailey_jazzTheater_beg_jazz_(",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.124255+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978715+00:00"
   },
   {
     "studioId": "ailey",
@@ -661,7 +661,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_adv_beg_cu",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124292+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978735+00:00"
   },
   {
     "studioId": "ailey",
@@ -669,7 +669,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_afro_",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.124321+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978776+00:00"
   },
   {
     "studioId": "ailey",
@@ -677,7 +677,7 @@
     "assignedTemplateId": "ailey_jazzTheater_beg_commer",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.124369+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978849+00:00"
   },
   {
     "studioId": "ailey",
@@ -685,7 +685,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_vogue_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124395+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978888+00:00"
   },
   {
     "studioId": "ailey",
@@ -693,7 +693,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_abs_beg_ho",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124418+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978923+00:00"
   },
   {
     "studioId": "ailey",
@@ -701,7 +701,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_graham",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124449+00:00"
+    "detectedAt": "2026-10-16T20:08:46.978969+00:00"
   },
   {
     "studioId": "ailey",
@@ -709,7 +709,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_afro_",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.124463+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979005+00:00"
   },
   {
     "studioId": "ailey",
@@ -717,7 +717,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_samba/",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.124497+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979528+00:00"
   },
   {
     "studioId": "ailey",
@@ -725,7 +725,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_open_vogue",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124519+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979563+00:00"
   },
   {
     "studioId": "ailey",
@@ -733,7 +733,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_west_",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.124533+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979584+00:00"
   },
   {
     "studioId": "ailey",
@@ -741,7 +741,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_abs_beg_co",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124558+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979620+00:00"
   },
   {
     "studioId": "ailey",
@@ -749,7 +749,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_open_hip_h",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124585+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979658+00:00"
   },
   {
     "studioId": "ailey",
@@ -757,7 +757,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_open_limón",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124600+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979681+00:00"
   },
   {
     "studioId": "ailey",
@@ -765,7 +765,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_afro_b",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.124617+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979704+00:00"
   },
   {
     "studioId": "ailey",
@@ -773,7 +773,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_cuban_",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.124639+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979736+00:00"
   },
   {
     "studioId": "ailey",
@@ -781,7 +781,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_abs_beg_vo",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124821+00:00"
+    "detectedAt": "2026-10-16T20:08:46.979995+00:00"
   },
   {
     "studioId": "ailey",
@@ -789,7 +789,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_vogue_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.124998+00:00"
+    "detectedAt": "2026-10-16T20:08:46.980242+00:00"
   },
   {
     "studioId": "ailey",
@@ -797,7 +797,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_afro_",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.125059+00:00"
+    "detectedAt": "2026-10-16T20:08:46.980326+00:00"
   },
   {
     "studioId": "ailey",
@@ -805,7 +805,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_vogue_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.125608+00:00"
+    "detectedAt": "2026-10-16T20:08:46.980975+00:00"
   },
   {
     "studioId": "ailey",
@@ -813,7 +813,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_afro_",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.125675+00:00"
+    "detectedAt": "2026-10-16T20:08:46.981057+00:00"
   },
   {
     "studioId": "ailey",
@@ -821,7 +821,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_adv_beg_co",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.125952+00:00"
+    "detectedAt": "2026-10-16T20:08:46.981422+00:00"
   },
   {
     "studioId": "ailey",
@@ -829,7 +829,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_vogue_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126198+00:00"
+    "detectedAt": "2026-10-16T20:08:46.981754+00:00"
   },
   {
     "studioId": "ailey",
@@ -837,15 +837,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_afro_",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.126257+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Choreography",
-    "assignedTemplateId": "peridance_hipHopStreet_beg_choreo",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126604+00:00"
+    "detectedAt": "2026-10-16T20:08:46.981835+00:00"
   },
   {
     "studioId": "peridance",
@@ -853,7 +845,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_founda",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126615+00:00"
+    "detectedAt": "2026-10-16T20:08:46.982308+00:00"
   },
   {
     "studioId": "peridance",
@@ -861,7 +853,7 @@
     "assignedTemplateId": "peridance_africanDiaspora_open_haiti",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.126625+00:00"
+    "detectedAt": "2026-10-16T20:08:46.982322+00:00"
   },
   {
     "studioId": "peridance",
@@ -869,7 +861,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_poppi",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126635+00:00"
+    "detectedAt": "2026-10-16T20:08:46.982335+00:00"
   },
   {
     "studioId": "peridance",
@@ -877,7 +869,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_hip_ho",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126648+00:00"
+    "detectedAt": "2026-10-16T20:08:46.982352+00:00"
   },
   {
     "studioId": "peridance",
@@ -885,7 +877,7 @@
     "assignedTemplateId": "peridance_contemporaryModern_beg_contem",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.126657+00:00"
+    "detectedAt": "2026-10-16T20:08:46.982366+00:00"
   },
   {
     "studioId": "peridance",
@@ -893,7 +885,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126669+00:00"
+    "detectedAt": "2026-10-16T20:08:46.982382+00:00"
   },
   {
     "studioId": "peridance",
@@ -901,7 +893,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_locki",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126683+00:00"
+    "detectedAt": "2026-10-16T20:08:46.982400+00:00"
   },
   {
     "studioId": "peridance",
@@ -909,7 +901,7 @@
     "assignedTemplateId": "peridance_africanDiaspora_beg_africa",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.126693+00:00"
+    "detectedAt": "2026-10-16T20:08:46.983037+00:00"
   },
   {
     "studioId": "peridance",
@@ -917,7 +909,7 @@
     "assignedTemplateId": "peridance_ballet_beg_ballet",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.126705+00:00"
+    "detectedAt": "2026-10-16T20:08:46.983273+00:00"
   },
   {
     "studioId": "peridance",
@@ -925,7 +917,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_waacki",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126733+00:00"
+    "detectedAt": "2026-10-16T20:08:46.983577+00:00"
   },
   {
     "studioId": "peridance",
@@ -933,7 +925,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_moptop_uni",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126755+00:00"
+    "detectedAt": "2026-10-16T20:08:46.983624+00:00"
   },
   {
     "studioId": "peridance",
@@ -941,7 +933,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_dance",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126766+00:00"
+    "detectedAt": "2026-10-16T20:08:46.983694+00:00"
   },
   {
     "studioId": "peridance",
@@ -949,7 +941,15 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_danceh",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126784+00:00"
+    "detectedAt": "2026-10-16T20:08:46.983730+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Adv Beg Choreography",
+    "assignedTemplateId": "peridance_hipHopStreet_adv_beg_ch",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-10-16T20:08:46.983853+00:00"
   },
   {
     "studioId": "peridance",
@@ -957,7 +957,7 @@
     "assignedTemplateId": "peridance_contemporaryModern_beg_graham",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.126823+00:00"
+    "detectedAt": "2026-10-16T20:08:46.983945+00:00"
   },
   {
     "studioId": "peridance",
@@ -965,7 +965,7 @@
     "assignedTemplateId": "peridance_ballet_open_balle",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.126863+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984009+00:00"
   },
   {
     "studioId": "peridance",
@@ -973,7 +973,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_zena_",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126883+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984043+00:00"
   },
   {
     "studioId": "peridance",
@@ -981,7 +981,7 @@
     "assignedTemplateId": "peridance_africanDiaspora_beg_afro_f",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.126911+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984083+00:00"
   },
   {
     "studioId": "peridance",
@@ -989,7 +989,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126931+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984111+00:00"
   },
   {
     "studioId": "peridance",
@@ -997,7 +997,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_vogue",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126960+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984149+00:00"
   },
   {
     "studioId": "peridance",
@@ -1005,7 +1005,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_stret",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.126997+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984200+00:00"
   },
   {
     "studioId": "peridance",
@@ -1013,7 +1013,7 @@
     "assignedTemplateId": "peridance_africanDiaspora_open_afrob",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-10-16T19:50:15.127015+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984225+00:00"
   },
   {
     "studioId": "peridance",
@@ -1021,7 +1021,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_vogue",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127031+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984248+00:00"
   },
   {
     "studioId": "pmt",
@@ -1029,7 +1029,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127081+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984322+00:00"
   },
   {
     "studioId": "pmt",
@@ -1037,7 +1037,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_basic/begi",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127093+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984340+00:00"
   },
   {
     "studioId": "pmt",
@@ -1045,7 +1045,7 @@
     "assignedTemplateId": "pmt_jazzTheater_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.127104+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984354+00:00"
   },
   {
     "studioId": "pmt",
@@ -1053,7 +1053,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_beginner_h",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127115+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984369+00:00"
   },
   {
     "studioId": "pmt",
@@ -1061,7 +1061,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_breakin'10",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127128+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984387+00:00"
   },
   {
     "studioId": "pmt",
@@ -1069,7 +1069,7 @@
     "assignedTemplateId": "pmt_jazzTheater_beginner_j",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.127144+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984410+00:00"
   },
   {
     "studioId": "pmt",
@@ -1077,7 +1077,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_poppi",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127156+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984426+00:00"
   },
   {
     "studioId": "pmt",
@@ -1085,7 +1085,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_intro_to_h",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127175+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984451+00:00"
   },
   {
     "studioId": "pmt",
@@ -1093,7 +1093,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_regga",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127187+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984468+00:00"
   },
   {
     "studioId": "pmt",
@@ -1101,7 +1101,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open__leve",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127228+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984526+00:00"
   },
   {
     "studioId": "pmt",
@@ -1109,7 +1109,7 @@
     "assignedTemplateId": "pmt_jazzTheater_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.127238+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984541+00:00"
   },
   {
     "studioId": "pmt",
@@ -1117,7 +1117,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_beginner_c",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.127251+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984561+00:00"
   },
   {
     "studioId": "pmt",
@@ -1125,7 +1125,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127262+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984577+00:00"
   },
   {
     "studioId": "pmt",
@@ -1133,7 +1133,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_beginner_c",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.127274+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984594+00:00"
   },
   {
     "studioId": "pmt",
@@ -1141,7 +1141,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.127285+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984609+00:00"
   },
   {
     "studioId": "pmt",
@@ -1149,7 +1149,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_level",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127298+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984627+00:00"
   },
   {
     "studioId": "pmt",
@@ -1157,7 +1157,7 @@
     "assignedTemplateId": "pmt_commercialHeels_beginner_h",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-10-16T19:50:15.127312+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984646+00:00"
   },
   {
     "studioId": "pmt",
@@ -1165,7 +1165,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_beginner_h",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127343+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984690+00:00"
   },
   {
     "studioId": "pmt",
@@ -1173,7 +1173,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_intro_to_c",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.127356+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984708+00:00"
   },
   {
     "studioId": "pmt",
@@ -1181,7 +1181,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127367+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984724+00:00"
   },
   {
     "studioId": "pmt",
@@ -1189,7 +1189,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127381+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984744+00:00"
   },
   {
     "studioId": "pmt",
@@ -1197,7 +1197,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127401+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984772+00:00"
   },
   {
     "studioId": "pmt",
@@ -1205,7 +1205,7 @@
     "assignedTemplateId": "pmt_commercialHeels_open_heels",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-10-16T19:50:15.127414+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984790+00:00"
   },
   {
     "studioId": "pmt",
@@ -1213,7 +1213,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_barre",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127438+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984823+00:00"
   },
   {
     "studioId": "pmt",
@@ -1221,7 +1221,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_beginner_c",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.127450+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984840+00:00"
   },
   {
     "studioId": "pmt",
@@ -1229,7 +1229,7 @@
     "assignedTemplateId": "pmt_jazzTheater_basic_jazz",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.127462+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984858+00:00"
   },
   {
     "studioId": "pmt",
@@ -1237,7 +1237,7 @@
     "assignedTemplateId": "pmt_ballet_beginner_c",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-10-16T19:50:15.127477+00:00"
+    "detectedAt": "2026-10-16T20:08:46.984878+00:00"
   },
   {
     "studioId": "pmt",
@@ -1245,7 +1245,7 @@
     "assignedTemplateId": "pmt_jazzTheater_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-10-16T19:50:15.127619+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985076+00:00"
   },
   {
     "studioId": "pmt",
@@ -1253,7 +1253,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127641+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985107+00:00"
   },
   {
     "studioId": "pmt",
@@ -1261,7 +1261,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_beginner_c",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.127654+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985125+00:00"
   },
   {
     "studioId": "pmt",
@@ -1269,7 +1269,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_beginner_h",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127712+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985205+00:00"
   },
   {
     "studioId": "pmt",
@@ -1277,7 +1277,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127733+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985235+00:00"
   },
   {
     "studioId": "pmt",
@@ -1285,7 +1285,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127748+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985255+00:00"
   },
   {
     "studioId": "pmt",
@@ -1293,7 +1293,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv._beg._",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-10-16T19:50:15.127768+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985283+00:00"
   },
   {
     "studioId": "pmt",
@@ -1301,6 +1301,6 @@
     "assignedTemplateId": "pmt_contemporaryModern_beginner_c",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-10-16T19:50:15.127808+00:00"
+    "detectedAt": "2026-10-16T20:08:46.985338+00:00"
   }
 ]

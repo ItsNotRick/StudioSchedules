@@ -68,6 +68,10 @@ class CalendarHomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activeView = ref.watch(activeViewProvider);
     final selectedDate = ref.watch(selectedDateProvider);
+    final feed = ref.watch(feedProvider);
+    final theme = Theme.of(context);
+    final isNextWeek = selectedDate.compareTo(feed.today.startOfWeek.addDays(6)) > 0;
+    final isToday = selectedDate == feed.today;
 
     return Scaffold(
       appBar: AppBar(
@@ -78,16 +82,47 @@ class CalendarHomeScreen extends ConsumerWidget {
               'NYC Solo Dance Calendar',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            Text(
-              '${formatDate(selectedDate)} (EST)',
-              style: TextStyle(
-                fontSize: 12,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-              ),
+            Row(
+              children: [
+                Text(
+                  '${formatDate(selectedDate)} (EST)',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                  decoration: BoxDecoration(
+                    color: isNextWeek
+                        ? theme.colorScheme.tertiaryContainer
+                        : theme.colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    isNextWeek ? 'Next Week' : 'This Week',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: isNextWeek
+                          ? theme.colorScheme.onTertiaryContainer
+                          : theme.colorScheme.onPrimaryContainer,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
         actions: [
+          if (!isToday)
+            TextButton(
+              onPressed: () =>
+                  ref.read(selectedDateProvider.notifier).select(feed.today),
+              style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
+              child: const Text('Today', style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
           IconButton(
             icon: const Icon(Icons.repeat),
             tooltip: 'Beginner Workshop Series',

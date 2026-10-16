@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -157,21 +158,61 @@ class SessionCard extends ConsumerWidget {
 }
 
 /// Horizontal 14-day strip; dots indicate matching classes.
-class WeekStrip extends ConsumerWidget {
+class WeekStrip extends ConsumerStatefulWidget {
   const WeekStrip({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<WeekStrip> createState() => _WeekStripState();
+}
+
+class _WeekStripState extends ConsumerState<WeekStrip> {
+  final ScrollController _scrollController = ScrollController();
+  bool _hasInitialScrolled = false;
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToSelectedOrToday(MockFeed feed, ServiceDate target) {
+    if (!_scrollController.hasClients) return;
+    final dayIndex = feed.windowStart.daysUntil(target);
+    if (dayIndex >= 0) {
+      double offset = dayIndex * 52.0;
+      if (dayIndex >= 7) offset += 24.0;
+      // Show target with a 1-day lead so surrounding days are visible
+      offset = math.max(0.0, offset - 52.0);
+      _scrollController.animateTo(
+        offset,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutCubic,
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final feed = ref.watch(feedProvider);
     final selected = ref.watch(selectedDateProvider);
     final theme = Theme.of(context);
 
+    if (!_hasInitialScrolled) {
+      _hasInitialScrolled = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToSelectedOrToday(feed, selected);
+      });
+    }
+
+    final totalDays = math.max(14, feed.windowStart.daysUntil(feed.windowEnd) + 1);
+
     return SizedBox(
       height: 70,
       child: ListView.builder(
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        itemCount: 14,
+        itemCount: totalDays,
         itemBuilder: (context, i) {
           final d = feed.windowStart.addDays(i);
           final isSel = d == selected;
@@ -179,7 +220,9 @@ class WeekStrip extends ConsumerWidget {
           final count = ref.watch(sessionsForDateProvider(d)).length +
               ref.watch(seriesStartingOnProvider(d)).length;
           final past = d.compareTo(feed.today) < 0;
-          return Padding(
+          final isNextWeekStart = (d.weekday == 1 && i > 0);
+
+          Widget item = Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 4),
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
@@ -189,34 +232,87 @@ class WeekStrip extends ConsumerWidget {
                 decoration: BoxDecoration(
                   color: isSel ? theme.colorScheme.primary : null,
                   borderRadius: BorderRadius.circular(12),
-                  border: isToday && !isSel ? Border.all(color: theme.colorScheme.primary) : null,
+                  border: isToday && !isSel
+                      ? Border.all(color: theme.colorScheme.primary, width: 1.5)
+                      : null,
                 ),
-                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(weekdayShort[d.weekday - 1],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      weekdayShort[d.weekday - 1],
                       style: TextStyle(
-                          fontSize: 11,
-                          color: isSel
-                              ? theme.colorScheme.onPrimary
-                              : past
-                                  ? theme.disabledColor
-                                  : null)),
-                  Text('${d.day}',
+                        fontSize: 11,
+                        fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                        color: isSel
+                            ? theme.colorScheme.onPrimary
+                            : past
+                                ? theme.disabledColor
+                                : null,
+                      ),
+                    ),
+                    Text(
+                      '${d.day}',
                       style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: isSel
-                              ? theme.colorScheme.onPrimary
-                              : past
-                                  ? theme.disabledColor
-                                  : null)),
-                  Text(count == 0 ? '·' : '$count',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: isSel
+                            ? theme.colorScheme.onPrimary
+                            : past
+                                ? theme.disabledColor
+                                : null,
+                      ),
+                    ),
+                    Text(
+                      count == 0 ? '·' : '$count',
                       style: TextStyle(
-                          fontSize: 10,
-                          color: isSel ? theme.colorScheme.onPrimary : theme.colorScheme.primary)),
-                ]),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        color: isSel
+                            ? theme.colorScheme.onPrimary
+                            : past
+                                ? theme.disabledColor
+                                : theme.colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           );
+
+          if (isNextWeekStart) {
+            return Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Center(
+                    child: RotatedBox(
+                      quarterTurns: 3,
+                      child: Text(
+                        'NEXT WEEK',
+                        style: TextStyle(
+                          fontSize: 8,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.6,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                item,
+              ],
+            );
+          }
+
+          return item;
         },
       ),
     );

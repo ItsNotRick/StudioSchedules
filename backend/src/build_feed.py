@@ -210,13 +210,17 @@ def generate_live_feed() -> Dict[str, Any]:
             "bookingUrl": sess.get("bookingUrl", "")
         })
 
+    # Window dates: 14-day rolling window anchored to current week's Monday
+    today_dt = datetime.now()
+    current_monday_dt = today_dt - timedelta(days=today_dt.weekday())
+    window_start = current_monday_dt.strftime("%Y-%m-%d")
+    window_end = (current_monday_dt + timedelta(days=13)).strftime("%Y-%m-%d")
+
+    # Filter out sessions that occurred before the current week
+    normalized_sessions = [s for s in normalized_sessions if s["serviceDate"] >= window_start]
+
     # Sort sessions chronologically
     normalized_sessions.sort(key=lambda s: (s["serviceDate"], s["startMin"]))
-
-    # Window dates
-    sorted_dates = sorted(list(dates_seen))
-    window_start = sorted_dates[0] if sorted_dates else datetime.now().strftime("%Y-%m-%d")
-    window_end = sorted_dates[-1] if sorted_dates else window_start
 
     feed = {
         "version": "1.0.0",

@@ -40,8 +40,16 @@ class FeedRepository {
 
       final data = json.decode(jsonStr) as Map<String, dynamic>;
 
-      final windowStart = ServiceDate.parse(data['windowStart'] as String);
       final today = ServiceDate.fromDateTime(DateTime.now());
+      final currentMonday = today.startOfWeek;
+      final rawWindowStart = data['windowStart'] as String?;
+      final parsedWindowStart = rawWindowStart != null
+          ? ServiceDate.parse(rawWindowStart)
+          : currentMonday;
+      // Anchor windowStart to current week's Monday if feed windowStart was earlier
+      final windowStart = parsedWindowStart.compareTo(currentMonday) < 0
+          ? currentMonday
+          : parsedWindowStart;
 
       // Parse and register all templates from feed (curated + dynamically classified)
       final rawTemplates = data['templates'] as List<dynamic>? ?? [];

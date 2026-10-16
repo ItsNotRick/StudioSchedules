@@ -22,8 +22,18 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
             "Referer": "https://ailey.org/"
         }
     )
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        html = resp.read().decode("utf-8")
+    html = ""
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                html = resp.read().decode("utf-8")
+            if html:
+                break
+        except Exception as e:
+            if attempt == 2:
+                raise e
+            import time
+            time.sleep(2)
 
     sep = chr(92) + '\"title' + chr(92) + '\":' + chr(92) + '\"'
     sessions: List[Dict[str, Any]] = []
