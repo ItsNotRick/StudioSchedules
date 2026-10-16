@@ -62,28 +62,39 @@ void main() {
         equals('Week_of_Oct_12___Oct_18__2026'));
   });
 
-  test('Back-to-back pairs only match same studio starting immediately after', () async {
+  test('Pairs well with includes immediate same-studio and reachable cross-studio classes', () async {
     final repo = FeedRepository();
     final feed = await repo.loadFeed();
 
-    // Check a session at BDC that ends at 3:00 PM (900 min)
+    // Check a session at Peridance (Bo Belza, ends at 19:00 / 1140 min on Oct 16)
+    final periSession = feed.sessions.firstWhere(
+      (s) => s.studioId == StudioId.peridance && s.serviceDate == const ServiceDate(2026, 10, 16) && s.endMin == 1140,
+    );
+
+    // Cross-studio candidates reachable with commute buffer
+    final crossStudio = feed.sessions.where((o) {
+      if (o.id == periSession.id || o.serviceDate != periSession.serviceDate) return false;
+      if (o.studioId == periSession.studioId) return false;
+      if (o.status != SessionStatus.scheduled) return false;
+      final gap = o.startMin - periSession.endMin;
+      if (gap < 0 || gap > 90) return false;
+      return commuteBetween(periSession.studioId, o.studioId).minutes + 5 <= gap;
+    }).toList();
+
+    expect(crossStudio, isNotEmpty, reason: 'Cross-studio commute options should be found');
+
+    // Immediate same-studio candidate at BDC (ends at 3:00 PM / 900 min on Oct 16)
     final bdcSession = feed.sessions.firstWhere(
       (s) => s.studioId == StudioId.bdc && s.serviceDate == const ServiceDate(2026, 10, 16) && s.endMin == 900,
     );
-
-    final pairs = feed.sessions.where((o) {
+    final immediateSame = feed.sessions.where((o) {
       if (o.id == bdcSession.id || o.serviceDate != bdcSession.serviceDate) return false;
       if (o.studioId != bdcSession.studioId) return false;
       if (o.status != SessionStatus.scheduled) return false;
       return o.startMin == bdcSession.endMin;
     }).toList();
 
-    expect(pairs, isNotEmpty);
-    for (final p in pairs) {
-      expect(p.studioId, equals(bdcSession.studioId));
-      expect(p.serviceDate, equals(bdcSession.serviceDate));
-      expect(p.startMin, equals(bdcSession.endMin));
-    }
+    expect(immediateSame, isNotEmpty, reason: 'Same-studio immediate classes should be found');
   });
 }
 

@@ -126,30 +126,37 @@ class _SessionDetail extends ConsumerWidget {
     final feed = ref.watch(feedProvider);
     final filter = ref.watch(filterProvider);
 
-    // "Pairs well with": classes starting immediately after this one ends (strictly same studio).
-    final sameStudioCandidates = feed.sessions.where((o) {
+    // "Pairs well with":
+    // 1. Same-studio classes starting immediately after this one ends (gap == 0) or later (gap <= 90).
+    // 2. Cross-studio classes reachable in time via walk/subway within 90 min.
+    final allReachable = feed.sessions.where((o) {
       if (o.id == session.id || o.serviceDate != session.serviceDate) return false;
-      if (o.studioId != session.studioId) return false;
       if (o.status != SessionStatus.scheduled) return false;
       final gap = o.startMin - session.endMin;
-      return gap >= 0 && gap <= 15;
+      if (gap < 0 || gap > 90) return false;
+      if (o.studioId == session.studioId) return true; // Same studio includes immediate start (gap == 0)
+      return commuteBetween(session.studioId, o.studioId).minutes + 5 <= gap;
     }).toList()
       ..sort((a, b) => a.startMin.compareTo(b.startMin));
 
-    // Prefer candidates matching active filters if any exist, otherwise show all same-studio candidates.
-    final filtered = sameStudioCandidates
+    // Prefer classes that match the active filter if any match, otherwise show all reachable classes
+    final filtered = allReachable
         .where((o) => filter.acceptsTemplate(templatesById[o.templateId]!))
         .toList();
-    final candidatePool =
-        filtered.isNotEmpty ? filtered : sameStudioCandidates;
+    final reachable = filtered.isNotEmpty ? filtered : allReachable;
 
-    final immediateClasses =
-        candidatePool.where((o) => o.startMin == session.endMin).toList();
-    final pairs = (immediateClasses.isNotEmpty
-            ? immediateClasses
-            : candidatePool)
-        .take(4)
-        .toList();
+    final sameStudio = reachable.where((o) => o.studioId == session.studioId).toList();
+    final crossStudio = reachable.where((o) => o.studioId != session.studioId).toList();
+
+    // Include immediate same-studio classes in addition to cross-studio commute options
+    final pairs = <ClassSession>[];
+    if (sameStudio.isNotEmpty && crossStudio.isNotEmpty) {
+      pairs.addAll(sameStudio.take(2));
+      pairs.addAll(crossStudio.take(2));
+      pairs.sort((a, b) => a.startMin.compareTo(b.startMin));
+    } else {
+      pairs.addAll(reachable.take(4));
+    }
 
     return ListView(
       controller: controller,
@@ -221,7 +228,8 @@ class _SessionDetail extends ConsumerWidget {
                   subtitle: Text(
                     '${formatTime(o.startMin)}'
                     '${o.instructor.isNotEmpty ? ' · with ${o.instructor}' : ''}'
-                    ' · ${o.startMin == session.endMin ? 'Starts right after' : '${o.startMin - session.endMin} min gap'}',
+                    ' · ${o.startMin == session.endMin ? 'Starts right after' : '${o.startMin - session.endMin} min gap'}'
+                    ' · ${commuteBetween(session.studioId, o.studioId)}',
                   ),
                   trailing: LevelPill(templatesById[o.templateId]!),
                   onTap: () {
