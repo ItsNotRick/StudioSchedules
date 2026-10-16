@@ -61,4 +61,29 @@ void main() {
     expect(CalendarExportService.dateClean('Week of Oct 12 - Oct 18, 2026'),
         equals('Week_of_Oct_12___Oct_18__2026'));
   });
+
+  test('Back-to-back pairs only match same studio starting immediately after', () async {
+    final repo = FeedRepository();
+    final feed = await repo.loadFeed();
+
+    // Check a session at BDC that ends at 3:00 PM (900 min)
+    final bdcSession = feed.sessions.firstWhere(
+      (s) => s.studioId == StudioId.bdc && s.serviceDate == const ServiceDate(2026, 10, 16) && s.endMin == 900,
+    );
+
+    final pairs = feed.sessions.where((o) {
+      if (o.id == bdcSession.id || o.serviceDate != bdcSession.serviceDate) return false;
+      if (o.studioId != bdcSession.studioId) return false;
+      if (o.status != SessionStatus.scheduled) return false;
+      return o.startMin == bdcSession.endMin;
+    }).toList();
+
+    expect(pairs, isNotEmpty);
+    for (final p in pairs) {
+      expect(p.studioId, equals(bdcSession.studioId));
+      expect(p.serviceDate, equals(bdcSession.serviceDate));
+      expect(p.startMin, equals(bdcSession.endMin));
+    }
+  });
 }
+

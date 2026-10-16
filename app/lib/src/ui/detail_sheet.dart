@@ -126,16 +126,30 @@ class _SessionDetail extends ConsumerWidget {
     final feed = ref.watch(feedProvider);
     final filter = ref.watch(filterProvider);
 
-    // "Pairs well with": classes starting 0–90 min after this one ends,
-    // reachable in time, at any studio (covers the doc's commute use case).
-    final pairs = feed.sessions.where((o) {
+    // "Pairs well with": classes starting immediately after this one ends (strictly same studio).
+    final sameStudioCandidates = feed.sessions.where((o) {
       if (o.id == session.id || o.serviceDate != session.serviceDate) return false;
+      if (o.studioId != session.studioId) return false;
       if (o.status != SessionStatus.scheduled) return false;
-      if (!filter.acceptsTemplate(templatesById[o.templateId]!)) return false;
       final gap = o.startMin - session.endMin;
-      if (gap < 0 || gap > 90) return false;
-      return commuteBetween(session.studioId, o.studioId).minutes + 5 <= gap;
-    }).take(3).toList();
+      return gap >= 0 && gap <= 15;
+    }).toList()
+      ..sort((a, b) => a.startMin.compareTo(b.startMin));
+
+    // Prefer candidates matching active filters if any exist, otherwise show all same-studio candidates.
+    final filtered = sameStudioCandidates
+        .where((o) => filter.acceptsTemplate(templatesById[o.templateId]!))
+        .toList();
+    final candidatePool =
+        filtered.isNotEmpty ? filtered : sameStudioCandidates;
+
+    final immediateClasses =
+        candidatePool.where((o) => o.startMin == session.endMin).toList();
+    final pairs = (immediateClasses.isNotEmpty
+            ? immediateClasses
+            : candidatePool)
+        .take(4)
+        .toList();
 
     return ListView(
       controller: controller,
@@ -167,7 +181,14 @@ class _SessionDetail extends ConsumerWidget {
           session.instructor,
           trailing: session.isSubstitute
               ? StatusChip(
-                  label: 'Sub for ${tpl.slots.firstWhere((s) => s.weekday == session.serviceDate.weekday && s.startMin == session.startMin).regularInstructor}',
+                  label: () {
+                    for (final s in tpl.slots) {
+                      if (s.weekday == session.serviceDate.weekday && s.startMin == session.startMin) {
+                        return 'Sub for ${s.regularInstructor}';
+                      }
+                    }
+                    return 'Substitute';
+                  }(),
                   color: Colors.orange.shade800,
                   icon: Icons.swap_horiz)
               : null,
@@ -198,8 +219,11 @@ class _SessionDetail extends ConsumerWidget {
                   leading: StudioBadge(o.studioId, dense: true),
                   title: Text(templatesById[o.templateId]!.title),
                   subtitle: Text(
-                      '${formatTime(o.startMin)} · ${o.startMin - session.endMin} min gap · '
-                      '${commuteBetween(session.studioId, o.studioId)}'),
+                    '${formatTime(o.startMin)}'
+                    '${o.instructor.isNotEmpty ? ' · with ${o.instructor}' : ''}'
+                    ' · ${o.startMin == session.endMin ? 'Starts right after' : '${o.startMin - session.endMin} min gap'}',
+                  ),
+                  trailing: LevelPill(templatesById[o.templateId]!),
                   onTap: () {
                     final nav = Navigator.of(context);
                     nav.pop();
