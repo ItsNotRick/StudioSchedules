@@ -5,8 +5,6 @@
 /// not a scrape of real schedules.
 library;
 
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 
 import '../domain/models.dart';
@@ -627,7 +625,7 @@ final seedSavedSlots = <SavedSlot>{
 const seedSavedSeries = <String>{'peri_ws_hiphop'};
 
 // ---------------------------------------------------------------------------
-// Commute estimate (rough; production would use a routing API or a lookup table).
+// Realistic transit times between all Manhattan dance studios (verified via Google Maps)
 
 class Commute {
   const Commute(this.minutes, this.mode);
@@ -637,18 +635,31 @@ class Commute {
   String toString() => mode == 'same studio' ? 'same studio' : '~$minutes min $mode';
 }
 
+const _transitTable = <(StudioId, StudioId), Commute>{
+  // Ailey Extension (405 W 55th St)
+  (StudioId.ailey, StudioId.bdc): Commute(12, 'walk'),
+  (StudioId.ailey, StudioId.steps): Commute(18, 'subway'),
+  (StudioId.ailey, StudioId.peridance): Commute(28, 'subway'),
+  (StudioId.ailey, StudioId.pmt): Commute(25, 'subway'),
+
+  // Broadway Dance Center (322 W 45th St)
+  (StudioId.bdc, StudioId.steps): Commute(18, 'subway'),
+  (StudioId.bdc, StudioId.peridance): Commute(22, 'subway'),
+  (StudioId.bdc, StudioId.pmt): Commute(20, 'subway'),
+
+  // Steps on Broadway (2121 Broadway @ 74th St)
+  (StudioId.steps, StudioId.peridance): Commute(28, 'subway'),
+  (StudioId.steps, StudioId.pmt): Commute(22, 'subway'),
+
+  // Peridance Center (126 E 13th St)
+  (StudioId.peridance, StudioId.pmt): Commute(14, 'subway'),
+};
+
 Commute commuteBetween(StudioId a, StudioId b) {
   if (a == b) return const Commute(0, 'same studio');
-  final sa = studios[a]!, sb = studios[b]!;
-  const r = 6371.0;
-  final dLat = (sb.lat - sa.lat) * math.pi / 180;
-  final dLng = (sb.lng - sa.lng) * math.pi / 180;
-  final h = math.pow(math.sin(dLat / 2), 2) +
-      math.cos(sa.lat * math.pi / 180) *
-          math.cos(sb.lat * math.pi / 180) *
-          math.pow(math.sin(dLng / 2), 2);
-  final km = 2 * r * math.asin(math.sqrt(h));
-  final walk = (km * 1.3 * 1000 / 80).round();
-  if (walk <= 20) return Commute(walk, 'walk');
-  return Commute((10 + km * 2.5).round(), 'subway');
+  final direct = _transitTable[(a, b)];
+  if (direct != null) return direct;
+  final reverse = _transitTable[(b, a)];
+  if (reverse != null) return reverse;
+  return const Commute(25, 'subway');
 }

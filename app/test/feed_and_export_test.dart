@@ -110,5 +110,27 @@ void main() {
     final titles = otherTemplates.map((t) => t!.title).toSet();
     expect(titles.any((t) => t.toLowerCase().contains('jump') || t.toLowerCase().contains('stretch') || t.toLowerCase().contains('barre')), isTrue);
   });
+
+  test('commuteBetween returns verified transit times', () {
+    // Ailey to PMT is 25 min subway
+    final aileyPmt = commuteBetween(StudioId.ailey, StudioId.pmt);
+    expect(aileyPmt.minutes, equals(25));
+    expect(aileyPmt.mode, equals('subway'));
+
+    // Symmetric check
+    final pmtAiley = commuteBetween(StudioId.pmt, StudioId.ailey);
+    expect(pmtAiley.minutes, equals(25));
+    expect(pmtAiley.mode, equals('subway'));
+
+    // Ailey to BDC is 12 min walk
+    final aileyBdc = commuteBetween(StudioId.ailey, StudioId.bdc);
+    expect(aileyBdc.minutes, equals(12));
+    expect(aileyBdc.mode, equals('walk'));
+
+    // Same studio is 0 min
+    final same = commuteBetween(StudioId.bdc, StudioId.bdc);
+    expect(same.minutes, equals(0));
+    expect(same.mode, equals('same studio'));
+  });
 }
 
