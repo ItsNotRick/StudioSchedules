@@ -469,6 +469,21 @@ final templates = <ClassTemplate>[
 
 final templatesById = <String, ClassTemplate>{for (final t in templates) t.id: t};
 
+ClassTemplate getTemplate(String id) {
+  return templatesById[id] ??
+      ClassTemplate(
+        id: id,
+        studioId: StudioId.bdc,
+        title: 'Dance Class',
+        rawLevelLabel: 'OPEN',
+        tier: Tier.beginner,
+        primaryGenre: Genre.other,
+        slots: const [],
+        description: '',
+        catalogUrl: '',
+      );
+}
+
 void registerTemplates(List<ClassTemplate> newTemplates) {
   for (final t in newTemplates) {
     templatesById[t.id] = t;
@@ -612,17 +627,10 @@ class MockFeed {
   ServiceDate get windowEnd => windowStart.addDays(13);
 }
 
-/// Seed regimen so "My Week" demonstrates every change state.
-final seedSavedSlots = <SavedSlot>{
-  SavedSlot(templateId: 'ailey_intro_horton', weekday: 6, startMin: _t(11)), // sub this Sat
-  SavedSlot(templateId: 'pmt_basic_house', weekday: 6, startMin: _t(15)), // cancelled this Sat
-  SavedSlot(templateId: 'bdc_basic_hiphop', weekday: 5, startMin: _t(19)), // removed next Fri
-  SavedSlot(templateId: 'steps_basic_tap', weekday: 1, startMin: _t(18)), // sub next Mon
-  SavedSlot(templateId: 'bdc_basic_ballet', weekday: 3, startMin: _t(9)), // cancelled next Wed
-  SavedSlot(templateId: 'steps_basic_ballet', weekday: 5, startMin: _t(10)), // stale: slot no longer exists
-};
+/// Seed regimen slots and series (empty by default; user adds from schedule).
+final seedSavedSlots = <SavedSlot>{};
 
-const seedSavedSeries = <String>{'peri_ws_hiphop'};
+const seedSavedSeries = <String>{};
 
 // ---------------------------------------------------------------------------
 // Realistic transit times between all Manhattan dance studios (verified via Google Maps)

@@ -25,7 +25,7 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
     html = ""
     for attempt in range(3):
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
+            with urllib.request.urlopen(req, timeout=65) as resp:
                 html = resp.read().decode("utf-8")
             if html:
                 break
@@ -35,42 +35,42 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
             import time
             time.sleep(2)
 
-    sep = chr(92) + '\"title' + chr(92) + '\":' + chr(92) + '\"'
     sessions: List[Dict[str, Any]] = []
 
-    for p in html.split("self.__next_f.push([1,"):
+    parts = html.split("self.__next_f.push([1,")
+    for p in parts[1:]:
         if "instructor" in p and len(p) > 200000:
-            blocks = p.split(sep)
+            norm_p = p.replace(r'\\\"', '"').replace(r'\"', '"')
+            blocks = norm_p.split('"title":"')
             for i in range(1, len(blocks)):
                 b = blocks[i]
-                title_end = b.find(chr(92) + '\"')
+                title_end = b.find('"')
                 if title_end == -1:
                     continue
                 title = b[:title_end].strip()
 
-                clean_b = b.replace(chr(92), "")
-                start_m = re.search(r'\"start\":\s*\"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\"', clean_b)
+                start_m = re.search(r'"start":\s*"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})"', b)
                 if not start_m:
                     continue
                 start_iso = start_m.group(1)
 
-                end_m = re.search(r'\"end\":\s*\"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\"', clean_b)
+                end_m = re.search(r'"end":\s*"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})"', b)
                 end_iso = end_m.group(1) if end_m else ""
 
-                if '"canceled":true' in clean_b:
+                if '"canceled":true' in b or '"cancelled":true' in b:
                     continue
 
-                inst_m = re.search(r'\"instructor\":\s*\"([^\"]+)\"', clean_b)
+                inst_m = re.search(r'"instructor":\s*"([^"]+)"', b)
                 instructor = inst_m.group(1).strip() if inst_m else "Staff"
 
-                lvl_m = re.search(r'\"level\":\s*\"([^\"]*)\"', clean_b)
+                lvl_m = re.search(r'"level":\s*"([^"]*)"', b)
                 level = lvl_m.group(1).strip() if lvl_m else ""
 
-                is_sub = '"isSubstitute\":true' in clean_b
+                is_sub = '"isSubstitute":true' in b
 
                 # Mindbody URL is located in the cta href in the preceding block tail
                 prev_tail = blocks[i-1][-500:]
-                url_m = re.search(r'https://clients\.mindbodyonline\.com[^\"]+', prev_tail.replace(r'\u0026', '&').replace(chr(92), ""))
+                url_m = re.search(r'https://clients\.mindbodyonline\.com[^"]+', prev_tail.replace(r'\u0026', '&'))
                 booking_url = url_m.group(0) if url_m else "https://ailey.org/classes"
 
                 try:
@@ -85,10 +85,20 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
                 if end_min <= start_min:
                     end_min = start_min + 90
 
-                clean_title = title.replace("&#x27;", "'").replace("&amp;", "&").strip()
-                full_title = f"{clean_title} ({level.title()})" if level and level.lower() != "open" else clean_title
+                clean_title = ' '.join(title.replace("&#x27;", "'").replace("&amp;", "&").split())
+                has_level_in_title = re.search(
+                    r'\b(beg|beginner|abs\s*beg|absolute|adv\s*beg|advanced|intro|basic|open|int|intermediate)\b',
+                    clean_title,
+                    re.I,
+                ) is not None
+                if level and level.lower() != "open" and not has_level_in_title:
+                    full_title = f"{clean_title} ({level.title()})"
+                else:
+                    full_title = clean_title
 
-                session_id = f"ailey_{service_date}_{start_min}_{clean_title[:8].replace(' ', '').lower()}"
+                clean_t = re.sub(r'[^a-z0-9]', '', clean_title.lower())[:10]
+                clean_inst = re.sub(r'[^a-z0-9]', '', instructor.lower())[:8]
+                session_id = f"ailey_{service_date}_{start_min}_{clean_t}_{clean_inst}"
 
                 sessions.append({
                     "id": session_id,
@@ -103,7 +113,8 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
                     "isSubstitute": is_sub,
                     "bookingUrl": booking_url
                 })
-            break
+            if sessions:
+                break
 
     return sessions
 
@@ -121,9 +132,9 @@ def scrape_ailey_schedule() -> List[Dict[str, Any]]:
     except Exception as e:
         print(f"Error fetching current month from Ailey: {e}")
 
-    # 2. Check if we need next month (e.g. today is past the 20th of the month)
+    # 2. Check if our 14-day rolling window crosses into next month
     today = datetime.now()
-    if today.day >= 18:
+    if (today + timedelta(days=14)).month != today.month:
         # Compute first day of next month
         if today.month == 12:
             next_month_start = f"{today.year + 1}-01-01"

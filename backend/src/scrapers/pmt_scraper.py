@@ -6,6 +6,7 @@ instructors, durations, and substitute teachers.
 """
 
 import re
+import html as html_lib
 import urllib.request
 import urllib.parse
 import http.cookiejar
@@ -34,8 +35,9 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
         try:
             dt = datetime.strptime(date_str, "%B %d, %Y")
             service_date = dt.strftime("%Y-%m-%d")
-        except Exception:
-            service_date = date_str
+        except Exception as e:
+            print(f"Warning: skipping PMT date header '{date_str}': {e}")
+            continue
 
         row_matches = re.finditer(r'<div class="(?:evenRow|oddRow) row">(.*?)</div>\s*</div>\s*</div>', rows_chunk, re.DOTALL)
         for rm in row_matches:
@@ -49,8 +51,9 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
             try:
                 t_obj = datetime.strptime(time_str, "%I:%M %p")
                 start_min = t_obj.hour * 60 + t_obj.minute
-            except Exception:
-                start_min = 600
+            except Exception as e:
+                print(f"Warning: skipping PMT row on {service_date} with unparseable time '{time_str}': {e}")
+                continue
 
             col2_m = re.search(r'<div class="col-2">(.*)', row_html, re.DOTALL)
             if not col2_m:
@@ -59,14 +62,14 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
             if not cols:
                 continue
 
-            raw_title = re.sub(r'<[^>]+>', '', cols[0]).replace("&#39;", "'").replace("&amp;", "&").strip()
+            raw_title = html_lib.unescape(re.sub(r'<[^>]+>', '', cols[0])).strip()
 
             # Instructor
             teacher = "Staff"
             if len(cols) > 1:
                 clean_inst = re.sub(r'<a title="Regularly Scheduled[^"]*"[^>]*>.*?</a>', '', cols[1])
                 teacher = re.sub(r'<[^>]+>', '', clean_inst).strip()
-                teacher = re.sub(r'\(\d+\)', '', teacher).strip()
+                teacher = html_lib.unescape(re.sub(r'\(\d+\)', '', teacher)).strip()
 
             # Duration
             dur = 90
@@ -83,7 +86,9 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
 
             is_sub = "regularly scheduled" in row_html.lower() or "#990000" in row_html
 
-            session_id = f"pmt_{service_date}_{start_min}_{raw_title[:6].lower().replace(' ', '_')}"
+            clean_t = re.sub(r'[^a-z0-9]', '', raw_title.lower())[:10]
+            clean_teach = re.sub(r'[^a-z0-9]', '', teacher.lower())[:8]
+            session_id = f"pmt_{service_date}_{start_min}_{clean_t}_{clean_teach}"
             if session_id in seen:
                 continue
             seen.add(session_id)

@@ -66,5 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Allow access to add dance classes to your calendar.</string>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>Allow access to add dance classes to your calendar.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Used for location autocomplete when adding events to your calendar.</string>
 </dict>
 </plist>

@@ -68,10 +68,10 @@ class CalendarHomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final activeView = ref.watch(activeViewProvider);
     final selectedDate = ref.watch(selectedDateProvider);
-    final feed = ref.watch(feedProvider);
+    final today = ref.watch(todayProvider);
     final theme = Theme.of(context);
-    final isNextWeek = selectedDate.compareTo(feed.today.startOfWeek.addDays(6)) > 0;
-    final isToday = selectedDate == feed.today;
+    final isNextWeek = selectedDate.compareTo(today.startOfWeek.addDays(6)) > 0;
+    final isToday = selectedDate == today;
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +85,7 @@ class CalendarHomeScreen extends ConsumerWidget {
             Row(
               children: [
                 Text(
-                  '${formatDate(selectedDate)} (EST)',
+                  '${formatDate(selectedDate)} (${isEasternDst() ? "EDT" : "EST"})',
                   style: TextStyle(
                     fontSize: 12,
                     color: theme.colorScheme.onSurfaceVariant,
@@ -119,7 +119,7 @@ class CalendarHomeScreen extends ConsumerWidget {
           if (!isToday)
             TextButton(
               onPressed: () =>
-                  ref.read(selectedDateProvider.notifier).select(feed.today),
+                  ref.read(selectedDateProvider.notifier).select(today),
               style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
               child: const Text('Today', style: TextStyle(fontWeight: FontWeight.bold)),
             ),

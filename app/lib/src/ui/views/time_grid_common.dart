@@ -6,7 +6,7 @@ import '../common.dart';
 import '../detail_sheet.dart';
 
 const gridStartMin = 8 * 60;
-const gridEndMin = 22 * 60;
+const gridEndMin = 23 * 60;
 const hourHeight = 68.0;
 const gridHeight = (gridEndMin - gridStartMin) / 60 * hourHeight;
 
@@ -35,10 +35,10 @@ class GridItem {
   final int end;
 
   String get title => session != null
-      ? templatesById[session!.templateId]!.title
+      ? getTemplate(session!.templateId).title
       : series!.title;
   ClassTemplate get template =>
-      templatesById[session?.templateId ?? series!.templateId]!;
+      getTemplate(session?.templateId ?? series!.templateId);
 }
 
 /// Assigns overlapping items to side-by-side lanes.

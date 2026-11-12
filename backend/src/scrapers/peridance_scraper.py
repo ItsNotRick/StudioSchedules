@@ -8,9 +8,11 @@ Mindbody Branded Web Next.js payload.
 import re
 import urllib.request
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 from typing import List, Dict, Any
 
 PERIDANCE_WIDGET_URL = "https://go.mindbodyonline.com/book/widgets/schedules/view/f936462b7be/schedule"
+NY_TZ = ZoneInfo("America/New_York")
 
 def scrape_peridance_schedule() -> List[Dict[str, Any]]:
     req = urllib.request.Request(
@@ -58,15 +60,14 @@ def scrape_peridance_schedule() -> List[Dict[str, Any]]:
         try:
             clean_sdt = sdt.split(".")[0].replace("Z", "")
             dt_utc = datetime.strptime(clean_sdt, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
-            edt = timezone(timedelta(hours=-4))
-            dt_local = dt_utc.astimezone(edt)
+            dt_local = dt_utc.astimezone(NY_TZ)
             service_date = dt_local.strftime("%Y-%m-%d")
             start_min = dt_local.hour * 60 + dt_local.minute
-        except Exception:
-            service_date = sdt[:10]
-            start_min = 600
+        except Exception as e:
+            print(f"Warning: skipping Peridance session '{name}' with malformed startDateTime '{sdt}': {e}")
+            continue
 
-        is_sub = "sub" in instructor.lower()
+        is_sub = re.search(r'\b(sub|substitute)\b', instructor, re.I) is not None
 
         session_id = f"peri_{service_date}_{start_min}_{cid[-8:]}"
 

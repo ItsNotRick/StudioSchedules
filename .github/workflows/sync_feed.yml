@@ -2,12 +2,24 @@ name: Build and Publish NYC Dance Calendar Feed
 
 on:
   schedule:
-    # Run every 3 hours between 7am and 11pm Eastern (approx 11:00 UTC to 03:00 UTC)
+    # Run every 3 hours between 7am and 11pm Eastern (approx 10:00 UTC to 04:00 UTC)
     - cron: '0 10,13,16,19,22,1 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
 jobs:
   build-and-sync:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -22,7 +34,35 @@ jobs:
         run: |
           python3 backend/src/build_feed.py
 
-      - name: Deploy static feed to GitHub Pages / Release artifact
+      - name: Prepare GitHub Pages directory
+        run: |
+          mkdir -p _site
+          cp backend/data/schedule.json _site/schedule.json
+          # Create a lightweight index.html so visiting the root page explains the feed
+          cat << 'EOF' > _site/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>NYC Solo Dance Calendar Feed</title>
+          </head>
+          <body>
+            <h1>NYC Solo Dance Calendar Feed</h1>
+            <p>Access the latest JSON schedule feed at <a href="schedule.json">schedule.json</a>.</p>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Upload artifact backup
         uses: actions/upload-artifact@v4
         with:
           name: nyc-dance-schedule-feed

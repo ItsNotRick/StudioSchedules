@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nyc_dance_calendar/main.dart';
+import 'package:nyc_dance_calendar/src/ui/common.dart';
 import 'package:nyc_dance_calendar/src/ui/views/genre_agenda_view.dart';
 import 'package:nyc_dance_calendar/src/ui/views/my_week_view.dart';
 import 'package:nyc_dance_calendar/src/ui/views/studio_columns_view.dart';
@@ -28,6 +29,6 @@ void main() {
     await tester.tap(find.text('My Regimen'));
     await tester.pumpAndSettle();
     expect(find.byType(MyWeekView), findsOneWidget);
-    expect(find.text('Enrolled Series'), findsOneWidget);
+    expect(find.byType(EmptyState), findsOneWidget);
   });
 }

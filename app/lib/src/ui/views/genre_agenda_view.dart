@@ -29,7 +29,9 @@ class _GenreAgendaViewState extends ConsumerState<GenreAgendaView> {
 
     final byGenre = <Genre, List<ClassSession>>{};
     for (final s in sessions) {
-      byGenre.putIfAbsent(templatesById[s.templateId]!.primaryGenre, () => []).add(s);
+      byGenre
+          .putIfAbsent(getTemplate(s.templateId).primaryGenre, () => [])
+          .add(s);
     }
     final genres = Genre.values.where(byGenre.containsKey).toList();
 

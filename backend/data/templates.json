@@ -37,12 +37,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "ballet",
       "tags": [],
-      "slots": [
-        {"weekday": 1, "startMin": 540, "durationMin": 90, "regularInstructor": "Dana R."},
-        {"weekday": 3, "startMin": 540, "durationMin": 90, "regularInstructor": "Dana R."},
-        {"weekday": 6, "startMin": 600, "durationMin": 90, "regularInstructor": "Lena M."}
-      ],
-      "description": "An introduction to ballet vocabulary at the barre and in the center: posture, turnout, pliés, tendus and simple across-the-floor combinations.",
+      "slots": [],
+      "description": "",
       "prerequisiteNotes": "No prior experience required.",
       "attireNotes": "Form-fitting clothing; ballet slippers or socks. Hair secured away from the face.",
       "catalogUrl": "https://www.broadwaydancecenter.com/schedule"
@@ -56,11 +52,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "jazzTheater",
       "tags": [],
-      "slots": [
-        {"weekday": 2, "startMin": 1080, "durationMin": 90, "regularInstructor": "Marcus T."},
-        {"weekday": 4, "startMin": 1080, "durationMin": 90, "regularInstructor": "Marcus T."}
-      ],
-      "description": "Isolations, basic jazz walks, pas de bourrée, simple turns and a short combination.",
+      "slots": [],
+      "description": "",
       "prerequisiteNotes": "No prior experience required.",
       "attireNotes": "Jazz shoes or sneakers; clothing you can move in.",
       "catalogUrl": "https://www.broadwaydancecenter.com/schedule"
@@ -74,11 +67,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "hipHopStreet",
       "tags": [],
-      "slots": [
-        {"weekday": 1, "startMin": 1110, "durationMin": 90, "regularInstructor": "Jay K."},
-        {"weekday": 5, "startMin": 1140, "durationMin": 90, "regularInstructor": "Jay K."}
-      ],
-      "description": "Grooves, bounce and rock, foundational party steps and a beginner-paced combo.",
+      "slots": [],
+      "description": "",
       "prerequisiteNotes": "No prior experience required.",
       "attireNotes": "Comfortable clothes you can move in; clean sneakers.",
       "catalogUrl": "https://www.broadwaydancecenter.com/schedule"
@@ -92,11 +82,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "tap",
       "tags": [],
-      "slots": [
-        {"weekday": 1, "startMin": 1080, "durationMin": 90, "regularInstructor": "Gwen H."},
-        {"weekday": 6, "startMin": 720, "durationMin": 90, "regularInstructor": "Gwen H."}
-      ],
-      "description": "Toe, heel, shuffle, flap and ball-change—building rhythm from scratch.",
+      "slots": [],
+      "description": "",
       "prerequisiteNotes": "No prior experience required.",
       "attireNotes": "Tap shoes (loaners sometimes available—call ahead).",
       "catalogUrl": "https://www.stepsnyc.com/classes"
@@ -110,12 +97,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "ballet",
       "tags": [],
-      "slots": [
-        {"weekday": 2, "startMin": 600, "durationMin": 90, "regularInstructor": "Irina S."},
-        {"weekday": 4, "startMin": 600, "durationMin": 90, "regularInstructor": "Irina S."},
-        {"weekday": 7, "startMin": 660, "durationMin": 90, "regularInstructor": "Paul D."}
-      ],
-      "description": "Slow-paced barre with detailed alignment cues, followed by simple center work.",
+      "slots": [],
+      "description": "",
       "prerequisiteNotes": "No prior experience required.",
       "attireNotes": "Form-fitting clothing; ballet slippers or socks.",
       "catalogUrl": "https://www.stepsnyc.com/classes"
@@ -129,11 +112,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "contemporaryModern",
       "tags": [],
-      "slots": [
-        {"weekday": 1, "startMin": 1110, "durationMin": 90, "regularInstructor": "Keisha W."},
-        {"weekday": 6, "startMin": 660, "durationMin": 90, "regularInstructor": "Keisha W."}
-      ],
-      "description": "Flat backs, lateral T, fortifications and the foundational shapes of Horton modern technique.",
+      "slots": [],
+      "description": "Created by Lester Horton (Alvin Ailey's mentor) in the 1940s and is comprised of detailed exercises called Studies, which include Projections, Locomotions, Preludes, Rhythms, Improvisations, and Fortifications. The fortifications establish a framework of movement mechanics, muscular development and coordination, elasticity and range, rhythm and timing of phrasing, and movement quality.",
       "prerequisiteNotes": "For students who have never taken a dance class.",
       "attireNotes": "Form-fitting clothing; barefoot or socks.",
       "catalogUrl": "https://www.ailey.org/extension"
@@ -147,11 +127,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "ballet",
       "tags": [],
-      "slots": [
-        {"weekday": 2, "startMin": 1110, "durationMin": 90, "regularInstructor": "Elena F."},
-        {"weekday": 7, "startMin": 720, "durationMin": 90, "regularInstructor": "Elena F."}
-      ],
-      "description": "Barre fundamentals with plenty of repetition and individual corrections.",
+      "slots": [],
+      "description": "A form of dance dating back to Renaissance Italy, ballet technique has been adapted and finessed over centuries. Ballet technique is designed to develop symmetry, balance, flexibility, strength, the graceful carriage of the arms, intricate footwork, an elongated and centered midline, and virtuosity in pirouettes and jumps.",
       "prerequisiteNotes": "Little to no prior experience.",
       "attireNotes": "Form-fitting clothing; ballet slippers or socks.",
       "catalogUrl": "https://www.ailey.org/extension"
@@ -165,11 +142,8 @@
       "tier": "zeroExperience",
       "primaryGenre": "hipHopStreet",
       "tags": [],
-      "slots": [
-        {"weekday": 2, "startMin": 1140, "durationMin": 75, "regularInstructor": "Rico S."},
-        {"weekday": 6, "startMin": 900, "durationMin": 75, "regularInstructor": "Rico S."}
-      ],
-      "description": "Jacking, the basic box, shuffles and loose footwork to house music.",
+      "slots": [],
+      "description": "",
       "prerequisiteNotes": "No prior experience required.",
       "attireNotes": "Sneakers with smooth soles; loose clothing.",
       "catalogUrl": "https://www.pmthouseofdance.com/in-person-classes"
@@ -183,61 +157,12 @@
       "tier": "zeroExperience",
       "primaryGenre": "hipHopStreet",
       "tags": [],
-      "slots": [
-        {"weekday": 1, "startMin": 1170, "durationMin": 75, "regularInstructor": "Bea N."},
-        {"weekday": 4, "startMin": 1170, "durationMin": 75, "regularInstructor": "Bea N."}
-      ],
-      "description": "Hip hop foundations and grooves at a slower pace.",
+      "slots": [],
+      "description": "",
       "prerequisiteNotes": "No prior experience required.",
       "attireNotes": "Comfortable clothes you can move in; clean sneakers.",
       "catalogUrl": "https://www.pmthouseofdance.com/in-person-classes"
     }
   ],
-  "series": [
-    {
-      "id": "peri_ws_ballet_fall",
-      "templateId": "peri_absbeg_ballet_ws",
-      "studioId": "peridance",
-      "title": "Absolute Beginner Ballet Workshop",
-      "startDate": "2026-10-05",
-      "sessionCount": 6,
-      "weekday": 1,
-      "startMin": 1050,
-      "durationMin": 90,
-      "instructor": "Anna K.",
-      "enrollmentOpen": false,
-      "price": "$165 / 6 wks",
-      "bookingUrl": "https://www.peridance.com/open-classes"
-    },
-    {
-      "id": "peri_ws_hiphop",
-      "templateId": "peri_absbeg_hiphop_ws",
-      "studioId": "peridance",
-      "title": "Absolute Beginner Hip Hop Workshop",
-      "startDate": "2026-10-24",
-      "sessionCount": 5,
-      "weekday": 6,
-      "startMin": 960,
-      "durationMin": 75,
-      "instructor": "Jules R.",
-      "enrollmentOpen": true,
-      "price": "$140 / 5 wks",
-      "bookingUrl": "https://www.peridance.com/open-classes"
-    },
-    {
-      "id": "steps_ws_tap",
-      "templateId": "steps_absbeg_tap_series",
-      "studioId": "steps",
-      "title": "Absolute Beginner Tap Series",
-      "startDate": "2026-10-29",
-      "sessionCount": 4,
-      "weekday": 4,
-      "startMin": 1140,
-      "durationMin": 90,
-      "instructor": "Gwen H.",
-      "enrollmentOpen": true,
-      "price": "$120 / 4 wks",
-      "bookingUrl": "https://www.stepsnyc.com/classes"
-    }
-  ]
+  "series": []
 }

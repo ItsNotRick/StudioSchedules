@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../data/mock_feed.dart';
 import '../domain/models.dart';
+import '../services/calendar_export_service.dart';
 import '../state/providers.dart';
 import 'common.dart';
 
@@ -119,7 +120,7 @@ class _SessionDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tpl = templatesById[session.templateId]!;
+    final tpl = getTemplate(session.templateId);
     final studio = studios[session.studioId]!;
     final saved = ref.watch(savedSlotsProvider).any((s) => s.matches(session));
     final theme = Theme.of(context);
@@ -141,7 +142,7 @@ class _SessionDetail extends ConsumerWidget {
 
     // Prefer classes that match the active filter if any match, otherwise show all reachable classes
     final filtered = allReachable
-        .where((o) => filter.acceptsTemplate(templatesById[o.templateId]!))
+        .where((o) => filter.acceptsTemplate(getTemplate(o.templateId)))
         .toList();
     final reachable = filtered.isNotEmpty ? filtered : allReachable;
 
@@ -165,7 +166,6 @@ class _SessionDetail extends ConsumerWidget {
         Wrap(spacing: 6, crossAxisAlignment: WrapCrossAlignment.center, children: [
           StudioBadge(session.studioId),
           LevelPill(tpl),
-          Text(tpl.tier.label, style: theme.textTheme.bodySmall),
         ]),
         const SizedBox(height: 8),
         Text(tpl.title, style: theme.textTheme.headlineSmall),
@@ -201,9 +201,23 @@ class _SessionDetail extends ConsumerWidget {
               : null,
         ),
         const _InfoRow(Icons.confirmation_number_outlined, 'Drop-in · book per class'),
-        _Section('About this class', Text(tpl.description)),
-        if (tpl.prerequisiteNotes != null) _Section('Who it\'s for', Text(tpl.prerequisiteNotes!)),
-        if (tpl.attireNotes != null) _Section('What to wear', Text(tpl.attireNotes!)),
+        _Section(
+          'About this class',
+          Text(
+            (session.description != null && session.description!.trim().isNotEmpty)
+                ? session.description!
+                : (tpl.description.trim().isNotEmpty)
+                    ? "Studio's style description: ${tpl.description.trim()}"
+                    : 'A description has not been provided for this class.',
+            style: ((session.description != null && session.description!.trim().isNotEmpty) ||
+                    tpl.description.trim().isNotEmpty)
+                ? null
+                : theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.hintColor,
+                    fontStyle: FontStyle.italic,
+                  ),
+          ),
+        ),
         _Section(
           'Genres',
           Wrap(spacing: 6, children: [
@@ -224,18 +238,18 @@ class _SessionDetail extends ConsumerWidget {
                   dense: true,
                   contentPadding: EdgeInsets.zero,
                   leading: StudioBadge(o.studioId, dense: true),
-                  title: Text(templatesById[o.templateId]!.title),
+                  title: Text(getTemplate(o.templateId).title),
                   subtitle: Text(
                     '${formatTime(o.startMin)}'
                     '${o.instructor.isNotEmpty ? ' · with ${o.instructor}' : ''}'
                     ' · ${o.startMin == session.endMin ? 'Starts right after' : '${o.startMin - session.endMin} min gap'}'
                     ' · ${commuteBetween(session.studioId, o.studioId)}',
                   ),
-                  trailing: LevelPill(templatesById[o.templateId]!),
+                  trailing: LevelPill(getTemplate(o.templateId)),
                   onTap: () {
-                    final nav = Navigator.of(context);
-                    nav.pop();
-                    showSessionDetail(nav.context, o);
+                    final rootContext = Navigator.of(context, rootNavigator: true).context;
+                    Navigator.of(context).pop();
+                    showSessionDetail(rootContext, o);
                   },
                 ),
             ]),
@@ -248,14 +262,26 @@ class _SessionDetail extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         OutlinedButton.icon(
+          onPressed: () async {
+            final ok = await CalendarExportService.addSessionToCalendar(session);
+            if (!ok && context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Could not open calendar')),
+              );
+            }
+          },
+          icon: const Icon(Icons.calendar_today_outlined),
+          label: const Text('Add to calendar'),
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
           onPressed: () => ref.read(savedSlotsProvider.notifier).toggleFor(session),
           icon: Icon(saved ? Icons.bookmark_remove : Icons.bookmark_add_outlined),
           label: Text(saved
               ? 'Remove from my week'
               : 'Add every ${weekdayLong[session.serviceDate.weekday - 1]} ${formatTime(session.startMin)} to my week'),
         ),
-        const SizedBox(height: 8),
-        Text('Prototype · mock data', textAlign: TextAlign.center, style: theme.textTheme.bodySmall),
+        const SizedBox(height: 12),
       ],
     );
   }
@@ -268,7 +294,7 @@ class _SeriesDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tpl = templatesById[series.templateId]!;
+    final tpl = getTemplate(series.templateId);
     final studio = studios[series.studioId]!;
     final saved = ref.watch(savedSeriesProvider).contains(series.id);
     final theme = Theme.of(context);

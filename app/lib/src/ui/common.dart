@@ -107,7 +107,7 @@ class SessionCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tpl = templatesById[session.templateId]!;
+    final tpl = getTemplate(session.templateId);
     final saved = ref.watch(savedSlotsProvider).any((s) => s.matches(session));
     final status = sessionStatusChip(session);
     final strike = session.isCancelled ? TextDecoration.lineThrough : null;
@@ -167,7 +167,7 @@ class WeekStrip extends ConsumerStatefulWidget {
 
 class _WeekStripState extends ConsumerState<WeekStrip> {
   final ScrollController _scrollController = ScrollController();
-  bool _hasInitialScrolled = false;
+  ServiceDate? _lastScrolledDate;
 
   @override
   void dispose() {
@@ -183,8 +183,10 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
       if (dayIndex >= 7) offset += 24.0;
       // Show target with a 1-day lead so surrounding days are visible
       offset = math.max(0.0, offset - 52.0);
+      final maxExtent = _scrollController.position.maxScrollExtent;
+      final clampedOffset = offset.clamp(0.0, maxExtent);
       _scrollController.animateTo(
-        offset,
+        clampedOffset,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeOutCubic,
       );
@@ -195,12 +197,15 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
   Widget build(BuildContext context) {
     final feed = ref.watch(feedProvider);
     final selected = ref.watch(selectedDateProvider);
+    final today = ref.watch(todayProvider);
     final theme = Theme.of(context);
 
-    if (!_hasInitialScrolled) {
-      _hasInitialScrolled = true;
+    if (_lastScrolledDate != selected) {
+      _lastScrolledDate = selected;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollToSelectedOrToday(feed, selected);
+        if (mounted) {
+          _scrollToSelectedOrToday(feed, selected);
+        }
       });
     }
 
@@ -216,10 +221,10 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
         itemBuilder: (context, i) {
           final d = feed.windowStart.addDays(i);
           final isSel = d == selected;
-          final isToday = d == feed.today;
+          final isToday = d == today;
           final count = ref.watch(sessionsForDateProvider(d)).length +
               ref.watch(seriesStartingOnProvider(d)).length;
-          final past = d.compareTo(feed.today) < 0;
+          final past = d.compareTo(today) < 0;
           final isNextWeekStart = (d.weekday == 1 && i > 0);
 
           Widget item = Padding(
@@ -367,7 +372,7 @@ class SeriesCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tpl = templatesById[series.templateId]!;
+    final tpl = getTemplate(series.templateId);
     final saved = ref.watch(savedSeriesProvider).contains(series.id);
     final theme = Theme.of(context);
     return Card(

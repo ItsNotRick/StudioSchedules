@@ -167,6 +167,7 @@ class ClassSession {
     required this.startMin,
     required this.endMin,
     required this.instructor,
+    this.description,
     required this.isSubstitute,
     required this.status,
     required this.bookingUrl,
@@ -181,6 +182,7 @@ class ClassSession {
   final int endMin;
   final String tz;
   final String instructor;
+  final String? description;
   final bool isSubstitute;
   final SessionStatus status;
   final String bookingUrl;
@@ -239,26 +241,69 @@ class SavedSlot {
     required this.templateId,
     required this.weekday,
     required this.startMin,
+    this.instructor,
   });
 
   final String templateId;
   final int weekday;
   final int startMin;
+  final String? instructor;
 
   bool matches(ClassSession s) =>
       s.templateId == templateId &&
       s.serviceDate.weekday == weekday &&
-      s.startMin == startMin;
+      s.startMin == startMin &&
+      (instructor == null || s.instructor == instructor);
 
   @override
   bool operator ==(Object other) =>
       other is SavedSlot &&
       other.templateId == templateId &&
       other.weekday == weekday &&
-      other.startMin == startMin;
+      other.startMin == startMin &&
+      other.instructor == instructor;
 
   @override
-  int get hashCode => Object.hash(templateId, weekday, startMin);
+  int get hashCode => Object.hash(templateId, weekday, startMin, instructor);
+}
+
+// ---------------------------------------------------------------------------
+// America/New_York timezone helpers (independent of device timezone).
+
+/// Determines if US Eastern Daylight Time (EDT) is active for a given UTC datetime.
+bool isEasternDst([DateTime? utcNow]) {
+  final utc = utcNow ?? DateTime.now().toUtc();
+  if (utc.month < 3 || utc.month > 11) return false;
+  if (utc.month > 3 && utc.month < 11) return true;
+  if (utc.month == 3) {
+    // 2nd Sunday in March
+    final firstDayWeekday = DateTime.utc(utc.year, 3, 1).weekday;
+    final secondSundayDay = (7 - firstDayWeekday) % 7 + 8;
+    return utc.day > secondSundayDay ||
+        (utc.day == secondSundayDay && utc.hour >= 7);
+  } else {
+    // 1st Sunday in November
+    final firstDayWeekday = DateTime.utc(utc.year, 11, 1).weekday;
+    final firstSundayDay = (7 - firstDayWeekday) % 7 + 1;
+    return utc.day < firstSundayDay ||
+        (utc.day == firstSundayDay && utc.hour < 6);
+  }
+}
+
+/// Returns the current date in America/New_York (independent of local device timezone).
+ServiceDate getTodayInNewYork() {
+  final utc = DateTime.now().toUtc();
+  final offsetHours = isEasternDst(utc) ? -4 : -5;
+  final nyTime = utc.add(Duration(hours: offsetHours));
+  return ServiceDate(nyTime.year, nyTime.month, nyTime.day);
+}
+
+/// Returns current minutes after midnight in America/New_York.
+int getNowMinInNewYork() {
+  final utc = DateTime.now().toUtc();
+  final offsetHours = isEasternDst(utc) ? -4 : -5;
+  final nyTime = utc.add(Duration(hours: offsetHours));
+  return nyTime.hour * 60 + nyTime.minute;
 }
 
 // ---------------------------------------------------------------------------

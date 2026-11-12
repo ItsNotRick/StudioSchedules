@@ -7,9 +7,11 @@ extracts session names, instructors, times, and duration from the Next.js payloa
 import re
 import urllib.request
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 from typing import List, Dict, Any
 
 STEPS_WIDGET_URL = "https://go.mindbodyonline.com/book/widgets/schedules/view/00705830e76/schedule"
+NY_TZ = ZoneInfo("America/New_York")
 
 def scrape_steps_schedule() -> List[Dict[str, Any]]:
     req = urllib.request.Request(
@@ -59,13 +61,12 @@ def scrape_steps_schedule() -> List[Dict[str, Any]]:
         try:
             clean_sdt = sdt.split(".")[0].replace("Z", "")
             dt_utc = datetime.strptime(clean_sdt, "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
-            edt = timezone(timedelta(hours=-4))
-            dt_local = dt_utc.astimezone(edt)
+            dt_local = dt_utc.astimezone(NY_TZ)
             service_date = dt_local.strftime("%Y-%m-%d")
             start_min = dt_local.hour * 60 + dt_local.minute
-        except Exception:
-            service_date = sdt[:10]
-            start_min = 600
+        except Exception as e:
+            print(f"Warning: skipping Steps session '{clean_name}' with malformed startDateTime '{sdt}': {e}")
+            continue
 
         session_id = f"steps_{service_date}_{start_min}_{cid[-8:]}"
 

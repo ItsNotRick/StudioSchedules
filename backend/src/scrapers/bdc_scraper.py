@@ -55,7 +55,10 @@ def scrape_bdc_schedule() -> List[Dict[str, Any]]:
             day_content = day_blocks[i + 1]
 
             try:
-                parsed_date = datetime.strptime(f"{day_title} {year}", "%A, %B %d %Y").strftime("%Y-%m-%d")
+                dt_obj = datetime.strptime(f"{day_title} {year}", "%A, %B %d %Y")
+                if dt_obj.month == 1 and datetime.now().month == 12:
+                    dt_obj = datetime.strptime(f"{day_title} {year + 1}", "%A, %B %d %Y")
+                parsed_date = dt_obj.strftime("%Y-%m-%d")
             except Exception:
                 continue
 
@@ -68,12 +71,12 @@ def scrape_bdc_schedule() -> List[Dict[str, Any]]:
 
                 # Teacher
                 teach_m = re.search(r'class="bdc-sched-teach">\s*<a[^>]*>([^<]+)</a>', card)
-                teacher = teach_m.group(1).strip() if teach_m else "Staff"
+                teacher = html_lib.unescape(teach_m.group(1).strip()) if teach_m else "Staff"
 
                 # Times
                 time_m = re.search(r'class="class-time">(.*?)</div>', card, re.DOTALL)
-                start_min = 600
-                end_min = 690
+                start_min = None
+                end_min = None
                 if time_m:
                     clean_times = re.findall(r'([0-9]{1,2}:[0-9]{2}\s*(?:am|pm))', time_m.group(1), re.I)
                     if len(clean_times) >= 2:
@@ -82,6 +85,9 @@ def scrape_bdc_schedule() -> List[Dict[str, Any]]:
                         if s_min is not None and e_min is not None:
                             start_min = s_min
                             end_min = e_min
+                if start_min is None or end_min is None:
+                    print(f"Warning: skipping BDC class '{raw_title}' on {parsed_date} due to unparseable time")
+                    continue
 
                 # Direct Mindbody app/web booking link
                 booking_m = re.search(r'href="(https://bma1914\.bma\.mindbodyonline\.com[^\"]+)"', card)
@@ -90,7 +96,9 @@ def scrape_bdc_schedule() -> List[Dict[str, Any]]:
                 booking_url = booking_m.group(1).replace("&amp;", "&") if booking_m else "https://www.broadwaydancecenter.com/schedule"
 
                 # Stable Session ID
-                session_id = f"bdc_{parsed_date}_{start_min}_{raw_title[:10].replace(' ', '').lower()}"
+                clean_t = re.sub(r'[^a-z0-9]', '', raw_title.lower())[:10]
+                clean_teach = re.sub(r'[^a-z0-9]', '', teacher.lower())[:8]
+                session_id = f"bdc_{parsed_date}_{start_min}_{clean_t}_{clean_teach}"
                 if session_id in seen:
                     continue
                 seen.add(session_id)

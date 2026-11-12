@@ -20,8 +20,7 @@ class StudioColumnsView extends ConsumerWidget {
     final sessions = ref.watch(sessionsForDateProvider(date));
     final series = ref.watch(seriesStartingOnProvider(date));
     final cols = StudioId.values.where(filter.studios.contains).toList();
-    final now = DateTime.now();
-    final nowMin = date == today ? now.hour * 60 + now.minute : null;
+    final nowMin = date == today ? getNowMinInNewYork() : null;
     const gutter = 44.0;
 
     if (cols.isEmpty) return const EmptyState('Select at least one studio.');

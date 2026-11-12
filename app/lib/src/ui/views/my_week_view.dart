@@ -26,10 +26,21 @@ class MyWeekView extends ConsumerWidget {
         .where((s) => savedSeriesIds.contains(s.id))
         .toList();
 
-    // Group resolved slots by weekday
+    // Group resolved slots and enrolled series occurrences by weekday
     final byWeekday = <int, List<ResolvedSlot>>{};
     for (final r in resolvedSlots) {
       byWeekday.putIfAbsent(r.slot.weekday, () => []).add(r);
+    }
+
+    final seriesByWeekday = <int, List<(WorkshopSeries, int)>>{};
+    for (var day = 1; day <= 7; day++) {
+      final date = weekStart.addDays(day - 1);
+      for (final s in enrolledSeries) {
+        final wkNum = s.weekNumberOn(date);
+        if (wkNum != null) {
+          seriesByWeekday.putIfAbsent(day, () => []).add((s, wkNum));
+        }
+      }
     }
 
     final hasAny = resolvedSlots.isNotEmpty || enrolledSeries.isNotEmpty;
@@ -62,20 +73,24 @@ class MyWeekView extends ConsumerWidget {
                 ),
                 const SizedBox(width: 8),
                 OutlinedButton.icon(
-                  onPressed: () async {
-                    try {
-                      await CalendarExportService.exportRegimenToCalendar(
-                        regimenSlots: resolvedSlots,
-                        weekLabel: formatDate(weekStart),
-                      );
-                    } catch (e) {
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Calendar export: $e')),
-                        );
-                      }
-                    }
-                  },
+                  onPressed: hasAny
+                      ? () async {
+                          try {
+                            await CalendarExportService.exportRegimenToCalendar(
+                              regimenSlots: resolvedSlots,
+                              weekLabel: formatDate(weekStart),
+                              enrolledSeries: enrolledSeries,
+                              weekStart: weekStart,
+                            );
+                          } catch (e) {
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Calendar export: $e')),
+                              );
+                            }
+                          }
+                        }
+                      : null,
                   icon: const Icon(Icons.calendar_today, size: 14),
                   label: const Text('Export', style: TextStyle(fontSize: 12)),
                   style: OutlinedButton.styleFrom(
@@ -117,7 +132,7 @@ class MyWeekView extends ConsumerWidget {
           ),
         ],
         for (var day = 1; day <= 7; day++) ...[
-          if (byWeekday.containsKey(day)) ...[
+          if (byWeekday.containsKey(day) || seriesByWeekday.containsKey(day)) ...[
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 6),
@@ -139,13 +154,24 @@ class MyWeekView extends ConsumerWidget {
                 ),
               ),
             ),
-            SliverList.builder(
-              itemCount: byWeekday[day]!.length,
-              itemBuilder: (context, i) {
-                final resolved = byWeekday[day]![i];
-                return _RegimenSlotCard(resolved: resolved);
-              },
-            ),
+            if (seriesByWeekday.containsKey(day))
+              SliverList.list(
+                children: [
+                  for (final (series, _) in seriesByWeekday[day]!)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: SeriesCard(series),
+                    ),
+                ],
+              ),
+            if (byWeekday.containsKey(day))
+              SliverList.builder(
+                itemCount: byWeekday[day]!.length,
+                itemBuilder: (context, i) {
+                  final resolved = byWeekday[day]![i];
+                  return _RegimenSlotCard(resolved: resolved);
+                },
+              ),
           ],
         ],
         const SliverToBoxAdapter(child: SizedBox(height: 32)),
@@ -160,7 +186,7 @@ class _RegimenSlotCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tpl = templatesById[resolved.slot.templateId]!;
+    final tpl = getTemplate(resolved.slot.templateId);
     final studio = studios[tpl.studioId]!;
     final session = resolved.session;
     final theme = Theme.of(context);
@@ -180,7 +206,14 @@ class _RegimenSlotCard extends ConsumerWidget {
           color: Colors.orange.shade800,
           icon: Icons.swap_horiz,
         );
-        statusSubtitle = 'Regular teacher: ${tpl.slots.firstWhere((s) => s.weekday == resolved.slot.weekday && s.startMin == resolved.slot.startMin, orElse: () => tpl.slots.first).regularInstructor}';
+        final matchingSlot = tpl.slots
+            .where((s) =>
+                s.weekday == resolved.slot.weekday &&
+                s.startMin == resolved.slot.startMin)
+            .firstOrNull;
+        statusSubtitle = matchingSlot != null
+            ? 'Regular teacher: ${matchingSlot.regularInstructor}'
+            : 'Substitute teacher this week';
         break;
       case SlotHealth.cancelled:
         borderColor = Colors.red;

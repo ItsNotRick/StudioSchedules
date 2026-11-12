@@ -1,0 +1,583 @@
+{
+  "jazzy_j": {
+    "canonicalName": "Jazzy J",
+    "aliases": [
+      "Boog Soulfire",
+      "Jazzy J",
+      "Jazzy J (Boog Soulfire)"
+    ],
+    "studios": [
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/jazzy-j-(boog-soulfire)"
+    }
+  },
+  "kathryn_sullivan": {
+    "canonicalName": "Kathryn Sullivan",
+    "aliases": [
+      "Kathryn Sullivan",
+      "Kathy Sullivan"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/kathryn-sullivan",
+      "steps": "https://www.stepsnyc.com/faculty/kathryn-sullivan/"
+    }
+  },
+  "rashaan_james_ii": {
+    "canonicalName": "Rashaan James Ii",
+    "aliases": [
+      "Rashaan James II",
+      "Rashaan James Ii"
+    ],
+    "studios": [
+      "bdc",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/rashaan-james-ii/",
+      "bdc": "https://www.broadwaydancecenter.com/faculty/rashaan-james-ii"
+    }
+  },
+  "katharine_ponza": {
+    "canonicalName": "Katharine Ponza",
+    "aliases": [
+      "Kat Ponza",
+      "Katharine Ponza"
+    ],
+    "studios": [
+      "bdc",
+      "steps"
+    ],
+    "facultyUrls": {
+      "bdc": "https://www.broadwaydancecenter.com/faculty/kat-ponza",
+      "steps": "https://www.stepsnyc.com/faculty/katharine-ponza/"
+    }
+  },
+  "judith_mccarty": {
+    "canonicalName": "Judith Mccarty",
+    "aliases": [
+      "Judith McCarty",
+      "Judith Mccarty"
+    ],
+    "studios": [
+      "ailey",
+      "bdc"
+    ],
+    "facultyUrls": {
+      "bdc": "https://www.broadwaydancecenter.com/faculty/judith-mccarty"
+    }
+  },
+  "luann_leonard": {
+    "canonicalName": "Luann Leonard",
+    "aliases": [
+      "LuAnn Leonard",
+      "Luann Leonard"
+    ],
+    "studios": [
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/luann-leonard"
+    }
+  },
+  "hector_lopez": {
+    "canonicalName": "Hector Lopez",
+    "aliases": [
+      "Hector Invictus Lopez",
+      "Hector Lopez"
+    ],
+    "studios": [
+      "bdc",
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/hector-lopez/",
+      "bdc": "https://www.broadwaydancecenter.com/faculty/hector-lopez",
+      "peridance": "https://www.peridance.com/faculty/hector-invictus-lopez"
+    }
+  },
+  "matt_steffens": {
+    "canonicalName": "Matt Steffens",
+    "aliases": [
+      "Matt Steffens",
+      "Matthew Steffens"
+    ],
+    "studios": [
+      "bdc",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/matt-steffens/"
+    }
+  },
+  "jessica_mcroberts": {
+    "canonicalName": "Jessica Mcroberts",
+    "aliases": [
+      "Jessica McRoberts",
+      "Jessica Mcroberts"
+    ],
+    "studios": [
+      "bdc",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/jessica-mcroberts/"
+    }
+  },
+  "yvonne_marie_sain": {
+    "canonicalName": "Yvonne Marie Sain",
+    "aliases": [
+      "Yvonne Marie Sain",
+      "Yvonne-Marie Sain"
+    ],
+    "studios": [
+      "bdc"
+    ],
+    "facultyUrls": {
+      "bdc": "https://www.broadwaydancecenter.com/faculty/yvonne-marie-sain"
+    }
+  },
+  "natasha_aposivoryapos_markwick": {
+    "canonicalName": "Natasha &Apos;Ivory&Apos; Markwick",
+    "aliases": [
+      "Natasha &Apos;Ivory&Apos; Markwick",
+      "Natasha Markwick"
+    ],
+    "studios": [
+      "bdc",
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/natasha-&apos;ivory&apos;-markwick"
+    }
+  },
+  "jonathan_e2809cshwinge2809d_pena": {
+    "canonicalName": "Jonathan %E2%80%9Cshwing%E2%80%9D Pena",
+    "aliases": [
+      "Jonathan %E2%80%9Cshwing%E2%80%9D Pena",
+      "Jonathan Shwing Pena"
+    ],
+    "studios": [
+      "bdc",
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/jonathan-%E2%80%9Cshwing%E2%80%9D-pena",
+      "bdc": "https://www.broadwaydancecenter.com/faculty/jonathan-shwing-pena"
+    }
+  },
+  "robyn_mineko_williams": {
+    "canonicalName": "Robyn Mineko Williams",
+    "aliases": [
+      "Robyn Mineko Williams",
+      "Robyn Williams"
+    ],
+    "studios": [
+      "bdc",
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/robyn-mineko-williams",
+      "steps": "https://www.stepsnyc.com/faculty/robyn-williams/",
+      "bdc": "https://www.broadwaydancecenter.com/faculty/robyn-williams"
+    }
+  },
+  "ronald_alexander": {
+    "canonicalName": "Ronald Alexander",
+    "aliases": [
+      "Ronald Alexander",
+      "Ronald K. Alexander"
+    ],
+    "studios": [
+      "ailey",
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/ronald-alexander"
+    }
+  },
+  "tony_mcgregor": {
+    "canonicalName": "Tony Mcgregor",
+    "aliases": [
+      "Tony McGregor",
+      "Tony Mcgregor"
+    ],
+    "studios": [
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/tony-mcgregor"
+    }
+  },
+  "jolea_maffei": {
+    "canonicalName": "Jolea Maffei",
+    "aliases": [
+      "JoLea Maffei",
+      "Jolea Maffei"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/jolea-maffei",
+      "steps": "https://www.stepsnyc.com/faculty/jolea-maffei/"
+    }
+  },
+  "camille_a_brown": {
+    "canonicalName": "Camille A. Brown",
+    "aliases": [
+      "Camille A. Brown",
+      "Camille Brown"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/camille-a.-brown",
+      "steps": "https://www.stepsnyc.com/faculty/camille-brown/"
+    }
+  },
+  "janete_silva": {
+    "canonicalName": "Janete Silva",
+    "aliases": [
+      "Janete Da Silva",
+      "Janete Silva"
+    ],
+    "studios": [
+      "ailey",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/janete-silva/"
+    }
+  },
+  "leandro_santos_silva": {
+    "canonicalName": "Leandro Santos Silva",
+    "aliases": [
+      "Leandro Da Silva",
+      "Leandro Santos Silva"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/leandro-santos-silva",
+      "steps": "https://www.stepsnyc.com/faculty/leandro-da-silva/"
+    }
+  },
+  "graceanne_pierce": {
+    "canonicalName": "Graceanne Pierce",
+    "aliases": [
+      "Grace Pierce",
+      "Graceanne Pierce"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/graceanne-pierce/"
+    }
+  },
+  "cam_loeser": {
+    "canonicalName": "Cam Loeser",
+    "aliases": [
+      "Cam Loeser",
+      "Camden Loeser"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/cam-loeser",
+      "steps": "https://www.stepsnyc.com/faculty/cam-loeser/"
+    }
+  },
+  "michaela_mcgowan": {
+    "canonicalName": "Michaela Mcgowan",
+    "aliases": [
+      "Michaela McGowan",
+      "Michaela Mcgowan"
+    ],
+    "studios": [
+      "bdc",
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/michaela-mcgowan",
+      "steps": "https://www.stepsnyc.com/faculty/michaela-mcgowan/",
+      "bdc": "https://www.broadwaydancecenter.com/faculty/michaela-mcgowan"
+    }
+  },
+  "asha_griffith": {
+    "canonicalName": "Asha Griffith",
+    "aliases": [
+      "Asha DaHomey Griffith",
+      "Asha Griffith"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/asha-griffith/"
+    }
+  },
+  "mcgee_maddox": {
+    "canonicalName": "Mcgee Maddox",
+    "aliases": [
+      "McGee Maddox",
+      "Mcgee Maddox"
+    ],
+    "studios": [
+      "bdc",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/mcgee-maddox/"
+    }
+  },
+  "ingamarie_gerson": {
+    "canonicalName": "Ingamarie Gerson",
+    "aliases": [
+      "IngaMarie Gerson",
+      "Ingamarie Gerson"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/ingamarie-gerson/"
+    }
+  },
+  "darnetha_lincoln_mbaye": {
+    "canonicalName": "Darnetha Lincoln Mbaye",
+    "aliases": [
+      "Darnetha Lincoln MBaye",
+      "Darnetha Lincoln Mbaye"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/darnetha-lincoln-mbaye/"
+    }
+  },
+  "jabowen_dixon": {
+    "canonicalName": "Jabowen Dixon",
+    "aliases": [
+      "JaBowen Dixon",
+      "Jabowen Dixon"
+    ],
+    "studios": [
+      "bdc",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/jabowen-dixon/",
+      "bdc": "https://www.broadwaydancecenter.com/faculty/jabowen-dixon"
+    }
+  },
+  "quilan_22cue22_arnold": {
+    "canonicalName": "Quilan %22Cue%22 Arnold",
+    "aliases": [
+      "Quilan %22Cue%22 Arnold",
+      "Quilan Arnold"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/quilan-%22cue%22-arnold",
+      "steps": "https://www.stepsnyc.com/faculty/quilan-arnold/"
+    }
+  },
+  "chloe_arnold": {
+    "canonicalName": "Chloe Arnold",
+    "aliases": [
+      "Chloe Arnold",
+      "Chloe Maud Arnold"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/chloe-maud-arnold/"
+    }
+  },
+  "joseph_davis": {
+    "canonicalName": "Joseph Davis",
+    "aliases": [
+      "Joe Davis",
+      "Joseph Davis"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/joseph-davis",
+      "steps": "https://www.stepsnyc.com/faculty/joe-davis/"
+    }
+  },
+  "alexander_anderson": {
+    "canonicalName": "Alexander Anderson",
+    "aliases": [
+      "Alex Anderson",
+      "Alexander Anderson"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/alex-anderson",
+      "steps": "https://www.stepsnyc.com/faculty/alexander-anderson/"
+    }
+  },
+  "billy_bell": {
+    "canonicalName": "Billy Bell",
+    "aliases": [
+      "Billy Bell"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/billy-bell/"
+    }
+  },
+  "will_b_bell": {
+    "canonicalName": "Will B. Bell",
+    "aliases": [
+      "Will B Bell",
+      "Will B. Bell"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/will-b.-bell",
+      "steps": "https://www.stepsnyc.com/faculty/will-b-bell/"
+    }
+  },
+  "cindy_salgado": {
+    "canonicalName": "Cindy Salgado",
+    "aliases": [
+      "Cindy Salgado",
+      "Cindy Welik Salgado"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/cindy-salgado",
+      "steps": "https://www.stepsnyc.com/faculty/cindy-welik-salgado/"
+    }
+  },
+  "christopher_jarosz": {
+    "canonicalName": "Christopher Jarosz",
+    "aliases": [
+      "Chris Jarosz",
+      "Christopher Jarosz"
+    ],
+    "studios": [
+      "bdc",
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/chris-jarosz",
+      "bdc": "https://www.broadwaydancecenter.com/faculty/chris-jarosz",
+      "steps": "https://www.stepsnyc.com/faculty/christopher-jarosz/"
+    }
+  },
+  "jason_bernard": {
+    "canonicalName": "Jason Bernard",
+    "aliases": [
+      "Jason Bernard",
+      "Jason E Bernard"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/jason-bernard",
+      "steps": "https://www.stepsnyc.com/faculty/jason-e-bernard/"
+    }
+  },
+  "hayden_j_frederick": {
+    "canonicalName": "Hayden J. Frederick",
+    "aliases": [
+      "Hayden Frederick",
+      "Hayden J. Frederick"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/hayden-j.-frederick",
+      "steps": "https://www.stepsnyc.com/faculty/hayden-frederick/"
+    }
+  },
+  "madison_hicks": {
+    "canonicalName": "Madison Hicks",
+    "aliases": [
+      "Madi Hicks",
+      "Madison Hicks"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/madi-hicks",
+      "steps": "https://www.stepsnyc.com/faculty/madison-hicks/"
+    }
+  },
+  "gregory_lau": {
+    "canonicalName": "Gregory Lau",
+    "aliases": [
+      "Greg Lau",
+      "Gregory Lau"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/greg-lau",
+      "steps": "https://www.stepsnyc.com/faculty/gregory-lau/"
+    }
+  },
+  "norbert_de_la_cruz": {
+    "canonicalName": "Norbert De La Cruz",
+    "aliases": [
+      "Norbert De La Cruz",
+      "Norbert De La Cruz Iii"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/norbert-de-la-cruz",
+      "steps": "https://www.stepsnyc.com/faculty/norbert-de-la-cruz-iii/"
+    }
+  }
+}
