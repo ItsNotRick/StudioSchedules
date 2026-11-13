@@ -70,7 +70,6 @@ class CalendarHomeScreen extends ConsumerWidget {
     final selectedDate = ref.watch(selectedDateProvider);
     final today = ref.watch(todayProvider);
     final theme = Theme.of(context);
-    final isNextWeek = selectedDate.compareTo(today.startOfWeek.addDays(6)) > 0;
     final isToday = selectedDate == today;
 
     return Scaffold(
@@ -82,36 +81,12 @@ class CalendarHomeScreen extends ConsumerWidget {
               'NYC Solo Dance Calendar',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
-            Row(
-              children: [
-                Text(
-                  '${formatDate(selectedDate)} (${isEasternDst() ? "EDT" : "EST"})',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                  decoration: BoxDecoration(
-                    color: isNextWeek
-                        ? theme.colorScheme.tertiaryContainer
-                        : theme.colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Text(
-                    isNextWeek ? 'Next Week' : 'This Week',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: isNextWeek
-                          ? theme.colorScheme.onTertiaryContainer
-                          : theme.colorScheme.onPrimaryContainer,
-                    ),
-                  ),
-                ),
-              ],
+            Text(
+              '${formatDate(selectedDate)} (${isEasternDst() ? "EDT" : "EST"})',
+              style: TextStyle(
+                fontSize: 12,
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
         ),

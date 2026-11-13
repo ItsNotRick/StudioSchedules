@@ -180,7 +180,6 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
     final dayIndex = feed.windowStart.daysUntil(target);
     if (dayIndex >= 0) {
       double offset = dayIndex * 52.0;
-      if (dayIndex >= 7) offset += 24.0;
       // Show target with a 1-day lead so surrounding days are visible
       offset = math.max(0.0, offset - 52.0);
       final maxExtent = _scrollController.position.maxScrollExtent;
@@ -225,9 +224,8 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
           final count = ref.watch(sessionsForDateProvider(d)).length +
               ref.watch(seriesStartingOnProvider(d)).length;
           final past = d.compareTo(today) < 0;
-          final isNextWeekStart = (d.weekday == 1 && i > 0);
 
-          Widget item = Padding(
+          return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 4),
             child: InkWell(
               borderRadius: BorderRadius.circular(12),
@@ -285,39 +283,6 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
               ),
             ),
           );
-
-          if (isNextWeekStart) {
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Center(
-                    child: RotatedBox(
-                      quarterTurns: 3,
-                      child: Text(
-                        'NEXT WEEK',
-                        style: TextStyle(
-                          fontSize: 8,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 0.6,
-                          color: theme.colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                item,
-              ],
-            );
-          }
-
-          return item;
         },
       ),
     );
