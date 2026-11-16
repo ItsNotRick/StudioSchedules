@@ -17,8 +17,6 @@ const studios = <StudioId, Studio>{
     address: '322 W 45th St',
     neighborhood: 'Hell\'s Kitchen',
     color: Color(0xFFC62828), // crimson
-    lat: 40.7598,
-    lng: -73.9891,
   ),
   StudioId.steps: Studio(
     id: StudioId.steps,
@@ -27,8 +25,6 @@ const studios = <StudioId, Studio>{
     address: '2121 Broadway',
     neighborhood: 'Upper West Side',
     color: Color(0xFF3949AB), // indigo
-    lat: 40.7806,
-    lng: -73.9810,
   ),
   StudioId.ailey: Studio(
     id: StudioId.ailey,
@@ -37,8 +33,6 @@ const studios = <StudioId, Studio>{
     address: '405 W 55th St',
     neighborhood: 'Hell\'s Kitchen',
     color: Color(0xFFF9A825), // amber
-    lat: 40.7668,
-    lng: -73.9867,
   ),
   StudioId.peridance: Studio(
     id: StudioId.peridance,
@@ -47,8 +41,6 @@ const studios = <StudioId, Studio>{
     address: '126 E 13th St',
     neighborhood: 'Union Square',
     color: Color(0xFF00897B), // teal
-    lat: 40.7334,
-    lng: -73.9887,
   ),
   StudioId.pmt: Studio(
     id: StudioId.pmt,
@@ -57,8 +49,6 @@ const studios = <StudioId, Studio>{
     address: 'W 25th St (verify)',
     neighborhood: 'Flatiron',
     color: Color(0xFF7B1FA2), // purple
-    lat: 40.7437,
-    lng: -73.9905,
   ),
 };
 

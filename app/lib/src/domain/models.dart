@@ -18,8 +18,6 @@ class Studio {
     required this.address,
     required this.neighborhood,
     required this.color,
-    required this.lat,
-    required this.lng,
   });
 
   final StudioId id;
@@ -28,8 +26,6 @@ class Studio {
   final String address;
   final String neighborhood;
   final Color color;
-  final double lat;
-  final double lng;
 }
 
 /// Three hand-assigned tiers (Q4). The studio's raw label is always shown.
@@ -171,7 +167,6 @@ class ClassSession {
     required this.isSubstitute,
     required this.status,
     required this.bookingUrl,
-    this.tz = 'America/New_York',
   });
 
   final String id; // Mindbody class-instance id
@@ -180,7 +175,6 @@ class ClassSession {
   final ServiceDate serviceDate;
   final int startMin;
   final int endMin;
-  final String tz;
   final String instructor;
   final String? description;
   final bool isSubstitute;

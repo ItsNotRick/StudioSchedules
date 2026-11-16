@@ -217,7 +217,6 @@ class FeedRepository {
         serviceDate: ServiceDate.parse(m['serviceDate'] as String),
         startMin: m['startMin'] as int,
         endMin: m['endMin'] as int,
-        tz: m['tz'] as String? ?? 'America/New_York',
         instructor: unescapeHtml(m['instructor'] as String),
         description: rawDesc != null ? unescapeHtml(rawDesc) : null,
         isSubstitute: m['isSubstitute'] as bool? ?? false,

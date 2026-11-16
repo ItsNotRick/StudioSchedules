@@ -173,8 +173,6 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
     }
   }
 
-  bool isSaved(ClassSession s) => state.any((slot) => slot.matches(s));
-
   void toggleFor(ClassSession s) {
     final existingMatches = state.where((slot) => slot.matches(s)).toList();
     final next = {...state};
