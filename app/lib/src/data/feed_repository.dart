@@ -133,6 +133,12 @@ class FeedRepository {
         ? currentMonday
         : parsedWindowStart;
 
+    // Parse and register studio details (name, address, color, ...) from feed
+    final rawStudios = data['studios'] as List<dynamic>? ?? [];
+    registerStudios(rawStudios
+        .map((item) => parseStudio(item as Map<String, dynamic>))
+        .whereType<Studio>());
+
     // Parse and register all templates from feed (curated + dynamically classified)
     final rawTemplates = data['templates'] as List<dynamic>? ?? [];
     final parsedTemplates = rawTemplates.map((item) {
@@ -257,6 +263,33 @@ class FeedRepository {
       windowStart: windowStart,
       sessions: sessions,
       series: seriesList,
+    );
+  }
+
+  /// Parses one entry of the feed's `studios` list. Returns null for an
+  /// unknown studio id. Missing or malformed fields keep the current value
+  /// from [studios].
+  static Studio? parseStudio(Map<String, dynamic> m) {
+    final idKey = m['id'] as String?;
+    final id = StudioId.values.where((s) => s.name == idKey).firstOrNull;
+    if (id == null) return null;
+    final base = studios[id]!;
+
+    String str(String key, String fallback) {
+      final v = m[key];
+      return v is String && v.trim().isNotEmpty ? unescapeHtml(v.trim()) : fallback;
+    }
+
+    final rawColor = m['color'];
+    final colorValue = rawColor is String ? int.tryParse(rawColor) : null;
+
+    return Studio(
+      id: id,
+      name: str('name', base.name),
+      shortName: str('shortName', base.shortName),
+      address: str('address', base.address),
+      neighborhood: str('neighborhood', base.neighborhood),
+      color: colorValue != null ? Color(colorValue) : base.color,
     );
   }
 

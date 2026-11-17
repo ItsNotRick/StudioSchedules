@@ -1,6 +1,6 @@
 /// Realistic-shaped MOCK data for the view prototypes.
 ///
-/// Studio addresses are best-effort and must be verified. Instructor names
+/// Studio details mirror backend/data/studios.json. Instructor names
 /// are fictional placeholders. Class titles/levels are plausible examples,
 /// not a scrape of real schedules.
 library;
@@ -9,12 +9,15 @@ import 'package:flutter/material.dart';
 
 import '../domain/models.dart';
 
-const studios = <StudioId, Studio>{
+/// Built-in studio details, used until the feed's `studios` list is parsed
+/// (and as a fallback for any studio the feed omits). The feed, generated from
+/// `backend/data/studios.json`, is the source of truth.
+const _fallbackStudios = <StudioId, Studio>{
   StudioId.bdc: Studio(
     id: StudioId.bdc,
     name: 'Broadway Dance Center',
     shortName: 'BDC',
-    address: '322 W 45th St',
+    address: '322 W 45th St, 3rd Fl',
     neighborhood: 'Hell\'s Kitchen',
     color: Color(0xFFC62828), // crimson
   ),
@@ -22,7 +25,7 @@ const studios = <StudioId, Studio>{
     id: StudioId.steps,
     name: 'Steps on Broadway',
     shortName: 'Steps',
-    address: '2121 Broadway',
+    address: '2121 Broadway, 3rd Fl',
     neighborhood: 'Upper West Side',
     color: Color(0xFF3949AB), // indigo
   ),
@@ -46,11 +49,30 @@ const studios = <StudioId, Studio>{
     id: StudioId.pmt,
     name: 'PMT House of Dance',
     shortName: 'PMT',
-    address: 'W 25th St (verify)',
+    address: '28 W 25th St, 2nd Fl',
     neighborhood: 'Flatiron',
     color: Color(0xFF7B1FA2), // purple
   ),
 };
+
+/// Current studio details, keyed by id. Seeded from [_fallbackStudios] and
+/// overwritten by [registerStudios] when a feed is parsed.
+final studios = <StudioId, Studio>{..._fallbackStudios};
+
+/// Replaces entries in [studios] with the given feed-provided studios.
+void registerStudios(Iterable<Studio> feedStudios) {
+  for (final s in feedStudios) {
+    studios[s.id] = s;
+  }
+}
+
+/// Restores [studios] to the built-in fallback values (used by tests).
+@visibleForTesting
+void resetStudios() {
+  studios
+    ..clear()
+    ..addAll(_fallbackStudios);
+}
 
 const _homepages = {
   StudioId.bdc: 'https://www.broadwaydancecenter.com',
