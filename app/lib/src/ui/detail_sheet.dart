@@ -122,7 +122,8 @@ class _SessionDetail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tpl = getTemplate(session.templateId);
     final studio = studios[session.studioId]!;
-    final saved = ref.watch(savedSlotsProvider).any((s) => s.matches(session));
+    final saved = slotsClaiming(
+        session, ref.watch(feedProvider).sessions, ref.watch(savedSlotsProvider)).isNotEmpty;
     final theme = Theme.of(context);
     final feed = ref.watch(feedProvider);
     final filter = ref.watch(filterProvider);
@@ -168,7 +169,7 @@ class _SessionDetail extends ConsumerWidget {
           LevelPill(tpl),
         ]),
         const SizedBox(height: 8),
-        Text(tpl.title, style: theme.textTheme.headlineSmall),
+        Text(session.title ?? tpl.title, style: theme.textTheme.headlineSmall),
         if (session.isCancelled)
           Padding(
             padding: const EdgeInsets.only(top: 8),
@@ -238,7 +239,7 @@ class _SessionDetail extends ConsumerWidget {
                   dense: true,
                   contentPadding: EdgeInsets.zero,
                   leading: StudioBadge(o.studioId, dense: true),
-                  title: Text(getTemplate(o.templateId).title),
+                  title: Text(o.title ?? getTemplate(o.templateId).title),
                   subtitle: Text(
                     '${formatTime(o.startMin)}'
                     '${o.instructor.isNotEmpty ? ' · with ${o.instructor}' : ''}'

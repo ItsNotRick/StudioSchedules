@@ -21,6 +21,8 @@ class SavedRegimenSlots extends Table {
   IntColumn get targetWeekday => integer()();
   IntColumn get targetStartMin => integer()();
   TextColumn get label => text()();
+  // Canonical instructor key (v2). Null for rows saved before v2.
+  TextColumn get instructorKey => text().nullable()();
   DateTimeColumn get createdAt => dateTime()();
 
   @override
@@ -40,7 +42,16 @@ class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
+
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+        onUpgrade: (m, from, to) async {
+          if (from < 2) {
+            await m.addColumn(savedRegimenSlots, savedRegimenSlots.instructorKey);
+          }
+        },
+      );
 
   // Cached feed operations
   Future<void> saveFeedJson(String key, String jsonPayload) {

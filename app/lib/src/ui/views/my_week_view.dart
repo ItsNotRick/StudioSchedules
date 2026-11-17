@@ -206,13 +206,17 @@ class _RegimenSlotCard extends ConsumerWidget {
           color: Colors.orange.shade800,
           icon: Icons.swap_horiz,
         );
-        final matchingSlot = tpl.slots
-            .where((s) =>
-                s.weekday == resolved.slot.weekday &&
-                s.startMin == resolved.slot.startMin)
-            .firstOrNull;
-        statusSubtitle = matchingSlot != null
-            ? 'Regular teacher: ${matchingSlot.regularInstructor}'
+        // The teacher you saved is "regular" from your point of view; fall
+        // back to the template's teacher for slots saved without one.
+        final regular = resolved.slot.instructor ??
+            tpl.slots
+                .where((s) =>
+                    s.weekday == resolved.slot.weekday &&
+                    s.startMin == resolved.slot.startMin)
+                .firstOrNull
+                ?.regularInstructor;
+        statusSubtitle = regular != null
+            ? 'Regular teacher: $regular'
             : 'Substitute teacher this week';
         break;
       case SlotHealth.cancelled:
@@ -300,7 +304,7 @@ class _RegimenSlotCard extends ConsumerWidget {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          tpl.title,
+                          session?.title ?? tpl.title,
                           style: theme.textTheme.titleMedium?.copyWith(
                             decoration: strike,
                           ),

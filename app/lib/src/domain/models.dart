@@ -167,6 +167,8 @@ class ClassSession {
     required this.startMin,
     required this.endMin,
     required this.instructor,
+    this.instructorKey,
+    this.rawTitle,
     this.description,
     required this.isSubstitute,
     required this.status,
@@ -182,10 +184,31 @@ class ClassSession {
   final int endMin;
   final String tz;
   final String instructor;
+
+  /// Canonical matching key from the feed (alias-resolved, normalized).
+  /// Older feeds omit it; use [matchKey] rather than reading this directly.
+  final String? instructorKey;
+
+  /// The class name exactly as the studio lists it, e.g.
+  /// "Adv Beg THEATER with Jason Wise". Use [title] for display.
+  final String? rawTitle;
   final String? description;
   final bool isSubstitute;
   final SessionStatus status;
   final String bookingUrl;
+
+  /// The studio's own class name, minus any " with [teacher]" suffix (the
+  /// suffix names the regular teacher, which is wrong when a sub teaches).
+  /// Null when the feed has no raw title; callers fall back to the template.
+  String? get title {
+    final raw = rawTitle;
+    if (raw == null) return null;
+    final t = raw.split(' with ').first.trim().split(RegExp(r'\s+')).join(' ');
+    return t.isEmpty ? null : t;
+  }
+
+  /// Key used to compare this session's teacher against a saved slot.
+  String get matchKey => instructorKey ?? normalizeInstructor(instructor);
 
   int get durationMin => endMin - startMin;
   bool get isCancelled => status == SessionStatus.cancelled;
@@ -234,6 +257,18 @@ class WorkshopSeries {
   }
 }
 
+/// Matching key for an instructor name.
+///
+/// Must stay identical to normalize_instructor() in backend/src/build_feed.py:
+/// collapse whitespace, drop quote characters, lowercase, trim.
+String normalizeInstructor(String name) => name
+    .trim()
+    .split(RegExp(r'\s+'))
+    .join(' ')
+    .replaceAll(RegExp('["\']'), '')
+    .toLowerCase()
+    .trim();
+
 /// A device-local "regimen" entry: a recurring weekly slot (Q10).
 @immutable
 class SavedSlot {
@@ -242,18 +277,42 @@ class SavedSlot {
     required this.weekday,
     required this.startMin,
     this.instructor,
+    this.instructorKey,
   });
 
   final String templateId;
   final int weekday;
   final int startMin;
+
+  /// Teacher's name as displayed when the slot was saved.
   final String? instructor;
 
-  bool matches(ClassSession s) =>
+  /// Canonical key of that teacher (see [ClassSession.matchKey]). Null for
+  /// slots saved before keys existed; [teacherKey] then falls back to the
+  /// normalized display name.
+  final String? instructorKey;
+
+  String? get teacherKey {
+    if (instructorKey != null && instructorKey!.isNotEmpty) return instructorKey;
+    if (instructor == null || instructor!.isEmpty) return null;
+    return normalizeInstructor(instructor!);
+  }
+
+  /// Same class, weekday and start time, whoever teaches it.
+  bool matchesSlot(ClassSession s) =>
       s.templateId == templateId &&
       s.serviceDate.weekday == weekday &&
-      s.startMin == startMin &&
-      (instructor == null || s.instructor == instructor);
+      s.startMin == startMin;
+
+  /// Same slot and the saved teacher (or any teacher if none was saved).
+  bool matches(ClassSession s) {
+    if (!matchesSlot(s)) return false;
+    final key = teacherKey;
+    if (key == null) return true;
+    // The raw-name check keeps legacy slots (display name only) matching
+    // sessions whose key was alias-resolved to a different canonical name.
+    return s.matchKey == key || normalizeInstructor(s.instructor) == key;
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -261,11 +320,75 @@ class SavedSlot {
       other.templateId == templateId &&
       other.weekday == weekday &&
       other.startMin == startMin &&
-      other.instructor == instructor;
+      other.teacherKey == teacherKey;
 
   @override
-  int get hashCode => Object.hash(templateId, weekday, startMin, instructor);
+  int get hashCode => Object.hash(templateId, weekday, startMin, teacherKey);
 }
+
+/// The session a saved slot resolves to on one date.
+class SlotMatch {
+  const SlotMatch(this.session, {required this.exact});
+  final ClassSession session;
+
+  /// False when the saved teacher isn't teaching and this session was picked
+  /// as the only plausible stand-in (i.e. a substitute).
+  final bool exact;
+
+  /// A stand-in, or a session the studio itself flags as subbed.
+  bool get isSubstitute => !exact || session.isSubstitute;
+}
+
+/// Finds the session [slot] refers to on [date].
+///
+/// 1. A session taught by the saved teacher wins.
+/// 2. Otherwise, among same-slot sessions not claimed exactly by another saved
+///    slot, if they are all taught by one person, that's the substitute.
+///    With concurrent sections, a single studio-flagged sub breaks the tie.
+/// 3. Otherwise null (not on schedule / ambiguous).
+SlotMatch? resolveSlot(
+  SavedSlot slot,
+  ServiceDate date,
+  Iterable<ClassSession> sessions,
+  Iterable<SavedSlot> allSaved,
+) {
+  final candidates = sessions
+      .where((s) => s.serviceDate == date && slot.matchesSlot(s))
+      .toList()
+    // Prefer scheduled over cancelled/removed when duplicates exist.
+    ..sort((a, b) => a.status.index.compareTo(b.status.index));
+  if (candidates.isEmpty) return null;
+
+  final exact = candidates.where(slot.matches);
+  if (exact.isNotEmpty) return SlotMatch(exact.first, exact: true);
+
+  final others = allSaved.where((o) => o != slot).toList();
+  var loose = candidates
+      .where((s) => !others.any((o) => o.matches(s)))
+      .toList();
+  if (loose.map((s) => s.matchKey).toSet().length > 1) {
+    loose = loose.where((s) => s.isSubstitute).toList();
+  }
+  if (loose.isEmpty || loose.map((s) => s.matchKey).toSet().length > 1) {
+    return null;
+  }
+  return SlotMatch(loose.first, exact: false);
+}
+
+/// Saved slots that resolve to [session] on its date.
+Iterable<SavedSlot> slotsClaiming(
+  ClassSession session,
+  Iterable<ClassSession> sessions,
+  Iterable<SavedSlot> allSaved,
+) =>
+    allSaved.where((slot) {
+      if (!slot.matchesSlot(session)) return false;
+      if (slot.matches(session)) return true;
+      return resolveSlot(slot, session.serviceDate, sessions, allSaved)
+              ?.session
+              .id ==
+          session.id;
+    });
 
 // ---------------------------------------------------------------------------
 // America/New_York timezone helpers (independent of device timezone).
