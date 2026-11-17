@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/database/app_database.dart';
 import '../data/feed_repository.dart';
-import '../data/mock_feed.dart';
+import '../data/feed.dart';
 import '../domain/models.dart';
 
 export '../domain/models.dart'
@@ -20,29 +20,41 @@ final todayProvider = Provider<ServiceDate>(
   (ref) => getTodayInNewYork(),
 );
 
-class FeedNotifier extends Notifier<MockFeed> {
+/// Loads the schedule feed. The bundled or cached feed is shown as soon as
+/// it's read; the remote feed is then checked in the background and replaces
+/// it if newer. Call `ref.invalidate(feedProvider)` to retry after an error.
+class FeedNotifier extends AsyncNotifier<Feed> {
   @override
-  MockFeed build() {
-    _load();
-    return MockFeed.build(ref.watch(todayProvider));
+  Future<Feed> build() async {
+    final repo = FeedRepository(database: ref.read(appDatabaseProvider));
+    final local = await repo.loadFeed(fetchRemote: false);
+    _checkRemote(repo);
+    return local;
   }
 
-  Future<void> _load() async {
-    final db = ref.read(appDatabaseProvider);
-    final repo = FeedRepository(database: db);
-    final realFeed = await repo.loadFeed();
-    state = realFeed;
-  }
-
-  Future<void> refresh() async {
-    final db = ref.read(appDatabaseProvider);
-    final repo = FeedRepository(database: db);
-    final realFeed = await repo.loadFeed();
-    state = realFeed;
+  Future<void> _checkRemote(FeedRepository repo) async {
+    try {
+      final latest = await repo.loadFeed();
+      if (ref.mounted) state = AsyncData(latest);
+    } catch (e) {
+      // Keep showing the local feed.
+    }
   }
 }
 
-final feedProvider = NotifierProvider<FeedNotifier, MockFeed>(FeedNotifier.new);
+final feedProvider = AsyncNotifierProvider<FeedNotifier, Feed>(
+  FeedNotifier.new,
+  // No automatic retry: a failure means the bundled asset is unreadable,
+  // which retrying won't fix. The error view offers a manual retry.
+  retry: (retryCount, error) => null,
+);
+
+/// The loaded feed, or an empty one while loading or after an error. The home
+/// screen shows loading and error states itself, so views can read this
+/// without handling them.
+final currentFeedProvider = Provider<Feed>((ref) {
+  return ref.watch(feedProvider).value ?? Feed.empty(ref.watch(todayProvider));
+});
 
 class SelectedDate extends Notifier<ServiceDate> {
   @override
@@ -103,7 +115,7 @@ final filterProvider = NotifierProvider<Filter, FilterState>(Filter.new);
 /// cancelled sessions stay visible, struck through).
 final sessionsForDateProvider =
     Provider.family<List<ClassSession>, ServiceDate>((ref, date) {
-  final feed = ref.watch(feedProvider);
+  final feed = ref.watch(currentFeedProvider);
   final filter = ref.watch(filterProvider);
   return feed.sessions
       .where((s) =>
@@ -116,7 +128,7 @@ final sessionsForDateProvider =
 /// Series whose first session is on [date] and that pass the filter.
 final seriesStartingOnProvider =
     Provider.family<List<WorkshopSeries>, ServiceDate>((ref, date) {
-  final feed = ref.watch(feedProvider);
+  final feed = ref.watch(currentFeedProvider);
   final filter = ref.watch(filterProvider);
   return feed.series
       .where((s) =>
@@ -127,7 +139,7 @@ final seriesStartingOnProvider =
 
 /// All series still worth showing (in progress or upcoming) that pass the active filter.
 final upcomingSeriesProvider = Provider<List<WorkshopSeries>>((ref) {
-  final feed = ref.watch(feedProvider);
+  final feed = ref.watch(currentFeedProvider);
   final filter = ref.watch(filterProvider);
   final today = ref.watch(todayProvider);
   return feed.series
@@ -149,7 +161,7 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
     _removedBeforeLoad.clear();
     _isLoaded = false;
     _loadFromDb();
-    return {...seedSavedSlots};
+    return {};
   }
 
   Future<void> _loadFromDb() async {
@@ -259,7 +271,7 @@ class SavedSeries extends Notifier<Set<String>> {
     _removedBeforeLoad.clear();
     _isLoaded = false;
     _loadFromDb();
-    return {...seedSavedSeries};
+    return {};
   }
 
   Future<void> _loadFromDb() async {
@@ -327,7 +339,7 @@ class ResolvedSlot {
 /// Resolves every saved slot for the week starting [weekStart].
 final resolvedRegimenProvider =
     Provider.family<List<ResolvedSlot>, ServiceDate>((ref, weekStart) {
-  final feed = ref.watch(feedProvider);
+  final feed = ref.watch(currentFeedProvider);
   final saved = ref.watch(savedSlotsProvider);
   final out = <ResolvedSlot>[];
   for (final slot in saved) {

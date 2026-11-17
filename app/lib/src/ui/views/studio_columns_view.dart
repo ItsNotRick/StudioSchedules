@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/mock_feed.dart';
+import '../../data/feed.dart';
 import '../../domain/models.dart';
 import '../../state/providers.dart';
 import '../common.dart';

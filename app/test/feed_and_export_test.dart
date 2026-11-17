@@ -3,7 +3,7 @@ import 'dart:ui' show Color;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:nyc_dance_calendar/src/data/feed_repository.dart';
-import 'package:nyc_dance_calendar/src/data/mock_feed.dart';
+import 'package:nyc_dance_calendar/src/data/feed.dart';
 import 'package:nyc_dance_calendar/src/domain/models.dart';
 import 'package:nyc_dance_calendar/src/services/calendar_export_service.dart';
 

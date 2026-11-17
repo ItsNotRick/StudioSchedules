@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../data/mock_feed.dart';
+import '../data/feed.dart';
 import '../domain/models.dart';
 import '../services/calendar_export_service.dart';
 import '../state/providers.dart';
@@ -124,7 +124,7 @@ class _SessionDetail extends ConsumerWidget {
     final studio = studios[session.studioId]!;
     final saved = ref.watch(savedSlotsProvider).any((s) => s.matches(session));
     final theme = Theme.of(context);
-    final feed = ref.watch(feedProvider);
+    final feed = ref.watch(currentFeedProvider);
     final filter = ref.watch(filterProvider);
 
     // "Pairs well with":

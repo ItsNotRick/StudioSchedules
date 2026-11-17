@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/mock_feed.dart';
+import '../../data/feed.dart';
 import '../../domain/models.dart';
 import '../../state/providers.dart';
 import '../../services/calendar_export_service.dart';
@@ -20,7 +20,7 @@ class MyWeekView extends ConsumerWidget {
     final weekStart = selectedDate.startOfWeek;
     final resolvedSlots = ref.watch(resolvedRegimenProvider(weekStart));
     final savedSeriesIds = ref.watch(savedSeriesProvider);
-    final feed = ref.watch(feedProvider);
+    final feed = ref.watch(currentFeedProvider);
 
     final enrolledSeries = feed.series
         .where((s) => savedSeriesIds.contains(s.id))

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/mock_feed.dart';
+import '../../data/feed.dart';
 import '../../domain/models.dart';
 import '../common.dart';
 import '../detail_sheet.dart';

@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/mock_feed.dart';
+import '../data/feed.dart';
 import '../domain/models.dart';
 import '../state/providers.dart';
 import 'detail_sheet.dart';
@@ -175,7 +175,7 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
     super.dispose();
   }
 
-  void _scrollToSelectedOrToday(MockFeed feed, ServiceDate target) {
+  void _scrollToSelectedOrToday(Feed feed, ServiceDate target) {
     if (!_scrollController.hasClients) return;
     final dayIndex = feed.windowStart.daysUntil(target);
     if (dayIndex >= 0) {
@@ -194,7 +194,7 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
 
   @override
   Widget build(BuildContext context) {
-    final feed = ref.watch(feedProvider);
+    final feed = ref.watch(currentFeedProvider);
     final selected = ref.watch(selectedDateProvider);
     final today = ref.watch(todayProvider);
     final theme = Theme.of(context);
@@ -385,6 +385,44 @@ class EmptyState extends StatelessWidget {
             Icon(Icons.event_busy, size: 48, color: Theme.of(context).disabledColor),
             const SizedBox(height: 8),
             Text(message, textAlign: TextAlign.center),
+          ]),
+        ),
+      );
+}
+
+/// Shown while the schedule feed is loading for the first time.
+class FeedLoadingView extends StatelessWidget {
+  const FeedLoadingView({super.key});
+
+  @override
+  Widget build(BuildContext context) => const Center(
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          CircularProgressIndicator(),
+          SizedBox(height: 12),
+          Text('Loading schedule…'),
+        ]),
+      );
+}
+
+/// Shown when no schedule feed could be loaded at all.
+class FeedErrorView extends StatelessWidget {
+  const FeedErrorView({super.key, required this.onRetry});
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Icon(Icons.cloud_off, size: 48, color: Theme.of(context).disabledColor),
+            const SizedBox(height: 8),
+            const Text("Couldn't load the class schedule.", textAlign: TextAlign.center),
+            const SizedBox(height: 12),
+            FilledButton.icon(
+              onPressed: onRetry,
+              icon: const Icon(Icons.refresh),
+              label: const Text('Try again'),
+            ),
           ]),
         ),
       );
