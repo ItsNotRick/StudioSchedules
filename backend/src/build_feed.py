@@ -175,6 +175,13 @@ def get_generic_studio_description(studio_id: str, title: str, genre: str) -> st
     # No authentic studio-wide description scraped from website
     return ""
 
+# Template fields used only while building the feed, never by the app.
+INTERNAL_TEMPLATE_FIELDS = {"matchPatterns"}
+
+def public_template(t: Dict[str, Any]) -> Dict[str, Any]:
+    """Returns a copy of template [t] without build-only fields."""
+    return {k: v for k, v in t.items() if k not in INTERNAL_TEMPLATE_FIELDS}
+
 def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     templates_path = os.path.join(base_dir, "data", "templates.json")
@@ -379,6 +386,8 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                 if session_desc:
                     break
 
+        # rawClassTitle stays in the output: if a scraper fails on the next
+        # run, cached sessions are re-classified from it (see fallback above).
         session_record = {
             "id": sess["id"],
             "templateId": matched_tpl["id"],
@@ -387,7 +396,6 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             "serviceDate": service_date,
             "startMin": sess["startMin"],
             "endMin": sess["endMin"],
-            "tz": "America/New_York",
             "instructor": instructor_clean,
             "isSubstitute": sess.get("isSubstitute", False),
             "status": "scheduled",
@@ -417,9 +425,8 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
         "version": "1.0.0",
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "windowStart": window_start,
-        "windowEnd": window_end,
         "studios": studios,
-        "templates": templates,
+        "templates": [public_template(t) for t in templates],
         "series": series,
         "sessions": normalized_sessions,
         "scraperStats": scraper_stats
