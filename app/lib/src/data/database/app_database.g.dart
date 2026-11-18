@@ -332,6 +332,17 @@ class $SavedRegimenSlotsTable extends SavedRegimenSlots
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _instructorKeyMeta = const VerificationMeta(
+    'instructorKey',
+  );
+  @override
+  late final GeneratedColumn<String> instructorKey = GeneratedColumn<String>(
+    'instructor_key',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _createdAtMeta = const VerificationMeta(
     'createdAt',
   );
@@ -350,6 +361,7 @@ class $SavedRegimenSlotsTable extends SavedRegimenSlots
     targetWeekday,
     targetStartMin,
     label,
+    instructorKey,
     createdAt,
   ];
   @override
@@ -407,6 +419,15 @@ class $SavedRegimenSlotsTable extends SavedRegimenSlots
     } else if (isInserting) {
       context.missing(_labelMeta);
     }
+    if (data.containsKey('instructor_key')) {
+      context.handle(
+        _instructorKeyMeta,
+        instructorKey.isAcceptableOrUnknown(
+          data['instructor_key']!,
+          _instructorKeyMeta,
+        ),
+      );
+    }
     if (data.containsKey('created_at')) {
       context.handle(
         _createdAtMeta,
@@ -444,6 +465,10 @@ class $SavedRegimenSlotsTable extends SavedRegimenSlots
         DriftSqlType.string,
         data['${effectivePrefix}label'],
       )!,
+      instructorKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}instructor_key'],
+      ),
       createdAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}created_at'],
@@ -464,6 +489,7 @@ class SavedRegimenSlot extends DataClass
   final int targetWeekday;
   final int targetStartMin;
   final String label;
+  final String? instructorKey;
   final DateTime createdAt;
   const SavedRegimenSlot({
     required this.id,
@@ -471,6 +497,7 @@ class SavedRegimenSlot extends DataClass
     required this.targetWeekday,
     required this.targetStartMin,
     required this.label,
+    this.instructorKey,
     required this.createdAt,
   });
   @override
@@ -481,6 +508,9 @@ class SavedRegimenSlot extends DataClass
     map['target_weekday'] = Variable<int>(targetWeekday);
     map['target_start_min'] = Variable<int>(targetStartMin);
     map['label'] = Variable<String>(label);
+    if (!nullToAbsent || instructorKey != null) {
+      map['instructor_key'] = Variable<String>(instructorKey);
+    }
     map['created_at'] = Variable<DateTime>(createdAt);
     return map;
   }
@@ -492,6 +522,9 @@ class SavedRegimenSlot extends DataClass
       targetWeekday: Value(targetWeekday),
       targetStartMin: Value(targetStartMin),
       label: Value(label),
+      instructorKey: instructorKey == null && nullToAbsent
+          ? const Value.absent()
+          : Value(instructorKey),
       createdAt: Value(createdAt),
     );
   }
@@ -507,6 +540,7 @@ class SavedRegimenSlot extends DataClass
       targetWeekday: serializer.fromJson<int>(json['targetWeekday']),
       targetStartMin: serializer.fromJson<int>(json['targetStartMin']),
       label: serializer.fromJson<String>(json['label']),
+      instructorKey: serializer.fromJson<String?>(json['instructorKey']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
     );
   }
@@ -519,6 +553,7 @@ class SavedRegimenSlot extends DataClass
       'targetWeekday': serializer.toJson<int>(targetWeekday),
       'targetStartMin': serializer.toJson<int>(targetStartMin),
       'label': serializer.toJson<String>(label),
+      'instructorKey': serializer.toJson<String?>(instructorKey),
       'createdAt': serializer.toJson<DateTime>(createdAt),
     };
   }
@@ -529,6 +564,7 @@ class SavedRegimenSlot extends DataClass
     int? targetWeekday,
     int? targetStartMin,
     String? label,
+    Value<String?> instructorKey = const Value.absent(),
     DateTime? createdAt,
   }) => SavedRegimenSlot(
     id: id ?? this.id,
@@ -536,6 +572,9 @@ class SavedRegimenSlot extends DataClass
     targetWeekday: targetWeekday ?? this.targetWeekday,
     targetStartMin: targetStartMin ?? this.targetStartMin,
     label: label ?? this.label,
+    instructorKey: instructorKey.present
+        ? instructorKey.value
+        : this.instructorKey,
     createdAt: createdAt ?? this.createdAt,
   );
   SavedRegimenSlot copyWithCompanion(SavedRegimenSlotsCompanion data) {
@@ -551,6 +590,9 @@ class SavedRegimenSlot extends DataClass
           ? data.targetStartMin.value
           : this.targetStartMin,
       label: data.label.present ? data.label.value : this.label,
+      instructorKey: data.instructorKey.present
+          ? data.instructorKey.value
+          : this.instructorKey,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
     );
   }
@@ -563,6 +605,7 @@ class SavedRegimenSlot extends DataClass
           ..write('targetWeekday: $targetWeekday, ')
           ..write('targetStartMin: $targetStartMin, ')
           ..write('label: $label, ')
+          ..write('instructorKey: $instructorKey, ')
           ..write('createdAt: $createdAt')
           ..write(')'))
         .toString();
@@ -575,6 +618,7 @@ class SavedRegimenSlot extends DataClass
     targetWeekday,
     targetStartMin,
     label,
+    instructorKey,
     createdAt,
   );
   @override
@@ -586,6 +630,7 @@ class SavedRegimenSlot extends DataClass
           other.targetWeekday == this.targetWeekday &&
           other.targetStartMin == this.targetStartMin &&
           other.label == this.label &&
+          other.instructorKey == this.instructorKey &&
           other.createdAt == this.createdAt);
 }
 
@@ -595,6 +640,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
   final Value<int> targetWeekday;
   final Value<int> targetStartMin;
   final Value<String> label;
+  final Value<String?> instructorKey;
   final Value<DateTime> createdAt;
   final Value<int> rowid;
   const SavedRegimenSlotsCompanion({
@@ -603,6 +649,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
     this.targetWeekday = const Value.absent(),
     this.targetStartMin = const Value.absent(),
     this.label = const Value.absent(),
+    this.instructorKey = const Value.absent(),
     this.createdAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
@@ -612,6 +659,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
     required int targetWeekday,
     required int targetStartMin,
     required String label,
+    this.instructorKey = const Value.absent(),
     required DateTime createdAt,
     this.rowid = const Value.absent(),
   }) : id = Value(id),
@@ -626,6 +674,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
     Expression<int>? targetWeekday,
     Expression<int>? targetStartMin,
     Expression<String>? label,
+    Expression<String>? instructorKey,
     Expression<DateTime>? createdAt,
     Expression<int>? rowid,
   }) {
@@ -635,6 +684,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
       if (targetWeekday != null) 'target_weekday': targetWeekday,
       if (targetStartMin != null) 'target_start_min': targetStartMin,
       if (label != null) 'label': label,
+      if (instructorKey != null) 'instructor_key': instructorKey,
       if (createdAt != null) 'created_at': createdAt,
       if (rowid != null) 'rowid': rowid,
     });
@@ -646,6 +696,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
     Value<int>? targetWeekday,
     Value<int>? targetStartMin,
     Value<String>? label,
+    Value<String?>? instructorKey,
     Value<DateTime>? createdAt,
     Value<int>? rowid,
   }) {
@@ -655,6 +706,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
       targetWeekday: targetWeekday ?? this.targetWeekday,
       targetStartMin: targetStartMin ?? this.targetStartMin,
       label: label ?? this.label,
+      instructorKey: instructorKey ?? this.instructorKey,
       createdAt: createdAt ?? this.createdAt,
       rowid: rowid ?? this.rowid,
     );
@@ -678,6 +730,9 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
     if (label.present) {
       map['label'] = Variable<String>(label.value);
     }
+    if (instructorKey.present) {
+      map['instructor_key'] = Variable<String>(instructorKey.value);
+    }
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
@@ -695,6 +750,7 @@ class SavedRegimenSlotsCompanion extends UpdateCompanion<SavedRegimenSlot> {
           ..write('targetWeekday: $targetWeekday, ')
           ..write('targetStartMin: $targetStartMin, ')
           ..write('label: $label, ')
+          ..write('instructorKey: $instructorKey, ')
           ..write('createdAt: $createdAt, ')
           ..write('rowid: $rowid')
           ..write(')'))
@@ -1108,6 +1164,7 @@ typedef $$SavedRegimenSlotsTableCreateCompanionBuilder =
       required int targetWeekday,
       required int targetStartMin,
       required String label,
+      Value<String?> instructorKey,
       required DateTime createdAt,
       Value<int> rowid,
     });
@@ -1118,6 +1175,7 @@ typedef $$SavedRegimenSlotsTableUpdateCompanionBuilder =
       Value<int> targetWeekday,
       Value<int> targetStartMin,
       Value<String> label,
+      Value<String?> instructorKey,
       Value<DateTime> createdAt,
       Value<int> rowid,
     });
@@ -1153,6 +1211,11 @@ class $$SavedRegimenSlotsTableFilterComposer
 
   ColumnFilters<String> get label => $composableBuilder(
     column: $table.label,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get instructorKey => $composableBuilder(
+    column: $table.instructorKey,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -1196,6 +1259,11 @@ class $$SavedRegimenSlotsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get instructorKey => $composableBuilder(
+    column: $table.instructorKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get createdAt => $composableBuilder(
     column: $table.createdAt,
     builder: (column) => ColumnOrderings(column),
@@ -1231,6 +1299,11 @@ class $$SavedRegimenSlotsTableAnnotationComposer
 
   GeneratedColumn<String> get label =>
       $composableBuilder(column: $table.label, builder: (column) => column);
+
+  GeneratedColumn<String> get instructorKey => $composableBuilder(
+    column: $table.instructorKey,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get createdAt =>
       $composableBuilder(column: $table.createdAt, builder: (column) => column);
@@ -1281,6 +1354,7 @@ class $$SavedRegimenSlotsTableTableManager
                 Value<int> targetWeekday = const Value.absent(),
                 Value<int> targetStartMin = const Value.absent(),
                 Value<String> label = const Value.absent(),
+                Value<String?> instructorKey = const Value.absent(),
                 Value<DateTime> createdAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => SavedRegimenSlotsCompanion(
@@ -1289,6 +1363,7 @@ class $$SavedRegimenSlotsTableTableManager
                 targetWeekday: targetWeekday,
                 targetStartMin: targetStartMin,
                 label: label,
+                instructorKey: instructorKey,
                 createdAt: createdAt,
                 rowid: rowid,
               ),
@@ -1299,6 +1374,7 @@ class $$SavedRegimenSlotsTableTableManager
                 required int targetWeekday,
                 required int targetStartMin,
                 required String label,
+                Value<String?> instructorKey = const Value.absent(),
                 required DateTime createdAt,
                 Value<int> rowid = const Value.absent(),
               }) => SavedRegimenSlotsCompanion.insert(
@@ -1307,6 +1383,7 @@ class $$SavedRegimenSlotsTableTableManager
                 targetWeekday: targetWeekday,
                 targetStartMin: targetStartMin,
                 label: label,
+                instructorKey: instructorKey,
                 createdAt: createdAt,
                 rowid: rowid,
               ),

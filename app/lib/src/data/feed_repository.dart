@@ -219,6 +219,10 @@ class FeedRepository {
         endMin: m['endMin'] as int,
         tz: m['tz'] as String? ?? 'America/New_York',
         instructor: unescapeHtml(m['instructor'] as String),
+        instructorKey: m['instructorKey'] as String?,
+        rawTitle: (m['rawClassTitle'] as String?) == null
+            ? null
+            : unescapeHtml(m['rawClassTitle'] as String),
         description: rawDesc != null ? unescapeHtml(rawDesc) : null,
         isSubstitute: m['isSubstitute'] as bool? ?? false,
         status: status,

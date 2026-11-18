@@ -25,7 +25,7 @@ class CalendarExportService {
 
     final teacher = session.instructor;
     final subNote = session.isSubstitute ? ' [SUBSTITUTE TEACHER]' : '';
-    final summary = '${tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}';
+    final summary = '${session.title ?? tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}';
     final classDesc = (session.description != null && session.description!.trim().isNotEmpty)
         ? session.description!
         : (tpl.description.trim().isNotEmpty)
@@ -85,7 +85,7 @@ class CalendarExportService {
 
     final teacher = session.instructor;
     final subNote = session.isSubstitute ? ' [SUBSTITUTE TEACHER]' : '';
-    final summary = escapeIcsText('${tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}');
+    final summary = escapeIcsText('${session.title ?? tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}');
     final classDesc = (session.description != null && session.description!.trim().isNotEmpty)
         ? session.description!
         : (tpl.description.trim().isNotEmpty)
@@ -103,7 +103,7 @@ class CalendarExportService {
     buffer.writeln('PRODID:-//NYC Solo Dance Calendar//EN');
     buffer.writeln('CALSCALE:GREGORIAN');
     buffer.writeln('METHOD:PUBLISH');
-    buffer.writeln('X-WR-CALNAME:${tpl.title} at ${studio.shortName}');
+    buffer.writeln('X-WR-CALNAME:${session.title ?? tpl.title} at ${studio.shortName}');
     buffer.writeln('X-WR-TIMEZONE:America/New_York');
 
     buffer.writeln('BEGIN:VTIMEZONE');
@@ -147,7 +147,7 @@ class CalendarExportService {
     if (tpl == null) return false;
     final studio = studios[session.studioId]!;
     final date = session.serviceDate;
-    final summary = '${tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}';
+    final summary = '${session.title ?? tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}';
 
     final icsContent = generateSingleSessionIcsContent(session);
     if (icsContent.isEmpty) return false;
@@ -243,7 +243,7 @@ class CalendarExportService {
           session?.isSubstitute == true ? ' [SUBSTITUTE TEACHER]' : '';
 
       final summary = escapeIcsText(
-          '${tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}');
+          '${session?.title ?? tpl.title} (${tpl.rawLevelLabel}) at ${studio.shortName}');
       final classDesc =
           (session?.description != null && session!.description!.trim().isNotEmpty)
               ? session.description!

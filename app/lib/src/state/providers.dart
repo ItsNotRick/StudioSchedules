@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart' show Value;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/database/app_database.dart';
@@ -163,6 +164,7 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
                 startMin: s.targetStartMin,
                 instructor:
                     (s.label.isNotEmpty && s.label != s.templateId) ? s.label : null,
+                instructorKey: s.instructorKey,
               ))
           .toSet();
       _isLoaded = true;
@@ -173,10 +175,15 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
     }
   }
 
-  bool isSaved(ClassSession s) => state.any((slot) => slot.matches(s));
+  /// True if a saved slot resolves to [s], including when [s] is taught by a
+  /// substitute for the saved teacher.
+  bool isSaved(ClassSession s) => _claiming(s).isNotEmpty;
+
+  List<SavedSlot> _claiming(ClassSession s) =>
+      slotsClaiming(s, ref.read(feedProvider).sessions, state).toList();
 
   void toggleFor(ClassSession s) {
-    final existingMatches = state.where((slot) => slot.matches(s)).toList();
+    final existingMatches = _claiming(s);
     final next = {...state};
     if (existingMatches.isNotEmpty) {
       for (final m in existingMatches) {
@@ -194,6 +201,7 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
         weekday: s.serviceDate.weekday,
         startMin: s.startMin,
         instructor: s.instructor,
+        instructorKey: s.matchKey,
       );
       next.add(slot);
       if (!_isLoaded) {
@@ -233,6 +241,7 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
           targetWeekday: slot.weekday,
           targetStartMin: slot.startMin,
           label: slot.instructor ?? slot.templateId,
+          instructorKey: Value(slot.instructorKey),
           createdAt: DateTime.now(),
         ));
       } else {
@@ -326,6 +335,16 @@ class ResolvedSlot {
   final SlotHealth health;
 }
 
+SlotHealth slotHealth(SlotMatch? match) => switch (match) {
+      null => SlotHealth.notOnSchedule,
+      SlotMatch(session: ClassSession(status: SessionStatus.removed)) =>
+        SlotHealth.removed,
+      SlotMatch(session: ClassSession(status: SessionStatus.cancelled)) =>
+        SlotHealth.cancelled,
+      SlotMatch(isSubstitute: true) => SlotHealth.substitute,
+      _ => SlotHealth.ok,
+    };
+
 /// Resolves every saved slot for the week starting [weekStart].
 final resolvedRegimenProvider =
     Provider.family<List<ResolvedSlot>, ServiceDate>((ref, weekStart) {
@@ -334,21 +353,8 @@ final resolvedRegimenProvider =
   final out = <ResolvedSlot>[];
   for (final slot in saved) {
     final date = weekStart.addDays(slot.weekday - 1);
-    final matches = feed.sessions
-        .where(slot.matches)
-        .where((s) => s.serviceDate == date)
-        .toList();
-    // Prefer scheduled sessions over cancelled/removed if multiple match
-    matches.sort((a, b) => a.status.index.compareTo(b.status.index));
-    final session = matches.isEmpty ? null : matches.first;
-    final health = switch (session) {
-      null => SlotHealth.notOnSchedule,
-      ClassSession(status: SessionStatus.removed) => SlotHealth.removed,
-      ClassSession(status: SessionStatus.cancelled) => SlotHealth.cancelled,
-      ClassSession(isSubstitute: true) => SlotHealth.substitute,
-      _ => SlotHealth.ok,
-    };
-    out.add(ResolvedSlot(slot, date, session, health));
+    final match = resolveSlot(slot, date, feed.sessions, saved);
+    out.add(ResolvedSlot(slot, date, match?.session, slotHealth(match)));
   }
   out.sort((a, b) {
     final c = a.date.compareTo(b.date);

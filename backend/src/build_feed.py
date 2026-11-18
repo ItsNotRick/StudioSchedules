@@ -11,6 +11,7 @@ import json
 import re
 import html as html_lib
 import shutil
+import hashlib
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from typing import Dict, List, Any, Optional, Tuple
@@ -54,6 +55,70 @@ AGE_RESTRICTION_REGEX = re.compile(
     r'\b(ages?\s*\d+\s*[-–to]+\s*\d+|ages?\s*\d+\+?|\btots?\b|\bpro\b)',
     re.I,
 )
+
+def normalize_instructor(name: str) -> str:
+    """Matching key for an instructor name.
+
+    Must stay identical to normalizeInstructor() in app/lib/src/domain/models.dart:
+    collapse whitespace, drop quote characters, lowercase, trim.
+    """
+    collapsed = ' '.join(name.split())
+    return re.sub(r'[\"\']', '', collapsed).lower().strip()
+
+def match_template(
+    templates: List[Dict[str, Any]],
+    auto_tpl_ids: set,
+    studio_id: str,
+    tier: str,
+    raw_title: str,
+    clean_title: str,
+) -> Optional[Dict[str, Any]]:
+    """Pick the template a scraped class belongs to, or None.
+
+    Hand-curated templates (templates.json) match on any of their
+    matchPatterns, exactly or as a whole-word phrase inside the raw title, and
+    the longest pattern wins. That lets a curator deliberately fold variants
+    ("Abs Beg Ballet", "Intro to Ballet") into one template.
+
+    Auto-created templates (ids in auto_tpl_ids) only match their exact
+    title. Otherwise the first title seen ("Open Contemporary") would swallow
+    every longer, different class containing it ("Open Contemporary Indian").
+    """
+    norm_clean = clean_title.lower()
+    norm_raw = raw_title.lower()
+    matched_tpl = None
+    best_pat_len = -1
+    for t in templates:
+        if t["studioId"] != studio_id or t.get("tier") != tier:
+            continue
+        is_auto = t["id"] in auto_tpl_ids
+        for pat in t.get("matchPatterns", [t["title"]]):
+            norm_pat = ' '.join(pat.lower().split())
+            if norm_pat == norm_clean or norm_pat == norm_raw:
+                return t
+            if is_auto:
+                continue
+            if re.search(rf'(?:^|\b){re.escape(norm_pat)}(?:\b|$)', norm_raw):
+                if len(norm_pat) > best_pat_len:
+                    matched_tpl = t
+                    best_pat_len = len(norm_pat)
+    return matched_tpl
+
+def auto_template_id(studio_id: str, genre: str, clean_title: str,
+                     tpl_lookup: Dict[str, Dict[str, Any]]) -> str:
+    """Stable id for an auto-created template.
+
+    The slug is cut at 30 chars to keep existing ids (and saved slots) stable;
+    if that collides with a template for a different title, a short hash of
+    the full title is appended so the two classes stay separate.
+    """
+    slug = re.sub(r'[^a-z0-9]+', '_', clean_title.lower()).strip('_')
+    tpl_id = f"{studio_id}_{genre}_{slug[:30]}"
+    existing = tpl_lookup.get(tpl_id)
+    if existing and existing["title"].lower() != clean_title.lower():
+        digest = hashlib.sha1(clean_title.lower().encode()).hexdigest()[:6]
+        tpl_id = f"{tpl_id}_{digest}"
+    return tpl_id
 
 def load_json(path: str) -> Any:
     with open(path, "r", encoding="utf-8") as f:
@@ -189,13 +254,19 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
 
     # Build alias lookup mapping any normalized name to all its known aliases
     alias_lookup: Dict[str, List[str]] = {}
+    # Maps any normalized alias to the normalized canonical name. Emitted as
+    # each session's "instructorKey" so the app can match a saved slot even
+    # when a scraper prints a different spelling ("Kathy" vs "Kathryn").
+    canonical_lookup: Dict[str, str] = {}
     for cid, rec in instructors_reg.items():
-        all_aliases = [re.sub(r'[\"\']', '', a).lower().strip() for a in rec.get("aliases", [])]
-        can_name = re.sub(r'[\"\']', '', rec.get("canonicalName", "")).lower().strip()
+        all_aliases = [normalize_instructor(a) for a in rec.get("aliases", [])]
+        can_name = normalize_instructor(rec.get("canonicalName", ""))
         if can_name and can_name not in all_aliases:
             all_aliases.append(can_name)
         for a in all_aliases:
             alias_lookup[a] = all_aliases
+            if can_name:
+                canonical_lookup[a] = can_name
 
     ignore_rules = templates_data.get("ignoreRules", {})
     templates = list(templates_data["templates"])
@@ -266,6 +337,9 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     review_queue: List[Dict[str, Any]] = []
     queued_tpl_ids = set()
     tpl_lookup = {t["id"]: t for t in templates}
+    # Templates created below during this run (not hand-curated); they only
+    # match their exact title. See match_template().
+    auto_tpl_ids: set = set()
 
     dates_seen = set()
 
@@ -283,30 +357,12 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
         genre = infer_genre(raw_title)
         clean_title = ' '.join(raw_title.split(" with ")[0].split())
 
-        # Try to match an existing template of the same studio and tier
-        matched_tpl = None
-        best_pat_len = -1
-        for t in templates:
-            if t["studioId"] == studio_id and t.get("tier") == tier:
-                for pat in t.get("matchPatterns", [t["title"]]):
-                    norm_pat = ' '.join(pat.lower().split())
-                    norm_clean = clean_title.lower()
-                    norm_raw = raw_title.lower()
-                    if norm_pat == norm_clean or norm_pat == norm_raw:
-                        matched_tpl = t
-                        best_pat_len = 10000
-                        break
-                    if re.search(rf'(?:^|\b){re.escape(norm_pat)}(?:\b|$)', norm_raw):
-                        if len(norm_pat) > best_pat_len:
-                            matched_tpl = t
-                            best_pat_len = len(norm_pat)
-            if best_pat_len == 10000:
-                break
+        matched_tpl = match_template(
+            templates, auto_tpl_ids, studio_id, tier, raw_title, clean_title)
 
         # If not matched, generate an on-the-fly dynamic template
         if not matched_tpl:
-            slug = re.sub(r'[^a-z0-9]+', '_', clean_title.lower()).strip('_')
-            dynamic_tpl_id = f"{studio_id}_{genre}_{slug[:30]}"
+            dynamic_tpl_id = auto_template_id(studio_id, genre, clean_title, tpl_lookup)
 
             if dynamic_tpl_id not in tpl_lookup:
                 new_tpl = {
@@ -326,6 +382,7 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                 }
                 templates.append(new_tpl)
                 tpl_lookup[dynamic_tpl_id] = new_tpl
+                auto_tpl_ids.add(dynamic_tpl_id)
 
             matched_tpl = tpl_lookup[dynamic_tpl_id]
 
@@ -342,7 +399,7 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                 })
 
         instructor_clean = ' '.join(html_lib.unescape(sess.get("instructor", "Staff")).split())
-        norm_inst = re.sub(r'[\"\']', '', instructor_clean).lower().strip()
+        norm_inst = normalize_instructor(instructor_clean)
         candidate_names = [norm_inst]
         if norm_inst in alias_lookup:
             for a in alias_lookup[norm_inst]:
@@ -389,6 +446,7 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             "endMin": sess["endMin"],
             "tz": "America/New_York",
             "instructor": instructor_clean,
+            "instructorKey": canonical_lookup.get(norm_inst, norm_inst),
             "isSubstitute": sess.get("isSubstitute", False),
             "status": "scheduled",
             "bookingUrl": sess.get("bookingUrl", "")
