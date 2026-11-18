@@ -35,7 +35,7 @@ class GridItem {
   final int end;
 
   String get title => session != null
-      ? getTemplate(session!.templateId).title
+      ? session!.title ?? getTemplate(session!.templateId).title
       : series!.title;
   ClassTemplate get template =>
       getTemplate(session?.templateId ?? series!.templateId);

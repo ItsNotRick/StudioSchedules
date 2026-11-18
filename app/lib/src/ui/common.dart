@@ -108,7 +108,8 @@ class SessionCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tpl = getTemplate(session.templateId);
-    final saved = ref.watch(savedSlotsProvider).any((s) => s.matches(session));
+    final saved = slotsClaiming(
+        session, ref.watch(currentFeedProvider).sessions, ref.watch(savedSlotsProvider)).isNotEmpty;
     final status = sessionStatusChip(session);
     final strike = session.isCancelled ? TextDecoration.lineThrough : null;
     final theme = Theme.of(context);
@@ -142,7 +143,7 @@ class SessionCard extends ConsumerWidget {
                     ?status,
                   ]),
                   const SizedBox(height: 4),
-                  Text(tpl.title,
+                  Text(session.title ?? tpl.title,
                       style: theme.textTheme.titleMedium?.copyWith(decoration: strike)),
                   Text(session.instructor, style: theme.textTheme.bodySmall),
                 ]),
