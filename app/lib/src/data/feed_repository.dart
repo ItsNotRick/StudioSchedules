@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import '../domain/models.dart';
 import 'database/app_database.dart';
-import 'mock_feed.dart';
+import 'feed.dart';
 
 class FeedRepository {
   FeedRepository({
@@ -30,67 +30,71 @@ class FeedRepository {
   }
 
   /// Loads the feed using an offline-first strategy:
-  /// 1. Reads SQLite cache if present and valid.
-  /// 2. Reads bundled asset as fallback or initial seed.
-  /// 3. If [fetchRemote] is true, checks remote HTTP endpoint in the background or during refresh.
-  Future<MockFeed> loadFeed({bool fetchRemote = true}) async {
+  /// 1. Reads the bundled asset (throws if it can't be read or parsed).
+  /// 2. Uses the SQLite cache instead if it holds a newer feed.
+  /// 3. If [fetchRemote] is true, uses the remote feed if it is newer still.
+  Future<Feed> loadFeed({bool fetchRemote = true}) async {
+    // The bundled asset always ships with the app. If it can't be read or
+    // parsed, there is no feed to show, so let the error reach the caller.
+    final assetJsonStr = await rootBundle.loadString('assets/feed/schedule.json');
+    final assetData = json.decode(assetJsonStr) as Map<String, dynamic>;
+    var data = assetData;
+
+    // The SQLite cache is best-effort: any failure falls back to the asset.
     try {
-      final assetJsonStr = await rootBundle.loadString('assets/feed/schedule.json');
-      final assetData = json.decode(assetJsonStr) as Map<String, dynamic>;
-      Map<String, dynamic> data = assetData;
-
-      if (database != null) {
-        final cachedJsonStr = await database!.getFeedJson('latest');
-        if (cachedJsonStr != null && cachedJsonStr.isNotEmpty) {
-          try {
-            if (cachedJsonStr == assetJsonStr) {
-              data = assetData;
-            } else {
-              final cachedData = json.decode(cachedJsonStr) as Map<String, dynamic>;
-              final cachedGen = DateTime.tryParse(cachedData['generatedAt'] as String? ?? '');
-              final assetGen = DateTime.tryParse(assetData['generatedAt'] as String? ?? '');
-
-              if (cachedGen != null && assetGen != null && cachedGen.isAfter(assetGen)) {
-                data = cachedData;
-              } else {
-                // Asset is newer or updated: persist to SQLite cache
-                await database!.saveFeedJson('latest', assetJsonStr);
-                data = assetData;
-              }
-            }
-          } catch (_) {
-            data = assetData;
-          }
-        } else {
-          await database!.saveFeedJson('latest', assetJsonStr);
-        }
-      }
-
-      // If remote fetching is enabled, attempt to fetch the latest feed from HTTP
-      if (fetchRemote) {
-        try {
-          final remoteData = await fetchRemoteFeed();
-          if (remoteData != null) {
-            final remoteGen = DateTime.tryParse(remoteData['generatedAt'] as String? ?? '');
-            final currentGen = DateTime.tryParse(data['generatedAt'] as String? ?? '');
-
-            if (remoteGen != null && (currentGen == null || remoteGen.isAfter(currentGen))) {
-              data = remoteData;
-              if (database != null) {
-                await database!.saveFeedJson('latest', json.encode(remoteData));
-              }
-            }
-          }
-        } catch (e) {
-          debugPrint('FeedRepository: Remote fetch failed or skipped, using cached feed: $e');
-        }
-      }
-
-      return parseFeedData(data);
-    } catch (e, st) {
-      debugPrint('FeedRepository error loading feed: $e\n$st');
-      return MockFeed.build(getTodayInNewYork());
+      data = await _newerOfCacheAndAsset(assetJsonStr, assetData);
+    } catch (e) {
+      debugPrint('FeedRepository: cache unavailable, using bundled feed: $e');
     }
+
+    if (fetchRemote) {
+      try {
+        final remoteData = await fetchRemoteFeed();
+        if (remoteData != null) {
+          final remoteGen = DateTime.tryParse(remoteData['generatedAt'] as String? ?? '');
+          final currentGen = DateTime.tryParse(data['generatedAt'] as String? ?? '');
+
+          if (remoteGen != null && (currentGen == null || remoteGen.isAfter(currentGen))) {
+            data = remoteData;
+            await database?.saveFeedJson('latest', json.encode(remoteData));
+          }
+        }
+      } catch (e) {
+        debugPrint('FeedRepository: Remote fetch failed or skipped, using cached feed: $e');
+      }
+    }
+
+    return parseFeedData(data);
+  }
+
+  /// Returns the cached feed if it is newer than the bundled asset; otherwise
+  /// stores the asset in the cache and returns it.
+  Future<Map<String, dynamic>> _newerOfCacheAndAsset(
+    String assetJsonStr,
+    Map<String, dynamic> assetData,
+  ) async {
+    final db = database;
+    if (db == null) return assetData;
+
+    final cachedJsonStr = await db.getFeedJson('latest');
+    if (cachedJsonStr == assetJsonStr) return assetData;
+
+    if (cachedJsonStr != null && cachedJsonStr.isNotEmpty) {
+      try {
+        final cachedData = json.decode(cachedJsonStr) as Map<String, dynamic>;
+        final cachedGen = DateTime.tryParse(cachedData['generatedAt'] as String? ?? '');
+        final assetGen = DateTime.tryParse(assetData['generatedAt'] as String? ?? '');
+        if (cachedGen != null && assetGen != null && cachedGen.isAfter(assetGen)) {
+          return cachedData;
+        }
+      } catch (_) {
+        // Corrupt cache entry: overwrite it with the asset below.
+      }
+    }
+
+    // Asset is newer (or nothing usable is cached): persist it.
+    await db.saveFeedJson('latest', assetJsonStr);
+    return assetData;
   }
 
   /// Fetches schedule.json over HTTP. Returns decoded JSON map or null if request fails.
@@ -120,8 +124,8 @@ class FeedRepository {
     return null;
   }
 
-  /// Parses the raw JSON map into a [MockFeed] and registers templates.
-  MockFeed parseFeedData(Map<String, dynamic> data) {
+  /// Parses the raw JSON map into a [Feed] and registers templates.
+  Feed parseFeedData(Map<String, dynamic> data) {
     final today = getTodayInNewYork();
     final currentMonday = today.startOfWeek;
     final rawWindowStart = data['windowStart'] as String?;
@@ -132,6 +136,12 @@ class FeedRepository {
     final windowStart = parsedWindowStart.compareTo(currentMonday) < 0
         ? currentMonday
         : parsedWindowStart;
+
+    // Parse and register studio details (name, address, color, ...) from feed
+    final rawStudios = data['studios'] as List<dynamic>? ?? [];
+    registerStudios(rawStudios
+        .map((item) => parseStudio(item as Map<String, dynamic>))
+        .whereType<Studio>());
 
     // Parse and register all templates from feed (curated + dynamically classified)
     final rawTemplates = data['templates'] as List<dynamic>? ?? [];
@@ -217,7 +227,6 @@ class FeedRepository {
         serviceDate: ServiceDate.parse(m['serviceDate'] as String),
         startMin: m['startMin'] as int,
         endMin: m['endMin'] as int,
-        tz: m['tz'] as String? ?? 'America/New_York',
         instructor: unescapeHtml(m['instructor'] as String),
         instructorKey: m['instructorKey'] as String?,
         rawTitle: (m['rawClassTitle'] as String?) == null
@@ -257,11 +266,38 @@ class FeedRepository {
       );
     }).toList();
 
-    return MockFeed.fromData(
+    return Feed(
       today: today,
       windowStart: windowStart,
       sessions: sessions,
       series: seriesList,
+    );
+  }
+
+  /// Parses one entry of the feed's `studios` list. Returns null for an
+  /// unknown studio id. Missing or malformed fields keep the current value
+  /// from [studios].
+  static Studio? parseStudio(Map<String, dynamic> m) {
+    final idKey = m['id'] as String?;
+    final id = StudioId.values.where((s) => s.name == idKey).firstOrNull;
+    if (id == null) return null;
+    final base = studios[id]!;
+
+    String str(String key, String fallback) {
+      final v = m[key];
+      return v is String && v.trim().isNotEmpty ? unescapeHtml(v.trim()) : fallback;
+    }
+
+    final rawColor = m['color'];
+    final colorValue = rawColor is String ? int.tryParse(rawColor) : null;
+
+    return Studio(
+      id: id,
+      name: str('name', base.name),
+      shortName: str('shortName', base.shortName),
+      address: str('address', base.address),
+      neighborhood: str('neighborhood', base.neighborhood),
+      color: colorValue != null ? Color(colorValue) : base.color,
     );
   }
 

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
-import '../data/mock_feed.dart';
+import '../data/feed.dart';
 import '../domain/models.dart';
 import '../state/providers.dart';
 

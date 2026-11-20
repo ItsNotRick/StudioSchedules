@@ -7,12 +7,11 @@ Contains zero AI-generated or LLM-summarized text.
 """
 
 import os
-import sys
 import json
 import re
 import html as html_lib
 import urllib.request
-from typing import Dict, Any
+from typing import Dict, List, Any
 
 DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "instructor_descriptions.json"))
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"

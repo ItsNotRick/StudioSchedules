@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'dart:ui' show Color;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:nyc_dance_calendar/src/data/feed_repository.dart';
-import 'package:nyc_dance_calendar/src/data/mock_feed.dart';
+import 'package:nyc_dance_calendar/src/data/feed.dart';
 import 'package:nyc_dance_calendar/src/domain/models.dart';
 import 'package:nyc_dance_calendar/src/services/calendar_export_service.dart';
 
@@ -367,6 +368,58 @@ void main() {
 
     expect(ics, contains('BEGIN:VEVENT'));
     expect(ics, contains('Intro Ballet Series (Week 1/4) at BDC'));
+  });
+
+  group('Feed studios', () {
+    tearDown(resetStudios);
+
+    test('parseStudio reads all fields and hex color from the feed', () {
+      final s = FeedRepository.parseStudio({
+        'id': 'pmt',
+        'name': 'PMT House of Dance',
+        'shortName': 'PMT',
+        'address': '28 W 25th St, 2nd Fl',
+        'neighborhood': 'Flatiron',
+        'color': '0xFF123456',
+        'lat': 40.7,
+        'mindbodySiteId': 'ignored',
+      })!;
+      expect(s.id, StudioId.pmt);
+      expect(s.address, '28 W 25th St, 2nd Fl');
+      expect(s.neighborhood, 'Flatiron');
+      expect(s.color, const Color(0xFF123456));
+    });
+
+    test('parseStudio returns null for unknown ids and keeps fallbacks for missing fields', () {
+      expect(FeedRepository.parseStudio({'id': 'not_a_studio', 'name': 'X'}), isNull);
+      expect(FeedRepository.parseStudio({'name': 'No id'}), isNull);
+
+      final fallback = studios[StudioId.ailey]!;
+      final s = FeedRepository.parseStudio({'id': 'ailey', 'address': '', 'color': 'bogus'})!;
+      expect(s.name, fallback.name);
+      expect(s.address, fallback.address);
+      expect(s.color, fallback.color);
+    });
+
+    test('parseFeedData overrides built-in studio details with feed values', () {
+      expect(studios[StudioId.bdc]!.address, isNot('Feed Address'));
+      FeedRepository().parseFeedData({
+        'studios': [
+          {'id': 'bdc', 'address': 'Feed Address', 'color': '0xFF000001'},
+          {'id': 'unknown', 'address': 'ignored'},
+        ],
+      });
+      expect(studios[StudioId.bdc]!.address, 'Feed Address');
+      expect(studios[StudioId.bdc]!.color, const Color(0xFF000001));
+      expect(studios[StudioId.bdc]!.shortName, 'BDC');
+      expect(studios.length, StudioId.values.length);
+    });
+
+    test('bundled feed supplies studio addresses from studios.json', () async {
+      await FeedRepository().loadFeed(fetchRemote: false);
+      expect(studios[StudioId.pmt]!.address, '28 W 25th St, 2nd Fl');
+      expect(studios[StudioId.bdc]!.address, '322 W 45th St, 3rd Fl');
+    });
   });
 
   test('FeedRepository fetches remote feed over HTTP and updates when newer', () async {

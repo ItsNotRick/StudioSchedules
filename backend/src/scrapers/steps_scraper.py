@@ -6,7 +6,7 @@ extracts session names, instructors, times, and duration from the Next.js payloa
 
 import re
 import urllib.request
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from typing import List, Dict, Any
 

@@ -11,7 +11,7 @@ import re
 import time
 import urllib.request
 from datetime import datetime, timedelta
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 AILEY_CALENDAR_URL = "https://ailey.org/calendar?view=month&classType=studio"
 
@@ -33,7 +33,6 @@ BROWSER_HEADERS = {
 def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
     req = urllib.request.Request(url, headers=BROWSER_HEADERS)
     html = ""
-    last_err: Optional[Exception] = None
 
     for attempt in range(3):
         try:
@@ -42,7 +41,6 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
             if html:
                 break
         except Exception as e:
-            last_err = e
             if attempt == 2:
                 print(f"Warning: Ailey fetch failed after 3 attempts on {url}: {e}")
                 raise e

@@ -12,7 +12,7 @@ import json
 import re
 import urllib.request
 import html as html_lib
-from typing import Dict, List, Set, Tuple, Any, Optional
+from typing import Dict, List, Set, Tuple, Any
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
@@ -147,11 +147,6 @@ def clean_name(name: str) -> str:
     n = re.sub(r'[\'\"״]', '', n)
     n = re.sub(r'\s+', ' ', n).strip()
     return n
-
-def normalize_key(name: str) -> str:
-    """Produces lowercase alphanumeric string for indexing."""
-    n = clean_name(name).lower()
-    return re.sub(r'[^a-z0-9]', '', n)
 
 def parse_name_parts(full_name: str) -> Tuple[str, str, str]:
     """Splits full name into (first_name, nickname_or_moniker, surname)."""
@@ -326,7 +321,7 @@ def find_candidate_clusters() -> List[Dict[str, Any]]:
             "urls": {}
         }
 
-    for fac_id, fac in faculty_profiles.items():
+    for fac in faculty_profiles.values():
         fac_name = fac["name"]
         if fac_name not in pool:
             pool[fac_name] = {
@@ -374,8 +369,8 @@ def find_candidate_clusters() -> List[Dict[str, Any]]:
                 if c1 and c2 and c1 == c2:
                     continue
 
-                f1, m1, l1 = parse_name_parts(n1)
-                f2, m2, l2 = parse_name_parts(n2)
+                f1, m1, _ = parse_name_parts(n1)
+                f2, m2, _ = parse_name_parts(n2)
 
                 is_match = False
                 reason = ""

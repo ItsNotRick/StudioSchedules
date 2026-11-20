@@ -71,6 +71,7 @@ class CalendarHomeScreen extends ConsumerWidget {
     final today = ref.watch(todayProvider);
     final theme = Theme.of(context);
     final isToday = selectedDate == today;
+    final feed = ref.watch(feedProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -136,14 +137,21 @@ class CalendarHomeScreen extends ConsumerWidget {
       ),
       body: AnimatedSwitcher(
         duration: const Duration(milliseconds: 250),
-        child: switch (activeView) {
-          CalendarViewType.genreAgenda => const GenreAgendaView(
+        child: switch ((feed, activeView)) {
+          (AsyncValue(hasValue: false, hasError: true), _) => FeedErrorView(
+              key: const ValueKey('feed_error'),
+              onRetry: () => ref.invalidate(feedProvider),
+            ),
+          (AsyncValue(hasValue: false), _) => const FeedLoadingView(
+              key: ValueKey('feed_loading'),
+            ),
+          (_, CalendarViewType.genreAgenda) => const GenreAgendaView(
               key: ValueKey('genre_agenda'),
             ),
-          CalendarViewType.studioColumns => const StudioColumnsView(
+          (_, CalendarViewType.studioColumns) => const StudioColumnsView(
               key: ValueKey('studio_columns'),
             ),
-          CalendarViewType.myWeek => const MyWeekView(
+          (_, CalendarViewType.myWeek) => const MyWeekView(
               key: ValueKey('my_week'),
             ),
         },
