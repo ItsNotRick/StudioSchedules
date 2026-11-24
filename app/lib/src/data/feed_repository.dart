@@ -20,13 +20,17 @@ class FeedRepository {
   /// If null, can be overridden via `FEED_URL` compilation define or set directly.
   final String? feedUrl;
 
-  /// Default GitHub Pages URL or environment variable.
+  /// Feed published to GitHub Pages by the sync_feed workflow.
+  static const defaultFeedUrl =
+      'https://itsnotrick.github.io/StudioSchedules/schedule.json';
+
+  /// [feedUrl] if set, else the `FEED_URL` compile-time define, else
+  /// [defaultFeedUrl].
   String get effectiveFeedUrl {
     if (feedUrl != null && feedUrl!.isNotEmpty) return feedUrl!;
     const envUrl = String.fromEnvironment('FEED_URL');
     if (envUrl.isNotEmpty) return envUrl;
-    // Default fallback or placeholder pointing to GitHub Pages
-    return 'https://raw.githubusercontent.com/unchiko/studio-schedules/gh-pages/schedule.json';
+    return defaultFeedUrl;
   }
 
   /// Loads the feed using an offline-first strategy:
