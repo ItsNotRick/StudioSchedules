@@ -253,7 +253,7 @@ class WorkshopSeries {
 
 /// Matching key for an instructor name.
 ///
-/// Must stay identical to normalize_instructor() in backend/src/build_feed.py:
+/// Must stay identical to normalize_instructor() in backend/src/instructor_names.py:
 /// collapse whitespace, drop quote characters, lowercase, trim.
 String normalizeInstructor(String name) => name
     .trim()

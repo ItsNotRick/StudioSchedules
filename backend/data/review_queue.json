@@ -1,323 +1,43 @@
 [
   {
     "studioId": "bdc",
-    "rawClassTitle": "Beg BALLET with Michele Moreno",
-    "assignedTemplateId": "bdc_ballet_beg_ballet",
-    "assignedTier": "beginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.632663+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg THEATER with Amanda LaMotte",
-    "assignedTemplateId": "bdc_jazzTheater_adv_beg_theater",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.633691+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic CONTEMP JAZZ with Ashley Lynne King",
-    "assignedTemplateId": "bdc_jazzTheater_basic_contemp_jazz",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.633933+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg HIP-HOP with Paolo Penala",
-    "assignedTemplateId": "bdc_hipHopStreet_adv_beg_hip_hop",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.633988+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg JUMPS AND TURNS with Blue",
-    "assignedTemplateId": "bdc_other_beg_jumps_and_turns",
-    "assignedTier": "beginner",
-    "assignedGenre": "other",
-    "detectedAt": "2026-11-13T02:29:13.634046+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg TAP with Felipe Galganni",
-    "assignedTemplateId": "bdc_tap_adv_beg_tap",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.634090+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic TAP with Jill Kenney",
-    "assignedTemplateId": "bdc_tap_basic_tap",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.634153+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg JAZZ FUNK with Chio",
-    "assignedTemplateId": "bdc_jazzTheater_beg_jazz_funk",
-    "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.634208+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic THEATER with Alyssa Click",
-    "assignedTemplateId": "bdc_jazzTheater_basic_theater",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.634260+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg BALLET with Natalya Stavro",
-    "assignedTemplateId": "bdc_ballet_adv_beg_ballet",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.634316+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg JAZZ with Michael Sakelos",
-    "assignedTemplateId": "bdc_jazzTheater_beg_jazz",
-    "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.634363+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg THEATER with Sarah Crane",
-    "assignedTemplateId": "bdc_jazzTheater_beg_theater",
-    "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.634436+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg JAZZ with Sheila Barker",
-    "assignedTemplateId": "bdc_jazzTheater_adv_beg_jazz",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.634498+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg CONTEMPORARY with Michaela McGowan",
+    "rawClassTitle": "Adv Beg CONTEMPORARY with Blue",
     "assignedTemplateId": "bdc_contemporaryModern_adv_beg_contemporary",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.634549+00:00"
+    "detectedAt": "2026-11-24T18:17:21.524850+00:00"
   },
   {
     "studioId": "bdc",
-    "rawClassTitle": "Beg CONTEMPORARY with Eric Campros",
-    "assignedTemplateId": "bdc_contemporaryModern_beg_contemporary",
-    "assignedTier": "beginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.634609+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg BROADWAY TAP with Deanna Doyle",
-    "assignedTemplateId": "bdc_tap_beg_broadway_tap",
-    "assignedTier": "beginner",
-    "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.634660+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic HIP-HOP/STREET JAZZ with Hugo Brument",
-    "assignedTemplateId": "bdc_jazzTheater_basic_hip_hop_street_jazz",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.634738+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic JUMPS AND TURNS with Stacie Webster",
-    "assignedTemplateId": "bdc_other_basic_jumps_and_turns",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "other",
-    "detectedAt": "2026-11-13T02:29:13.634820+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg HIP-HOP FOUNDATIONS with Ms Vee",
-    "assignedTemplateId": "bdc_hipHopStreet_beg_hip_hop_foundations",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.634911+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic STREET JAZZ with Q",
-    "assignedTemplateId": "bdc_jazzTheater_basic_street_jazz",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.635069+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg TAP with Orit Hirsch",
-    "assignedTemplateId": "bdc_tap_beg_tap",
-    "assignedTier": "beginner",
-    "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.635127+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg STREET JAZZ with Youlmae Kim",
-    "assignedTemplateId": "bdc_jazzTheater_adv_beg_street_jazz",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.635176+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg CONTEMP JAZZ with Ashley Lynne King",
-    "assignedTemplateId": "bdc_jazzTheater_adv_beg_contemp_jazz",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.635287+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg POP BALLET with Erica Ratkovicz",
-    "assignedTemplateId": "bdc_ballet_beg_pop_ballet",
-    "assignedTier": "beginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.635458+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg STREET JAZZ with Elodie Dufroux",
-    "assignedTemplateId": "bdc_jazzTheater_beg_street_jazz",
-    "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.635515+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg REGGAETON with David Machicado",
-    "assignedTemplateId": "bdc_hipHopStreet_adv_beg_reggaeton",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.635544+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg STREET STYLES with Ness Martinez",
-    "assignedTemplateId": "bdc_hipHopStreet_adv_beg_street_styles",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.635644+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Adv Beg BROADWAY JAZZ with Sue Samuels",
-    "assignedTemplateId": "bdc_jazzTheater_adv_beg_broadway_jazz",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.635773+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic HEELS with Courtney Sauls",
-    "assignedTemplateId": "bdc_commercialHeels_basic_heels",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.636092+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic HIP-HOP with Q",
-    "assignedTemplateId": "bdc_hipHopStreet_basic_hip_hop",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.636147+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg STREET STYLES with Chris Palacio",
-    "assignedTemplateId": "bdc_hipHopStreet_beg_street_styles",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.636325+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg HIP-HOP with Paolo Penala",
+    "rawClassTitle": "Beg HIP-HOP with Ness Martinez",
     "assignedTemplateId": "bdc_hipHopStreet_beg_hip_hop",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.636489+00:00"
+    "detectedAt": "2026-11-24T18:17:21.525378+00:00"
   },
   {
     "studioId": "bdc",
-    "rawClassTitle": "Adv Beg CONTEMP LYRICAL with Tracie Stanfield",
-    "assignedTemplateId": "bdc_contemporaryModern_adv_beg_contemp_lyrical",
+    "rawClassTitle": "Beg JAZZ with Heather Rigg",
+    "assignedTemplateId": "bdc_jazzTheater_beg_jazz",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.525455+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg BALLET with Yuka Kawazu",
+    "assignedTemplateId": "bdc_ballet_adv_beg_ballet",
     "assignedTier": "advancedBeginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.636548+00:00"
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.525491+00:00"
   },
   {
     "studioId": "bdc",
-    "rawClassTitle": "Basic GRAHAM TECHNIQUE with Tomislav Nevistic",
-    "assignedTemplateId": "bdc_contemporaryModern_basic_graham_technique",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.636682+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg MECHANICS OF TAP with Ja'Bowen Dixon",
-    "assignedTemplateId": "bdc_tap_beg_mechanics_of_tap",
-    "assignedTier": "beginner",
-    "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.637036+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg COMMERCIAL JAZZ with Debbie Wilson",
-    "assignedTemplateId": "bdc_jazzTheater_beg_commercial_jazz",
+    "rawClassTitle": "Beg THEATER with Marjorie Failoni",
+    "assignedTemplateId": "bdc_jazzTheater_beg_theater",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.637109+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg HEELS with Courtney Sauls",
-    "assignedTemplateId": "bdc_commercialHeels_beg_heels",
-    "assignedTier": "beginner",
-    "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.637191+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg BROADWAY JAZZ with Sue Samuels",
-    "assignedTemplateId": "bdc_jazzTheater_beg_broadway_jazz",
-    "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.637387+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Beg CONTEMP LYRICAL with Tracie Stanfield",
-    "assignedTemplateId": "bdc_contemporaryModern_beg_contemp_lyrical",
-    "assignedTier": "beginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.637477+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "Basic STREET STYLES with Youran Lee",
-    "assignedTemplateId": "bdc_hipHopStreet_basic_street_styles",
-    "assignedTier": "zeroExperience",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.637565+00:00"
+    "detectedAt": "2026-11-24T18:17:21.525532+00:00"
   },
   {
     "studioId": "bdc",
@@ -325,7 +45,31 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.637781+00:00"
+    "detectedAt": "2026-11-24T18:17:21.525587+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg HEELS with Yvonne-Marie Sain",
+    "assignedTemplateId": "bdc_commercialHeels_beg_heels",
+    "assignedTier": "beginner",
+    "assignedGenre": "commercialHeels",
+    "detectedAt": "2026-11-24T18:17:21.525633+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg TAP with April Cook",
+    "assignedTemplateId": "bdc_tap_adv_beg_tap",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.525669+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg STREET JAZZ with Neil Schwartz",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_street_jazz",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.525707+00:00"
   },
   {
     "studioId": "bdc",
@@ -333,7 +77,31 @@
     "assignedTemplateId": "bdc_contemporaryModern_adv_beg_soulful_lyrical_jazz",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.637881+00:00"
+    "detectedAt": "2026-11-24T18:17:21.525746+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg BALLET with Deanna Doyle",
+    "assignedTemplateId": "bdc_ballet_beg_ballet",
+    "assignedTier": "beginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.525794+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic TAP with Shelby Kaufman",
+    "assignedTemplateId": "bdc_tap_basic_tap",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.526470+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg THEATER with Victoria Biro",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_theater",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.526512+00:00"
   },
   {
     "studioId": "bdc",
@@ -341,7 +109,7 @@
     "assignedTemplateId": "bdc_other_adv_beg_jumps_and_turns",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "other",
-    "detectedAt": "2026-11-13T02:29:13.638098+00:00"
+    "detectedAt": "2026-11-24T18:17:21.526576+00:00"
   },
   {
     "studioId": "bdc",
@@ -349,7 +117,95 @@
     "assignedTemplateId": "bdc_commercialHeels_adv_beg_heels",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.638201+00:00"
+    "detectedAt": "2026-11-24T18:17:21.526627+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg REGGAETON with Jonathan 'Shwing' Pena",
+    "assignedTemplateId": "bdc_hipHopStreet_adv_beg_reggaeton",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.526676+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic THEATER with Melodye Redding",
+    "assignedTemplateId": "bdc_jazzTheater_basic_theater",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.526829+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg HIP-HOP with Paolo Penala",
+    "assignedTemplateId": "bdc_hipHopStreet_adv_beg_hip_hop",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.526876+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg JAZZ FUNK with Chio",
+    "assignedTemplateId": "bdc_jazzTheater_beg_jazz_funk",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.526956+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg THEATER TAP with Doug Shankman",
+    "assignedTemplateId": "bdc_tap_beg_theater_tap",
+    "assignedTier": "beginner",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.527044+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg CONTEMP LYRICAL with Tracie Stanfield",
+    "assignedTemplateId": "bdc_contemporaryModern_adv_beg_contemp_lyrical",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.527117+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg THEATER JAZZ with Ian Klein",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_theater_jazz",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.527159+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic HIP-HOP with Geheny Rivera",
+    "assignedTemplateId": "bdc_hipHopStreet_basic_hip_hop",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.527264+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg JUMPS AND TURNS with Kristi Tartaglione",
+    "assignedTemplateId": "bdc_other_beg_jumps_and_turns",
+    "assignedTier": "beginner",
+    "assignedGenre": "other",
+    "detectedAt": "2026-11-24T18:17:21.527350+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg CONTEMPORARY with Alex Mitchell",
+    "assignedTemplateId": "bdc_contemporaryModern_beg_contemporary",
+    "assignedTier": "beginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.527394+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg JAZZ with Sheila Barker",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_jazz",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.527448+00:00"
   },
   {
     "studioId": "bdc",
@@ -357,15 +213,15 @@
     "assignedTemplateId": "bdc_jazzTheater_adv_beg_street_theater_fusion",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.638666+00:00"
+    "detectedAt": "2026-11-24T18:17:21.527520+00:00"
   },
   {
     "studioId": "bdc",
-    "rawClassTitle": "Beg 40+ COMMUNITY JAZZ with Chryssie Whitehead",
-    "assignedTemplateId": "bdc_jazzTheater_beg_40_community_jazz",
+    "rawClassTitle": "Beg HIP-HOP FOUNDATIONS with Ms Vee",
+    "assignedTemplateId": "bdc_hipHopStreet_beg_hip_hop_foundations",
     "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.638805+00:00"
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.527719+00:00"
   },
   {
     "studioId": "bdc",
@@ -373,7 +229,7 @@
     "assignedTemplateId": "bdc_jazzTheater_basic_broadway_jazz",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.638881+00:00"
+    "detectedAt": "2026-11-24T18:17:21.527818+00:00"
   },
   {
     "studioId": "bdc",
@@ -381,7 +237,215 @@
     "assignedTemplateId": "bdc_africanDiaspora_basic_afro_dance",
     "assignedTier": "zeroExperience",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.638952+00:00"
+    "detectedAt": "2026-11-24T18:17:21.527881+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic CONTEMP JAZZ with Ashley Lynne King",
+    "assignedTemplateId": "bdc_jazzTheater_basic_contemp_jazz",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.528303+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg BROADWAY TAP with Deanna Doyle",
+    "assignedTemplateId": "bdc_tap_beg_broadway_tap",
+    "assignedTier": "beginner",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.528748+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic HIP-HOP/STREET JAZZ with Hugo Brument",
+    "assignedTemplateId": "bdc_jazzTheater_basic_hip_hop_street_jazz",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.528831+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic JUMPS AND TURNS with Stacie Webster",
+    "assignedTemplateId": "bdc_other_basic_jumps_and_turns",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "other",
+    "detectedAt": "2026-11-24T18:17:21.528941+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg JAZZ FUSION with Michelle Barber",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_jazz_fusion",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.529133+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg TAP with Orit Hirsch",
+    "assignedTemplateId": "bdc_tap_beg_tap",
+    "assignedTier": "beginner",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.529178+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic STREET JAZZ with Q",
+    "assignedTemplateId": "bdc_jazzTheater_basic_street_jazz",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.529244+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg CONTEMP JAZZ with Ashley Lynne King",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_contemp_jazz",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.529416+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg CONTEMP THEATER with Daniel Booda and Anna Gortner",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_contemp_theater",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.529535+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "BDC Gives: Beg THEATER with John Guaragna",
+    "assignedTemplateId": "bdc_jazzTheater_bdc_gives_beg_theater",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.529609+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg THEATER TAP with Doug Shankman",
+    "assignedTemplateId": "bdc_tap_adv_beg_theater_tap",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.529734+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg JAZZ FUNK with Chio",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_jazz_funk",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.529788+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg POP BALLET with Erica Ratkovicz",
+    "assignedTemplateId": "bdc_ballet_beg_pop_ballet",
+    "assignedTier": "beginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.529977+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg STREET JAZZ with Elodie Dufroux",
+    "assignedTemplateId": "bdc_jazzTheater_beg_street_jazz",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.530087+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg STREET STYLES with Ness Martinez",
+    "assignedTemplateId": "bdc_hipHopStreet_adv_beg_street_styles",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.530255+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg BROADWAY JAZZ with Sue Samuels",
+    "assignedTemplateId": "bdc_jazzTheater_adv_beg_broadway_jazz",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.530416+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic HEELS with Courtney Sauls",
+    "assignedTemplateId": "bdc_commercialHeels_basic_heels",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "commercialHeels",
+    "detectedAt": "2026-11-24T18:17:21.531016+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg STREET STYLES with Chris Palacio",
+    "assignedTemplateId": "bdc_hipHopStreet_beg_street_styles",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.531400+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic GRAHAM TECHNIQUE with Tomislav Nevistic",
+    "assignedTemplateId": "bdc_contemporaryModern_basic_graham_technique",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.531815+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg MECHANICS OF TAP with Ja'Bowen Dixon",
+    "assignedTemplateId": "bdc_tap_beg_mechanics_of_tap",
+    "assignedTier": "beginner",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.532418+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg COMMERCIAL JAZZ with Debbie Wilson",
+    "assignedTemplateId": "bdc_jazzTheater_beg_commercial_jazz",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.532481+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg CONTEMP LYRICAL with Tracie Stanfield",
+    "assignedTemplateId": "bdc_contemporaryModern_beg_contemp_lyrical",
+    "assignedTier": "beginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.532861+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg BROADWAY JAZZ with Sue Samuels",
+    "assignedTemplateId": "bdc_jazzTheater_beg_broadway_jazz",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.532945+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Basic STREET STYLES with Youran Lee",
+    "assignedTemplateId": "bdc_hipHopStreet_basic_street_styles",
+    "assignedTier": "zeroExperience",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.533067+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Beg 40+ COMMUNITY JAZZ with Chryssie Whitehead",
+    "assignedTemplateId": "bdc_jazzTheater_beg_40_community_jazz",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.534520+00:00"
+  },
+  {
+    "studioId": "bdc",
+    "rawClassTitle": "Adv Beg HIP-HOP CHOREOGRAPHY with John John Tarrayo",
+    "assignedTemplateId": "bdc_hipHopStreet_adv_beg_hip_hop_choreography",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.535196+00:00"
   },
   {
     "studioId": "bdc",
@@ -389,7 +453,7 @@
     "assignedTemplateId": "bdc_ballet_adv_beg_pop_ballet",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.639551+00:00"
+    "detectedAt": "2026-11-24T18:17:21.535509+00:00"
   },
   {
     "studioId": "bdc",
@@ -397,63 +461,7 @@
     "assignedTemplateId": "bdc_hipHopStreet_beg_waacking",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.639629+00:00"
-  },
-  {
-    "studioId": "bdc",
-    "rawClassTitle": "BDC Inspire: Adv Beg LYRICAL with Gianna Martello",
-    "assignedTemplateId": "bdc_contemporaryModern_bdc_inspire_adv_beg_lyrical",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.640397+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Beg Ballet",
-    "assignedTemplateId": "steps_ballet_beg_ballet",
-    "assignedTier": "beginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.641820+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Broadway Tap",
-    "assignedTemplateId": "steps_tap_adv_beg_broadway_tap",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.641856+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Cole Floor Progressions",
-    "assignedTemplateId": "steps_other_adv_beg_cole_floor_progression",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "other",
-    "detectedAt": "2026-11-13T02:29:13.641921+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Contemporary",
-    "assignedTemplateId": "steps_contemporaryModern_adv_beg_contemporary",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.641970+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Theater Jazz",
-    "assignedTemplateId": "steps_jazzTheater_adv_beg_theater_jazz",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.642013+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Jazz",
-    "assignedTemplateId": "steps_jazzTheater_adv_beg_jazz",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.642112+00:00"
+    "detectedAt": "2026-11-24T18:17:21.535568+00:00"
   },
   {
     "studioId": "steps",
@@ -461,15 +469,7 @@
     "assignedTemplateId": "steps_tap_beg_tap",
     "assignedTier": "beginner",
     "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.642125+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Theater Dance",
-    "assignedTemplateId": "steps_jazzTheater_adv_beg_theater_dance",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.642236+00:00"
+    "detectedAt": "2026-11-24T18:17:21.536318+00:00"
   },
   {
     "studioId": "steps",
@@ -477,39 +477,15 @@
     "assignedTemplateId": "steps_tap_adv_beg_tap",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.642325+00:00"
+    "detectedAt": "2026-11-24T18:17:21.536354+00:00"
   },
   {
     "studioId": "steps",
-    "rawClassTitle": "Open Hip Hop",
-    "assignedTemplateId": "steps_hipHopStreet_open_hip_hop",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.642461+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Ballet",
-    "assignedTemplateId": "steps_ballet_adv_beg_ballet",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.642557+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Modern/Horton",
-    "assignedTemplateId": "steps_contemporaryModern_adv_beg_modern_horton",
+    "rawClassTitle": "Adv/Beg Contemporary Jazz",
+    "assignedTemplateId": "steps_contemporaryModern_adv_beg_contemporary_jazz",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.642690+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Beg Hip Hop",
-    "assignedTemplateId": "steps_hipHopStreet_beg_hip_hop",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.642841+00:00"
+    "detectedAt": "2026-11-24T18:17:21.536384+00:00"
   },
   {
     "studioId": "steps",
@@ -517,55 +493,23 @@
     "assignedTemplateId": "steps_jazzTheater_beg_jazz",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.643020+00:00"
+    "detectedAt": "2026-11-24T18:17:21.536455+00:00"
   },
   {
     "studioId": "steps",
-    "rawClassTitle": "Beg Theater Dance",
-    "assignedTemplateId": "steps_jazzTheater_beg_theater_dance",
-    "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.643089+00:00"
+    "rawClassTitle": "Adv/Beg Broadway Tap",
+    "assignedTemplateId": "steps_tap_adv_beg_broadway_tap",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "tap",
+    "detectedAt": "2026-11-24T18:17:21.536547+00:00"
   },
   {
     "studioId": "steps",
-    "rawClassTitle": "Open Countertechnique",
-    "assignedTemplateId": "steps_other_open_countertechnique",
-    "assignedTier": "beginner",
-    "assignedGenre": "other",
-    "detectedAt": "2026-11-13T02:29:13.643161+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Open Afro Brazilian",
-    "assignedTemplateId": "steps_africanDiaspora_open_afro_brazilian",
-    "assignedTier": "beginner",
-    "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.643226+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Beg Theater Jazz",
-    "assignedTemplateId": "steps_jazzTheater_beg_theater_jazz",
-    "assignedTier": "beginner",
-    "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.643376+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Adv/Beg Precision Jazz",
-    "assignedTemplateId": "steps_jazzTheater_adv_beg_precision_jazz",
+    "rawClassTitle": "Adv/Beg Theater Jazz",
+    "assignedTemplateId": "steps_jazzTheater_adv_beg_theater_jazz",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.643619+00:00"
-  },
-  {
-    "studioId": "steps",
-    "rawClassTitle": "Beg Broadway Tap",
-    "assignedTemplateId": "steps_tap_beg_broadway_tap",
-    "assignedTier": "beginner",
-    "assignedGenre": "tap",
-    "detectedAt": "2026-11-13T02:29:13.643743+00:00"
+    "detectedAt": "2026-11-24T18:17:21.536576+00:00"
   },
   {
     "studioId": "steps",
@@ -573,7 +517,7 @@
     "assignedTemplateId": "steps_jazzTheater_adv_beg_street_jazz",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.643960+00:00"
+    "detectedAt": "2026-11-24T18:17:21.536612+00:00"
   },
   {
     "studioId": "steps",
@@ -581,7 +525,23 @@
     "assignedTemplateId": "steps_commercialHeels_open_heels",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.644018+00:00"
+    "detectedAt": "2026-11-24T18:17:21.536705+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Beg Ballet",
+    "assignedTemplateId": "steps_ballet_beg_ballet",
+    "assignedTier": "beginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.536749+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Adv/Beg Ballet",
+    "assignedTemplateId": "steps_ballet_adv_beg_ballet",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.536841+00:00"
   },
   {
     "studioId": "steps",
@@ -589,7 +549,15 @@
     "assignedTemplateId": "steps_ballet_adv_beg_pointe",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.644174+00:00"
+    "detectedAt": "2026-11-24T18:17:21.537102+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Adv/Beg Jazz",
+    "assignedTemplateId": "steps_jazzTheater_adv_beg_jazz",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.537242+00:00"
   },
   {
     "studioId": "steps",
@@ -597,7 +565,95 @@
     "assignedTemplateId": "steps_contemporaryModern_beg_modern_horton",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.644386+00:00"
+    "detectedAt": "2026-11-24T18:17:21.537563+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Open Hip Hop",
+    "assignedTemplateId": "steps_hipHopStreet_open_hip_hop",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.537698+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Adv/Beg Cole Floor Progressions",
+    "assignedTemplateId": "steps_other_adv_beg_cole_floor_progression",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "other",
+    "detectedAt": "2026-11-24T18:17:21.537854+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Adv/Beg Contemporary",
+    "assignedTemplateId": "steps_contemporaryModern_adv_beg_contemporary",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.537889+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Adv/Beg Theater Dance",
+    "assignedTemplateId": "steps_jazzTheater_adv_beg_theater_dance",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.538117+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Adv/Beg Contemporary Fusion",
+    "assignedTemplateId": "steps_contemporaryModern_adv_beg_contemporary_fusion",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.538439+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Adv/Beg Modern/Horton",
+    "assignedTemplateId": "steps_contemporaryModern_adv_beg_modern_horton",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.538695+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Beg Hip Hop",
+    "assignedTemplateId": "steps_hipHopStreet_beg_hip_hop",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.538910+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Beg Theater Dance",
+    "assignedTemplateId": "steps_jazzTheater_beg_theater_dance",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.539524+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Open Countertechnique",
+    "assignedTemplateId": "steps_other_open_countertechnique",
+    "assignedTier": "beginner",
+    "assignedGenre": "other",
+    "detectedAt": "2026-11-24T18:17:21.539613+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Open Afro Brazilian",
+    "assignedTemplateId": "steps_africanDiaspora_open_afro_brazilian",
+    "assignedTier": "beginner",
+    "assignedGenre": "africanDiaspora",
+    "detectedAt": "2026-11-24T18:17:21.539679+00:00"
+  },
+  {
+    "studioId": "steps",
+    "rawClassTitle": "Beg Theater Jazz",
+    "assignedTemplateId": "steps_jazzTheater_beg_theater_jazz",
+    "assignedTier": "beginner",
+    "assignedGenre": "jazzTheater",
+    "detectedAt": "2026-11-24T18:17:21.539925+00:00"
   },
   {
     "studioId": "ailey",
@@ -605,7 +661,7 @@
     "assignedTemplateId": "ailey_ballet_beg_ballet",
     "assignedTier": "beginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.644705+00:00"
+    "detectedAt": "2026-11-24T18:17:21.540338+00:00"
   },
   {
     "studioId": "ailey",
@@ -613,7 +669,7 @@
     "assignedTemplateId": "ailey_ballet_adv_beg_ballet",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.644731+00:00"
+    "detectedAt": "2026-11-24T18:17:21.540389+00:00"
   },
   {
     "studioId": "ailey",
@@ -621,7 +677,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_contemporary",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.644851+00:00"
+    "detectedAt": "2026-11-24T18:17:21.540682+00:00"
   },
   {
     "studioId": "ailey",
@@ -629,7 +685,7 @@
     "assignedTemplateId": "ailey_jazzTheater_beg_jazz",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.644872+00:00"
+    "detectedAt": "2026-11-24T18:17:21.540726+00:00"
   },
   {
     "studioId": "ailey",
@@ -637,7 +693,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_adv_beg_cuban_modern_dance",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.644888+00:00"
+    "detectedAt": "2026-11-24T18:17:21.540762+00:00"
   },
   {
     "studioId": "ailey",
@@ -645,7 +701,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_abs_beg_hip_hop",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.644967+00:00"
+    "detectedAt": "2026-11-24T18:17:21.540948+00:00"
   },
   {
     "studioId": "ailey",
@@ -653,7 +709,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_adv_beg_horton",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.645010+00:00"
+    "detectedAt": "2026-11-24T18:17:21.540979+00:00"
   },
   {
     "studioId": "ailey",
@@ -661,7 +717,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_afro_haitian",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.645032+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541015+00:00"
   },
   {
     "studioId": "ailey",
@@ -669,7 +725,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_west_african_dance",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.645083+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541054+00:00"
   },
   {
     "studioId": "ailey",
@@ -677,7 +733,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_intro_to_hip_hop",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.645144+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541117+00:00"
   },
   {
     "studioId": "ailey",
@@ -685,7 +741,7 @@
     "assignedTemplateId": "ailey_jazzTheater_beg_commercial_jazz",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.645214+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541183+00:00"
   },
   {
     "studioId": "ailey",
@@ -693,7 +749,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_horton",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.645250+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541232+00:00"
   },
   {
     "studioId": "ailey",
@@ -701,7 +757,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_vogue",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.645295+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541263+00:00"
   },
   {
     "studioId": "ailey",
@@ -709,7 +765,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_open_contemporary",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.645341+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541293+00:00"
   },
   {
     "studioId": "ailey",
@@ -717,7 +773,7 @@
     "assignedTemplateId": "ailey_jazzTheater_beg_broadway_dance",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.645391+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541326+00:00"
   },
   {
     "studioId": "ailey",
@@ -725,7 +781,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_abs_beg_house",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.645440+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541369+00:00"
   },
   {
     "studioId": "ailey",
@@ -733,7 +789,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_graham",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.645532+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541466+00:00"
   },
   {
     "studioId": "ailey",
@@ -741,7 +797,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_afro_cuban_folkloric",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.645587+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541506+00:00"
   },
   {
     "studioId": "ailey",
@@ -749,7 +805,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_hip_hop",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.645640+00:00"
+    "detectedAt": "2026-11-24T18:17:21.541536+00:00"
   },
   {
     "studioId": "ailey",
@@ -757,7 +813,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_samba_afro_brazilian",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.645682+00:00"
+    "detectedAt": "2026-11-24T18:17:21.542677+00:00"
   },
   {
     "studioId": "ailey",
@@ -765,7 +821,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_open_vogue_fem",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.645757+00:00"
+    "detectedAt": "2026-11-24T18:17:21.542745+00:00"
   },
   {
     "studioId": "ailey",
@@ -773,7 +829,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_open_west_african_dance",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.645813+00:00"
+    "detectedAt": "2026-11-24T18:17:21.542785+00:00"
   },
   {
     "studioId": "ailey",
@@ -781,7 +837,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_abs_beg_contemporary",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.645863+00:00"
+    "detectedAt": "2026-11-24T18:17:21.542831+00:00"
   },
   {
     "studioId": "ailey",
@@ -789,7 +845,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_afro_dance",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.645923+00:00"
+    "detectedAt": "2026-11-24T18:17:21.542870+00:00"
   },
   {
     "studioId": "ailey",
@@ -797,7 +853,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_open_hip_hop",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.646007+00:00"
+    "detectedAt": "2026-11-24T18:17:21.542948+00:00"
   },
   {
     "studioId": "ailey",
@@ -805,7 +861,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_beg_afro_brazilian",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.646044+00:00"
+    "detectedAt": "2026-11-24T18:17:21.542995+00:00"
   },
   {
     "studioId": "ailey",
@@ -813,7 +869,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_cuban_modern_dance",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.646111+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543038+00:00"
   },
   {
     "studioId": "ailey",
@@ -821,7 +877,7 @@
     "assignedTemplateId": "ailey_commercialHeels_beg_heels",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.646173+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543077+00:00"
   },
   {
     "studioId": "ailey",
@@ -829,7 +885,15 @@
     "assignedTemplateId": "ailey_contemporaryModern_abs_beg_horton",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.646296+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543235+00:00"
+  },
+  {
+    "studioId": "ailey",
+    "rawClassTitle": "Beg Vogue Fem",
+    "assignedTemplateId": "ailey_hipHopStreet_beg_vogue_fem",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.543396+00:00"
   },
   {
     "studioId": "ailey",
@@ -837,7 +901,7 @@
     "assignedTemplateId": "ailey_africanDiaspora_adv_beg_west_african_dance",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.646479+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543455+00:00"
   },
   {
     "studioId": "ailey",
@@ -845,7 +909,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_adv_beg_contemporary",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.646582+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543560+00:00"
   },
   {
     "studioId": "ailey",
@@ -853,7 +917,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_beg_lim_n",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.646636+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543640+00:00"
   },
   {
     "studioId": "ailey",
@@ -861,7 +925,7 @@
     "assignedTemplateId": "ailey_contemporaryModern_abs_beg_dunham",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.646688+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543680+00:00"
   },
   {
     "studioId": "ailey",
@@ -869,7 +933,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.646805+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543790+00:00"
   },
   {
     "studioId": "ailey",
@@ -877,7 +941,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_abs_beg_vogue_basics",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.646878+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543867+00:00"
   },
   {
     "studioId": "ailey",
@@ -885,7 +949,7 @@
     "assignedTemplateId": "ailey_hipHopStreet_beg_dancehall",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.646926+00:00"
+    "detectedAt": "2026-11-24T18:17:21.543929+00:00"
   },
   {
     "studioId": "ailey",
@@ -893,7 +957,15 @@
     "assignedTemplateId": "ailey_contemporaryModern_open_lim_n",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.647511+00:00"
+    "detectedAt": "2026-11-24T18:17:21.544825+00:00"
+  },
+  {
+    "studioId": "ailey",
+    "rawClassTitle": "Open Contemporary Indian",
+    "assignedTemplateId": "ailey_contemporaryModern_open_contemporary_indian",
+    "assignedTier": "beginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.544930+00:00"
   },
   {
     "studioId": "ailey",
@@ -901,183 +973,7 @@
     "assignedTemplateId": "ailey_worldCultural_beg_ny_style_mambo",
     "assignedTier": "beginner",
     "assignedGenre": "worldCultural",
-    "detectedAt": "2026-11-13T02:29:13.647703+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Ballet",
-    "assignedTemplateId": "peridance_ballet_beg_ballet",
-    "assignedTier": "beginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.651274+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg House",
-    "assignedTemplateId": "peridance_hipHopStreet_beg_house",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651294+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Waacking",
-    "assignedTemplateId": "peridance_hipHopStreet_beg_waacking",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651314+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Adv Beg Contemporary",
-    "assignedTemplateId": "peridance_contemporaryModern_adv_beg_contemporary",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.651333+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Adv Beg Heels",
-    "assignedTemplateId": "peridance_commercialHeels_adv_beg_heels",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.651347+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Open Ballet",
-    "assignedTemplateId": "peridance_ballet_open_ballet",
-    "assignedTier": "beginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.651404+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Open Dancehall",
-    "assignedTemplateId": "peridance_hipHopStreet_open_dancehall",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651451+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Choreography",
-    "assignedTemplateId": "peridance_hipHopStreet_beg_choreography",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651501+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Foundations of Hip Hop",
-    "assignedTemplateId": "peridance_hipHopStreet_beg_foundations_of_hip_hop",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651553+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Open Haitian",
-    "assignedTemplateId": "peridance_africanDiaspora_open_haitian",
-    "assignedTier": "beginner",
-    "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.651602+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Open Popping",
-    "assignedTemplateId": "peridance_hipHopStreet_open_popping",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651648+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Hip Hop",
-    "assignedTemplateId": "peridance_hipHopStreet_beg_hip_hop",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651698+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Contemporary",
-    "assignedTemplateId": "peridance_contemporaryModern_beg_contemporary",
-    "assignedTier": "beginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.651721+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Open Locking",
-    "assignedTemplateId": "peridance_hipHopStreet_open_locking",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651764+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg African",
-    "assignedTemplateId": "peridance_africanDiaspora_beg_african",
-    "assignedTier": "beginner",
-    "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.651814+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Adv Beg Ballet",
-    "assignedTemplateId": "peridance_ballet_adv_beg_ballet",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "ballet",
-    "detectedAt": "2026-11-13T02:29:13.651858+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "MOPTOP UNIVERSAL Open Class",
-    "assignedTemplateId": "peridance_hipHopStreet_moptop_universal_open_class",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.651955+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Dancehall",
-    "assignedTemplateId": "peridance_hipHopStreet_beg_dancehall",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652038+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Open Campbellocking",
-    "assignedTemplateId": "peridance_hipHopStreet_open_campbellocking",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652073+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Adv Beg Choreography",
-    "assignedTemplateId": "peridance_hipHopStreet_adv_beg_choreography",
-    "assignedTier": "advancedBeginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652092+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Beg Graham",
-    "assignedTemplateId": "peridance_contemporaryModern_beg_graham",
-    "assignedTier": "beginner",
-    "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.652145+00:00"
-  },
-  {
-    "studioId": "peridance",
-    "rawClassTitle": "Open Litefeet",
-    "assignedTemplateId": "peridance_hipHopStreet_open_litefeet",
-    "assignedTier": "beginner",
-    "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652266+00:00"
+    "detectedAt": "2026-11-24T18:17:21.545032+00:00"
   },
   {
     "studioId": "peridance",
@@ -1085,7 +981,31 @@
     "assignedTemplateId": "peridance_africanDiaspora_beg_afro_fusion",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.652423+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554164+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Graham",
+    "assignedTemplateId": "peridance_contemporaryModern_beg_graham",
+    "assignedTier": "beginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.554192+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "MOPTOP UNIVERSAL Open Class",
+    "assignedTemplateId": "peridance_hipHopStreet_moptop_universal_open_class",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.554227+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Ballet (Pointe Optional)",
+    "assignedTemplateId": "peridance_ballet_open_ballet_pointe_optional",
+    "assignedTier": "beginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.554255+00:00"
   },
   {
     "studioId": "peridance",
@@ -1093,7 +1013,31 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652584+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554278+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Popping",
+    "assignedTemplateId": "peridance_hipHopStreet_open_popping",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.554305+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Ballet",
+    "assignedTemplateId": "peridance_ballet_beg_ballet",
+    "assignedTier": "beginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.554326+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Contemporary",
+    "assignedTemplateId": "peridance_contemporaryModern_beg_contemporary",
+    "assignedTier": "beginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.554348+00:00"
   },
   {
     "studioId": "peridance",
@@ -1101,7 +1045,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_foundations_of_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652699+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554377+00:00"
   },
   {
     "studioId": "peridance",
@@ -1109,7 +1053,7 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_vogue",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652759+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554402+00:00"
   },
   {
     "studioId": "peridance",
@@ -1117,7 +1061,23 @@
     "assignedTemplateId": "peridance_contemporaryModern_beg_horton",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.652807+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554440+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg House",
+    "assignedTemplateId": "peridance_hipHopStreet_beg_house",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.554533+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Ballet",
+    "assignedTemplateId": "peridance_ballet_open_ballet",
+    "assignedTier": "beginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.554569+00:00"
   },
   {
     "studioId": "peridance",
@@ -1125,7 +1085,15 @@
     "assignedTemplateId": "peridance_hipHopStreet_beg_popping",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.652922+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554597+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Dancehall",
+    "assignedTemplateId": "peridance_hipHopStreet_open_dancehall",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.554636+00:00"
   },
   {
     "studioId": "peridance",
@@ -1133,7 +1101,15 @@
     "assignedTemplateId": "peridance_africanDiaspora_open_afrobeats",
     "assignedTier": "beginner",
     "assignedGenre": "africanDiaspora",
-    "detectedAt": "2026-11-13T02:29:13.652989+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554667+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Adv Beg Contemporary",
+    "assignedTemplateId": "peridance_contemporaryModern_adv_beg_contemporary",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "contemporaryModern",
+    "detectedAt": "2026-11-24T18:17:21.554690+00:00"
   },
   {
     "studioId": "peridance",
@@ -1141,7 +1117,7 @@
     "assignedTemplateId": "peridance_worldCultural_open_brazilian_samba",
     "assignedTier": "beginner",
     "assignedGenre": "worldCultural",
-    "detectedAt": "2026-11-13T02:29:13.653067+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554728+00:00"
   },
   {
     "studioId": "peridance",
@@ -1149,7 +1125,111 @@
     "assignedTemplateId": "peridance_hipHopStreet_open_vogue",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653128+00:00"
+    "detectedAt": "2026-11-24T18:17:21.554754+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Waacking",
+    "assignedTemplateId": "peridance_hipHopStreet_beg_waacking",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.554833+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Adv Beg Heels",
+    "assignedTemplateId": "peridance_commercialHeels_adv_beg_heels",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "commercialHeels",
+    "detectedAt": "2026-11-24T18:17:21.554883+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Choreography",
+    "assignedTemplateId": "peridance_hipHopStreet_beg_choreography",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.554968+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Foundations of Hip Hop",
+    "assignedTemplateId": "peridance_hipHopStreet_beg_foundations_of_hip_hop",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.555000+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Haitian",
+    "assignedTemplateId": "peridance_africanDiaspora_open_haitian",
+    "assignedTier": "beginner",
+    "assignedGenre": "africanDiaspora",
+    "detectedAt": "2026-11-24T18:17:21.555028+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Hip Hop",
+    "assignedTemplateId": "peridance_hipHopStreet_beg_hip_hop",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.555078+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Locking",
+    "assignedTemplateId": "peridance_hipHopStreet_open_locking",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.555151+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg African",
+    "assignedTemplateId": "peridance_africanDiaspora_beg_african",
+    "assignedTier": "beginner",
+    "assignedGenre": "africanDiaspora",
+    "detectedAt": "2026-11-24T18:17:21.555182+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Adv Beg Ballet",
+    "assignedTemplateId": "peridance_ballet_adv_beg_ballet",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.555246+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Beg Dancehall",
+    "assignedTemplateId": "peridance_hipHopStreet_beg_dancehall",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.555387+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Campbellocking",
+    "assignedTemplateId": "peridance_hipHopStreet_open_campbellocking",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.555424+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Adv Beg Choreography",
+    "assignedTemplateId": "peridance_hipHopStreet_adv_beg_choreography",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.555448+00:00"
+  },
+  {
+    "studioId": "peridance",
+    "rawClassTitle": "Open Litefeet",
+    "assignedTemplateId": "peridance_hipHopStreet_open_litefeet",
+    "assignedTier": "beginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.555622+00:00"
   },
   {
     "studioId": "pmt",
@@ -1157,7 +1237,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv_beg_hip_hop",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653401+00:00"
+    "detectedAt": "2026-11-24T18:17:21.555963+00:00"
   },
   {
     "studioId": "pmt",
@@ -1165,7 +1245,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_basic_beginner_house",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653470+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556097+00:00"
   },
   {
     "studioId": "pmt",
@@ -1173,7 +1253,7 @@
     "assignedTemplateId": "pmt_jazzTheater_adv_beg_street_jazz",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.653510+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556124+00:00"
   },
   {
     "studioId": "pmt",
@@ -1181,7 +1261,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_beginner_hip_hop",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653526+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556149+00:00"
   },
   {
     "studioId": "pmt",
@@ -1189,7 +1269,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_breakin_101_for_beginners",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653576+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556187+00:00"
   },
   {
     "studioId": "pmt",
@@ -1197,7 +1277,7 @@
     "assignedTemplateId": "pmt_jazzTheater_beginner_jazz",
     "assignedTier": "beginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.653637+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556230+00:00"
   },
   {
     "studioId": "pmt",
@@ -1205,7 +1285,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_popping",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653675+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556251+00:00"
   },
   {
     "studioId": "pmt",
@@ -1213,7 +1293,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_intro_to_hip_hop",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653737+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556298+00:00"
   },
   {
     "studioId": "pmt",
@@ -1221,7 +1301,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_reggaeton",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653758+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556322+00:00"
   },
   {
     "studioId": "pmt",
@@ -1229,7 +1309,7 @@
     "assignedTemplateId": "pmt_jazzTheater_basic_beginner_jazz",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.653780+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556357+00:00"
   },
   {
     "studioId": "pmt",
@@ -1237,7 +1317,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_level_breaking_fundamenta",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653853+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556426+00:00"
   },
   {
     "studioId": "pmt",
@@ -1245,7 +1325,7 @@
     "assignedTemplateId": "pmt_jazzTheater_adv_beg_jazz",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.653898+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556448+00:00"
   },
   {
     "studioId": "pmt",
@@ -1253,7 +1333,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_beginner_contemporary_jazz",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.653948+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556475+00:00"
   },
   {
     "studioId": "pmt",
@@ -1261,7 +1341,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv_beg_choreography",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.653990+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556500+00:00"
   },
   {
     "studioId": "pmt",
@@ -1269,7 +1349,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_beginner_contemporary",
     "assignedTier": "beginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.654037+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556523+00:00"
   },
   {
     "studioId": "pmt",
@@ -1277,7 +1357,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_adv_beg_contemporary",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.654079+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556544+00:00"
   },
   {
     "studioId": "pmt",
@@ -1285,7 +1365,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_open_level_house_drills",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.654127+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556575+00:00"
   },
   {
     "studioId": "pmt",
@@ -1293,7 +1373,7 @@
     "assignedTemplateId": "pmt_commercialHeels_beginner_heels",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.654176+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556598+00:00"
   },
   {
     "studioId": "pmt",
@@ -1301,7 +1381,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_basic_beginner_hip_hop",
     "assignedTier": "zeroExperience",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.654244+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556653+00:00"
   },
   {
     "studioId": "pmt",
@@ -1309,7 +1389,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_beginner_house",
     "assignedTier": "beginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.654293+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556679+00:00"
   },
   {
     "studioId": "pmt",
@@ -1317,7 +1397,7 @@
     "assignedTemplateId": "pmt_contemporaryModern_intro_to_contemporary",
     "assignedTier": "zeroExperience",
     "assignedGenre": "contemporaryModern",
-    "detectedAt": "2026-11-13T02:29:13.654344+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556710+00:00"
   },
   {
     "studioId": "pmt",
@@ -1325,7 +1405,7 @@
     "assignedTemplateId": "pmt_hipHopStreet_adv_beg_breaking",
     "assignedTier": "advancedBeginner",
     "assignedGenre": "hipHopStreet",
-    "detectedAt": "2026-11-13T02:29:13.654444+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556802+00:00"
   },
   {
     "studioId": "pmt",
@@ -1333,7 +1413,7 @@
     "assignedTemplateId": "pmt_commercialHeels_open_heels",
     "assignedTier": "beginner",
     "assignedGenre": "commercialHeels",
-    "detectedAt": "2026-11-13T02:29:13.654491+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556827+00:00"
   },
   {
     "studioId": "pmt",
@@ -1341,6 +1421,22 @@
     "assignedTemplateId": "pmt_jazzTheater_basic_jazz",
     "assignedTier": "zeroExperience",
     "assignedGenre": "jazzTheater",
-    "detectedAt": "2026-11-13T02:29:13.654580+00:00"
+    "detectedAt": "2026-11-24T18:17:21.556899+00:00"
+  },
+  {
+    "studioId": "pmt",
+    "rawClassTitle": "Beginner Contemporary Ballet",
+    "assignedTemplateId": "pmt_ballet_beginner_contemporary_ballet",
+    "assignedTier": "beginner",
+    "assignedGenre": "ballet",
+    "detectedAt": "2026-11-24T18:17:21.556927+00:00"
+  },
+  {
+    "studioId": "pmt",
+    "rawClassTitle": "Adv. Beg. Hip Hop Choreo",
+    "assignedTemplateId": "pmt_hipHopStreet_adv_beg_hip_hop_choreo",
+    "assignedTier": "advancedBeginner",
+    "assignedGenre": "hipHopStreet",
+    "detectedAt": "2026-11-24T18:17:21.556972+00:00"
   }
 ]

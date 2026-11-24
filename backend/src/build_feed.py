@@ -23,6 +23,12 @@ from scrapers.steps_scraper import scrape_steps_schedule
 from scrapers.ailey_scraper import scrape_ailey_schedule
 from scrapers.peridance_scraper import scrape_peridance_schedule
 from scrapers.pmt_scraper import scrape_pmt_schedule
+from instructor_names import (
+    PLACEHOLDER_INSTRUCTORS,
+    alias_registry_problems,
+    build_canonical_lookup,
+    normalize_instructor,
+)
 
 NY_TZ = ZoneInfo("America/New_York")
 
@@ -55,15 +61,6 @@ AGE_RESTRICTION_REGEX = re.compile(
     r'\b(ages?\s*\d+\s*[-–to]+\s*\d+|ages?\s*\d+\+?|\btots?\b|\bpro\b)',
     re.I,
 )
-
-def normalize_instructor(name: str) -> str:
-    """Matching key for an instructor name.
-
-    Must stay identical to normalizeInstructor() in app/lib/src/domain/models.dart:
-    collapse whitespace, drop quote characters, lowercase, trim.
-    """
-    collapsed = ' '.join(name.split())
-    return re.sub(r'[\"\']', '', collapsed).lower().strip()
 
 def match_template(
     templates: List[Dict[str, Any]],
@@ -260,11 +257,8 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     instructors_reg = load_json(instructors_reg_path) if os.path.exists(instructors_reg_path) else {}
 
     # Build alias lookup mapping any normalized name to all its known aliases
+    # (used to find teacher descriptions under any spelling).
     alias_lookup: Dict[str, List[str]] = {}
-    # Maps any normalized alias to the normalized canonical name. Emitted as
-    # each session's "instructorKey" so the app can match a saved slot even
-    # when a scraper prints a different spelling ("Kathy" vs "Kathryn").
-    canonical_lookup: Dict[str, str] = {}
     for cid, rec in instructors_reg.items():
         all_aliases = [normalize_instructor(a) for a in rec.get("aliases", [])]
         can_name = normalize_instructor(rec.get("canonicalName", ""))
@@ -272,8 +266,15 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             all_aliases.append(can_name)
         for a in all_aliases:
             alias_lookup[a] = all_aliases
-            if can_name:
-                canonical_lookup[a] = can_name
+
+    # Maps any normalized alias to the normalized canonical name. Emitted as
+    # each session's "instructorKey" so the app can match a saved slot even
+    # when a scraper prints a different spelling ("Kathy" vs "Kathryn"), and
+    # published whole as "instructorAliases" so the app can resolve names it
+    # stored earlier (teacher notes) against the current registry.
+    canonical_lookup = build_canonical_lookup(instructors_reg)
+    for problem in alias_registry_problems(instructors_reg):
+        print(f"WARNING: instructors.json: {problem}")
 
     ignore_rules = templates_data.get("ignoreRules", {})
     templates = list(templates_data["templates"])
@@ -480,13 +481,15 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     normalized_sessions.sort(key=lambda s: (s["serviceDate"], s["startMin"]))
 
     feed = {
-        "version": "1.0.0",
+        "version": "1.1.0",
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "windowStart": window_start,
         "studios": studios,
         "templates": [public_template(t) for t in templates],
         "series": series,
         "sessions": normalized_sessions,
+        "instructorAliases": canonical_lookup,
+        "placeholderInstructors": list(PLACEHOLDER_INSTRUCTORS),
         "scraperStats": scraper_stats
     }
 
