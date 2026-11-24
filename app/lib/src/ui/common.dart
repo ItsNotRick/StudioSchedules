@@ -38,6 +38,16 @@ Color _onColor(Color c) =>
 
 Color onStudioColor(StudioId id) => _onColor(studios[id]!.color);
 
+/// Accent colour for a normalized level tier.
+Color tierColor(Tier tier, ColorScheme scheme) => switch (tier) {
+      Tier.zeroExperience => Colors.green.shade700,
+      Tier.beginner => scheme.primary,
+      Tier.advancedBeginner => Colors.deepOrange.shade700,
+      Tier.intermediate => Colors.purple.shade700,
+      Tier.advanced => Colors.red.shade800,
+      Tier.allLevels => Colors.blueGrey.shade600,
+    };
+
 /// The studio's own level label (Q4), tinted by normalized tier.
 class LevelPill extends StatelessWidget {
   const LevelPill(this.template, {super.key});
@@ -46,14 +56,7 @@ class LevelPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final color = switch (template.tier) {
-      Tier.zeroExperience => Colors.green.shade700,
-      Tier.beginner => scheme.primary,
-      Tier.advancedBeginner => Colors.deepOrange.shade700,
-      Tier.intermediate => Colors.purple.shade700,
-      Tier.advanced => Colors.red.shade800,
-      Tier.allLevels => Colors.blueGrey.shade600,
-    };
+    final color = tierColor(template.tier, scheme);
     return Tooltip(
       message: template.tier.label,
       child: Container(
@@ -293,7 +296,7 @@ class _WeekStripState extends ConsumerState<WeekStrip> {
   }
 }
 
-/// Entry-level switch + studio chips + genre chips (Q4/Q5).
+/// Level tier chips + studio chips + genre chips (Q4/Q5).
 class FilterRail extends ConsumerWidget {
   const FilterRail({super.key});
 
@@ -301,12 +304,25 @@ class FilterRail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final f = ref.watch(filterProvider);
     final n = ref.read(filterProvider.notifier);
+    final scheme = Theme.of(context).colorScheme;
     return SizedBox(
       height: 48,
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         children: [
+          for (final t in Tier.values)
+            Padding(
+              padding: const EdgeInsets.only(right: 6),
+              child: FilterChip(
+                label: Text(t.label),
+                selected: f.tiers.contains(t),
+                selectedColor: tierColor(t, scheme).withValues(alpha: 0.25),
+                side: BorderSide(color: tierColor(t, scheme)),
+                onSelected: (_) => n.toggleTier(t),
+              ),
+            ),
+          const VerticalDivider(width: 16),
           for (final s in StudioId.values)
             Padding(
               padding: const EdgeInsets.only(right: 6),

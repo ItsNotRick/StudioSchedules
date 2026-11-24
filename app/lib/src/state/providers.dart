@@ -74,23 +74,30 @@ class FilterState {
   const FilterState({
     required this.studios,
     required this.genres,
+    this.tiers = const {},
   });
 
   final Set<StudioId> studios;
   final Set<Genre> genres; // empty = all genres
+  final Set<Tier> tiers; // empty = all tiers
 
   FilterState copyWith({
     Set<StudioId>? studios,
     Set<Genre>? genres,
+    Set<Tier>? tiers,
   }) =>
       FilterState(
         studios: studios ?? this.studios,
         genres: genres ?? this.genres,
+        tiers: tiers ?? this.tiers,
       );
 
   bool acceptsTemplate(ClassTemplate t) =>
       studios.contains(t.studioId) &&
-      (genres.isEmpty || t.allGenres.any(genres.contains));
+      (genres.isEmpty || t.allGenres.any(genres.contains)) &&
+      acceptsTier(t.tier);
+
+  bool acceptsTier(Tier tier) => tiers.isEmpty || tiers.contains(tier);
 }
 
 class Filter extends Notifier<FilterState> {
@@ -104,6 +111,12 @@ class Filter extends Notifier<FilterState> {
     final s = {...state.studios};
     s.contains(id) ? s.remove(id) : s.add(id);
     state = state.copyWith(studios: s);
+  }
+
+  void toggleTier(Tier t) {
+    final s = {...state.tiers};
+    s.contains(t) ? s.remove(t) : s.add(t);
+    state = state.copyWith(tiers: s);
   }
 
   void toggleGenre(Genre g) {
