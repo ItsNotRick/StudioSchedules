@@ -167,8 +167,7 @@ Future<SaveResult> create({required String listedName, required String body});
 Future<SaveResult> save({required int id, required int baseRevision, required String body,
                          required String listedName, required TeacherResolver r, required String forKey});
 Future<SaveResult> combine({required List<(int id, int rev)> rows, required String body});
-Future<void> delete(int id);
-Future<void> restore(TeacherNote note);    // for Undo
+Future<void> deleteNote(int id);
 ```
 
 Every write method runs in **one `transaction()`** and returns
@@ -257,9 +256,12 @@ optionally the note `id`.
   - Flush on `PopScope` pop and on `AppLifecycleState.paused`.
   - Capture the DAO in `initState`. Riverpod 3 throws if `ref` is used in
     `dispose`.
-- **Autosave never deletes.** A blank body isn't saved. If the user leaves
-  with a blank body, the note is deleted and a snackbar offers **Undo**
-  (`restore`). There's also an explicit Delete action with a confirmation.
+- **Autosave never deletes.** A blank body isn't saved. If the user clears a
+  saved note and leaves, a dialog asks **Delete** or **Keep note** (keeping
+  leaves the last saved text). There's also an explicit Delete action with
+  the same confirmation. This is a dialog rather than an Undo snackbar:
+  when the editor is opened from the class sheet, a snackbar appears on the
+  home Scaffold behind the sheet's modal barrier, where it can't be tapped.
 - The "Saving…" / "Saved" status is announced to screen readers through a
   `Semantics(liveRegion: true)`.
 - The editor loads its row(s) once. Nothing changes them in the background, so
@@ -320,8 +322,10 @@ platform changes.
   - A `combine` conflict changes nothing.
   - 50 autosaves in a row produce no extra rows and no repeated text.
 - **Property test:** with random edits, alias-map changes and combines, no
-  saved text is ever lost except by an explicit delete, and every name belongs
-  to exactly one row.
+  saved text is ever lost except by an explicit delete, and no row has a blank
+  body or no names. (A spelling *can* appear on more than one row: a conflict
+  save or a second "Add a note" creates a new row with the same name, which
+  is why a teacher can show several notes.)
 - **Migration:** build a v2 database with raw SQL, open it as v3, and check
   that `teacher_notes` exists and the existing tables are untouched.
 - **Contract:** a shared fixture of raw → normalized names
@@ -329,7 +333,7 @@ platform changes.
   test. Plus the registry checks in §4.
 - **Widget** (override `appDatabaseProvider` with an in-memory DB):
   - the sheet hides notes for "Staff" and shows "2 notes" plus Combine;
-  - leaving the editor with a blank body deletes the note and offers Undo;
+  - leaving a cleared note asks first, and Keep / Delete both work;
   - the editor flushes on pop.
 
 ## 10. Room for class notes later

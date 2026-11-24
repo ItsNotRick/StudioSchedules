@@ -271,7 +271,29 @@ class FeedRepository {
       windowStart: windowStart,
       sessions: sessions,
       series: seriesList,
+      instructorAliases: parseInstructorAliases(data['instructorAliases']),
+      placeholderInstructors: parsePlaceholderInstructors(data['placeholderInstructors']),
     );
+  }
+
+  /// Parses the feed's `instructorAliases` map. Entries that aren't
+  /// string -> string are skipped; a missing or malformed field gives `{}`.
+  static Map<String, String> parseInstructorAliases(Object? raw) {
+    if (raw is! Map) return const {};
+    return {
+      for (final e in raw.entries)
+        if (e.key is String && e.value is String) e.key as String: e.value as String,
+    };
+  }
+
+  /// Parses the feed's `placeholderInstructors` list (normalizing each
+  /// entry). Falls back to [defaultPlaceholderInstructors] when missing.
+  static List<String> parsePlaceholderInstructors(Object? raw) {
+    if (raw is! List) return defaultPlaceholderInstructors;
+    return [
+      for (final v in raw)
+        if (v is String && normalizeInstructor(v).isNotEmpty) normalizeInstructor(v),
+    ];
   }
 
   /// Parses one entry of the feed's `studios` list. Returns null for an

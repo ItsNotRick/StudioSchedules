@@ -106,18 +106,30 @@ class Feed {
     required this.windowStart,
     required this.sessions,
     required this.series,
+    this.instructorAliases = const {},
+    this.placeholderInstructors = defaultPlaceholderInstructors,
   });
 
   /// A feed with no classes, used while the real feed is loading.
   Feed.empty(this.today)
       : windowStart = today.startOfWeek,
         sessions = const [],
-        series = const [];
+        series = const [],
+        instructorAliases = const {},
+        placeholderInstructors = defaultPlaceholderInstructors;
 
   final ServiceDate today;
   final ServiceDate windowStart;
   final List<ClassSession> sessions;
   final List<WorkshopSeries> series;
+
+  /// Normalized alias -> normalized canonical name, for registered teachers
+  /// (feed field `instructorAliases`, v1.1+). Empty for older feeds.
+  final Map<String, String> instructorAliases;
+
+  /// Normalized names that mean "no particular teacher" (feed field
+  /// `placeholderInstructors`, v1.1+), or [defaultPlaceholderInstructors].
+  final List<String> placeholderInstructors;
 
   ServiceDate get windowEnd => windowStart.addDays(13);
 }

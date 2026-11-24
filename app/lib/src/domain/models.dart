@@ -263,6 +263,19 @@ String normalizeInstructor(String name) => name
     .toLowerCase()
     .trim();
 
+/// Built-in copy of PLACEHOLDER_INSTRUCTORS in
+/// backend/src/instructor_names.py, used when the feed omits
+/// `placeholderInstructors` (feeds older than v1.1).
+const defaultPlaceholderInstructors = <String>[
+  'staff',
+  'tba',
+  'tbd',
+  'guest artist',
+  'special guest',
+  'substitute teacher',
+  'various teachers',
+];
+
 /// A device-local "regimen" entry: a recurring weekly slot (Q10).
 @immutable
 class SavedSlot {

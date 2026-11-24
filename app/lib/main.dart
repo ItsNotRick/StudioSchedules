@@ -8,6 +8,7 @@ import 'src/ui/detail_sheet.dart';
 import 'src/ui/views/genre_agenda_view.dart';
 import 'src/ui/views/my_week_view.dart';
 import 'src/ui/views/studio_columns_view.dart';
+import 'src/ui/views/teachers_view.dart';
 
 void main() {
   runApp(const ProviderScope(child: NYCStudioCalendarApp()));
@@ -16,11 +17,16 @@ void main() {
 enum CalendarViewType {
   genreAgenda('Genre Agenda', Icons.view_agenda_outlined),
   studioColumns('Studio Columns', Icons.view_column_outlined),
-  myWeek('My Regimen', Icons.bookmark_added_outlined);
+  myWeek('My Regimen', Icons.bookmark_added_outlined),
+  teachers('Teachers', Icons.people_outline);
 
   const CalendarViewType(this.label, this.icon);
   final String label;
   final IconData icon;
+
+  /// False for tabs that aren't a view of the calendar (no date strip,
+  /// filters or Today button).
+  bool get isCalendar => this != teachers;
 }
 
 class ActiveViewNotifier extends Notifier<CalendarViewType> {
@@ -75,7 +81,9 @@ class CalendarHomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Column(
+        title: !activeView.isCalendar
+            ? Text(activeView.label, style: const TextStyle(fontWeight: FontWeight.bold))
+            : Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
@@ -91,7 +99,7 @@ class CalendarHomeScreen extends ConsumerWidget {
             ),
           ],
         ),
-        actions: [
+        actions: !activeView.isCalendar ? null : [
           if (!isToday)
             TextButton(
               onPressed: () =>
@@ -111,7 +119,7 @@ class CalendarHomeScreen extends ConsumerWidget {
             onSelected: (view) =>
                 ref.read(activeViewProvider.notifier).select(view),
             itemBuilder: (context) => [
-              for (final view in CalendarViewType.values)
+              for (final view in CalendarViewType.values.where((v) => v.isCalendar))
                 PopupMenuItem(
                   value: view,
                   child: Row(
@@ -125,7 +133,7 @@ class CalendarHomeScreen extends ConsumerWidget {
             ],
           ),
         ],
-        bottom: PreferredSize(
+        bottom: !activeView.isCalendar ? null : PreferredSize(
           preferredSize: const Size.fromHeight(120),
           child: Column(
             children: const [
@@ -153,6 +161,9 @@ class CalendarHomeScreen extends ConsumerWidget {
             ),
           (_, CalendarViewType.myWeek) => const MyWeekView(
               key: ValueKey('my_week'),
+            ),
+          (_, CalendarViewType.teachers) => const TeachersView(
+              key: ValueKey('teachers'),
             ),
         },
       ),
