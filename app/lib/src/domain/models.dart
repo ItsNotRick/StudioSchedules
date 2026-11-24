@@ -170,6 +170,7 @@ class ClassSession {
     required this.endMin,
     required this.instructor,
     this.instructorKey,
+    this.regularInstructor,
     this.rawTitle,
     this.description,
     required this.isSubstitute,
@@ -188,6 +189,10 @@ class ClassSession {
   /// Canonical matching key from the feed (alias-resolved, normalized).
   /// Older feeds omit it; use [matchKey] rather than reading this directly.
   final String? instructorKey;
+
+  /// Original regular teacher reported by the studio when a sub or cancellation
+  /// replaces [instructor] (optional; omitted by most scrapers).
+  final String? regularInstructor;
 
   /// The class name exactly as the studio lists it, e.g.
   /// "Adv Beg THEATER with Jason Wise". Use [title] for display.
@@ -379,6 +384,28 @@ SlotMatch? resolveSlot(
   var loose = candidates
       .where((s) => !others.any((o) => o.matches(s)))
       .toList();
+  // Do not claim an unflagged teacher who is known to teach another concurrent
+  // section at this same (template, weekday, time) on another date.
+  final knownConcurrentKeys = <String>{};
+  final exactDates = sessions
+      .where((s) => slot.matches(s))
+      .map((s) => (s.serviceDate, s.matchKey))
+      .toList();
+  if (exactDates.isNotEmpty) {
+    for (final s in sessions) {
+      if (!slot.matchesSlot(s)) continue;
+      for (final (d, myKey) in exactDates) {
+        if (s.serviceDate == d && s.matchKey != myKey) {
+          knownConcurrentKeys.add(s.matchKey);
+        }
+      }
+    }
+  }
+  if (knownConcurrentKeys.isNotEmpty) {
+    loose = loose
+        .where((s) => s.isSubstitute || !knownConcurrentKeys.contains(s.matchKey))
+        .toList();
+  }
   if (loose.map((s) => s.matchKey).toSet().length > 1) {
     loose = loose.where((s) => s.isSubstitute).toList();
   }
@@ -408,7 +435,7 @@ Iterable<SavedSlot> slotsClaiming(
 
 /// Determines if US Eastern Daylight Time (EDT) is active for a given UTC datetime.
 bool isEasternDst([DateTime? utcNow]) {
-  final utc = utcNow ?? DateTime.now().toUtc();
+  final utc = (utcNow ?? DateTime.now()).toUtc();
   if (utc.month < 3 || utc.month > 11) return false;
   if (utc.month > 3 && utc.month < 11) return true;
   if (utc.month == 3) {
@@ -424,6 +451,35 @@ bool isEasternDst([DateTime? utcNow]) {
     return utc.day < firstSundayDay ||
         (utc.day == firstSundayDay && utc.hour < 6);
   }
+}
+
+/// Converts a NY wall-clock [date] and [minutesAfterMidnight] into the exact
+/// UTC [DateTime] instant, handling DST transitions and >= 1440 rollover.
+DateTime nyWallClockToUtc(ServiceDate date, int minutesAfterMidnight) {
+  final extraDays = minutesAfterMidnight ~/ 1440;
+  final rem = minutesAfterMidnight % 1440;
+  final d = extraDays == 0 ? date : date.addDays(extraDays);
+  final h = rem ~/ 60;
+  final m = rem % 60;
+
+  bool isEdt;
+  if (d.month < 3 || d.month > 11) {
+    isEdt = false;
+  } else if (d.month > 3 && d.month < 11) {
+    isEdt = true;
+  } else if (d.month == 3) {
+    final firstW = DateTime.utc(d.year, 3, 1).weekday;
+    final secondSun = (7 - firstW) % 7 + 8;
+    isEdt = d.day > secondSun || (d.day == secondSun && h >= 2);
+  } else {
+    final firstW = DateTime.utc(d.year, 11, 1).weekday;
+    final firstSun = (7 - firstW) % 7 + 1;
+    isEdt = d.day < firstSun || (d.day == firstSun && h < 2);
+  }
+
+  final offsetHours = isEdt ? 4 : 5;
+  return DateTime.utc(d.year, d.month, d.day, h, m)
+      .add(Duration(hours: offsetHours));
 }
 
 /// Returns the current date in America/New_York (independent of local device timezone).
@@ -446,7 +502,7 @@ int getNowMinInNewYork() {
 // Formatting helpers (NY wall-clock; no timezone conversion in the UI layer).
 
 String formatTime(int minutes) {
-  final h = minutes ~/ 60;
+  final h = (minutes ~/ 60) % 24;
   final m = minutes % 60;
   final h12 = h % 12 == 0 ? 12 : h % 12;
   final ampm = h < 12 ? 'am' : 'pm';

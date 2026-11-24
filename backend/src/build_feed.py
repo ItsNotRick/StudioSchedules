@@ -86,21 +86,34 @@ def match_template(
                     best_pat_len = len(norm_pat)
     return matched_tpl
 
-def auto_template_id(studio_id: str, genre: str, clean_title: str,
+def auto_template_id(studio_id: str, genre: str, tier: str, clean_title: str,
                      tpl_lookup: Dict[str, Dict[str, Any]]) -> str:
     """Stable id for an auto-created template.
 
     The slug is cut at 30 chars to keep existing ids (and saved slots) stable;
-    if that collides with a template for a different title, a short hash of
-    the full title is appended so the two classes stay separate.
+    if that collides with a template for a different title or tier, a short
+    hash of the full title + tier is appended so the two classes stay separate.
     """
     slug = re.sub(r'[^a-z0-9]+', '_', clean_title.lower()).strip('_')
     tpl_id = f"{studio_id}_{genre}_{slug[:30]}"
-    existing = tpl_lookup.get(tpl_id)
-    if existing and existing["title"].lower() != clean_title.lower():
-        digest = hashlib.sha1(clean_title.lower().encode()).hexdigest()[:6]
-        tpl_id = f"{tpl_id}_{digest}"
-    return tpl_id
+
+    def _collides(existing: Optional[Dict[str, Any]]) -> bool:
+        return existing is not None and (
+            existing["title"].lower() != clean_title.lower()
+            or existing.get("tier") != tier
+        )
+
+    if not _collides(tpl_lookup.get(tpl_id)):
+        return tpl_id
+
+    digest = hashlib.sha1(f"{clean_title.lower()}|{tier}".encode()).hexdigest()[:6]
+    base_hashed = f"{tpl_id}_{digest}"
+    candidate = base_hashed
+    counter = 2
+    while _collides(tpl_lookup.get(candidate)):
+        candidate = f"{base_hashed}_{counter}"
+        counter += 1
+    return candidate
 
 def load_json(path: str) -> Any:
     with open(path, "r", encoding="utf-8") as f:
@@ -326,11 +339,20 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
         ("danznik", scrape_danznik_schedule),
     ]
 
+    # Window dates: 14-day rolling window anchored to current week's Monday in NYC
+    today_dt = datetime.now(NY_TZ)
+    current_monday_dt = today_dt - timedelta(days=today_dt.weekday())
+    window_start = current_monday_dt.strftime("%Y-%m-%d")
+    window_end = (current_monday_dt + timedelta(days=13)).strftime("%Y-%m-%d")
+
     all_scraped_sessions: List[Dict[str, Any]] = []
     scraper_stats = {}
+    curated_ids = {t["id"] for t in templates}
     prev_tpl_lookup = {t["id"]: t for t in previous_templates}
     prev_auto_ids = {
-        (t["studioId"], t["title"].lower()): t["id"] for t in previous_templates
+        (t["studioId"], t["title"].lower(), t.get("tier")): t["id"]
+        for t in previous_templates
+        if t["id"] not in curated_ids
     }
     for t in templates:
         prev_tpl_lookup[t["id"]] = t
@@ -345,7 +367,11 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             print(f"Scraped {len(sessions)} raw sessions from {studio_id.upper()}")
         except Exception as e:
             print(f"Error scraping {studio_id.upper()}: {e}")
-            cached = [s for s in previous_sessions if s.get("studioId") == studio_id]
+            cached = [
+                s for s in previous_sessions
+                if s.get("studioId") == studio_id
+                and window_start <= s.get("serviceDate", "") <= window_end
+            ]
             if cached:
                 for c in cached:
                     fallback_title = (
@@ -353,7 +379,7 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                         or prev_tpl_lookup.get(c["templateId"], {}).get("title")
                         or c["templateId"]
                     )
-                    all_scraped_sessions.append({
+                    fallback_sess = {
                         "id": c["id"],
                         "studioId": studio_id,
                         "rawClassTitle": fallback_title,
@@ -362,10 +388,14 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                         "endMin": c["endMin"],
                         "instructor": c.get("instructor", "Staff"),
                         "isSubstitute": c.get("isSubstitute", False),
+                        "status": c.get("status", "scheduled"),
                         "bookingUrl": c.get("bookingUrl", ""),
                         "rawLevel": c.get("rawLevel"),
                         "rawCategory": c.get("rawCategory"),
-                    })
+                    }
+                    if c.get("regularInstructor"):
+                        fallback_sess["regularInstructor"] = c["regularInstructor"]
+                    all_scraped_sessions.append(fallback_sess)
                 scraper_stats[studio_id] = len(cached)
                 print(f"Preserved {len(cached)} cached sessions for {studio_id.upper()}")
             else:
@@ -403,11 +433,14 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
         if not matched_tpl:
             # Reuse the id this class had in the previous feed so saved slots
             # survive a genre change; otherwise derive a fresh one.
-            dynamic_tpl_id = prev_auto_ids.get((studio_id, clean_title.lower()))
+            dynamic_tpl_id = prev_auto_ids.get((studio_id, clean_title.lower(), tier))
             reused = tpl_lookup.get(dynamic_tpl_id) if dynamic_tpl_id else None
-            if not dynamic_tpl_id or (reused and reused["title"].lower() != clean_title.lower()):
+            if not dynamic_tpl_id or (
+                reused
+                and (reused["title"].lower() != clean_title.lower() or reused.get("tier") != tier)
+            ):
                 dynamic_tpl_id = auto_template_id(
-                    studio_id, genre, clean_title, {**prev_tpl_lookup, **tpl_lookup})
+                    studio_id, genre, tier, clean_title, {**prev_tpl_lookup, **tpl_lookup})
 
             if dynamic_tpl_id not in tpl_lookup:
                 new_tpl = {
@@ -495,9 +528,13 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             "instructor": instructor_clean,
             "instructorKey": canonical_lookup.get(norm_inst, norm_inst),
             "isSubstitute": sess.get("isSubstitute", False),
-            "status": "scheduled",
+            "status": sess.get("status", "scheduled"),
             "bookingUrl": sess.get("bookingUrl", "")
         }
+        if sess.get("regularInstructor"):
+            session_record["regularInstructor"] = ' '.join(
+                html_lib.unescape(sess["regularInstructor"]).split()
+            )
         if studio_level:
             session_record["rawLevel"] = studio_level
         if studio_category:
@@ -506,12 +543,6 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             session_record["description"] = session_desc
 
         normalized_sessions.append(session_record)
-
-    # Window dates: 14-day rolling window anchored to current week's Monday in NYC
-    today_dt = datetime.now(NY_TZ)
-    current_monday_dt = today_dt - timedelta(days=today_dt.weekday())
-    window_start = current_monday_dt.strftime("%Y-%m-%d")
-    window_end = (current_monday_dt + timedelta(days=13)).strftime("%Y-%m-%d")
 
     # Filter sessions to the 14-day rolling window
     normalized_sessions = [
@@ -545,6 +576,10 @@ def main():
 
     print("Building NYC Solo Dance Calendar live feed...")
     feed, review_queue = generate_live_feed()
+
+    if not feed["sessions"]:
+        print("Error: generated feed contains 0 sessions; aborting overwrite.", file=sys.stderr)
+        sys.exit(1)
 
     save_json(output_path, feed)
     save_json(review_queue_path, review_queue)

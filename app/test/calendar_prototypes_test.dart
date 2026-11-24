@@ -60,7 +60,24 @@ class _FakeFeedNotifier extends FeedNotifier {
   Future<Feed> build() => _load();
 }
 
-Widget _app(Future<Feed> Function() load) => ProviderScope(
+class _FakeSavedSlots extends SavedSlots {
+  _FakeSavedSlots(this._initial);
+  final Set<SavedSlot> _initial;
+
+  @override
+  Set<SavedSlot> build() => _initial;
+}
+
+class _FakeSavedSeries extends SavedSeries {
+  @override
+  Set<String> build() => const {};
+}
+
+Widget _app(
+  Future<Feed> Function() load, {
+  Set<SavedSlot> savedSlots = const {},
+}) =>
+    ProviderScope(
       overrides: [
         feedProvider.overrideWith(() => _FakeFeedNotifier(load)),
         appDatabaseProvider.overrideWith((ref) {
@@ -68,6 +85,8 @@ Widget _app(Future<Feed> Function() load) => ProviderScope(
           ref.onDispose(db.close);
           return db;
         }),
+        savedSlotsProvider.overrideWith(() => _FakeSavedSlots(savedSlots)),
+        savedSeriesProvider.overrideWith(() => _FakeSavedSeries()),
       ],
       child: const NYCStudioCalendarApp(),
     );
@@ -129,5 +148,140 @@ void main() {
     expect(attempts, 2);
     expect(find.byType(FeedErrorView), findsNothing);
     expect(find.byType(GenreAgendaView), findsOneWidget);
+  });
+
+  testWidgets('StudioColumnsView widens dense columns and shows late-evening sessions without overflow',
+      (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    final today = getTodayInNewYork();
+    registerTemplates([
+      const ClassTemplate(
+        id: 'steps_dense_ballet',
+        studioId: StudioId.steps,
+        title: 'Dense Steps Ballet',
+        rawLevelLabel: 'OPEN',
+        tier: Tier.allLevels,
+        primaryGenre: Genre.ballet,
+        slots: [],
+        description: '',
+        catalogUrl: '',
+      ),
+      const ClassTemplate(
+        id: 'danznik_late_social',
+        studioId: StudioId.danznik,
+        title: 'Late Night Social',
+        rawLevelLabel: 'OPEN',
+        tier: Tier.allLevels,
+        primaryGenre: Genre.social,
+        slots: [],
+        description: '',
+        catalogUrl: '',
+      ),
+    ]);
+
+    final denseFeed = Feed(
+      today: today,
+      windowStart: today.startOfWeek,
+      sessions: [
+        for (var i = 0; i < 14; i++)
+          ClassSession(
+            id: 'steps_overlap_$i',
+            templateId: 'steps_dense_ballet',
+            studioId: StudioId.steps,
+            serviceDate: today,
+            startMin: 12 * 60,
+            endMin: 13 * 60 + 30,
+            instructor: 'Teacher $i',
+            isSubstitute: false,
+            status: SessionStatus.scheduled,
+            bookingUrl: 'https://stepsnyc.com',
+          ),
+        ClassSession(
+          id: 'danznik_late_1',
+          templateId: 'danznik_late_social',
+          studioId: StudioId.danznik,
+          serviceDate: today,
+          startMin: 21 * 60,
+          endMin: 23 * 60 + 45,
+          instructor: 'Late Host',
+          isSubstitute: false,
+          status: SessionStatus.scheduled,
+          bookingUrl: 'https://danznik.com',
+        ),
+      ],
+      series: const [],
+    );
+
+    await tester.pumpWidget(_app(() async => denseFeed));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Studio Columns'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(StudioColumnsView), findsOneWidget);
+    expect(find.text('Late Night Social'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('MyWeekView keeps booking button visible for substituted slots',
+      (WidgetTester tester) async {
+    final today = getTodayInNewYork();
+    registerTemplates([
+      const ClassTemplate(
+        id: 'sub_tpl',
+        studioId: StudioId.ailey,
+        title: 'Horton Technique',
+        rawLevelLabel: 'OPEN',
+        tier: Tier.allLevels,
+        primaryGenre: Genre.contemporaryModern,
+        slots: [],
+        description: '',
+        catalogUrl: '',
+      ),
+    ]);
+
+    final feed = Feed(
+      today: today,
+      windowStart: today.startOfWeek,
+      sessions: [
+        ClassSession(
+          id: 'sub_sess',
+          templateId: 'sub_tpl',
+          studioId: StudioId.ailey,
+          serviceDate: today,
+          startMin: 18 * 60,
+          endMin: 19 * 60 + 30,
+          instructor: 'Sam Lee',
+          instructorKey: 'sam lee',
+          isSubstitute: true,
+          status: SessionStatus.scheduled,
+          bookingUrl: 'https://ailey.org',
+        ),
+      ],
+      series: const [],
+    );
+
+    final slot = SavedSlot(
+      templateId: 'sub_tpl',
+      weekday: today.weekday,
+      startMin: 18 * 60,
+      instructor: 'Regular Teacher',
+      instructorKey: 'regular teacher',
+    );
+
+    await tester.pumpWidget(_app(() async => feed, savedSlots: {slot}));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('My Regimen'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Teacher Substitute'), findsOneWidget);
+    expect(find.text('Book on Ailey'), findsOneWidget);
   });
 }

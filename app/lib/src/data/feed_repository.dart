@@ -233,6 +233,9 @@ class FeedRepository {
         endMin: m['endMin'] as int,
         instructor: unescapeHtml(m['instructor'] as String),
         instructorKey: m['instructorKey'] as String?,
+        regularInstructor: (m['regularInstructor'] as String?) == null
+            ? null
+            : unescapeHtml(m['regularInstructor'] as String),
         rawTitle: (m['rawClassTitle'] as String?) == null
             ? null
             : unescapeHtml(m['rawClassTitle'] as String),

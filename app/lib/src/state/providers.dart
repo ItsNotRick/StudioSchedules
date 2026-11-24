@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart' show Value;
+import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/database/app_database.dart';
@@ -153,34 +154,154 @@ final upcomingSeriesProvider = Provider<List<WorkshopSeries>>((ref) {
     ..sort((a, b) => a.startDate.compareTo(b.startDate));
 });
 
+/// Builds the [SavedSlot] to persist when saving [s]. When [s] is currently
+/// taught by a substitute, resolves the underlying regular teacher (from
+/// [ClassSession.regularInstructor] or a unique non-sub occurrence on another
+/// date) instead of storing the substitute as the regular teacher; falls back
+/// to a slot-level bookmark (`instructor: null`) if ambiguous.
+///
+/// [resolver] maps the regular teacher's name to the same key the feed uses
+/// (through its alias map), so the slot matches later weeks under any spelling.
+@visibleForTesting
+SavedSlot buildSavedSlotForSession(
+  ClassSession s,
+  Iterable<ClassSession> allSessions, {
+  TeacherResolver? resolver,
+}) {
+  if (!s.isSubstitute) {
+    return SavedSlot(
+      templateId: s.templateId,
+      weekday: s.serviceDate.weekday,
+      startMin: s.startMin,
+      instructor: s.instructor,
+      instructorKey: s.matchKey,
+    );
+  }
+
+  final explicitRegular = s.regularInstructor?.trim();
+  if (explicitRegular != null && explicitRegular.isNotEmpty) {
+    return SavedSlot(
+      templateId: s.templateId,
+      weekday: s.serviceDate.weekday,
+      startMin: s.startMin,
+      instructor: explicitRegular,
+      instructorKey: (resolver ?? TeacherResolver.empty).keyFor(explicitRegular),
+    );
+  }
+
+  final concurrentOnDate = allSessions
+      .where((o) =>
+          o.id != s.id &&
+          o.serviceDate == s.serviceDate &&
+          o.templateId == s.templateId &&
+          o.startMin == s.startMin)
+      .map((o) => o.matchKey)
+      .toSet();
+
+  final candidates = allSessions.where((o) =>
+      o.serviceDate != s.serviceDate &&
+      o.templateId == s.templateId &&
+      o.serviceDate.weekday == s.serviceDate.weekday &&
+      o.startMin == s.startMin &&
+      !o.isSubstitute &&
+      !concurrentOnDate.contains(o.matchKey)).toList();
+
+  if (candidates.map((o) => o.matchKey).toSet().length == 1) {
+    final reg = candidates.first;
+    return SavedSlot(
+      templateId: s.templateId,
+      weekday: s.serviceDate.weekday,
+      startMin: s.startMin,
+      instructor: reg.instructor,
+      instructorKey: reg.matchKey,
+    );
+  }
+
+  return SavedSlot(
+    templateId: s.templateId,
+    weekday: s.serviceDate.weekday,
+    startMin: s.startMin,
+  );
+}
+
 class SavedSlots extends Notifier<Set<SavedSlot>> {
   final Set<SavedSlot> _addedBeforeLoad = {};
   final Set<SavedSlot> _removedBeforeLoad = {};
   bool _isLoaded = false;
+  Future<void> _writeQueue = Future.value();
 
   @override
   Set<SavedSlot> build() {
     _addedBeforeLoad.clear();
     _removedBeforeLoad.clear();
     _isLoaded = false;
+    _writeQueue = Future.value();
     _loadFromDb();
     return {};
+  }
+
+  void _enqueueWrite(Future<void> Function() op) {
+    _writeQueue = _writeQueue.then((_) => op()).catchError((_) {});
   }
 
   Future<void> _loadFromDb() async {
     try {
       final db = ref.read(appDatabaseProvider);
       final dbSlots = await db.getAllSavedSlots();
-      final loaded = dbSlots
-          .map((s) => SavedSlot(
-                templateId: s.templateId,
-                weekday: s.targetWeekday,
-                startMin: s.targetStartMin,
-                instructor:
-                    (s.label.isNotEmpty && s.label != s.templateId) ? s.label : null,
-                instructorKey: s.instructorKey,
-              ))
-          .toSet();
+      if (!ref.mounted) return;
+
+      final canonicalSlots = <SavedSlot, SavedSlot>{};
+      final staleIds = <String>{};
+      final toUpsert = <SavedSlot>{};
+
+      for (final row in dbSlots) {
+        final slot = SavedSlot(
+          templateId: row.templateId,
+          weekday: row.targetWeekday,
+          startMin: row.targetStartMin,
+          instructor:
+              (row.label.isNotEmpty && row.label != row.templateId)
+                  ? row.label
+                  : null,
+          instructorKey: row.instructorKey,
+        );
+        final canonicalId = _slotDbId(slot);
+        final existing = canonicalSlots[slot];
+        if (existing == null) {
+          canonicalSlots[slot] = slot;
+          if (row.id != canonicalId) {
+            staleIds.add(row.id);
+            toUpsert.add(slot);
+          }
+        } else {
+          final existingCanonicalId = _slotDbId(existing);
+          if (row.id != existingCanonicalId) {
+            staleIds.add(row.id);
+          } else {
+            canonicalSlots[slot] = slot;
+          }
+        }
+      }
+
+      toUpsert.removeAll(_removedBeforeLoad);
+      if (staleIds.isNotEmpty || toUpsert.isNotEmpty) {
+        _enqueueWrite(() async {
+          for (final s in toUpsert) {
+            await db.insertOrUpdateSlot(SavedRegimenSlotsCompanion.insert(
+              id: _slotDbId(s),
+              templateId: s.templateId,
+              targetWeekday: s.weekday,
+              targetStartMin: s.startMin,
+              label: s.instructor ?? s.templateId,
+              instructorKey: Value(s.instructorKey),
+              createdAt: DateTime.now(),
+            ));
+          }
+          await db.deleteSlotsByIds(staleIds);
+        });
+      }
+
+      final loaded = canonicalSlots.values.toSet();
       _isLoaded = true;
       state = ({...state, ...loaded, ..._addedBeforeLoad})
         ..removeAll(_removedBeforeLoad);
@@ -210,12 +331,10 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
       }
       state = next;
     } else {
-      final slot = SavedSlot(
-        templateId: s.templateId,
-        weekday: s.serviceDate.weekday,
-        startMin: s.startMin,
-        instructor: s.instructor,
-        instructorKey: s.matchKey,
+      final slot = buildSavedSlotForSession(
+        s,
+        ref.read(currentFeedProvider).sessions,
+        resolver: ref.read(teacherResolverProvider),
       );
       next.add(slot);
       if (!_isLoaded) {
@@ -238,14 +357,13 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
 
   static String _slotDbId(SavedSlot slot) {
     final base = '${slot.templateId}_${slot.weekday}_${slot.startMin}';
-    if (slot.instructor == null || slot.instructor!.isEmpty) return base;
-    final cleanInst =
-        slot.instructor!.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
-    return '${base}_$cleanInst';
+    final key = slot.teacherKey;
+    if (key == null || key.isEmpty) return base;
+    return '${base}_${Uri.encodeComponent(key)}';
   }
 
-  void _persistSlotToggle(SavedSlot slot, bool isAdded) async {
-    try {
+  void _persistSlotToggle(SavedSlot slot, bool isAdded) {
+    _enqueueWrite(() async {
       final db = ref.read(appDatabaseProvider);
       final id = _slotDbId(slot);
       if (isAdded) {
@@ -259,14 +377,20 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
           createdAt: DateTime.now(),
         ));
       } else {
-        await db.deleteSlot(id);
-        // Also delete legacy key without instructor suffix if present
-        final legacyId = '${slot.templateId}_${slot.weekday}_${slot.startMin}';
-        if (legacyId != id) {
-          await db.deleteSlot(legacyId);
+        final idsToDelete = <String>{id};
+        // Also remove pre-migration display-name id if this slot has an instructor.
+        if (slot.instructor != null && slot.instructor!.isNotEmpty) {
+          final cleanInst =
+              slot.instructor!.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+          if (cleanInst.isNotEmpty) {
+            idsToDelete.add(
+              '${slot.templateId}_${slot.weekday}_${slot.startMin}_$cleanInst',
+            );
+          }
         }
+        await db.deleteSlotsByIds(idsToDelete);
       }
-    } catch (_) {}
+    });
   }
 }
 
@@ -277,20 +401,27 @@ class SavedSeries extends Notifier<Set<String>> {
   final Set<String> _addedBeforeLoad = {};
   final Set<String> _removedBeforeLoad = {};
   bool _isLoaded = false;
+  Future<void> _writeQueue = Future.value();
 
   @override
   Set<String> build() {
     _addedBeforeLoad.clear();
     _removedBeforeLoad.clear();
     _isLoaded = false;
+    _writeQueue = Future.value();
     _loadFromDb();
     return {};
+  }
+
+  void _enqueueWrite(Future<void> Function() op) {
+    _writeQueue = _writeQueue.then((_) => op()).catchError((_) {});
   }
 
   Future<void> _loadFromDb() async {
     try {
       final db = ref.read(appDatabaseProvider);
       final val = await db.getSetting('saved_series');
+      if (!ref.mounted) return;
       final loaded = (val != null && val.isNotEmpty)
           ? val.split(',').where((s) => s.isNotEmpty).toSet()
           : <String>{};
@@ -327,11 +458,11 @@ class SavedSeries extends Notifier<Set<String>> {
     }
   }
 
-  void _persist(Set<String> series) async {
-    try {
+  void _persist(Set<String> series) {
+    _enqueueWrite(() async {
       final db = ref.read(appDatabaseProvider);
       await db.setSetting('saved_series', series.join(','));
-    } catch (_) {}
+    });
   }
 }
 

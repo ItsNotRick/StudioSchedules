@@ -72,31 +72,39 @@ class MyWeekView extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                OutlinedButton.icon(
-                  onPressed: hasAny
-                      ? () async {
-                          try {
-                            await CalendarExportService.exportRegimenToCalendar(
-                              regimenSlots: resolvedSlots,
-                              weekLabel: formatDate(weekStart),
-                              enrolledSeries: enrolledSeries,
-                              weekStart: weekStart,
-                            );
-                          } catch (e) {
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Calendar export: $e')),
+                Builder(
+                  builder: (btnContext) => OutlinedButton.icon(
+                    onPressed: hasAny
+                        ? () async {
+                            try {
+                              final box =
+                                  btnContext.findRenderObject() as RenderBox?;
+                              final origin = box != null && box.hasSize
+                                  ? box.localToGlobal(Offset.zero) & box.size
+                                  : const Rect.fromLTWH(0, 0, 1, 1);
+                              await CalendarExportService.exportRegimenToCalendar(
+                                regimenSlots: resolvedSlots,
+                                weekLabel: formatDate(weekStart),
+                                enrolledSeries: enrolledSeries,
+                                weekStart: weekStart,
+                                sharePositionOrigin: origin,
                               );
+                            } catch (e) {
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('Calendar export: $e')),
+                                );
+                              }
                             }
                           }
-                        }
-                      : null,
-                  icon: const Icon(Icons.calendar_today, size: 14),
-                  label: const Text('Export', style: TextStyle(fontSize: 12)),
-                  style: OutlinedButton.styleFrom(
-                    visualDensity: VisualDensity.compact,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                        : null,
+                    icon: const Icon(Icons.calendar_today, size: 14),
+                    label: const Text('Export', style: TextStyle(fontSize: 12)),
+                    style: OutlinedButton.styleFrom(
+                      visualDensity: VisualDensity.compact,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 8),
+                    ),
                   ),
                 ),
               ],
@@ -345,7 +353,9 @@ class _RegimenSlotCard extends ConsumerWidget {
                   ),
                 ],
               ),
-              if (session != null && resolved.health == SlotHealth.ok) ...[
+              if (session != null &&
+                  (resolved.health == SlotHealth.ok ||
+                      resolved.health == SlotHealth.substitute)) ...[
                 const SizedBox(height: 8),
                 Align(
                   alignment: Alignment.centerRight,

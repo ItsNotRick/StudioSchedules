@@ -1,5 +1,10 @@
+import 'package:drift/drift.dart' show Value;
+import 'package:drift/native.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:nyc_dance_calendar/src/data/database/app_database.dart';
 import 'package:nyc_dance_calendar/src/domain/models.dart';
+import 'package:nyc_dance_calendar/src/domain/teachers.dart';
 import 'package:nyc_dance_calendar/src/state/providers.dart';
 
 const _tpl = 'ailey_contemporaryModern_open_contemporary';
@@ -138,11 +143,193 @@ void main() {
     expect(slotsClaiming(other, [sub, other], {slot}), isEmpty);
   });
 
-  test('a slot claims only its own session among concurrent sections', () {
+    test('a slot claims only its own session among concurrent sections', () {
     final brinda = _slot('Brinda Guha');
     final b = _session('b', 'Brinda Guha');
     final n = _session('n', 'Nicholas Palmquist');
     expect(slotsClaiming(b, [b, n], {brinda}), [brinda]);
     expect(slotsClaiming(n, [b, n], {brinda}), isEmpty);
+  });
+
+  test('absent concurrent section does not claim other known regular teacher as sub', () {
+    final brinda = _slot('Brinda Guha');
+    const wk1 = ServiceDate(2026, 11, 11);
+    const wk2 = ServiceDate(2026, 11, 18);
+    final allSessions = [
+      _session('b1', 'Brinda Guha'),
+      _session('n1', 'Nicholas Palmquist'),
+      ClassSession(
+        id: 'n2',
+        templateId: _tpl,
+        studioId: StudioId.ailey,
+        serviceDate: wk2,
+        startMin: 1170,
+        endMin: 1260,
+        instructor: 'Nicholas Palmquist',
+        isSubstitute: false,
+        status: SessionStatus.scheduled,
+        bookingUrl: 'https://ailey.org',
+      ),
+    ];
+    expect(allSessions.first.serviceDate, wk1);
+    expect(
+      slotHealth(resolveSlot(brinda, wk2, allSessions, {brinda})),
+      SlotHealth.notOnSchedule,
+    );
+  });
+
+  test('buildSavedSlotForSession resolves regular teacher when saving a subbed session', () {
+    const wk1 = ServiceDate(2026, 11, 11);
+    const wk2 = ServiceDate(2026, 11, 18);
+    final subWithExplicit = ClassSession(
+      id: 'sub_explicit',
+      templateId: _tpl,
+      studioId: StudioId.pmt,
+      serviceDate: wk1,
+      startMin: 1170,
+      endMin: 1260,
+      instructor: 'Temp Sub',
+      regularInstructor: 'Shirlene Quigley',
+      isSubstitute: true,
+      status: SessionStatus.scheduled,
+      bookingUrl: 'https://pmt.example',
+    );
+    final savedExplicit = buildSavedSlotForSession(subWithExplicit, [subWithExplicit]);
+    expect(savedExplicit.instructor, 'Shirlene Quigley');
+    expect(savedExplicit.instructorKey, 'shirlene quigley');
+
+    // The regular teacher's key goes through the feed's alias map, so the
+    // slot matches later weeks listed under the canonical spelling.
+    final aliased = ClassSession(
+      id: 'sub_aliased',
+      templateId: _tpl,
+      studioId: StudioId.pmt,
+      serviceDate: wk1,
+      startMin: 1170,
+      endMin: 1260,
+      instructor: 'Temp Sub',
+      regularInstructor: 'Camden Loeser',
+      isSubstitute: true,
+      status: SessionStatus.scheduled,
+      bookingUrl: 'https://pmt.example',
+    );
+    final wk2Canonical = ClassSession(
+      id: 'wk2_canonical',
+      templateId: _tpl,
+      studioId: StudioId.pmt,
+      serviceDate: wk2,
+      startMin: 1170,
+      endMin: 1260,
+      instructor: 'Cam Loeser',
+      instructorKey: 'cam loeser',
+      isSubstitute: false,
+      status: SessionStatus.scheduled,
+      bookingUrl: 'https://pmt.example',
+    );
+    final resolver = TeacherResolver.build(
+      aliases: const {'camden loeser': 'cam loeser', 'cam loeser': 'cam loeser'},
+      sessions: [aliased, wk2Canonical],
+    );
+    final savedAliased = buildSavedSlotForSession(
+      aliased,
+      [aliased, wk2Canonical],
+      resolver: resolver,
+    );
+    expect(savedAliased.instructor, 'Camden Loeser');
+    expect(savedAliased.instructorKey, 'cam loeser');
+    expect(savedAliased.matches(wk2Canonical), isTrue);
+
+    final subInferred = _session('s_sub', 'Temp Sub', isSub: true);
+    final wk2Regular = ClassSession(
+      id: 'wk2_reg',
+      templateId: _tpl,
+      studioId: StudioId.ailey,
+      serviceDate: wk2,
+      startMin: 1170,
+      endMin: 1260,
+      instructor: 'Adriana Pierce',
+      instructorKey: 'adriana pierce',
+      isSubstitute: false,
+      status: SessionStatus.scheduled,
+      bookingUrl: 'https://ailey.org',
+    );
+    final savedInferred = buildSavedSlotForSession(subInferred, [subInferred, wk2Regular]);
+    expect(savedInferred.instructor, 'Adriana Pierce');
+
+    final subOnly = buildSavedSlotForSession(subInferred, [subInferred]);
+    expect(subOnly.instructor, isNull);
+    expect(subOnly.instructorKey, isNull);
+  });
+
+  test('nyWallClockToUtc handles EST, EDT, DST boundaries, and 1440 rollover', () {
+    expect(
+      nyWallClockToUtc(const ServiceDate(2026, 1, 15), 18 * 60),
+      DateTime.utc(2026, 1, 15, 23, 0),
+    );
+    expect(
+      nyWallClockToUtc(const ServiceDate(2026, 7, 15), 18 * 60),
+      DateTime.utc(2026, 7, 15, 22, 0),
+    );
+    expect(
+      nyWallClockToUtc(const ServiceDate(2026, 11, 1), 30),
+      DateTime.utc(2026, 11, 1, 4, 30),
+    );
+    expect(
+      nyWallClockToUtc(const ServiceDate(2026, 11, 1), 150),
+      DateTime.utc(2026, 11, 1, 7, 30),
+    );
+    expect(
+      nyWallClockToUtc(const ServiceDate(2026, 11, 24), 1440),
+      DateTime.utc(2026, 11, 25, 5, 0),
+    );
+    expect(formatTime(1440), '12am');
+  });
+
+  test('SavedSlots deletes alias rows without leaving zombies or deleting legacy slots', () async {
+    final db = AppDatabase(NativeDatabase.memory());
+    addTearDown(db.close);
+
+    // Seed an instructor-less legacy slot plus a pre-migration alias-keyed row.
+    const legacyId = '${_tpl}_3_1170';
+    await db.insertOrUpdateSlot(SavedRegimenSlotsCompanion.insert(
+      id: legacyId,
+      templateId: _tpl,
+      targetWeekday: 3,
+      targetStartMin: 1170,
+      label: _tpl,
+      instructorKey: const Value(null),
+      createdAt: DateTime.utc(2026, 11, 1),
+    ));
+    await db.insertOrUpdateSlot(SavedRegimenSlotsCompanion.insert(
+      id: '${_tpl}_3_1170_kathysullivan',
+      templateId: _tpl,
+      targetWeekday: 3,
+      targetStartMin: 1170,
+      label: 'Kathy Sullivan',
+      instructorKey: const Value('kathryn sullivan'),
+      createdAt: DateTime.utc(2026, 11, 2),
+    ));
+
+    final container = ProviderContainer(
+      overrides: [appDatabaseProvider.overrideWithValue(db)],
+    );
+    addTearDown(container.dispose);
+
+    container.read(savedSlotsProvider);
+    await pumpEventQueue();
+
+    const kathrynAlias = SavedSlot(
+      templateId: _tpl,
+      weekday: 3,
+      startMin: 1170,
+      instructor: 'Kathryn Sullivan',
+      instructorKey: 'kathryn sullivan',
+    );
+    container.read(savedSlotsProvider.notifier).remove(kathrynAlias);
+    await pumpEventQueue();
+    await Future<void>.delayed(const Duration(milliseconds: 20));
+
+    final remaining = await db.getAllSavedSlots();
+    expect(remaining.map((r) => r.id), [legacyId]);
   });
 }

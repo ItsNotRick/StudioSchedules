@@ -37,8 +37,7 @@ def _parse_sessions(markup: str, seen: set) -> List[Dict[str, Any]]:
         if not root_m:
             continue
         root_classes, mbo_id = root_m.group(1), root_m.group(2)
-        if "cancel" in root_classes.lower():
-            continue
+        is_cancelled = "cancel" in root_classes.lower()
 
         start_m = re.search(r'class="hc_starttime" datetime="([^"]+)"', block)
         end_m = re.search(r'class="hc_endtime" datetime="([^"]+)"', block)
@@ -91,6 +90,7 @@ def _parse_sessions(markup: str, seen: set) -> List[Dict[str, Any]]:
             "tz": "America/New_York",
             "instructor": instructor,
             "isSubstitute": is_sub,
+            "status": "cancelled" if is_cancelled else "scheduled",
             "bookingUrl": DANZNIK_SCHEDULE_URL,
         }
         if level:

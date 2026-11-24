@@ -268,21 +268,36 @@ class _SessionDetail extends ConsumerWidget {
           label: Text('Book on ${studio.shortName}'),
         ),
         const SizedBox(height: 8),
-        OutlinedButton.icon(
-          onPressed: () async {
-            final ok = await CalendarExportService.addSessionToCalendar(session);
-            if (!ok && context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Could not open calendar')),
-              );
-            }
-          },
-          icon: const Icon(Icons.calendar_today_outlined),
-          label: const Text('Add to calendar'),
+        Builder(
+          builder: (btnContext) => OutlinedButton.icon(
+            onPressed: session.isCancelled
+                ? null
+                : () async {
+                    final box = btnContext.findRenderObject() as RenderBox?;
+                    final origin = box != null && box.hasSize
+                        ? box.localToGlobal(Offset.zero) & box.size
+                        : const Rect.fromLTWH(0, 0, 1, 1);
+                    final ok = await CalendarExportService.addSessionToCalendar(
+                      session,
+                      sharePositionOrigin: origin,
+                    );
+                    if (!ok && context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Could not open calendar')),
+                      );
+                    }
+                  },
+            icon: const Icon(Icons.calendar_today_outlined),
+            label: const Text('Add to calendar'),
+          ),
         ),
         const SizedBox(height: 8),
         OutlinedButton.icon(
-          onPressed: () => ref.read(savedSlotsProvider.notifier).toggleFor(session),
+          // Cancelled sessions often list "Staff" instead of the real teacher,
+          // so saving from one would store a slot that never matches again.
+          onPressed: (session.isCancelled && !saved)
+              ? null
+              : () => ref.read(savedSlotsProvider.notifier).toggleFor(session),
           icon: Icon(saved ? Icons.bookmark_remove : Icons.bookmark_add_outlined),
           label: Text(saved
               ? 'Remove from my week'
