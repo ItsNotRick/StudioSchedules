@@ -8,7 +8,7 @@ library;
 
 import 'package:flutter/material.dart';
 
-enum StudioId { bdc, steps, ailey, peridance, pmt }
+enum StudioId { bdc, steps, ailey, peridance, pmt, danznik }
 
 class Studio {
   const Studio({
@@ -28,11 +28,14 @@ class Studio {
   final Color color;
 }
 
-/// Three hand-assigned tiers (Q4). The studio's raw label is always shown.
+/// Normalized level tiers (Q4). The studio's raw label is always shown.
 enum Tier {
   zeroExperience('Zero experience'),
   beginner('Beginner'),
-  advancedBeginner('Adv. beginner');
+  advancedBeginner('Adv. beginner'),
+  intermediate('Intermediate'),
+  advanced('Advanced'),
+  allLevels('All levels');
 
   const Tier(this.label);
   final String label;
@@ -48,6 +51,9 @@ enum Genre {
   commercialHeels('Commercial / Heels', Icons.star_outline),
   africanDiaspora('African / Afro-diasporic', Icons.public),
   worldCultural('World / Cultural', Icons.language),
+  social('Social', Icons.people_outline),
+  ballroom('Ballroom', Icons.nightlife),
+  misc('Misc.', Icons.fitness_center),
   other('Other', Icons.category_outlined);
 
   const Genre(this.label, this.icon);
