@@ -105,6 +105,13 @@ class AppDatabase extends _$AppDatabase {
     return (delete(savedRegimenSlots)..where((tbl) => tbl.id.equals(id))).go();
   }
 
+  Future<int> deleteSlotsByIds(Iterable<String> ids) {
+    final idList = ids.toList();
+    if (idList.isEmpty) return Future.value(0);
+    return (delete(savedRegimenSlots)..where((tbl) => tbl.id.isIn(idList)))
+        .go();
+  }
+
   // User settings
   Future<void> setSetting(String key, String value) {
     return into(userSettings).insertOnConflictUpdate(

@@ -71,8 +71,7 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
             end_m = re.search(r'"end":\s*"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})"', b)
             end_iso = end_m.group(1) if end_m else ""
 
-            if '"canceled":true' in b or '"cancelled":true' in b:
-                continue
+            is_cancelled = '"canceled":true' in b or '"cancelled":true' in b
 
             inst_m = re.search(r'"instructor":\s*"([^"]+)"', b)
             instructor = inst_m.group(1).strip() if inst_m else "Staff"
@@ -126,6 +125,7 @@ def _fetch_month_classes(url: str) -> List[Dict[str, Any]]:
                     "tz": "America/New_York",
                     "instructor": instructor,
                     "isSubstitute": is_sub,
+                    "status": "cancelled" if is_cancelled else "scheduled",
                     "bookingUrl": booking_url
                 }
 

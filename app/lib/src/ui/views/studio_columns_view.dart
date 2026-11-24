@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,12 +23,33 @@ class StudioColumnsView extends ConsumerWidget {
     final cols = StudioId.values.where(filter.studios.contains).toList();
     final nowMin = date == today ? getNowMinInNewYork() : null;
     const gutter = 44.0;
+    const minLaneWidth = 56.0;
 
     if (cols.isEmpty) return const EmptyState('Select at least one studio.');
 
+    final itemsByStudio = <StudioId, List<GridItem>>{};
+    final lanesByStudio = <StudioId, List<(int, int)>>{};
+    final maxLanesByStudio = <StudioId, int>{};
+    for (final s in cols) {
+      final items = [
+        ...sessions.where((x) => x.studioId == s).map(GridItem.session),
+        ...series.where((x) => x.studioId == s).map(GridItem.series),
+      ];
+      final lanes = layoutLanes(items);
+      itemsByStudio[s] = items;
+      lanesByStudio[s] = lanes;
+      maxLanesByStudio[s] = lanes.fold<int>(1, (best, l) => math.max(best, l.$2));
+    }
+
     return LayoutBuilder(builder: (context, c) {
-      final colWidth = ((c.maxWidth - gutter - 8) / cols.length).clamp(72.0, 240.0);
-      final totalWidth = gutter + colWidth * cols.length + 8;
+      final baseColWidth =
+          ((c.maxWidth - gutter - 8) / cols.length).clamp(72.0, 240.0);
+      final colWidths = {
+        for (final s in cols)
+          s: math.max(baseColWidth, maxLanesByStudio[s]! * minLaneWidth),
+      };
+      final totalWidth =
+          gutter + colWidths.values.fold<double>(0.0, (a, b) => a + b) + 8;
 
       final grid = SizedBox(
         width: totalWidth,
@@ -37,7 +59,7 @@ class StudioColumnsView extends ConsumerWidget {
             const SizedBox(width: gutter),
             for (final s in cols)
               SizedBox(
-                width: colWidth,
+                width: colWidths[s]!,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 6),
                   child: Column(children: [
@@ -57,7 +79,7 @@ class StudioColumnsView extends ConsumerWidget {
                 const HourGutter(width: gutter),
                 for (final s in cols)
                   Container(
-                    width: colWidth,
+                    width: colWidths[s]!,
                     height: gridHeight,
                     decoration: BoxDecoration(
                       border: Border(left: BorderSide(color: Theme.of(context).dividerColor)),
@@ -67,12 +89,10 @@ class StudioColumnsView extends ConsumerWidget {
                       Positioned.fill(child: HourLines(nowMin: nowMin)),
                       ...buildBlocks(
                         context,
-                        [
-                          ...sessions.where((x) => x.studioId == s).map(GridItem.session),
-                          ...series.where((x) => x.studioId == s).map(GridItem.series),
-                        ],
-                        colWidth,
+                        itemsByStudio[s]!,
+                        colWidths[s]!,
                         compact: true,
+                        precomputedLanes: lanesByStudio[s]!,
                       ),
                     ]),
                   ),

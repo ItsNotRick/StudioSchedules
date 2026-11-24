@@ -27,6 +27,17 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Fetch Previously Published Feed for Cache Fallback
+        run: |
+          if curl -fsSL --max-time 15 "https://itsnotrick.github.io/StudioSchedules/schedule.json" -o /tmp/prev_schedule.json; then
+            python3 -c 'import json; d = json.load(open("/tmp/prev_schedule.json", encoding="utf-8")); assert isinstance(d.get("sessions"), list) and len(d["sessions"]) > 0' \
+              && cp /tmp/prev_schedule.json backend/data/schedule.json \
+              && echo "Loaded live published feed as fallback cache." \
+              || echo "Published feed invalid or empty; keeping git-tracked schedule.json."
+          else
+            echo "Could not fetch published feed; keeping git-tracked schedule.json."
+          fi
+
       - name: Run Feed Aggregator
         run: |
           python3 backend/src/build_feed.py

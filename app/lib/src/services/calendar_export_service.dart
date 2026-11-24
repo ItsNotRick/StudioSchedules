@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui' show Rect;
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
@@ -9,19 +10,17 @@ import '../state/providers.dart';
 class CalendarExportService {
   /// Prompts the native iOS/Android calendar UI to add this class session.
   /// Falls back to sharing an .ics file if native EventKit is unavailable.
-  static Future<bool> addSessionToCalendar(ClassSession session) async {
+  static Future<bool> addSessionToCalendar(
+    ClassSession session, {
+    Rect? sharePositionOrigin,
+  }) async {
     final tpl = templatesById[session.templateId];
     if (tpl == null) return false;
     final studio = studios[session.studioId]!;
     final date = session.serviceDate;
 
-    final startH = session.startMin ~/ 60;
-    final startM = session.startMin % 60;
-    final endH = session.endMin ~/ 60;
-    final endM = session.endMin % 60;
-
-    final startDt = DateTime(date.year, date.month, date.day, startH, startM);
-    final endDt = DateTime(date.year, date.month, date.day, endH, endM);
+    final startDt = nyWallClockToUtc(date, session.startMin);
+    final endDt = nyWallClockToUtc(date, session.endMin);
 
     final teacher = session.instructor;
     final subNote = session.isSubstitute ? ' [SUBSTITUTE TEACHER]' : '';
@@ -55,8 +54,24 @@ class CalendarExportService {
       return ok;
     } catch (_) {
       // Native plugin not available in the currently running process (e.g. desktop or test environment)
-      return exportSingleSessionToIcs(session);
+      return exportSingleSessionToIcs(
+        session,
+        sharePositionOrigin: sharePositionOrigin,
+      );
     }
+  }
+
+  static String _formatIcsDateTime(ServiceDate date, int minutesAfterMidnight) {
+    final extraDays = minutesAfterMidnight ~/ 1440;
+    final rem = minutesAfterMidnight % 1440;
+    final d = extraDays == 0 ? date : date.addDays(extraDays);
+    final h = rem ~/ 60;
+    final m = rem % 60;
+    return '${d.year}'
+        '${d.month.toString().padLeft(2, '0')}'
+        '${d.day.toString().padLeft(2, '0')}'
+        'T${h.toString().padLeft(2, '0')}'
+        '${m.toString().padLeft(2, '0')}00';
   }
 
   /// Builds the iCalendar RFC-5545 string for a single session.
@@ -66,22 +81,8 @@ class CalendarExportService {
     final studio = studios[session.studioId]!;
     final date = session.serviceDate;
 
-    final startH = session.startMin ~/ 60;
-    final startM = session.startMin % 60;
-    final endH = session.endMin ~/ 60;
-    final endM = session.endMin % 60;
-
-    final dtStart = '${date.year}'
-        '${date.month.toString().padLeft(2, '0')}'
-        '${date.day.toString().padLeft(2, '0')}'
-        'T${startH.toString().padLeft(2, '0')}'
-        '${startM.toString().padLeft(2, '0')}00';
-
-    final dtEnd = '${date.year}'
-        '${date.month.toString().padLeft(2, '0')}'
-        '${date.day.toString().padLeft(2, '0')}'
-        'T${endH.toString().padLeft(2, '0')}'
-        '${endM.toString().padLeft(2, '0')}00';
+    final dtStart = _formatIcsDateTime(date, session.startMin);
+    final dtEnd = _formatIcsDateTime(date, session.endMin);
 
     final teacher = session.instructor;
     final subNote = session.isSubstitute ? ' [SUBSTITUTE TEACHER]' : '';
@@ -142,7 +143,10 @@ class CalendarExportService {
   }
 
   /// Exports a single session as an iCalendar (.ics) file.
-  static Future<bool> exportSingleSessionToIcs(ClassSession session) async {
+  static Future<bool> exportSingleSessionToIcs(
+    ClassSession session, {
+    Rect? sharePositionOrigin,
+  }) async {
     final tpl = templatesById[session.templateId];
     if (tpl == null) return false;
     final studio = studios[session.studioId]!;
@@ -161,6 +165,7 @@ class CalendarExportService {
         files: [XFile(file.path, mimeType: 'text/calendar')],
         subject: '$summary on ${date.toString()}',
         text: 'Calendar invite for $summary on ${date.toString()}.',
+        sharePositionOrigin: sharePositionOrigin,
       ),
     );
 
@@ -219,24 +224,11 @@ class CalendarExportService {
       final studio = studios[tpl.studioId]!;
       final date = resolved.date;
 
-      final startH = resolved.slot.startMin ~/ 60;
-      final startM = resolved.slot.startMin % 60;
       final dur = session?.durationMin ?? 90;
       final endMin = resolved.slot.startMin + dur;
-      final endH = endMin ~/ 60;
-      final endM = endMin % 60;
 
-      final dtStart = '${date.year}'
-          '${date.month.toString().padLeft(2, '0')}'
-          '${date.day.toString().padLeft(2, '0')}'
-          'T${startH.toString().padLeft(2, '0')}'
-          '${startM.toString().padLeft(2, '0')}00';
-
-      final dtEnd = '${date.year}'
-          '${date.month.toString().padLeft(2, '0')}'
-          '${date.day.toString().padLeft(2, '0')}'
-          'T${endH.toString().padLeft(2, '0')}'
-          '${endM.toString().padLeft(2, '0')}00';
+      final dtStart = _formatIcsDateTime(date, resolved.slot.startMin);
+      final dtEnd = _formatIcsDateTime(date, endMin);
 
       final teacher = session?.instructor ?? resolved.slot.instructor ?? 'Staff';
       final subNote =
@@ -283,23 +275,10 @@ class CalendarExportService {
             continue;
           }
         }
-        final startH = s.startMin ~/ 60;
-        final startM = s.startMin % 60;
         final endMin = s.startMin + s.durationMin;
-        final endH = endMin ~/ 60;
-        final endM = endMin % 60;
 
-        final dtStart = '${date.year}'
-            '${date.month.toString().padLeft(2, '0')}'
-            '${date.day.toString().padLeft(2, '0')}'
-            'T${startH.toString().padLeft(2, '0')}'
-            '${startM.toString().padLeft(2, '0')}00';
-
-        final dtEnd = '${date.year}'
-            '${date.month.toString().padLeft(2, '0')}'
-            '${date.day.toString().padLeft(2, '0')}'
-            'T${endH.toString().padLeft(2, '0')}'
-            '${endM.toString().padLeft(2, '0')}00';
+        final dtStart = _formatIcsDateTime(date, s.startMin);
+        final dtEnd = _formatIcsDateTime(date, endMin);
 
         final summary = escapeIcsText(
             '${s.title} (Week ${w + 1}/${s.sessionCount}) at ${studio.shortName}');
@@ -333,6 +312,7 @@ class CalendarExportService {
     required String weekLabel,
     List<WorkshopSeries> enrolledSeries = const [],
     ServiceDate? weekStart,
+    Rect? sharePositionOrigin,
   }) async {
     final icsContent = generateRegimenIcsContent(
       regimenSlots: regimenSlots,
@@ -354,6 +334,7 @@ class CalendarExportService {
         files: [XFile(file.path, mimeType: 'text/calendar')],
         subject: 'NYC Dance Regimen ($weekLabel)',
         text: 'Exported dance classes for $weekLabel.',
+        sharePositionOrigin: sharePositionOrigin,
       ),
     );
   }

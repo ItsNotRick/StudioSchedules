@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../../data/feed.dart';
@@ -6,7 +7,7 @@ import '../common.dart';
 import '../detail_sheet.dart';
 
 const gridStartMin = 8 * 60;
-const gridEndMin = 23 * 60;
+const gridEndMin = 24 * 60;
 const hourHeight = 68.0;
 const gridHeight = (gridEndMin - gridStartMin) / 60 * hourHeight;
 
@@ -123,17 +124,27 @@ class HourLines extends StatelessWidget {
 
 /// Lays out [items] in a column of width [width].
 List<Widget> buildBlocks(BuildContext context, List<GridItem> items, double width,
-    {bool compact = false}) {
-  final lanes = layoutLanes(items);
+    {bool compact = false, List<(int, int)>? precomputedLanes}) {
+  final lanes = precomputedLanes ?? layoutLanes(items);
   return [
     for (var i = 0; i < items.length; i++)
-      Positioned(
-        top: yFor(items[i].start) + 1,
-        height: (items[i].end - items[i].start) / 60 * hourHeight - 2,
-        left: width / lanes[i].$2 * lanes[i].$1 + 1,
-        width: width / lanes[i].$2 - 2,
-        child: GridBlock(items[i], compact: compact || lanes[i].$2 > 2),
-      ),
+      () {
+        const minBlockHeight = 18.0;
+        final rawTop = yFor(items[i].start) + 1;
+        final rawBottom = yFor(items[i].end) - 1;
+        final top = rawTop.clamp(0.0, gridHeight - minBlockHeight);
+        final bottom = rawBottom.clamp(top + minBlockHeight, gridHeight);
+        final lane = lanes[i].$1;
+        final laneCount = lanes[i].$2;
+        final laneWidth = math.max(0.0, width / laneCount - 2);
+        return Positioned(
+          top: top,
+          height: bottom - top,
+          left: width / laneCount * lane + 1,
+          width: laneWidth,
+          child: GridBlock(items[i], compact: compact || laneCount > 2),
+        );
+      }(),
   ];
 }
 
@@ -160,31 +171,58 @@ class GridBlock extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () => s != null ? showSessionDetail(context, s) : showSeriesDetail(context, item.series!),
-        child: Padding(
-          padding: const EdgeInsets.all(4),
-          child: DefaultTextStyle(
-            style: TextStyle(
-                color: cancelled ? Colors.black54 : on, fontSize: compact ? 10 : 12, decoration: strike),
-            overflow: TextOverflow.ellipsis,
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(
-                [
-                  if (isSeries) 'SERIES',
-                  if (cancelled) 'CANCELLED',
-                  if (s?.isSubstitute ?? false) 'SUB',
-                  item.template.rawLevelLabel,
-                ].join(' · '),
-                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 9),
-                maxLines: 1,
-              ),
-              Text(item.title, style: const TextStyle(fontWeight: FontWeight.w600), maxLines: compact ? 3 : 2),
-              if (!compact)
-                Text(
-                  '${studios[item.studioId]!.shortName} · ${formatTime(item.start)}',
-                  maxLines: 1,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final pad = (constraints.maxWidth < 24 || constraints.maxHeight < 28)
+                ? 2.0
+                : 4.0;
+            final innerH = math.max(0.0, constraints.maxHeight - pad * 2);
+            final showMeta = innerH >= 32;
+            final showFooter = !compact && innerH >= 52;
+            final titleMaxLines = innerH < 24 ? 1 : (compact ? 2 : 2);
+            return Padding(
+              padding: EdgeInsets.all(pad),
+              child: DefaultTextStyle(
+                style: TextStyle(
+                    color: cancelled ? Colors.black54 : on,
+                    fontSize: compact ? 10 : 12,
+                    decoration: strike),
+                overflow: TextOverflow.ellipsis,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (showMeta)
+                      Text(
+                        [
+                          if (isSeries) 'SERIES',
+                          if (cancelled) 'CANCELLED',
+                          if (s?.isSubstitute ?? false) 'SUB',
+                          item.template.rawLevelLabel,
+                        ].join(' · '),
+                        style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 9),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    Flexible(
+                      child: Text(
+                        item.title,
+                        style: const TextStyle(fontWeight: FontWeight.w600),
+                        maxLines: titleMaxLines,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    if (showFooter)
+                      Text(
+                        '${studios[item.studioId]!.shortName} · ${formatTime(item.start)}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                  ],
                 ),
-            ]),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

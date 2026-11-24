@@ -39,7 +39,7 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
             print(f"Warning: skipping PMT date header '{date_str}': {e}")
             continue
 
-        row_matches = re.finditer(r'<div class="(?:evenRow|oddRow) row">(.*?)</div>\s*</div>\s*</div>', rows_chunk, re.DOTALL)
+        row_matches = re.finditer(r'<div class="(?:evenRow|oddRow) row">(.*?</div>)\s*</div>\s*</div>', rows_chunk, re.DOTALL)
         for rm in row_matches:
             row_html = rm.group(1)
 
@@ -64,18 +64,29 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
 
             raw_title = html_lib.unescape(re.sub(r'<[^>]+>', '', cols[0])).strip()
 
-            # Instructor
+            # Instructor & cancellation detection
             teacher = "Staff"
+            regular_teacher = None
             if len(cols) > 1:
+                reg_m = re.search(
+                    r'<a[^>]*title="Regularly Scheduled(?:\s+(?:Teacher|Instructor))?[:\s-]*([^"]*)"',
+                    cols[1],
+                    re.I,
+                )
+                if reg_m:
+                    regular_teacher = re.sub(
+                        r'\s*\.$', '', html_lib.unescape(reg_m.group(1))
+                    ).strip() or None
                 clean_inst = re.sub(r'<a title="Regularly Scheduled[^"]*"[^>]*>.*?</a>', '', cols[1])
                 teacher = re.sub(r'<[^>]+>', '', clean_inst).strip()
                 teacher = html_lib.unescape(re.sub(r'\(\d+\)', '', teacher)).strip()
+                teacher = re.sub(r'\s*\.$', '', teacher).strip() or "Staff"
 
             # Duration
             dur = 90
             if len(cols) > 2:
-                dur_text = cols[2]
-                dur_m = re.search(r'(\d+)\s*hour(?:\s*&?\s*(\d+)\s*min)?|(\d+)\s*min', dur_text, re.I)
+                dur_text = html_lib.unescape(cols[2])
+                dur_m = re.search(r'(\d+)\s*hours?(?:\s*(?:&|,)?\s*(\d+)\s*min)?|(\d+)\s*min', dur_text, re.I)
                 if dur_m:
                     if dur_m.group(1):
                         h = int(dur_m.group(1))
@@ -84,7 +95,17 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
                     elif dur_m.group(3):
                         dur = int(dur_m.group(3))
 
-            is_sub = "regularly scheduled" in row_html.lower() or "#990000" in row_html
+            is_cancelled = (
+                re.search(r'\bcancell?ed\b', teacher, re.I) is not None
+                or re.search(r'\bcancell?ed\s+today\b', raw_title, re.I) is not None
+            )
+            if is_cancelled:
+                status = "cancelled"
+                is_sub = False
+                teacher = regular_teacher or "Staff"
+            else:
+                status = "scheduled"
+                is_sub = "regularly scheduled" in row_html.lower() or "#990000" in row_html
 
             clean_t = re.sub(r'[^a-z0-9]', '', raw_title.lower())[:10]
             clean_teach = re.sub(r'[^a-z0-9]', '', teacher.lower())[:8]
@@ -93,7 +114,7 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
                 continue
             seen.add(session_id)
 
-            sessions.append({
+            session_record = {
                 "id": session_id,
                 "studioId": "pmt",
                 "rawClassTitle": raw_title,
@@ -103,8 +124,12 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
                 "tz": "America/New_York",
                 "instructor": teacher,
                 "isSubstitute": is_sub,
+                "status": status,
                 "bookingUrl": "https://www.pmthouseofdance.com/sign-up-for-classes"
-            })
+            }
+            if regular_teacher and (is_cancelled or is_sub):
+                session_record["regularInstructor"] = regular_teacher
+            sessions.append(session_record)
 
     return sessions
 
