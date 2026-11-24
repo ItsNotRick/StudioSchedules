@@ -160,13 +160,13 @@ const _transitTable = <(StudioId, StudioId), Commute>{
   // Peridance Center (126 E 13th St)
   (StudioId.peridance, StudioId.pmt): Commute(14, 'subway'),
 
-  // Danznik Studios NYC (240 W 37th St). Estimated from distance and subway
-  // routes, not yet checked against Google Maps.
-  (StudioId.danznik, StudioId.bdc): Commute(12, 'walk'),
-  (StudioId.danznik, StudioId.pmt): Commute(16, 'walk'),
-  (StudioId.danznik, StudioId.ailey): Commute(20, 'subway'),
-  (StudioId.danznik, StudioId.steps): Commute(18, 'subway'),
-  (StudioId.danznik, StudioId.peridance): Commute(20, 'subway'),
+  // Danznik Studios NYC (240 W 37th St). Google Maps, weekday afternoon;
+  // walking is kept unless transit is more than 5 min faster.
+  (StudioId.danznik, StudioId.bdc): Commute(8, 'subway'), // A/C/E; walk 15
+  (StudioId.danznik, StudioId.pmt): Commute(19, 'walk'), // M7/M20 bus 16
+  (StudioId.danznik, StudioId.ailey): Commute(19, 'subway'), // C; walk 30
+  (StudioId.danznik, StudioId.steps): Commute(15, 'subway'), // 1/2/3; walk 50
+  (StudioId.danznik, StudioId.peridance): Commute(15, 'subway'), // N/Q/R/W; walk 37
 };
 
 Commute commuteBetween(StudioId a, StudioId b) {

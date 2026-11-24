@@ -127,6 +127,11 @@ void main() {
     expect(aileyBdc.minutes, equals(12));
     expect(aileyBdc.mode, equals('walk'));
 
+    // Danznik to Steps is 15 min subway, in either direction
+    final danznikSteps = commuteBetween(StudioId.steps, StudioId.danznik);
+    expect(danznikSteps.minutes, equals(15));
+    expect(danznikSteps.mode, equals('subway'));
+
     // Same studio is 0 min
     final same = commuteBetween(StudioId.bdc, StudioId.bdc);
     expect(same.minutes, equals(0));
