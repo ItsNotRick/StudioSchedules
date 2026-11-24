@@ -75,6 +75,43 @@ class MindbodyWidgetTests(unittest.TestCase):
         self.assertEqual(second["instructor"], 'Paolo "Slice" Penala')
         self.assertEqual(second["status"], "cancelled")
 
+    def test_resolves_staff_row_that_follows_a_text_row(self):
+        # Text rows ("<id>:T<hexByteLen>,<bytes>") have no trailing newline, so
+        # the next row starts on the same line. Multi-byte characters check
+        # that the length is counted in UTF-8 bytes, not characters.
+        bio = "<p>Ève-Marie trained in Montréal.\nMore bio…</p></div>"
+        text_row = f"2b:T{len(bio.encode('utf-8')):x},{bio}"
+        staff_row = '47:' + json.dumps(
+            {"id": "sspec_47", "displayLabel": "Christa Thiesing"}
+        )
+        session = json.dumps({
+            "id": "cinst_3001",
+            "name": "In-Studio Gyrokinesis",
+            "startDateTime": "2026-11-24T18:00:00Z",
+            "duration": 60,
+            "cancelled": False,
+            "staff": ["$47"],
+        })
+        flight_payload = f"{text_row}{staff_row}\n5:{session}\n"
+        # Split across pushes mid-row, as the live widget does.
+        cut = len(text_row) + 10
+        html = (
+            f"<script>self.__next_f.push([1,{json.dumps(flight_payload[:cut])}])</script>"
+            f"<script>self.__next_f.push([1,{json.dumps(flight_payload[cut:])}])</script>"
+        )
+
+        sessions = parse_mindbody_widget_sessions(
+            html,
+            studio_id="steps",
+            id_prefix="steps",
+            booking_url="https://www.stepsnyc.com/classes/schedule/",
+            exclude_virtual=True,
+            strip_in_studio_prefix=True,
+        )
+        self.assertEqual(len(sessions), 1)
+        self.assertEqual(sessions[0]["rawClassTitle"], "Gyrokinesis")
+        self.assertEqual(sessions[0]["instructor"], "Christa Thiesing")
+
     def test_peridance_strips_trailing_underscore_and_keeps_cancelled(self):
         flight_payload = "\n".join([
             json.dumps({

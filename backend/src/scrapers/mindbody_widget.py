@@ -13,6 +13,8 @@ NY_TZ = ZoneInfo("America/New_York")
 
 _FLIGHT_PUSH_RE = re.compile(r'self\.__next_f\.push\(\[\s*1\s*,\s*"')
 _RSC_LINE_RE = re.compile(r'^([0-9a-fA-F]+):(\{|\[)', re.M)
+_RSC_ROW_ID_RE = re.compile(rb'([0-9a-fA-F]+):')
+_RSC_TEXT_ROW_RE = re.compile(rb'T([0-9a-fA-F]+),')
 _SUB_MARKER_RE = re.compile(r'\(\s*sub(?:stitute)?\s*\)', re.I)
 _SUB_WORD_RE = re.compile(r'\b(sub|substitute)\b', re.I)
 _VIRTUAL_RE = re.compile(r'\b(virtual|livestream|live\s*stream)\b', re.I)
@@ -91,6 +93,53 @@ def _parse_enclosing_object(
         return None
 
 
+def _iter_rsc_rows(text: str):
+    """Yields (row_id, payload) for each row of a decoded RSC flight stream.
+
+    Most rows are ``<hexId>:<payload>\\n``, but text rows are
+    ``<hexId>:T<hexByteLen>,<bytes>`` with no trailing newline, so the next
+    row starts right after the text on the same line. Reading in order and
+    skipping text rows by their exact UTF-8 byte length finds those rows too.
+    Text-row payloads are skipped (not yielded). Unparseable spans resync at
+    the next newline.
+    """
+    data = text.encode("utf-8")
+    n = len(data)
+    pos = 0
+    while pos < n:
+        if data[pos] == 0x0A:  # blank line
+            pos += 1
+            continue
+        m = _RSC_ROW_ID_RE.match(data, pos)
+        if not m:
+            nl = data.find(b"\n", pos)
+            pos = n if nl < 0 else nl + 1
+            continue
+        row_id = m.group(1).decode("ascii")
+        p = m.end()
+        t = _RSC_TEXT_ROW_RE.match(data, p)
+        if t:
+            pos = t.end() + int(t.group(1), 16)
+            continue
+        nl = data.find(b"\n", p)
+        end = n if nl < 0 else nl
+        yield row_id, data[p:end].decode("utf-8", "replace")
+        pos = end + 1
+
+
+def _register_rsc_row(
+    row_id: str,
+    val: Any,
+    staff_by_id: Dict[str, str],
+    rsc_refs: Dict[str, Any],
+) -> None:
+    rsc_refs.setdefault(f"${row_id}", val)
+    if isinstance(val, dict) and "displayLabel" in val and "id" in val:
+        label = val.get("displayLabel")
+        if isinstance(label, str) and label.strip():
+            staff_by_id.setdefault(str(val["id"]), label.strip())
+
+
 def _collect_staff_maps(
     text: str, decoder: json.JSONDecoder
 ) -> tuple[Dict[str, str], Dict[str, Any]]:
@@ -98,17 +147,24 @@ def _collect_staff_maps(
     staff_by_id: Dict[str, str] = {}
     rsc_refs: Dict[str, Any] = {}
 
+    # Primary: read rows in stream order (handles rows that follow a text row).
+    for row_id, payload in _iter_rsc_rows(text):
+        if payload[:1] not in ("{", "["):
+            continue
+        try:
+            val, _ = decoder.raw_decode(payload, 0)
+        except json.JSONDecodeError:
+            continue
+        _register_rsc_row(row_id, val, staff_by_id, rsc_refs)
+
+    # Fallback: rows at the start of a line, for input that isn't a clean
+    # stream (e.g. the unescaped-HTML path in decode_next_flight_html).
     for m in _RSC_LINE_RE.finditer(text):
-        ref_key = f"${m.group(1)}"
         try:
             val, _ = decoder.raw_decode(text, m.start(2))
-            rsc_refs[ref_key] = val
-            if isinstance(val, dict) and "displayLabel" in val and "id" in val:
-                label = val.get("displayLabel")
-                if isinstance(label, str) and label.strip():
-                    staff_by_id[str(val["id"])] = label.strip()
         except json.JSONDecodeError:
-            pass
+            continue
+        _register_rsc_row(m.group(1), val, staff_by_id, rsc_refs)
 
     for m in re.finditer(r'"displayLabel"\s*:', text):
         obj = _parse_enclosing_object(text, m.start(), decoder)
