@@ -22,7 +22,11 @@ class _TeachersViewState extends ConsumerState<TeachersView> {
   bool _matches(TeacherEntry e) {
     if (_query.isEmpty) return true;
     final q = normalizeInstructor(_query);
-    return e.key.contains(q) || normalizeInstructor(e.displayName).contains(q);
+    return e.key.contains(q) ||
+        normalizeInstructor(e.displayName).contains(q) ||
+        e.spellings.any((s) => normalizeInstructor(s).contains(q)) ||
+        e.notes.any((n) => n.names.any((s) => normalizeInstructor(s).contains(q))) ||
+        e.upcomingSessions.any((s) => normalizeInstructor(s.instructor).contains(q));
   }
 
   @override

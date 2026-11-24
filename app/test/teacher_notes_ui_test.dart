@@ -170,12 +170,19 @@ void main() {
 
     expect(find.text('Combining notes'), findsOneWidget);
     expect(await _db.teacherNotesDao.getAll(), hasLength(2)); // nothing changes yet
+    await tester.enterText(find.byType(TextField), 'A + B');
     await tester.tap(find.text('Save'));
     await tester.pumpAndSettle();
 
     final all = await _db.teacherNotesDao.getAll();
-    expect(all.single.body, 'A\n\nB');
+    expect(all.single.body, 'A + B');
     expect(all.single.names, ['Kathy Sullivan', 'Kathryn Sullivan']);
+
+    // Still in edit mode with synced text; leaving doesn't overwrite or prompt.
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.byType(TeacherNoteEditorPage), findsNothing);
+    expect((await _db.teacherNotesDao.getAll()).single.body, 'A + B');
   });
 
   testWidgets('Teachers tab lists notes first, then the schedule, and hides calendar chrome',
@@ -196,6 +203,11 @@ void main() {
     expect(find.textContaining('Not on the current schedule'), findsOneWidget);
     expect(find.text('Ana Lopez'), findsOneWidget);
     expect(find.text('Staff'), findsNothing);
+
+    await tester.enterText(find.byType(TextField), 'kathy');
+    await tester.pumpAndSettle();
+    expect(find.text('Kathryn Sullivan'), findsOneWidget);
+    expect(find.text('Ana Lopez'), findsNothing);
 
     await tester.enterText(find.byType(TextField), 'ana');
     await tester.pumpAndSettle();

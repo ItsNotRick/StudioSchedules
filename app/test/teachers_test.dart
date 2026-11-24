@@ -161,6 +161,17 @@ void main() {
       expect(old.onSchedule, isFalse);
       expect(old.studios, isEmpty);
     });
+
+    test('off-schedule split note uses each teacher\'s own spelling as displayName', () {
+      final shared = _note(1, 'shared', ['Kathy Sullivan', 'Kathryn Sullivan']);
+      final r = TeacherResolver.build(aliases: const {}, sessions: const []);
+      final dir = buildTeacherDirectory(sessions: const [], notes: [shared], resolver: r, today: _day);
+
+      expect(dir.map((e) => (e.key, e.displayName)), [
+        ('kathryn sullivan', 'Kathryn Sullivan'),
+        ('kathy sullivan', 'Kathy Sullivan'),
+      ]);
+    });
   });
 
   group('feed parsing', () {

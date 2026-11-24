@@ -116,6 +116,7 @@ class TeacherEntry {
     required this.upcomingSessions,
     required this.notes,
     required this.onSchedule,
+    this.spellings = const {},
   });
 
   final String key;
@@ -130,6 +131,9 @@ class TeacherEntry {
 
   /// False when the teacher has notes but no session in the current feed.
   final bool onSchedule;
+
+  /// All scraped instructor spellings seen in sessions or notes for this entry.
+  final Set<String> spellings;
 
   DateTime? get lastNoteUpdate => notes.isEmpty
       ? null
@@ -173,11 +177,19 @@ List<TeacherEntry> buildTeacherDirectory({
       });
     out.add(TeacherEntry(
       key: key,
-      displayName: ss.isNotEmpty ? _mostCommonName(ss) : _latestNoteName(ns),
+      displayName: ss.isNotEmpty
+          ? _mostCommonName(ss)
+          : _latestNoteName(ns, key, resolver),
       studios: {for (final s in ss) s.studioId},
       upcomingSessions: upcoming,
       notes: ns,
       onSchedule: ss.isNotEmpty,
+      spellings: {
+        for (final s in ss) s.instructor,
+        for (final n in ns)
+          for (final name in n.names)
+            if (resolver.keyFor(name) == key) name,
+      },
     ));
   }
   out.sort((a, b) => a.displayName.toLowerCase().compareTo(b.displayName.toLowerCase()));
@@ -197,7 +209,14 @@ String _mostCommonName(List<ClassSession> sessions) {
   return ranked.first.key;
 }
 
-String _latestNoteName(List<TeacherNote> notes) {
+String _latestNoteName(
+  List<TeacherNote> notes,
+  String key,
+  TeacherResolver resolver,
+) {
   final newest = notes.reduce((a, b) => b.updatedAt.isAfter(a.updatedAt) ? b : a);
-  return newest.latestName;
+  return newest.names.lastWhere(
+    (n) => resolver.keyFor(n) == key,
+    orElse: () => newest.latestName,
+  );
 }

@@ -170,8 +170,8 @@ enum _Mode { loading, edit, choose, combine }
 ///
 /// - Editing autosaves 600 ms after typing stops, when leaving, and when the
 ///   app goes to the background. Only one save runs at a time.
-/// - Autosave never deletes: leaving with a blank note deletes it and offers
-///   Undo.
+/// - Autosave never deletes: leaving with a blank saved note asks whether to
+///   delete it or keep the last saved text.
 /// - With several notes for the teacher (and no [noteId]), it first asks
 ///   which to edit, or combines them into text the user reviews and saves.
 class TeacherNoteEditorPage extends ConsumerStatefulWidget {
@@ -426,6 +426,8 @@ class _TeacherNoteEditorPageState extends ConsumerState<TeacherNoteEditorPage> {
       _id = r.id;
       _revision = r.revision;
       _group = const [];
+      _text = body;
+      _dirty = false;
       _status = 'Saved';
     });
   }
