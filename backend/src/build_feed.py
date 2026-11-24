@@ -1,7 +1,8 @@
 """
 Aggregator and sync builder for NYC Solo Dance Calendar.
-Runs live scrapers for BDC, Steps, Ailey, Peridance, and PMT,
-filters for solo entry & beginner dance classes, matches to curated templates,
+Runs live scrapers for BDC, Steps, Ailey, Peridance, PMT, and Danznik,
+keeps every scheduled class (all levels, styles, and non-dance classes),
+assigns each a level tier and genre, matches to curated templates,
 and outputs versioned static JSON feed files for offline-first Flutter consumption.
 """
 
@@ -23,38 +24,22 @@ from scrapers.steps_scraper import scrape_steps_schedule
 from scrapers.ailey_scraper import scrape_ailey_schedule
 from scrapers.peridance_scraper import scrape_peridance_schedule
 from scrapers.pmt_scraper import scrape_pmt_schedule
+from scrapers.danznik_scraper import scrape_danznik_schedule
 
 NY_TZ = ZoneInfo("America/New_York")
 
-PARTNER_KEYWORDS = [
-    "salsa", "bachata", "tango", "ballroom", "swing", "hustle", "kizomba", "zouk", "partnering", "partner"
-]
-
-NON_SOLO_OR_FITNESS = [
-    "cardio", "zumba", "yoga", "pilates", "gyrokinesis", "conditioning",
-    "virtual", "livestream", "zoom", "online",
-    "kids", "youth", "teen", "pre-teen", "toddler", "children", "junior",
-    "masterclass", "audition", "revelations", "halloween", "mini ball",
-    "barre à terre", "floor-barre", "floor barre", "barre", "stretch",
-    "pre-pro", "professional"
-]
+# Studio notices that appear in a schedule feed but are not classes.
+NOT_A_CLASS_REGEX = re.compile(r'\b(is\s+closed|closed\s+today|studio\s+closed)\b', re.I)
 
 ADV_BEG_REGEX = re.compile(
     r'\b(adv\.?\s*beg(inner)?|adv/beg|beg/adv|advanced\s+beg(inner)?)\b',
     re.I,
 )
-INT_ADV_REGEX = re.compile(
-    r'\b(intermediate|inter|int|adv|advanced)\b',
-    re.I,
-)
-BEG_OPEN_REGEX = re.compile(
-    r'\b(basic|beg|beginner|intro|101|absolute|abs\s*beg|open)\b',
-    re.I,
-)
-AGE_RESTRICTION_REGEX = re.compile(
-    r'\b(ages?\s*\d+\s*[-–to]+\s*\d+|ages?\s*\d+\+?|\btots?\b|\bpro\b)',
-    re.I,
-)
+INT_REGEX = re.compile(r'\b(intermediate|inter|int)\b', re.I)
+ADV_REGEX = re.compile(r'\b(adv|advanced|pro|professional|pre-pro)\b', re.I)
+BEG_REGEX = re.compile(r'\b(beg|beginners?)\b', re.I)
+ALL_LEVELS_REGEX = re.compile(r'\b(all[\s-]+levels?|open\s+levels?|open)\b', re.I)
+AGE_REGEX = re.compile(r'\bages?\s*\d+(\s*[-–]\s*\d+|\+)?', re.I)
 
 def normalize_instructor(name: str) -> str:
     """Matching key for an instructor name.
@@ -129,65 +114,92 @@ def save_json(path: str, data: Any):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def classify_session(raw_title: str, extra_ignore: Optional[Dict[str, List[str]]] = None) -> Tuple[bool, str]:
-    """Determines if a class is an adult solo beginner/entry dance class."""
-    t = ' '.join(raw_title.lower().split())
+def is_not_a_class(raw_title: str) -> bool:
+    """True for schedule entries that are studio notices ("BDC IS CLOSED TODAY")."""
+    return NOT_A_CLASS_REGEX.search(raw_title) is not None
 
-    partner_list = list(PARTNER_KEYWORDS)
-    if extra_ignore and "partnerKeywords" in extra_ignore:
-        for pk in extra_ignore["partnerKeywords"]:
-            if pk.lower() not in partner_list:
-                partner_list.append(pk.lower())
+# Genre rules, checked in order; the first match wins. Genre ids must match
+# the Genre enum in app/lib/src/domain/models.dart.
+GENRE_RULES: List[Tuple[str, re.Pattern]] = [
+    # Anything with "ballroom" in the title is Ballroom, whatever else it says.
+    ("ballroom", re.compile(r'\bballroom\b')),
+    # Non-dance classes: fitness, wellness, conditioning, voice, acting, acro.
+    ("misc", re.compile(
+        r'\b(yoga|pilates|gyrokinesis|gyrotonic|zumba|cardio|aerobics|fitness|workout|'
+        r'conditioning|strength|flexibility|stretch|lastics|alignment|meditation|healing|'
+        r'floor[\s-]*barre|barre\s+[àa]\s+terre|tumbling|acro|acrobatics|voice|singing|acting)\b')),
+    ("ballet", re.compile(r'ballet|pointe')),
+    # A barre class that isn't ballet is a barre workout.
+    ("misc", re.compile(r'\bbarre\b')),
+    ("tap", re.compile(r'\btap\b')),
+    ("contemporaryModern", re.compile(
+        r'contemp|modern|horton|graham|lyrical|dunham|lim[oó]n|cunningham|taylor|countertechnique')),
+    ("jazzTheater", re.compile(r'jazz|theater|theatre|broadway|jack cole|cole floor')),
+    ("commercialHeels", re.compile(r'heels|commercial|burlesque')),
+    ("africanDiaspora", re.compile(r'african|haitian|diaspora|afro|sabar')),
+    ("social", re.compile(
+        r'swing|lindy|west coast|\bwcs\b|hustle|salsa|mambo|zouk|bachata|kizomba|balboa|charleston')),
+    # Every other partner dance.
+    ("ballroom", re.compile(
+        r'\blatin\b|american rhythm|\bsmooth\b|tango|waltz|foxtrot|quickstep|cha[\s-]?cha|rumba|'
+        r'paso doble|\bjive\b|bolero|date night|couples|partner')),
+    ("worldCultural", re.compile(r'world|flamenco|belly|samba|folk|capoeira|cultural|bhangra|bollywood')),
+    ("hipHopStreet", re.compile(
+        r'hip hop|hip-hop|hiphop|street|break|popping|locking|waacking|vogue|voguing|house|choreo|'
+        r'urban|groove|krump|freestyle|dancehall|reggaeton|moptop|litefeet|tutting')),
+]
 
-    # Partner check
-    for p in partner_list:
-        if p in t:
-            return False, f"partner: {p}"
-
-    # Fitness / Virtual / Youth check
-    for f in NON_SOLO_OR_FITNESS:
-        if f in t:
-            return False, f"fitness/virtual/youth: {f}"
-
-    if AGE_RESTRICTION_REGEX.search(t):
-        return False, "age/pro restriction"
-
-    # Adv Beg check
-    is_adv_beg = ADV_BEG_REGEX.search(t) is not None
-
-    # Pure Intermediate or Advanced check
-    if not is_adv_beg:
-        if INT_ADV_REGEX.search(t):
-            return False, "intermediate/advanced"
-
-    # Beginner, Basic, Intro, Open check
-    has_beg = BEG_OPEN_REGEX.search(t) is not None
-    if has_beg or is_adv_beg:
-        return True, "keep"
-
-    return False, "unclassified"
-
-def infer_genre(title: str) -> str:
-    t = title.lower()
-    if "ballet" in t or "pointe" in t:
-        return "ballet"
-    if "tap" in t:
-        return "tap"
-    if "contemporary" in t or "modern" in t or "horton" in t or "graham" in t or "lyrical" in t or "dunham" in t or "limón" in t or "limon" in t or "cunningham" in t or "taylor" in t:
-        return "contemporaryModern"
-    if "jazz" in t or "theater" in t or "theatre" in t or "broadway" in t:
-        return "jazzTheater"
-    if "heels" in t or "commercial" in t:
-        return "commercialHeels"
-    if "african" in t or "haitian" in t or "diaspora" in t or "afro" in t:
-        return "africanDiaspora"
-    if "world" in t or "flamenco" in t or "belly" in t or "samba" in t or "tango" in t or "salsa" in t or "bachata" in t or "mambo" in t or "folk" in t or "capoeira" in t or "cultural" in t:
-        return "worldCultural"
-    if any(k in t for k in ["hip hop", "hip-hop", "hiphop", "street", "break", "popping", "locking", "waacking", "vogue", "voguing", "house", "choreo", "urban", "groove", "krump", "freestyle", "dancehall", "reggaeton", "moptop", "litefeet"]):
-        return "hipHopStreet"
+def _genre_from_text(text: str) -> str:
+    t = ' '.join(text.lower().split())
+    for genre, rx in GENRE_RULES:
+        if rx.search(t):
+            return genre
     return "other"
 
-def infer_tier(title: str) -> Tuple[str, str]:
+def infer_genre(title: str, category: Optional[str] = None) -> str:
+    """Genre for a class title.
+
+    Only the part before " with " / " w/ " is read, so an instructor's name
+    ("... with Taylor Smith") can't decide the genre. [category] is the
+    studio's own class category when its scraper provides one (Danznik's
+    "West Coast Swing", "Mixed Ballroom"); it is used when the title alone
+    matches no genre.
+    """
+    class_part = re.split(r'\s+(?:with|w/)\s+', title, maxsplit=1, flags=re.I)[0]
+    genre = _genre_from_text(class_part)
+    if genre == "other" and category:
+        genre = _genre_from_text(category)
+    return genre
+
+# Studio-provided level field (Ailey's and Danznik's feeds), checked in order.
+STUDIO_LEVEL_TIERS: List[Tuple[re.Pattern, str]] = [
+    (re.compile(r'\badv\w*\.?\s*/?\s*beg', re.I), "advancedBeginner"),
+    (re.compile(r'\b(abs\w*|basic|intro\w*)\b', re.I), "zeroExperience"),
+    (re.compile(r'\b(all[\s-]*levels?|open)\b', re.I), "allLevels"),
+    (re.compile(r'\bint', re.I), "intermediate"),
+    (re.compile(r'\badv', re.I), "advanced"),
+    (re.compile(r'\bbeg', re.I), "beginner"),
+]
+
+def infer_tier(title: str, studio_level: Optional[str] = None) -> Tuple[str, str]:
+    """(tier, raw level label) for a class.
+
+    Tier ids must match the Tier enum in app/lib/src/domain/models.dart. A
+    level the studio states in its own field wins over the title; the
+    title's shorter label ("ABS BEG") is kept when both agree.
+    """
+    title_tier, title_label = _tier_from_title(title)
+    if studio_level:
+        for rx, tier in STUDIO_LEVEL_TIERS:
+            if rx.search(studio_level):
+                if tier == title_tier and title_label:
+                    return title_tier, title_label
+                return tier, ' '.join(studio_level.upper().split())
+    return title_tier, title_label or "ALL LEVELS"
+
+def _tier_from_title(title: str) -> Tuple[str, Optional[str]]:
+    """(tier, label) read from the title; label is None when the title
+    states no level at all (tier then defaults to allLevels)."""
     t = ' '.join(title.lower().split())
     if ADV_BEG_REGEX.search(t):
         return "advancedBeginner", "ADV/BEG"
@@ -198,7 +210,20 @@ def infer_tier(title: str) -> Tuple[str, str]:
         elif "intro" in t:
             label = "INTRO"
         return "zeroExperience", label
-    return "beginner", "BEGINNER"
+    if INT_REGEX.search(t):
+        return "intermediate", "INT/ADV" if ADV_REGEX.search(t) else "INTERMEDIATE"
+    if ADV_REGEX.search(t):
+        return "advanced", "ADVANCED"
+    if BEG_REGEX.search(t):
+        return "beginner", "BEGINNER"
+    age = AGE_REGEX.search(t)
+    if age:
+        # Kids/teen classes: show the age range as the level label.
+        return "allLevels", ' '.join(age.group(0).upper().split())
+    all_levels = ALL_LEVELS_REGEX.search(t)
+    if all_levels:
+        return "allLevels", "OPEN" if all_levels.group(0).startswith("open") else "ALL LEVELS"
+    return "allLevels", None
 
 # Verbatim technique descriptions scraped directly from https://ailey.org/classes/techniques/
 AILEY_TECHNIQUE_DESCRIPTIONS = {
@@ -275,7 +300,6 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             if can_name:
                 canonical_lookup[a] = can_name
 
-    ignore_rules = templates_data.get("ignoreRules", {})
     templates = list(templates_data["templates"])
     series = templates_data.get("series", [])
     studios = studios_data["studios"]
@@ -298,11 +322,15 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
         ("ailey", scrape_ailey_schedule),
         ("peridance", scrape_peridance_schedule),
         ("pmt", scrape_pmt_schedule),
+        ("danznik", scrape_danznik_schedule),
     ]
 
     all_scraped_sessions: List[Dict[str, Any]] = []
     scraper_stats = {}
     prev_tpl_lookup = {t["id"]: t for t in previous_templates}
+    prev_auto_ids = {
+        (t["studioId"], t["title"].lower()): t["id"] for t in previous_templates
+    }
     for t in templates:
         prev_tpl_lookup[t["id"]] = t
 
@@ -333,7 +361,9 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                         "endMin": c["endMin"],
                         "instructor": c.get("instructor", "Staff"),
                         "isSubstitute": c.get("isSubstitute", False),
-                        "bookingUrl": c.get("bookingUrl", "")
+                        "bookingUrl": c.get("bookingUrl", ""),
+                        "rawLevel": c.get("rawLevel"),
+                        "rawCategory": c.get("rawCategory"),
                     })
                 scraper_stats[studio_id] = len(cached)
                 print(f"Preserved {len(cached)} cached sessions for {studio_id.upper()}")
@@ -356,12 +386,13 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
         service_date = sess["serviceDate"]
         dates_seen.add(service_date)
 
-        is_solo_beg, reason = classify_session(raw_title, ignore_rules)
-        if not is_solo_beg:
+        if is_not_a_class(raw_title):
             continue
 
-        tier, raw_level_label = infer_tier(raw_title)
-        genre = infer_genre(raw_title)
+        studio_level = sess.get("rawLevel")
+        studio_category = sess.get("rawCategory")
+        tier, raw_level_label = infer_tier(raw_title, studio_level)
+        genre = infer_genre(raw_title, studio_category)
         clean_title = ' '.join(raw_title.split(" with ")[0].split())
 
         matched_tpl = match_template(
@@ -369,7 +400,13 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
 
         # If not matched, generate an on-the-fly dynamic template
         if not matched_tpl:
-            dynamic_tpl_id = auto_template_id(studio_id, genre, clean_title, tpl_lookup)
+            # Reuse the id this class had in the previous feed so saved slots
+            # survive a genre change; otherwise derive a fresh one.
+            dynamic_tpl_id = prev_auto_ids.get((studio_id, clean_title.lower()))
+            reused = tpl_lookup.get(dynamic_tpl_id) if dynamic_tpl_id else None
+            if not dynamic_tpl_id or (reused and reused["title"].lower() != clean_title.lower()):
+                dynamic_tpl_id = auto_template_id(
+                    studio_id, genre, clean_title, {**prev_tpl_lookup, **tpl_lookup})
 
             if dynamic_tpl_id not in tpl_lookup:
                 new_tpl = {
@@ -443,8 +480,9 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                 if session_desc:
                     break
 
-        # rawClassTitle stays in the output: if a scraper fails on the next
-        # run, cached sessions are re-classified from it (see fallback above).
+        # rawClassTitle (plus rawLevel / rawCategory when the studio provides
+        # them) stays in the output: if a scraper fails on the next run,
+        # cached sessions are re-classified from it (see fallback above).
         session_record = {
             "id": sess["id"],
             "templateId": matched_tpl["id"],
@@ -459,6 +497,10 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
             "status": "scheduled",
             "bookingUrl": sess.get("bookingUrl", "")
         }
+        if studio_level:
+            session_record["rawLevel"] = studio_level
+        if studio_category:
+            session_record["rawCategory"] = studio_category
         if session_desc:
             session_record["description"] = session_desc
 

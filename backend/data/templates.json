@@ -1,32 +1,4 @@
 {
-  "ignoreRules": {
-    "titleKeywords": [
-      "Intermediate",
-      "Inter",
-      "Advanced",
-      "Adv",
-      "Professional",
-      "Pro",
-      "Pre-Pro",
-      "Kids",
-      "Youth",
-      "Teen",
-      "Virtual",
-      "Livestream",
-      "Zoom",
-      "Online"
-    ],
-    "partnerKeywords": [
-      "Salsa",
-      "Bachata",
-      "Tango",
-      "Ballroom",
-      "Swing",
-      "Hustle",
-      "Kizomba",
-      "Zouk"
-    ]
-  },
   "templates": [
     {
       "id": "bdc_basic_ballet",

@@ -53,6 +53,14 @@ const _fallbackStudios = <StudioId, Studio>{
     neighborhood: 'Flatiron',
     color: Color(0xFF7B1FA2), // purple
   ),
+  StudioId.danznik: Studio(
+    id: StudioId.danznik,
+    name: 'Danznik Studios NYC',
+    shortName: 'Danznik',
+    address: '240 W 37th St, 2nd Fl',
+    neighborhood: 'Garment District',
+    color: Color(0xFFD81B60), // pink
+  ),
 };
 
 /// Current studio details, keyed by id. Seeded from [_fallbackStudios] and
@@ -151,6 +159,14 @@ const _transitTable = <(StudioId, StudioId), Commute>{
 
   // Peridance Center (126 E 13th St)
   (StudioId.peridance, StudioId.pmt): Commute(14, 'subway'),
+
+  // Danznik Studios NYC (240 W 37th St). Estimated from distance and subway
+  // routes, not yet checked against Google Maps.
+  (StudioId.danznik, StudioId.bdc): Commute(12, 'walk'),
+  (StudioId.danznik, StudioId.pmt): Commute(16, 'walk'),
+  (StudioId.danznik, StudioId.ailey): Commute(20, 'subway'),
+  (StudioId.danznik, StudioId.steps): Commute(18, 'subway'),
+  (StudioId.danznik, StudioId.peridance): Commute(20, 'subway'),
 };
 
 Commute commuteBetween(StudioId a, StudioId b) {

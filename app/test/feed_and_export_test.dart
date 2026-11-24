@@ -18,13 +18,14 @@ void main() {
     expect(feed.windowStart, isNotNull);
     expect(feed.today, isNotNull);
 
-    // Verify all 5 studios are present in the sessions
+    // Verify all 6 studios are present in the sessions
     final studioIds = feed.sessions.map((s) => s.studioId).toSet();
     expect(studioIds.contains(StudioId.bdc), isTrue);
     expect(studioIds.contains(StudioId.steps), isTrue);
     expect(studioIds.contains(StudioId.ailey), isTrue);
     expect(studioIds.contains(StudioId.peridance), isTrue);
     expect(studioIds.contains(StudioId.pmt), isTrue);
+    expect(studioIds.contains(StudioId.danznik), isTrue);
 
     // Verify templatesById contains registered templates
     for (final s in feed.sessions) {
@@ -277,7 +278,7 @@ void main() {
     );
   });
 
-  test('Live feed preserves Adv Beg templates and excludes youth/barre/stretch leaks', () async {
+  test('Live feed keeps every class: all levels, youth, and non-dance classes', () async {
     final repo = FeedRepository();
     final feed = await repo.loadFeed();
 
@@ -293,16 +294,47 @@ void main() {
     expect(bdcAdvBegTitles, contains('Adv Beg TAP'));
     expect(bdcAdvBegTitles, contains('Adv Beg HEELS'));
 
-    // Ensure no youth or barre/stretch classes leaked into the adult solo dance feed
-    for (final s in feed.sessions) {
-      final titleLower = getTemplate(s.templateId).title.toLowerCase();
-      expect(titleLower.contains('ages '), isFalse, reason: 'Youth class leaked: $titleLower');
-      expect(titleLower.contains('floor-barre'), isFalse, reason: 'Floor-Barre leaked: $titleLower');
-      expect(titleLower.contains('open stretch'), isFalse, reason: 'Stretch class leaked: $titleLower');
-      if (s.studioId == StudioId.ailey) {
+    final templates = feed.sessions.map((s) => getTemplate(s.templateId)).toList();
+    final tiers = templates.map((t) => t.tier).toSet();
+    expect(tiers, containsAll(Tier.values), reason: 'Every level tier should appear');
+
+    // Non-dance classes stay on the schedule under Misc.
+    final miscTitles = templates
+        .where((t) => t.primaryGenre == Genre.misc)
+        .map((t) => t.title.toLowerCase())
+        .toSet();
+    expect(miscTitles.any((t) => t.contains('pilates') || t.contains('yoga')), isTrue);
+    expect(miscTitles.any((t) => t.contains('stretch') || t.contains('barre')), isTrue);
+
+    for (final t in templates) {
+      final titleLower = t.title.toLowerCase();
+      expect(titleLower.contains('closed today'), isFalse, reason: 'Closure notice listed as a class: $titleLower');
+      if (t.studioId == StudioId.ailey) {
         expect(titleLower.contains('(beginner)'), isFalse, reason: 'Redundant level suffix: $titleLower');
       }
     }
+  });
+
+  test('Danznik partner classes are classified as Social or Ballroom', () async {
+    final repo = FeedRepository();
+    final feed = await repo.loadFeed();
+
+    final danznik = feed.sessions
+        .where((s) => s.studioId == StudioId.danznik)
+        .map((s) => getTemplate(s.templateId))
+        .toList();
+    expect(danznik, isNotEmpty);
+
+    Genre genreOf(String titlePart) => danznik
+        .firstWhere((t) => t.title.toLowerCase().contains(titlePart))
+        .primaryGenre;
+
+    expect(genreOf('west coast swing'), Genre.social);
+    expect(genreOf('lindy'), Genre.social);
+    expect(genreOf('zouk'), Genre.social);
+    expect(genreOf('ballroom'), Genre.ballroom);
+    expect(genreOf('international latin'), Genre.ballroom);
+    expect(genreOf('cardio'), Genre.misc);
   });
 
   test('SavedSlot disambiguates concurrent same-template classes by instructor', () {
