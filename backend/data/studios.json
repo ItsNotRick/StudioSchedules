@@ -64,6 +64,19 @@
       "bookingPlatform": "mindbody",
       "mindbodySiteId": "727061",
       "scheduleUrl": "https://www.pmthouseofdance.com/in-person-classes"
+    },
+    {
+      "id": "danznik",
+      "name": "Danznik Studios NYC",
+      "shortName": "Danznik",
+      "address": "240 W 37th St, 2nd Fl",
+      "neighborhood": "Garment District",
+      "color": "0xFFD81B60",
+      "lat": 40.7534,
+      "lng": -73.9910,
+      "bookingPlatform": "mindbody",
+      "mindbodySiteId": "668929",
+      "scheduleUrl": "https://www.danznik.com/studios/nyc/schedule/"
     }
   ]
 }

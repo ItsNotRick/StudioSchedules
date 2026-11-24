@@ -50,6 +50,9 @@ class LevelPill extends StatelessWidget {
       Tier.zeroExperience => Colors.green.shade700,
       Tier.beginner => scheme.primary,
       Tier.advancedBeginner => Colors.deepOrange.shade700,
+      Tier.intermediate => Colors.purple.shade700,
+      Tier.advanced => Colors.red.shade800,
+      Tier.allLevels => Colors.blueGrey.shade600,
     };
     return Tooltip(
       message: template.tier.label,
