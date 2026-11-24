@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nyc_dance_calendar/src/data/database/app_database.dart';
 import 'package:nyc_dance_calendar/src/domain/models.dart';
+import 'package:nyc_dance_calendar/src/domain/teachers.dart';
 import 'package:nyc_dance_calendar/src/state/providers.dart';
 
 const _tpl = 'ailey_contemporaryModern_open_contemporary';
@@ -196,6 +197,47 @@ void main() {
     final savedExplicit = buildSavedSlotForSession(subWithExplicit, [subWithExplicit]);
     expect(savedExplicit.instructor, 'Shirlene Quigley');
     expect(savedExplicit.instructorKey, 'shirlene quigley');
+
+    // The regular teacher's key goes through the feed's alias map, so the
+    // slot matches later weeks listed under the canonical spelling.
+    final aliased = ClassSession(
+      id: 'sub_aliased',
+      templateId: _tpl,
+      studioId: StudioId.pmt,
+      serviceDate: wk1,
+      startMin: 1170,
+      endMin: 1260,
+      instructor: 'Temp Sub',
+      regularInstructor: 'Camden Loeser',
+      isSubstitute: true,
+      status: SessionStatus.scheduled,
+      bookingUrl: 'https://pmt.example',
+    );
+    final wk2Canonical = ClassSession(
+      id: 'wk2_canonical',
+      templateId: _tpl,
+      studioId: StudioId.pmt,
+      serviceDate: wk2,
+      startMin: 1170,
+      endMin: 1260,
+      instructor: 'Cam Loeser',
+      instructorKey: 'cam loeser',
+      isSubstitute: false,
+      status: SessionStatus.scheduled,
+      bookingUrl: 'https://pmt.example',
+    );
+    final resolver = TeacherResolver.build(
+      aliases: const {'camden loeser': 'cam loeser', 'cam loeser': 'cam loeser'},
+      sessions: [aliased, wk2Canonical],
+    );
+    final savedAliased = buildSavedSlotForSession(
+      aliased,
+      [aliased, wk2Canonical],
+      resolver: resolver,
+    );
+    expect(savedAliased.instructor, 'Camden Loeser');
+    expect(savedAliased.instructorKey, 'cam loeser');
+    expect(savedAliased.matches(wk2Canonical), isTrue);
 
     final subInferred = _session('s_sub', 'Temp Sub', isSub: true);
     final wk2Regular = ClassSession(

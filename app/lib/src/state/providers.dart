@@ -159,11 +159,15 @@ final upcomingSeriesProvider = Provider<List<WorkshopSeries>>((ref) {
 /// [ClassSession.regularInstructor] or a unique non-sub occurrence on another
 /// date) instead of storing the substitute as the regular teacher; falls back
 /// to a slot-level bookmark (`instructor: null`) if ambiguous.
+///
+/// [resolver] maps the regular teacher's name to the same key the feed uses
+/// (through its alias map), so the slot matches later weeks under any spelling.
 @visibleForTesting
 SavedSlot buildSavedSlotForSession(
   ClassSession s,
-  Iterable<ClassSession> allSessions,
-) {
+  Iterable<ClassSession> allSessions, {
+  TeacherResolver? resolver,
+}) {
   if (!s.isSubstitute) {
     return SavedSlot(
       templateId: s.templateId,
@@ -181,7 +185,7 @@ SavedSlot buildSavedSlotForSession(
       weekday: s.serviceDate.weekday,
       startMin: s.startMin,
       instructor: explicitRegular,
-      instructorKey: normalizeInstructor(explicitRegular),
+      instructorKey: (resolver ?? TeacherResolver.empty).keyFor(explicitRegular),
     );
   }
 
@@ -330,6 +334,7 @@ class SavedSlots extends Notifier<Set<SavedSlot>> {
       final slot = buildSavedSlotForSession(
         s,
         ref.read(currentFeedProvider).sessions,
+        resolver: ref.read(teacherResolverProvider),
       );
       next.add(slot);
       if (!_isLoaded) {
