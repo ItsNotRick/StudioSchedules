@@ -178,11 +178,17 @@ void main() {
     expect(all.single.body, 'A + B');
     expect(all.single.names, ['Kathy Sullivan', 'Kathryn Sullivan']);
 
-    // Still in edit mode with synced text; leaving doesn't overwrite or prompt.
+    // Back in edit mode with the field's text tracked: typing the original
+    // pre-filled text back in is a real change and autosaves.
+    await tester.enterText(find.byType(TextField), 'A\n\nB');
+    await tester.pump(const Duration(milliseconds: 700));
+    await tester.pumpAndSettle();
+    expect((await _db.teacherNotesDao.getAll()).single.body, 'A\n\nB');
+
     await tester.pageBack();
     await tester.pumpAndSettle();
     expect(find.byType(TeacherNoteEditorPage), findsNothing);
-    expect((await _db.teacherNotesDao.getAll()).single.body, 'A + B');
+    expect((await _db.teacherNotesDao.getAll()).single.body, 'A\n\nB');
   });
 
   testWidgets('Teachers tab lists notes first, then the schedule, and hides calendar chrome',

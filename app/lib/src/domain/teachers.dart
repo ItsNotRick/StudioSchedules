@@ -116,7 +116,7 @@ class TeacherEntry {
     required this.upcomingSessions,
     required this.notes,
     required this.onSchedule,
-    this.spellings = const {},
+    required this.spellings,
   });
 
   final String key;

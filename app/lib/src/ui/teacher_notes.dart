@@ -269,9 +269,12 @@ class _TeacherNoteEditorPageState extends ConsumerState<TeacherNoteEditorPage> {
   }
 
   void _onChanged() {
-    if (_mode != _Mode.edit || _controller.text == _text) return;
+    if (_controller.text == _text) return;
     final wasBlank = _text.trim().isEmpty;
+    // Tracked in every mode so [_text] always matches the field; only edit
+    // mode autosaves (combined text is saved explicitly).
     _text = _controller.text;
+    if (_mode != _Mode.edit) return;
     // Blankness decides whether leaving needs a confirmation (PopScope).
     if (wasBlank != _text.trim().isEmpty) setState(() {});
     _dirty = true;

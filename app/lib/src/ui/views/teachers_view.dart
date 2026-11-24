@@ -22,11 +22,12 @@ class _TeachersViewState extends ConsumerState<TeachersView> {
   bool _matches(TeacherEntry e) {
     if (_query.isEmpty) return true;
     final q = normalizeInstructor(_query);
+    // `spellings` already holds this teacher's session and note spellings
+    // (and only theirs, so a note shared with another teacher doesn't make
+    // both entries match).
     return e.key.contains(q) ||
         normalizeInstructor(e.displayName).contains(q) ||
-        e.spellings.any((s) => normalizeInstructor(s).contains(q)) ||
-        e.notes.any((n) => n.names.any((s) => normalizeInstructor(s).contains(q))) ||
-        e.upcomingSessions.any((s) => normalizeInstructor(s.instructor).contains(q));
+        e.spellings.any((s) => normalizeInstructor(s).contains(q));
   }
 
   @override
