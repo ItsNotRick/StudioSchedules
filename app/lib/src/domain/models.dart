@@ -30,12 +30,12 @@ class Studio {
 
 /// Normalized level tiers (Q4). The studio's raw label is always shown.
 enum Tier {
-  zeroExperience('Zero experience'),
+  zeroExperience('Basic'), // Basic, Abs Beg, Intro: zero experience needed
   beginner('Beginner'),
   advancedBeginner('Adv. beginner'),
   intermediate('Intermediate'),
   advanced('Advanced'),
-  allLevels('All levels');
+  allLevels('Open / All levels');
 
   const Tier(this.label);
   final String label;
