@@ -42,7 +42,9 @@ def decode_next_flight_html(html: str) -> str:
             pos = m.end()
 
     if chunks:
-        return "\n".join(chunks)
+        # Chunks are slices of one continuous RSC stream and often split
+        # mid-row, so concatenate them as-is (rows carry their own newlines).
+        return "".join(chunks)
 
     if '"id":"cinst_' not in html and r'\"id\":\"cinst_' in html:
         return re.sub(r'\\(["\\])', lambda m: m.group(1), html)

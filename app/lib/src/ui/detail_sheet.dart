@@ -293,7 +293,11 @@ class _SessionDetail extends ConsumerWidget {
         ),
         const SizedBox(height: 8),
         OutlinedButton.icon(
-          onPressed: () => ref.read(savedSlotsProvider.notifier).toggleFor(session),
+          // Cancelled sessions often list "Staff" instead of the real teacher,
+          // so saving from one would store a slot that never matches again.
+          onPressed: (session.isCancelled && !saved)
+              ? null
+              : () => ref.read(savedSlotsProvider.notifier).toggleFor(session),
           icon: Icon(saved ? Icons.bookmark_remove : Icons.bookmark_add_outlined),
           label: Text(saved
               ? 'Remove from my week'
