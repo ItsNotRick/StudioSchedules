@@ -14,6 +14,9 @@ import urllib.request
 import html as html_lib
 from typing import Dict, List, Set, Tuple, Any
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from instructor_names import is_placeholder_instructor  # noqa: E402
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 INSTRUCTORS_PATH = os.path.join(DATA_DIR, "instructors.json")
@@ -217,7 +220,7 @@ def harvest_schedule_names() -> Dict[str, Set[str]]:
         if not inst:
             continue
         clean = clean_name(inst)
-        if clean in {"Staff", "Guest Artist", "Special Guest", "Substitute Teacher", "Various Teachers"}:
+        if is_placeholder_instructor(clean):
             continue
         studio = s.get("studioId", "unknown")
         if clean not in res:

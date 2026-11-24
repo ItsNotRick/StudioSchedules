@@ -7,6 +7,7 @@ import '../domain/models.dart';
 import '../services/calendar_export_service.dart';
 import '../state/providers.dart';
 import 'common.dart';
+import 'teacher_notes.dart';
 
 /// Opens the booking URL in the external browser so the Mindbody login
 /// persists between bookings (Q16).
@@ -202,6 +203,11 @@ class _SessionDetail extends ConsumerWidget {
               : null,
         ),
         const _InfoRow(Icons.confirmation_number_outlined, 'Drop-in · book per class'),
+        TeacherNotesSection(
+          teacherKey: session.matchKey,
+          listedName: session.instructor,
+          displayName: session.instructor,
+        ),
         _Section(
           'About this class',
           Text(

@@ -259,7 +259,7 @@ class WorkshopSeries {
 
 /// Matching key for an instructor name.
 ///
-/// Must stay identical to normalize_instructor() in backend/src/build_feed.py:
+/// Must stay identical to normalize_instructor() in backend/src/instructor_names.py:
 /// collapse whitespace, drop quote characters, lowercase, trim.
 String normalizeInstructor(String name) => name
     .trim()
@@ -268,6 +268,19 @@ String normalizeInstructor(String name) => name
     .replaceAll(RegExp('["\']'), '')
     .toLowerCase()
     .trim();
+
+/// Built-in copy of PLACEHOLDER_INSTRUCTORS in
+/// backend/src/instructor_names.py, used when the feed omits
+/// `placeholderInstructors` (feeds older than v1.1).
+const defaultPlaceholderInstructors = <String>[
+  'staff',
+  'tba',
+  'tbd',
+  'guest artist',
+  'special guest',
+  'substitute teacher',
+  'various teachers',
+];
 
 /// A device-local "regimen" entry: a recurring weekly slot (Q10).
 @immutable

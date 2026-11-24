@@ -1,9 +1,12 @@
 import 'dart:async';
 
+import 'package:drift/drift.dart' show DatabaseConnection;
+import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:nyc_dance_calendar/main.dart';
+import 'package:nyc_dance_calendar/src/data/database/app_database.dart';
 import 'package:nyc_dance_calendar/src/data/feed.dart';
 import 'package:nyc_dance_calendar/src/domain/models.dart';
 import 'package:nyc_dance_calendar/src/state/providers.dart';
@@ -58,7 +61,14 @@ class _FakeFeedNotifier extends FeedNotifier {
 }
 
 Widget _app(Future<Feed> Function() load) => ProviderScope(
-      overrides: [feedProvider.overrideWith(() => _FakeFeedNotifier(load))],
+      overrides: [
+        feedProvider.overrideWith(() => _FakeFeedNotifier(load)),
+        appDatabaseProvider.overrideWith((ref) {
+          final db = AppDatabase(DatabaseConnection(NativeDatabase.memory(), closeStreamsSynchronously: true));
+          ref.onDispose(db.close);
+          return db;
+        }),
+      ],
       child: const NYCStudioCalendarApp(),
     );
 

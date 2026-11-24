@@ -4,6 +4,8 @@ import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 
+import 'teacher_notes_dao.dart';
+
 part 'app_database.g.dart';
 
 class CachedFeeds extends Table {
@@ -37,18 +39,38 @@ class UserSettings extends Table {
   Set<Column> get primaryKey => {key};
 }
 
-@DriftDatabase(tables: [CachedFeeds, SavedRegimenSlots, UserSettings])
+/// Private notes about a teacher (v3). See docs/teacher-notes-design.md:
+/// rows store the scraped names they were written under, never a teacher
+/// key, and are only changed by explicit user actions.
+@DataClassName('TeacherNoteRow')
+class TeacherNotes extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get body => text()();
+  // JSON list of scraped names, oldest first.
+  TextColumn get namesJson => text()();
+  IntColumn get revision => integer().withDefault(const Constant(1))();
+  DateTimeColumn get createdAt => dateTime()();
+  DateTimeColumn get updatedAt => dateTime()();
+}
+
+@DriftDatabase(
+  tables: [CachedFeeds, SavedRegimenSlots, UserSettings, TeacherNotes],
+  daos: [TeacherNotesDao],
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? e]) : super(e ?? _openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onUpgrade: (m, from, to) async {
           if (from < 2) {
             await m.addColumn(savedRegimenSlots, savedRegimenSlots.instructorKey);
+          }
+          if (from < 3) {
+            await m.createTable(teacherNotes);
           }
         },
       );

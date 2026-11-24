@@ -2,9 +2,11 @@ import 'package:drift/drift.dart' show Value;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/database/app_database.dart';
+import '../data/database/teacher_notes_dao.dart';
 import '../data/feed_repository.dart';
 import '../data/feed.dart';
 import '../domain/models.dart';
+import '../domain/teachers.dart';
 
 export '../domain/models.dart'
     show isEasternDst, getTodayInNewYork, getNowMinInNewYork;
@@ -373,4 +375,49 @@ final resolvedRegimenProvider =
     return c != 0 ? c : a.slot.startMin.compareTo(b.slot.startMin);
   });
   return out;
+});
+
+// ---------------------------------------------------------------------------
+// Teacher notes (docs/teacher-notes-design.md §7.1)
+
+/// Resolves scraped instructor names to teacher keys for the displayed feed.
+/// Every note read and write uses this, so they always agree.
+final teacherResolverProvider = Provider<TeacherResolver>((ref) {
+  final feed = ref.watch(currentFeedProvider);
+  return TeacherResolver.build(
+    aliases: feed.instructorAliases,
+    sessions: feed.sessions,
+    placeholders: feed.placeholderInstructors,
+  );
+});
+
+final teacherNotesDaoProvider = Provider<TeacherNotesDao>(
+  (ref) => ref.watch(appDatabaseProvider).teacherNotesDao,
+);
+
+/// Every saved note, oldest first. Updates after each committed write.
+final allTeacherNotesProvider = StreamProvider<List<TeacherNote>>(
+  (ref) => ref.watch(teacherNotesDaoProvider).watchAll(),
+  // A failing local query won't fix itself on a timer.
+  retry: (retryCount, error) => null,
+);
+
+/// Notes belonging to the teacher [key] under the displayed feed, oldest
+/// first. Empty while notes are loading.
+final notesForTeacherProvider =
+    Provider.autoDispose.family<List<TeacherNote>, String>((ref, key) {
+  final resolver = ref.watch(teacherResolverProvider);
+  final notes = ref.watch(allTeacherNotesProvider).value ?? const <TeacherNote>[];
+  return notesForTeacher(key, notes, resolver);
+});
+
+/// The Teachers tab: everyone on the current schedule plus anyone with notes.
+final teacherDirectoryProvider = Provider<List<TeacherEntry>>((ref) {
+  final feed = ref.watch(currentFeedProvider);
+  return buildTeacherDirectory(
+    sessions: feed.sessions,
+    notes: ref.watch(allTeacherNotesProvider).value ?? const [],
+    resolver: ref.watch(teacherResolverProvider),
+    today: ref.watch(todayProvider),
+  );
 });

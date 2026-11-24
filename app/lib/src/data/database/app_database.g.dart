@@ -966,6 +966,402 @@ class UserSettingsCompanion extends UpdateCompanion<UserSetting> {
   }
 }
 
+class $TeacherNotesTable extends TeacherNotes
+    with TableInfo<$TeacherNotesTable, TeacherNoteRow> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $TeacherNotesTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _bodyMeta = const VerificationMeta('body');
+  @override
+  late final GeneratedColumn<String> body = GeneratedColumn<String>(
+    'body',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _namesJsonMeta = const VerificationMeta(
+    'namesJson',
+  );
+  @override
+  late final GeneratedColumn<String> namesJson = GeneratedColumn<String>(
+    'names_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _revisionMeta = const VerificationMeta(
+    'revision',
+  );
+  @override
+  late final GeneratedColumn<int> revision = GeneratedColumn<int>(
+    'revision',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta(
+    'createdAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+    'created_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
+    'updatedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
+    'updated_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.dateTime,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [
+    id,
+    body,
+    namesJson,
+    revision,
+    createdAt,
+    updatedAt,
+  ];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'teacher_notes';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<TeacherNoteRow> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('body')) {
+      context.handle(
+        _bodyMeta,
+        body.isAcceptableOrUnknown(data['body']!, _bodyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_bodyMeta);
+    }
+    if (data.containsKey('names_json')) {
+      context.handle(
+        _namesJsonMeta,
+        namesJson.isAcceptableOrUnknown(data['names_json']!, _namesJsonMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_namesJsonMeta);
+    }
+    if (data.containsKey('revision')) {
+      context.handle(
+        _revisionMeta,
+        revision.isAcceptableOrUnknown(data['revision']!, _revisionMeta),
+      );
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(
+        _createdAtMeta,
+        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_createdAtMeta);
+    }
+    if (data.containsKey('updated_at')) {
+      context.handle(
+        _updatedAtMeta,
+        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_updatedAtMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  TeacherNoteRow map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return TeacherNoteRow(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      body: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}body'],
+      )!,
+      namesJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}names_json'],
+      )!,
+      revision: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}revision'],
+      )!,
+      createdAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}created_at'],
+      )!,
+      updatedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}updated_at'],
+      )!,
+    );
+  }
+
+  @override
+  $TeacherNotesTable createAlias(String alias) {
+    return $TeacherNotesTable(attachedDatabase, alias);
+  }
+}
+
+class TeacherNoteRow extends DataClass implements Insertable<TeacherNoteRow> {
+  final int id;
+  final String body;
+  final String namesJson;
+  final int revision;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  const TeacherNoteRow({
+    required this.id,
+    required this.body,
+    required this.namesJson,
+    required this.revision,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['body'] = Variable<String>(body);
+    map['names_json'] = Variable<String>(namesJson);
+    map['revision'] = Variable<int>(revision);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    map['updated_at'] = Variable<DateTime>(updatedAt);
+    return map;
+  }
+
+  TeacherNotesCompanion toCompanion(bool nullToAbsent) {
+    return TeacherNotesCompanion(
+      id: Value(id),
+      body: Value(body),
+      namesJson: Value(namesJson),
+      revision: Value(revision),
+      createdAt: Value(createdAt),
+      updatedAt: Value(updatedAt),
+    );
+  }
+
+  factory TeacherNoteRow.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return TeacherNoteRow(
+      id: serializer.fromJson<int>(json['id']),
+      body: serializer.fromJson<String>(json['body']),
+      namesJson: serializer.fromJson<String>(json['namesJson']),
+      revision: serializer.fromJson<int>(json['revision']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'body': serializer.toJson<String>(body),
+      'namesJson': serializer.toJson<String>(namesJson),
+      'revision': serializer.toJson<int>(revision),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'updatedAt': serializer.toJson<DateTime>(updatedAt),
+    };
+  }
+
+  TeacherNoteRow copyWith({
+    int? id,
+    String? body,
+    String? namesJson,
+    int? revision,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => TeacherNoteRow(
+    id: id ?? this.id,
+    body: body ?? this.body,
+    namesJson: namesJson ?? this.namesJson,
+    revision: revision ?? this.revision,
+    createdAt: createdAt ?? this.createdAt,
+    updatedAt: updatedAt ?? this.updatedAt,
+  );
+  TeacherNoteRow copyWithCompanion(TeacherNotesCompanion data) {
+    return TeacherNoteRow(
+      id: data.id.present ? data.id.value : this.id,
+      body: data.body.present ? data.body.value : this.body,
+      namesJson: data.namesJson.present ? data.namesJson.value : this.namesJson,
+      revision: data.revision.present ? data.revision.value : this.revision,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+      updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TeacherNoteRow(')
+          ..write('id: $id, ')
+          ..write('body: $body, ')
+          ..write('namesJson: $namesJson, ')
+          ..write('revision: $revision, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(id, body, namesJson, revision, createdAt, updatedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is TeacherNoteRow &&
+          other.id == this.id &&
+          other.body == this.body &&
+          other.namesJson == this.namesJson &&
+          other.revision == this.revision &&
+          other.createdAt == this.createdAt &&
+          other.updatedAt == this.updatedAt);
+}
+
+class TeacherNotesCompanion extends UpdateCompanion<TeacherNoteRow> {
+  final Value<int> id;
+  final Value<String> body;
+  final Value<String> namesJson;
+  final Value<int> revision;
+  final Value<DateTime> createdAt;
+  final Value<DateTime> updatedAt;
+  const TeacherNotesCompanion({
+    this.id = const Value.absent(),
+    this.body = const Value.absent(),
+    this.namesJson = const Value.absent(),
+    this.revision = const Value.absent(),
+    this.createdAt = const Value.absent(),
+    this.updatedAt = const Value.absent(),
+  });
+  TeacherNotesCompanion.insert({
+    this.id = const Value.absent(),
+    required String body,
+    required String namesJson,
+    this.revision = const Value.absent(),
+    required DateTime createdAt,
+    required DateTime updatedAt,
+  }) : body = Value(body),
+       namesJson = Value(namesJson),
+       createdAt = Value(createdAt),
+       updatedAt = Value(updatedAt);
+  static Insertable<TeacherNoteRow> custom({
+    Expression<int>? id,
+    Expression<String>? body,
+    Expression<String>? namesJson,
+    Expression<int>? revision,
+    Expression<DateTime>? createdAt,
+    Expression<DateTime>? updatedAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (body != null) 'body': body,
+      if (namesJson != null) 'names_json': namesJson,
+      if (revision != null) 'revision': revision,
+      if (createdAt != null) 'created_at': createdAt,
+      if (updatedAt != null) 'updated_at': updatedAt,
+    });
+  }
+
+  TeacherNotesCompanion copyWith({
+    Value<int>? id,
+    Value<String>? body,
+    Value<String>? namesJson,
+    Value<int>? revision,
+    Value<DateTime>? createdAt,
+    Value<DateTime>? updatedAt,
+  }) {
+    return TeacherNotesCompanion(
+      id: id ?? this.id,
+      body: body ?? this.body,
+      namesJson: namesJson ?? this.namesJson,
+      revision: revision ?? this.revision,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (body.present) {
+      map['body'] = Variable<String>(body.value);
+    }
+    if (namesJson.present) {
+      map['names_json'] = Variable<String>(namesJson.value);
+    }
+    if (revision.present) {
+      map['revision'] = Variable<int>(revision.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    if (updatedAt.present) {
+      map['updated_at'] = Variable<DateTime>(updatedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('TeacherNotesCompanion(')
+          ..write('id: $id, ')
+          ..write('body: $body, ')
+          ..write('namesJson: $namesJson, ')
+          ..write('revision: $revision, ')
+          ..write('createdAt: $createdAt, ')
+          ..write('updatedAt: $updatedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -973,6 +1369,10 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $SavedRegimenSlotsTable savedRegimenSlots =
       $SavedRegimenSlotsTable(this);
   late final $UserSettingsTable userSettings = $UserSettingsTable(this);
+  late final $TeacherNotesTable teacherNotes = $TeacherNotesTable(this);
+  late final TeacherNotesDao teacherNotesDao = TeacherNotesDao(
+    this as AppDatabase,
+  );
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -981,6 +1381,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     cachedFeeds,
     savedRegimenSlots,
     userSettings,
+    teacherNotes,
   ];
 }
 
@@ -1572,6 +1973,228 @@ typedef $$UserSettingsTableProcessedTableManager =
       UserSetting,
       PrefetchHooks Function()
     >;
+typedef $$TeacherNotesTableCreateCompanionBuilder =
+    TeacherNotesCompanion Function({
+      Value<int> id,
+      required String body,
+      required String namesJson,
+      Value<int> revision,
+      required DateTime createdAt,
+      required DateTime updatedAt,
+    });
+typedef $$TeacherNotesTableUpdateCompanionBuilder =
+    TeacherNotesCompanion Function({
+      Value<int> id,
+      Value<String> body,
+      Value<String> namesJson,
+      Value<int> revision,
+      Value<DateTime> createdAt,
+      Value<DateTime> updatedAt,
+    });
+
+class $$TeacherNotesTableFilterComposer
+    extends Composer<_$AppDatabase, $TeacherNotesTable> {
+  $$TeacherNotesTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get namesJson => $composableBuilder(
+    column: $table.namesJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get revision => $composableBuilder(
+    column: $table.revision,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$TeacherNotesTableOrderingComposer
+    extends Composer<_$AppDatabase, $TeacherNotesTable> {
+  $$TeacherNotesTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get body => $composableBuilder(
+    column: $table.body,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get namesJson => $composableBuilder(
+    column: $table.namesJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get revision => $composableBuilder(
+    column: $table.revision,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+    column: $table.createdAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
+    column: $table.updatedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$TeacherNotesTableAnnotationComposer
+    extends Composer<_$AppDatabase, $TeacherNotesTable> {
+  $$TeacherNotesTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get body =>
+      $composableBuilder(column: $table.body, builder: (column) => column);
+
+  GeneratedColumn<String> get namesJson =>
+      $composableBuilder(column: $table.namesJson, builder: (column) => column);
+
+  GeneratedColumn<int> get revision =>
+      $composableBuilder(column: $table.revision, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updatedAt =>
+      $composableBuilder(column: $table.updatedAt, builder: (column) => column);
+}
+
+class $$TeacherNotesTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $TeacherNotesTable,
+          TeacherNoteRow,
+          $$TeacherNotesTableFilterComposer,
+          $$TeacherNotesTableOrderingComposer,
+          $$TeacherNotesTableAnnotationComposer,
+          $$TeacherNotesTableCreateCompanionBuilder,
+          $$TeacherNotesTableUpdateCompanionBuilder,
+          (
+            TeacherNoteRow,
+            BaseReferences<_$AppDatabase, $TeacherNotesTable, TeacherNoteRow>,
+          ),
+          TeacherNoteRow,
+          PrefetchHooks Function()
+        > {
+  $$TeacherNotesTableTableManager(_$AppDatabase db, $TeacherNotesTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$TeacherNotesTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$TeacherNotesTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$TeacherNotesTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> body = const Value.absent(),
+                Value<String> namesJson = const Value.absent(),
+                Value<int> revision = const Value.absent(),
+                Value<DateTime> createdAt = const Value.absent(),
+                Value<DateTime> updatedAt = const Value.absent(),
+              }) => TeacherNotesCompanion(
+                id: id,
+                body: body,
+                namesJson: namesJson,
+                revision: revision,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String body,
+                required String namesJson,
+                Value<int> revision = const Value.absent(),
+                required DateTime createdAt,
+                required DateTime updatedAt,
+              }) => TeacherNotesCompanion.insert(
+                id: id,
+                body: body,
+                namesJson: namesJson,
+                revision: revision,
+                createdAt: createdAt,
+                updatedAt: updatedAt,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable<$TeacherNotesTable, TeacherNoteRow>(table),
+                  BaseReferences<
+                    _$AppDatabase,
+                    $TeacherNotesTable,
+                    TeacherNoteRow
+                  >(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$TeacherNotesTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $TeacherNotesTable,
+      TeacherNoteRow,
+      $$TeacherNotesTableFilterComposer,
+      $$TeacherNotesTableOrderingComposer,
+      $$TeacherNotesTableAnnotationComposer,
+      $$TeacherNotesTableCreateCompanionBuilder,
+      $$TeacherNotesTableUpdateCompanionBuilder,
+      (
+        TeacherNoteRow,
+        BaseReferences<_$AppDatabase, $TeacherNotesTable, TeacherNoteRow>,
+      ),
+      TeacherNoteRow,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -1582,4 +2205,6 @@ class $AppDatabaseManager {
       $$SavedRegimenSlotsTableTableManager(_db, _db.savedRegimenSlots);
   $$UserSettingsTableTableManager get userSettings =>
       $$UserSettingsTableTableManager(_db, _db.userSettings);
+  $$TeacherNotesTableTableManager get teacherNotes =>
+      $$TeacherNotesTableTableManager(_db, _db.teacherNotes);
 }

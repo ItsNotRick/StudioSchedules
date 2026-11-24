@@ -1,0 +1,69 @@
+{
+  "_comment": "Raw instructor name -> normalized key. Checked by backend/tests/test_instructor_names.py and app/test/instructor_names_contract_test.dart so the Python and Dart normalizers stay identical.",
+  "cases": [
+    [
+      "Kathy Sullivan",
+      "kathy sullivan"
+    ],
+    [
+      "  Rashaan   James II ",
+      "rashaan james ii"
+    ],
+    [
+      "Natasha \"Ivory\" Markwick",
+      "natasha ivory markwick"
+    ],
+    [
+      "Natasha 'Ivory' Markwick",
+      "natasha ivory markwick"
+    ],
+    [
+      "Natasha ‘Ivory’ Markwick",
+      "natasha ‘ivory’ markwick"
+    ],
+    [
+      "Jazzy J (Boog Soulfire)",
+      "jazzy j (boog soulfire)"
+    ],
+    [
+      "O'Neil Green",
+      "oneil green"
+    ],
+    [
+      "Yvonne-Marie Sain",
+      "yvonne-marie sain"
+    ],
+    [
+      "Ronald K. Alexander",
+      "ronald k. alexander"
+    ],
+    [
+      "PEÑALA",
+      "peñala"
+    ],
+    [
+      "Ana Lopez",
+      "ana lopez"
+    ],
+    [
+      "Ana\tLopez\n",
+      "ana lopez"
+    ],
+    [
+      "STAFF",
+      "staff"
+    ],
+    [
+      "Obremski/Works",
+      "obremski/works"
+    ],
+    [
+      "Q",
+      "q"
+    ],
+    [
+      "",
+      ""
+    ]
+  ]
+}
