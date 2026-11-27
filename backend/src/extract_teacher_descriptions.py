@@ -7,11 +7,15 @@ Contains zero AI-generated or LLM-summarized text.
 """
 
 import os
+import sys
 import json
 import re
 import html as html_lib
 import urllib.request
-from typing import Dict, List, Any
+from concurrent.futures import ThreadPoolExecutor
+from typing import Dict, List, Any, Optional
+
+from instructor_names import normalize_instructor
 
 DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "instructor_descriptions.json"))
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
@@ -196,32 +200,80 @@ def scrape_peridance_verbatim() -> Dict[str, Any]:
     print(f"Extracted {len(results)} verbatim class descriptions from Peridance.")
     return results
 
-def scrape_steps_verbatim() -> Dict[str, Any]:
-    print("Extracting verbatim class descriptions from Steps on Broadway faculty directory...")
-    results = {}
-    try:
-        sitemap_url = "https://www.stepsnyc.com/faculty-sitemap.xml"
-        xml = fetch_url(sitemap_url, timeout=12)
-        urls = re.findall(r'<loc>(https://www\.stepsnyc\.com/faculty/([^/]+)/?)</loc>', xml)
-        for full_url, slug in urls:
-            norm_name = slug.replace("-", " ").strip().lower()
-            try:
-                page = fetch_url(full_url, timeout=8)
-                m = re.search(r'class="(?:faculty-bio|entry-content)"[^>]*>(.*?)</div>', page, re.DOTALL)
-                if m:
-                    clean = clean_text(m.group(1))
-                    if len(clean) > 30:
-                        results[norm_name] = {
-                            "default": clean,
-                            "raw": clean,
-                            "source": full_url
-                        }
-            except Exception:
-                continue
-    except Exception as e:
-        print(f"Error extracting Steps faculty descriptions: {e}")
+STEPS_FACULTY_SITEMAPS = (
+    "https://www.stepsnyc.com/faculty-sitemap.xml",
+    "https://www.stepsnyc.com/faculty-sitemap2.xml",
+)
+# Faculty bios carry the class text after a "Class Description" label, e.g.
+# <p><strong>Class Description</strong><br>Oren's tap classes are ...</p>
+_STEPS_LABEL = re.compile(r'class\s+descriptions?\s*:?', re.I)
+_STEPS_CONTENT_END = re.compile(r'<!--\s*/end content grid right side\s*-->|</article>', re.I)
 
-    print(f"Extracted {len(results)} verbatim descriptions from Steps.")
+
+def parse_steps_class_description(page: str) -> Optional[str]:
+    """Returns the text after "Class Description" in a Steps faculty bio, one line per
+    paragraph, or None when the bio has no class description."""
+    body_start = page.find("<article")
+    end_m = _STEPS_CONTENT_END.search(page, max(body_start, 0))
+    region = page[max(body_start, 0):end_m.start() if end_m else len(page)]
+    region = re.sub(r'<(script|style)[^>]*>.*?</\1>', ' ', region, flags=re.S | re.I)
+    text = re.sub(r'<br\s*/?>|</(?:p|div|li|h[1-6])>', '\n', region, flags=re.I)
+    text = html_lib.unescape(re.sub(r'<[^>]+>', ' ', text))
+    label = _STEPS_LABEL.search(text)
+    if not label:
+        return None
+    lines = [' '.join(line.split()) for line in text[label.end():].splitlines()]
+    description = '\n'.join(line for line in lines if line)
+    return description if len(description) > 30 else None
+
+
+def _steps_page_name(page: str, slug: str) -> str:
+    """Teacher name from the page title ("Oren Korenblum - Steps on Broadway")."""
+    title_m = re.search(r'<title>(.*?)</title>', page, re.S)
+    if title_m:
+        name = html_lib.unescape(title_m.group(1)).split(" - Steps on Broadway")[0].strip()
+        if name:
+            return name
+    return slug.replace("-", " ")
+
+
+def scrape_steps_verbatim() -> Dict[str, Any]:
+    print("Crawling Steps on Broadway faculty bios for verbatim class descriptions...")
+    urls: List[str] = []
+    for sitemap_url in STEPS_FACULTY_SITEMAPS:
+        try:
+            xml = fetch_url(sitemap_url, timeout=15)
+        except Exception as e:
+            print(f"Error fetching {sitemap_url}: {e}")
+            continue
+        for url in re.findall(r'<loc>(https://www\.stepsnyc\.com/faculty/[^<]+)</loc>', xml):
+            if url not in urls:
+                urls.append(url)
+    print(f"Found {len(urls)} Steps faculty pages.")
+
+    def fetch_one(url: str):
+        slug = url.rstrip("/").split("/")[-1]
+        try:
+            page = fetch_url(url, timeout=12)
+        except Exception:
+            return None
+        description = parse_steps_class_description(page)
+        if not description:
+            return None
+        return slug, _steps_page_name(page, slug), url, description
+
+    results: Dict[str, Any] = {}
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        for found in pool.map(fetch_one, urls):
+            if not found:
+                continue
+            slug, name, url, description = found
+            entry = {"default": description, "raw": description, "source": url}
+            # Index by both the page's name and the slug, like the BDC entries.
+            for key in (normalize_instructor(name), normalize_instructor(slug.replace("-", " "))):
+                results.setdefault(key, entry)
+
+    print(f"Extracted {len(results)} name keys with class descriptions from Steps.")
     return results
 
 def scrape_pmt_verbatim() -> Dict[str, Any]:
@@ -260,18 +312,41 @@ def scrape_pmt_verbatim() -> Dict[str, Any]:
     print(f"Extracted {len(results)} verbatim descriptions from PMT.")
     return results
 
-def main():
+SCRAPERS = {
+    "bdc": scrape_bdc_verbatim,
+    "peridance": scrape_peridance_verbatim,
+    "steps": scrape_steps_verbatim,
+    "pmt": scrape_pmt_verbatim,
+}
+
+
+def main(argv: List[str]) -> None:
+    """Refreshes the given studios (all when none are named), keeping every other
+    studio's entries, and any studio whose crawl comes back empty, as they were:
+        python3 backend/src/extract_teacher_descriptions.py steps
+    """
+    studios = argv or list(SCRAPERS)
+    unknown = [st for st in studios if st not in SCRAPERS]
+    if unknown:
+        raise SystemExit(f"Unknown studio(s): {', '.join(unknown)}. Choose from: {', '.join(SCRAPERS)}")
+
     print("=" * 60)
     print("Deterministic Verbatim Scraper (0% AI / 100% Human-Written)")
     print("=" * 60)
 
-    all_data = {
-        "bdc": scrape_bdc_verbatim(),
-        "peridance": scrape_peridance_verbatim(),
-        "steps": scrape_steps_verbatim(),
-        "ailey": {}, # Ailey organizes by technique; instructors do not have individual class blurbs
-        "pmt": scrape_pmt_verbatim()
-    }
+    all_data: Dict[str, Any] = {}
+    if os.path.exists(DATA_PATH):
+        with open(DATA_PATH, encoding="utf-8") as f:
+            all_data = json.load(f)
+    # Ailey organizes by technique; see extract_ailey_techniques.py.
+    all_data.setdefault("ailey", {})
+
+    for st in studios:
+        fresh = SCRAPERS[st]()
+        if fresh:
+            all_data[st] = fresh
+        else:
+            print(f"  ! {st.upper()}: nothing extracted; keeping the {len(all_data.get(st, {}))} existing entries")
 
     os.makedirs(os.path.dirname(DATA_PATH), exist_ok=True)
     with open(DATA_PATH, "w", encoding="utf-8") as f:
@@ -285,4 +360,4 @@ def main():
     print("=" * 60)
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
