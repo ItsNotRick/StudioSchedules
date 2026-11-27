@@ -742,5 +742,33 @@
       "peridance": "https://www.peridance.com/faculty/nicholas-korkos",
       "steps": "https://www.stepsnyc.com/faculty/nicholas-korkos/"
     }
+  },
+  "elizabeth_ferrell": {
+    "canonicalName": "Elizabeth Ferrell",
+    "aliases": [
+      "Beth Ferrell",
+      "Elizabeth Ferrell"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/elizabeth-ferrell",
+      "steps": "https://www.stepsnyc.com/faculty/elizabeth-ferrell/"
+    }
+  },
+  "nicole_von_arx": {
+    "canonicalName": "Nicole Von Arx",
+    "aliases": [
+      "Nicole Von Arx",
+      "Nicole von Arx"
+    ],
+    "studios": [
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/nicole-von-arx"
+    }
   }
 }
