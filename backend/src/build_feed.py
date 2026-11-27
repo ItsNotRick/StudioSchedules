@@ -13,6 +13,7 @@ import re
 import html as html_lib
 import shutil
 import hashlib
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 from typing import Dict, List, Any, Optional, Tuple
@@ -235,44 +236,80 @@ def _tier_from_title(title: str) -> Tuple[str, Optional[str]]:
         return "allLevels", "OPEN" if all_levels.group(0).startswith("open") else "ALL LEVELS"
     return "allLevels", None
 
-# Verbatim technique descriptions scraped directly from https://ailey.org/classes/techniques/
-AILEY_TECHNIQUE_DESCRIPTIONS = {
-    "ballet": "A form of dance dating back to Renaissance Italy, ballet technique has been adapted and finessed over centuries. Ballet technique is designed to develop symmetry, balance, flexibility, strength, the graceful carriage of the arms, intricate footwork, an elongated and centered midline, and virtuosity in pirouettes and jumps.",
-    "horton": "Created by Lester Horton (Alvin Ailey's mentor) in the 1940s and is comprised of detailed exercises called Studies, which include Projections, Locomotions, Preludes, Rhythms, Improvisations, and Fortifications. The fortifications establish a framework of movement mechanics, muscular development and coordination, elasticity and range, rhythm and timing of phrasing, and movement quality.",
-    "graham": "Developed by modern dance pioneer Martha Graham, Graham technique is centered around the contraction and release of the diaphragm, where the dancer's breath becomes the motor for movement. Graham technique utilizes floor work to strengthen the use of the torso in contractions and spiraling actions, before moving to standing and traveling patterns that move across the floor.",
-    "contemporary": "Contemporary dance encompasses a range of different techniques and movement vocabularies being practiced today. Contemporary classes often include floor work, sequencing of the spine, a focus on breath and alignment, phrase material, improvisation, fall and recovery, and working with gravity to find release.",
-    "hip hop": "Hip hop utilizes elements from popping, locking, and breaking to create a unique and popular street style. This class challenges every dancer with dynamic movement and combinations focused on rhythm and musicality, encouraging individual style while staying true to hip hop’s foundations.",
-    "west african": "West African classes at Ailey Extension bring together body, mind, and spirit in an energetic union of music, dance, and the oral traditions of West African cultures. Every class is accompanied by live drumming to provide students with an understanding of the relationship between music and dance.",
-    "afro-brazilian": "Afro-Brazilian dance is full of spontaneous, soulful, and dynamic movement that will energize your body and spirit. This class presents sequences and exercises to prepare the body for uplifting and exciting dances from northern Brazil.",
-    "jazz": "Jazz technique utilizes the elongated lines and extensions of ballet, the core-driven power of modern dance, and the dynamic syncopation of Broadway dance and street styles. It is a technically demanding style that encourages dancers to find their individual flair within the movement.",
-    "vogue": "Vogue, which originated in the Harlem balls, emulates the poses of fashion magazines but also draws from hieroglyphic imagery and martial arts. In this class, students master the five key elements to voguing—catwalk, spins and dips, floor work, hand work, and duckwalk.",
-    "pilates": "Pilates is a system of repetitive exercises performed on a yoga mat or other equipment to promote strength, stability, and flexibility. Pilates exercises develop the body through muscular effort that stems from the core."
-}
+AILEY_TECHNIQUES_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "ailey_techniques.json")
+
+# Words a technique name may carry that class titles usually drop
+# ("Afro-Brazilian Dance" is scheduled as "Beg Afro-Brazilian").
+_TECHNIQUE_NAME_SUFFIXES = (" dance technique", " technique", " dance", " for adults")
+
+
+def _normalize_for_match(text: str) -> str:
+    """Lowercases, strips accents and ®, unifies apostrophes, and treats hyphens as
+    spaces ("Limón" -> "limon", "Hip-Hop" -> "hip hop")."""
+    text = unicodedata.normalize("NFKD", text.replace("®", ""))
+    text = "".join(c for c in text if not unicodedata.combining(c))
+    text = text.replace("\u2019", "'").replace("\u2018", "'").replace("-", " ").lower()
+    return " ".join(text.split())
+
+
+def _technique_match_keys(name: str) -> List[str]:
+    keys = [_normalize_for_match(name)]
+    for suffix in _TECHNIQUE_NAME_SUFFIXES:
+        if keys[-1].endswith(suffix) and len(keys[-1]) > len(suffix):
+            keys.append(keys[-1][: -len(suffix)].strip())
+    return keys
+
+
+_ailey_technique_index: Optional[List[Tuple[str, str]]] = None
+
+
+def load_ailey_techniques(path: str = AILEY_TECHNIQUES_PATH) -> List[Tuple[str, str]]:
+    """Returns [(match key, description)] from ailey_techniques.json, longest key first.
+
+    The file is written by extract_ailey_techniques.py from each page under
+    https://www.ailey.org/classes/techniques/.
+    """
+    if not os.path.exists(path):
+        return []
+    with open(path, encoding="utf-8") as f:
+        techniques = json.load(f).get("techniques", [])
+    index = []
+    for tech in techniques:
+        description = (tech.get("description") or "").strip()
+        if not description:
+            continue
+        for key in _technique_match_keys(tech.get("name", "")):
+            if key:
+                index.append((key, description))
+    index.sort(key=lambda kd: len(kd[0]), reverse=True)
+    return index
+
+
+def match_ailey_technique(title: str, index: List[Tuple[str, str]]) -> str:
+    """Returns the description of the longest technique name found in [title], or "".
+
+    Longest wins, so "Open Contemporary Indian" gets Contemporary Indian Dance,
+    not Contemporary, and "Hip Hop Cardio" gets Hip Hop Cardio, not Hip Hop.
+    """
+    t = _normalize_for_match(title)
+    for key, description in index:
+        if re.search(r"(?<![a-z])" + re.escape(key) + r"(?![a-z])", t):
+            return description
+    return ""
+
 
 def get_generic_studio_description(studio_id: str, title: str, genre: str) -> str:
     """
-    Returns authentic verbatim class/style descriptions scraped directly from the studio website.
-    If no authentic website description exists, returns empty string so UI falls back to
-    'A description has not been provided for this class.'
-    Zero AI summaries or synthetic filler.
+    Returns the studio's own verbatim description of the class's style, or "" so the
+    UI falls back to 'A description has not been provided for this class.'
+    Only Ailey describes classes by style; see load_ailey_techniques().
     """
-    t_lower = title.lower()
+    global _ailey_technique_index
     if studio_id == "ailey":
-        for k, desc in AILEY_TECHNIQUE_DESCRIPTIONS.items():
-            if k in t_lower:
-                return desc
-        genre_to_tech = {
-            "ballet": "ballet",
-            "contemporaryModern": "contemporary",
-            "hipHopStreet": "hip hop",
-            "africanDiaspora": "west african",
-            "jazzTheater": "jazz",
-        }
-        tech_key = genre_to_tech.get(genre, genre)
-        if tech_key in AILEY_TECHNIQUE_DESCRIPTIONS:
-            return AILEY_TECHNIQUE_DESCRIPTIONS[tech_key]
-
-    # No authentic studio-wide description scraped from website
+        if _ailey_technique_index is None:
+            _ailey_technique_index = load_ailey_techniques()
+        return match_ailey_technique(title, _ailey_technique_index)
     return ""
 
 # Template fields used only while building the feed, never by the app.
