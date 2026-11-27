@@ -432,6 +432,10 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                     }
                     if c.get("regularInstructor"):
                         fallback_sess["regularInstructor"] = c["regularInstructor"]
+                    # Keep the description the cached session already showed, so a
+                    # studio's own class text survives a failed scrape.
+                    if c.get("description"):
+                        fallback_sess["classDescription"] = c["description"]
                     all_scraped_sessions.append(fallback_sess)
                 scraper_stats[studio_id] = len(cached)
                 print(f"Preserved {len(cached)} cached sessions for {studio_id.upper()}")
@@ -522,20 +526,23 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                     candidate_names.append(a)
 
         studio_descs = instructor_descriptions.get(studio_id, {})
-        session_desc = None
+        # 0. The studio's own description of this exact class, when its schedule
+        #    provides one (Danznik's Mindbody widget does), beats any teacher blurb.
+        session_desc = (sess.get("classDescription") or "").strip() or None
 
         # 1. Look for description under current studio for any known alias
-        for name_key in candidate_names:
-            if name_key in studio_descs:
-                inst_blurbs = studio_descs[name_key]
-                matched_blurb = None
-                for key, blurb in inst_blurbs.items():
-                    if key not in ("default", "raw", "source") and (key in raw_title.lower() or key in matched_tpl["title"].lower()):
-                        matched_blurb = blurb
+        if not session_desc:
+            for name_key in candidate_names:
+                if name_key in studio_descs:
+                    inst_blurbs = studio_descs[name_key]
+                    matched_blurb = None
+                    for key, blurb in inst_blurbs.items():
+                        if key not in ("default", "raw", "source") and (key in raw_title.lower() or key in matched_tpl["title"].lower()):
+                            matched_blurb = blurb
+                            break
+                    session_desc = matched_blurb or inst_blurbs.get("default")
+                    if session_desc:
                         break
-                session_desc = matched_blurb or inst_blurbs.get("default")
-                if session_desc:
-                    break
 
         # 2. Look across other studios if instructor teaches across studios and has a philosophy/blurb
         if not session_desc:
