@@ -11,13 +11,35 @@ import urllib.request
 import urllib.parse
 import http.cookiejar
 from datetime import datetime, timedelta
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import time
 
 PMT_STUDIO_ID = "727061"
 PMT_MINDBODY_WS_URL = f"https://clients.mindbodyonline.com/classic/ws?studioid={PMT_STUDIO_ID}"
 PMT_MINDBODY_HOME_URL = f"https://clients.mindbodyonline.com/classic/home?studioid={PMT_STUDIO_ID}"
 PMT_MINDBODY_SCHEDULE_URL = "https://clients.mindbodyonline.com/classic/mainclass?fl=true&tabID=7"
+# What the schedule's class-name popup loads: PMT's own description of the class.
+PMT_CLASS_INFO_URL = "https://clients.mindbodyonline.com/Ajax/ClassInfo/?classid={}"
+
+
+def _parse_class_info(html: str) -> Optional[str]:
+    """Returns the text of a /Ajax/ClassInfo/ response (one line per paragraph), or
+    None when the studio left it empty or as a placeholder such as "-"."""
+    m = re.search(r'<div class="userHTML">', html)
+    if not m:
+        return None
+    # Inner HTML of the userHTML div, nested divs included.
+    depth, end = 1, len(html)
+    for tag in re.finditer(r'<(/?)div\b[^>]*>', html[m.end():]):
+        depth += -1 if tag.group(1) else 1
+        if depth == 0:
+            end = m.end() + tag.start()
+            break
+    text = re.sub(r'<br\s*/?>|</(?:p|div|li|h[1-6])>', '\n', html[m.end():end], flags=re.I)
+    text = html_lib.unescape(re.sub(r'<[^>]+>', '', text)).replace('\xa0', ' ')
+    lines = [' '.join(line.split()) for line in text.splitlines()]
+    description = '\n'.join(line for line in lines if line)
+    return description if re.search(r'[A-Za-z]{3}', description) else None
 
 def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
     idx = html.find('<div id="classSchedule-mainTable"')
@@ -63,6 +85,7 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
                 continue
 
             raw_title = html_lib.unescape(re.sub(r'<[^>]+>', '', cols[0])).strip()
+            class_id_m = re.search(r'name="cid(\d+)"', cols[0])
 
             # Instructor & cancellation detection
             teacher = "Staff"
@@ -129,6 +152,9 @@ def _parse_pmt_table(html: str, seen: set) -> List[Dict[str, Any]]:
             }
             if regular_teacher and (is_cancelled or is_sub):
                 session_record["regularInstructor"] = regular_teacher
+            if class_id_m:
+                # Used by scrape_pmt_schedule() to look up the class description.
+                session_record["classInfoId"] = class_id_m.group(1)
             sessions.append(session_record)
 
     return sessions
@@ -192,6 +218,22 @@ def scrape_pmt_schedule() -> List[Dict[str, Any]]:
                     time.sleep(1)
                 else:
                     print(f"Error fetching PMT schedule from {schedule_url}: {e}")
+
+    # One description lookup per class (about 30), shared by all its sessions.
+    descriptions: Dict[str, Optional[str]] = {}
+    for sess in all_sessions:
+        class_id = sess.pop("classInfoId", None)
+        if not class_id:
+            continue
+        if class_id not in descriptions:
+            try:
+                resp = opener.open(PMT_CLASS_INFO_URL.format(class_id), timeout=15)
+                descriptions[class_id] = _parse_class_info(resp.read().decode("utf-8", errors="ignore"))
+            except Exception as e:
+                print(f"Warning: no PMT class description for class {class_id}: {e}")
+                descriptions[class_id] = None
+        if descriptions[class_id]:
+            sess["classDescription"] = descriptions[class_id]
 
     all_sessions.sort(key=lambda s: (s["serviceDate"], s["startMin"]))
     return all_sessions

@@ -61,6 +61,12 @@ class DanznikWidgetDescriptionTests(unittest.TestCase):
         self.assertNotIn("classDescription", social)
 
 
+LONG_CLASS_TEXT = (
+    "Perfect for beginners, the Lindy 100 course will provide you with the basic "
+    "fundamentals of swing, rotating through 6-count, 8-count and Charleston."
+)
+
+
 class StudioClassDescriptionFeedTests(unittest.TestCase):
     def build(self, danznik_sessions=None, danznik_error=None, cached_sessions=()):
         now_ny = datetime.now(build_feed.NY_TZ)
@@ -111,22 +117,31 @@ class StudioClassDescriptionFeedTests(unittest.TestCase):
 
     def test_studio_class_description_beats_teacher_blurb(self):
         sessions = self.build(danznik_sessions=[
-            self.session("with_text", classDescription="Perfect for beginners."),
+            self.session("with_text", classDescription=LONG_CLASS_TEXT),
             self.session("without_text"),
         ])
-        self.assertEqual(sessions["with_text"]["description"], "Perfect for beginners.")
+        self.assertEqual(sessions["with_text"]["description"], LONG_CLASS_TEXT)
         # No class text from the studio: the teacher's blurb is still used.
         self.assertEqual(sessions["without_text"]["description"], "AJ's BDC teacher blurb.")
+
+    def test_short_class_note_yields_to_teacher_blurb_but_fills_gaps(self):
+        note = "All levels welcome. Pace may vary depending on the flow of the class."
+        sessions = self.build(danznik_sessions=[
+            self.session("with_teacher", classDescription=note),
+            self.session("no_teacher", classDescription=note, instructor="Big Mike"),
+        ])
+        self.assertEqual(sessions["with_teacher"]["description"], "AJ's BDC teacher blurb.")
+        self.assertEqual(sessions["no_teacher"]["description"], note)
 
     def test_cached_description_survives_failed_scrape(self):
         sessions = self.build(
             danznik_error=RuntimeError("down"),
             cached_sessions=[{
                 **self.session("cached"), "templateId": "danznik_lindy",
-                "description": "Perfect for beginners.",
+                "description": LONG_CLASS_TEXT,
             }],
         )
-        self.assertEqual(sessions["cached"]["description"], "Perfect for beginners.")
+        self.assertEqual(sessions["cached"]["description"], LONG_CLASS_TEXT)
 
 
 if __name__ == "__main__":

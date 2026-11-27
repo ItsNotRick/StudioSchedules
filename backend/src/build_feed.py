@@ -312,6 +312,10 @@ def get_generic_studio_description(studio_id: str, title: str, genre: str) -> st
         return match_ailey_technique(title, _ailey_technique_index)
     return ""
 
+# A studio class description shorter than this is treated as a level/logistics
+# note ("All levels welcome. Pace may vary...") and yields to a teacher blurb.
+MIN_CLASS_DESCRIPTION_CHARS = 120
+
 # Template fields used only while building the feed, never by the app.
 INTERNAL_TEMPLATE_FIELDS = {"matchPatterns"}
 
@@ -527,8 +531,12 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
 
         studio_descs = instructor_descriptions.get(studio_id, {})
         # 0. The studio's own description of this exact class, when its schedule
-        #    provides one (Danznik's Mindbody widget does), beats any teacher blurb.
-        session_desc = (sess.get("classDescription") or "").strip() or None
+        #    provides one (Danznik, PMT), beats any teacher blurb. A one-line note
+        #    ("No experience needed.") only fills in when no teacher blurb exists.
+        studio_class_desc = (sess.get("classDescription") or "").strip()
+        session_desc = (
+            studio_class_desc if len(studio_class_desc) >= MIN_CLASS_DESCRIPTION_CHARS else None
+        )
 
         # 1. Look for description under current studio for any known alias
         if not session_desc:
@@ -557,6 +565,9 @@ def generate_live_feed() -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
                             break
                 if session_desc:
                     break
+
+        if not session_desc and studio_class_desc:
+            session_desc = studio_class_desc
 
         # rawClassTitle (plus rawLevel / rawCategory when the studio provides
         # them) stays in the output: if a scraper fails on the next run,
