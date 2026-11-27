@@ -579,5 +579,196 @@
       "peridance": "https://www.peridance.com/faculty/norbert-de-la-cruz",
       "steps": "https://www.stepsnyc.com/faculty/norbert-de-la-cruz-iii/"
     }
+  },
+  "alex_macdonald": {
+    "canonicalName": "Alex Macdonald",
+    "aliases": [
+      "Alex Macdonald",
+      "Alexander MacDonald"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/alex-macdonald/"
+    }
+  },
+  "john_vincent_leggio": {
+    "canonicalName": "John Vincent Leggio",
+    "aliases": [
+      "John Leggio",
+      "John Vincent Leggio"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/john-vincent-leggio/"
+    }
+  },
+  "tamisha_guy": {
+    "canonicalName": "Tamisha Guy",
+    "aliases": [
+      "Tamisha A. Guy",
+      "Tamisha Guy"
+    ],
+    "studios": [
+      "ailey",
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/tamisha-guy/"
+    }
+  },
+  "christopher_charles_mcdaniel": {
+    "canonicalName": "Christopher Charles Mcdaniel",
+    "aliases": [
+      "Christopher Charles McDaniel",
+      "Christopher Charles Mcdaniel"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/christopher-charles-mcdaniel/"
+    }
+  },
+  "aj_howard": {
+    "canonicalName": "Aj Howard",
+    "aliases": [
+      "AJ Howard",
+      "Aj Howard"
+    ],
+    "studios": [
+      "danznik",
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/aj-howard"
+    }
+  },
+  "igal_perry": {
+    "canonicalName": "Igal Perry",
+    "aliases": [
+      "Artistic Director Igal Perry",
+      "Artistic Director: Igal Perry",
+      "Igal Perry"
+    ],
+    "studios": [
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/artistic-director-igal-perry"
+    }
+  },
+  "moscelyne_parkeharrison": {
+    "canonicalName": "Moscelyne Parkeharrison",
+    "aliases": [
+      "Moscelyne ParkeHarrison",
+      "Moscelyne Parkeharrison"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/moscelyne-parkeharrison/"
+    }
+  },
+  "eve_marie_dalcourt": {
+    "canonicalName": "Eve Marie Dalcourt",
+    "aliases": [
+      "Eve Marie Dalcourt",
+      "Eve-Marie Dalcourt"
+    ],
+    "studios": [
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/eve-marie-dalcourt"
+    }
+  },
+  "mia_deweese": {
+    "canonicalName": "Mia Deweese",
+    "aliases": [
+      "Mia DeWeese",
+      "Mia Deweese"
+    ],
+    "studios": [
+      "steps"
+    ],
+    "facultyUrls": {
+      "steps": "https://www.stepsnyc.com/faculty/mia-deweese/"
+    }
+  },
+  "joshua_kolberg": {
+    "canonicalName": "Joshua Kolberg",
+    "aliases": [
+      "Josh Kolberg",
+      "Joshua Kolberg"
+    ],
+    "studios": [
+      "bdc",
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/joshua-kolberg"
+    }
+  },
+  "luz_guzman": {
+    "canonicalName": "Luz Guzman",
+    "aliases": [
+      "Luz Guzman",
+      "Luz Theodyssey Guzman"
+    ],
+    "studios": [
+      "bdc",
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/luz-guzman"
+    }
+  },
+  "nicholas_korkos": {
+    "canonicalName": "Nicholas Korkos",
+    "aliases": [
+      "Nicholas Korkos",
+      "Nick Korkos"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/nicholas-korkos",
+      "steps": "https://www.stepsnyc.com/faculty/nicholas-korkos/"
+    }
+  },
+  "elizabeth_ferrell": {
+    "canonicalName": "Elizabeth Ferrell",
+    "aliases": [
+      "Beth Ferrell",
+      "Elizabeth Ferrell"
+    ],
+    "studios": [
+      "peridance",
+      "steps"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/elizabeth-ferrell",
+      "steps": "https://www.stepsnyc.com/faculty/elizabeth-ferrell/"
+    }
+  },
+  "nicole_von_arx": {
+    "canonicalName": "Nicole Von Arx",
+    "aliases": [
+      "Nicole Von Arx",
+      "Nicole von Arx"
+    ],
+    "studios": [
+      "peridance"
+    ],
+    "facultyUrls": {
+      "peridance": "https://www.peridance.com/faculty/nicole-von-arx"
+    }
   }
 }

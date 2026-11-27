@@ -22,6 +22,9 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 INSTRUCTORS_PATH = os.path.join(DATA_DIR, "instructors.json")
 DENIED_PATH = os.path.join(DATA_DIR, "denied_aliases.json")
 SCHEDULE_PATH = os.path.join(DATA_DIR, "schedule.json")
+# The live feed. The git-tracked schedule.json is only refreshed by the feed job
+# in CI, so locally it can be days old; candidates are found from this instead.
+PUBLISHED_FEED_URL = "https://itsnotrick.github.io/StudioSchedules/schedule.json"
 DESCRIPTIONS_PATH = os.path.join(DATA_DIR, "instructor_descriptions.json")
 
 USER_AGENT = (
@@ -211,9 +214,30 @@ def levenshtein_distance(s1: str, s2: str) -> int:
         prev = curr
     return prev[-1]
 
+_schedule_cache: Dict[str, Any] = {}
+
+
+def load_schedule() -> Dict[str, Any]:
+    """The published feed, or the local schedule.json when it can't be fetched."""
+    if "data" not in _schedule_cache:
+        try:
+            req = urllib.request.Request(PUBLISHED_FEED_URL, headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            if not data.get("sessions"):
+                raise ValueError("published feed has no sessions")
+            print(f"Using the published feed ({data.get('generatedAt', 'unknown time')}).")
+        except Exception as e:
+            data = load_json(SCHEDULE_PATH, {})
+            print(f"Warning: could not fetch the published feed ({e}); "
+                  f"using local schedule.json ({data.get('generatedAt', 'unknown time')}), which may be stale.")
+        _schedule_cache["data"] = data
+    return _schedule_cache["data"]
+
+
 def harvest_schedule_names() -> Dict[str, Set[str]]:
-    """Returns mapping of raw instructor name -> set of studioIds from schedule.json."""
-    data = load_json(SCHEDULE_PATH, {})
+    """Returns mapping of raw instructor name -> set of studioIds from the current schedule."""
+    data = load_schedule()
     res: Dict[str, Set[str]] = {}
     for s in data.get("sessions", []):
         inst = s.get("instructor")

@@ -29,6 +29,50 @@ def _field(block: str, css_class: str) -> Optional[str]:
     m = re.search(rf'<div class="{css_class}"[^>]*>(.*?)</div>', block, re.S)
     return m.group(1) if m else None
 
+def _div_inner_html(block: str, css_class: str) -> Optional[str]:
+    """Returns the full inner HTML of the first <div class="css_class">, nested divs included."""
+    m = re.search(rf'<div class="{css_class}"[^>]*>', block)
+    if not m:
+        return None
+    depth = 1
+    for tag in re.finditer(r'<(/?)div\b[^>]*>', block[m.end():]):
+        depth += -1 if tag.group(1) else 1
+        if depth == 0:
+            return block[m.end():m.end() + tag.start()]
+    return block[m.end():]
+
+# Lines that start a pricing section in a class description, and lines about
+# pass eligibility. Prices go stale, so these are left out of the app's text.
+_PRICING_HEADING = re.compile(r'^pricing\b', re.I)
+_DANZPASS_LINE = re.compile(r'^[\s•*]*danzpass eligible[\s*]*$', re.I)
+_SECTION_BREAK = re.compile(r'^-{3,}$')
+
+def _class_description(block: str) -> Optional[str]:
+    """Danznik's own description of the class, as shown under "View details" on its
+    schedule, with line breaks kept and pricing / DanzPass lines removed."""
+    inner = _div_inner_html(block, "bw-session__description")
+    if not inner:
+        return None
+    text = re.sub(r'<br\s*/?>|</(?:p|div|li|h[1-6])>', '\n', inner, flags=re.I)
+    text = re.sub(r'<li[^>]*>', '• ', text, flags=re.I)
+    text = html_lib.unescape(re.sub(r'<[^>]+>', '', text)).replace('\xa0', ' ')
+    lines: List[str] = []
+    in_pricing = False
+    for raw in text.splitlines():
+        line = ' '.join(raw.split())
+        if not line:
+            continue
+        if _SECTION_BREAK.match(line):
+            in_pricing = False
+            continue
+        if _PRICING_HEADING.match(line):
+            in_pricing = True
+            continue
+        if in_pricing or _DANZPASS_LINE.match(line):
+            continue
+        lines.append(line)
+    return '\n'.join(lines) or None
+
 def _parse_sessions(markup: str, seen: set) -> List[Dict[str, Any]]:
     sessions: List[Dict[str, Any]] = []
     blocks = re.split(r'(?=<div class="bw-session[ "])', markup)
@@ -97,6 +141,9 @@ def _parse_sessions(markup: str, seen: set) -> List[Dict[str, Any]]:
             session["rawLevel"] = level
         if category:
             session["rawCategory"] = category
+        description = _class_description(block)
+        if description:
+            session["classDescription"] = description
         sessions.append(session)
     return sessions
 

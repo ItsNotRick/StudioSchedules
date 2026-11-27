@@ -1,0 +1,185 @@
+{
+  "source": "https://www.ailey.org/classes/techniques/",
+  "techniques": [
+    {
+      "slug": "ballet",
+      "name": "Ballet",
+      "url": "https://www.ailey.org/classes/techniques/ballet",
+      "description": "A form of dance dating back to Renaissance Italy, ballet technique has been adapted and finessed over centuries. Ballet technique is designed to develop symmetry, balance, flexibility, strength, the graceful carriage of the arms, intricate footwork, an elongated and centered midline, and virtuosity in pirouettes and jumps. Classes begin at the barre to warm up the body before moving to the centre and across the floor for exercises that further what students learn at the barre such as adagio, petit allegro, grand allegro, and more. Learn the basics or perfect your technique in a variety of levels. Please note that absolute beginner and some beginner-level ballet classes spend most, if not all, time at the barre."
+    },
+    {
+      "slug": "contemporary",
+      "name": "Contemporary",
+      "url": "https://www.ailey.org/classes/techniques/contemporary",
+      "description": "Contemporary dance encompasses a range of different techniques and movement vocabularies being practiced today. Contemporary classes often include floor work, sequencing of the spine, a focus on breath and alignment, phrase material, improvisation, fall and recovery, and working with gravity to find release. This class is designed to work on finding a balance between freedom and control of movement while developing students’ technique and building a strong foundation. Each class will begin with a warmup before learning original choreography while focusing on musicality and artistic style."
+    },
+    {
+      "slug": "cuban-modern-dance-technique",
+      "name": "Cuban Modern Dance Technique",
+      "url": "https://www.ailey.org/classes/techniques/cuban-modern-dance-technique",
+      "description": "Cuban modern dance technique, also known as la técnica cubana (técnica), is a codified contemporary dance language that was pioneered by Ramiro Guerra and further developed by Arnaldo Patterson in Havana, Cuba in the 1960s. Técnica is a highly expressive dance language that fuses Afro-Cuban dance traditions and Cuban social dances with European ballet and modern dance techniques. While drawing from the Graham-based principles of contraction and release, técnica utilizes deep, sensual, and oceanic undulations of the spine and arms, a broad circular use of the pelvis, torso and head, and spiraling movement guided fully by the breath. This class will incorporate a strong full-body warm-up, phrases in the center, floorwork, combinations across the floor, and stretches."
+    },
+    {
+      "slug": "dunham",
+      "name": "Dunham",
+      "url": "https://www.ailey.org/classes/techniques/dunham",
+      "description": "Created by choreographer and anthropologist Katherine Dunham, who fused African and Caribbean dance forms with modern dance, Dunham technique requires incredible physicality and strength to execute the spinal twists, undulations, and polyrhythmic movements that propel the body through space. Dunham class is divided into a series of barre exercises, a section focused on center floor work, and progressions that move across the floor and are integral to choreography. Signature moves include the Dunham walk, the undulating spine in the fall recovery series, and the dynamic rocking horse."
+    },
+    {
+      "slug": "graham",
+      "name": "Graham",
+      "url": "https://www.ailey.org/classes/techniques/graham",
+      "description": "Created by choreographer Martha Graham, Graham technique is centered around the contraction and release of the diaphragm, where the dancer's breath becomes the motor for movement. Graham technique utilizes floor work to strengthen the use of the torso in contractions and spiraling actions, before moving to standing and traveling patterns that move across the floor. The fundamental principles of the technique include contraction and release, the shift of weight, and spirals that create dramatic tension."
+    },
+    {
+      "slug": "horton",
+      "name": "Horton",
+      "url": "https://www.ailey.org/classes/techniques/horton",
+      "description": "Horton technique was devised by choreographer Lester Horton (Alvin Ailey's mentor) in the 1940s and is comprised of detailed exercises called Studies, which include Projections, Locomotions, Preludes, Rhythms, Improvisations, and Fortifications. The fortifications are considered the core of Horton technique. They establish a framework of movement mechanics, muscular development and coordination, elasticity and range, rhythm and timing of phrasing, and movement quality. Horton technique is the foundation for many of Mr. Ailey’s works, including Revelations, and is a fundamental training technique for The Ailey School, Ailey II, and Alvin Ailey American Dance Theater. Horton classes at Ailey Extension are led by Ailey-trained dancers and former Ailey II and Alvin Ailey American Dance Theater company members. Class typically begins with warm-up exercises such as tendus, flatbacks, primitive squats, and release swings before being led to the floor for deep lunges and coccyx balances. Students will then be led through combinations at the center and across the floor that integrate Horton studies such as lateral stretches, stags, and more. All Horton classes feature live percussion accompaniment."
+    },
+    {
+      "slug": "limon",
+      "name": "Limón",
+      "url": "https://www.ailey.org/classes/techniques/limon",
+      "description": "The Limón technique, created by modern dance choreographer José Limón, emphasizes the natural rhythms of fall and recovery, a conscious use of breath, and the interplay between weight and weightlessness. This class provides dancers with an organic approach to movement that easily adapts to a range of choreographic styles."
+    },
+    {
+      "slug": "heels",
+      "name": "Heels",
+      "url": "https://www.ailey.org/classes/techniques/heels",
+      "description": "Heels is designed for students to discover the power of strutting in heels with confidence. This class can improve balance, coordination, and muscle control. Students will receive a brief warm-up that will get them comfortable walking in heels before learning choreography with a focus on musicality, lines, grooves, hair whips, and floor work. The class environment is designed to help you tap into your sensuality and self-expression as you glide across the floor. Students who are new to heels classes are encouraged to wear comfortable low, thick heels or dance shoes."
+    },
+    {
+      "slug": "hip-hop",
+      "name": "Hip Hop",
+      "url": "https://www.ailey.org/classes/techniques/hip-hop",
+      "description": "Hip hop utilizes elements from popping, locking, and breaking to create a unique and popular street style. This class challenges every dancer with dynamic movement and combinations focused on rhythm and musicality, encouraging individual style while staying true to hip hop’s foundations."
+    },
+    {
+      "slug": "house",
+      "name": "House",
+      "url": "https://www.ailey.org/classes/techniques/house",
+      "description": "House dance is deeply connected to the strong rhythm of house music's heavy bass. In this class, students explore their freedom of expression through rhythmic sequences and improvisation driven by infectious dance, lounge, and funk tracks. This class breaks down basic house dance steps like jacking, skating, chase, salsa hop, sidewalk, stomp, and shuffle step to build a solid foundation that will help students find their rhythm and freestyle to the music."
+    },
+    {
+      "slug": "vogue",
+      "name": "Vogue",
+      "url": "https://www.ailey.org/classes/techniques/vogue",
+      "description": "Vogue, which originated in the Harlem balls, emulates the poses of fashion magazines but also draws from hieroglyphic imagery and martial arts. In this class, students master the five key elements to voguing—catwalk, spins and dips, floor work, hand work, and duckwalk—while unleashing their self-expression and connecting to the history of vogue and ballroom culture. Vogue Basics Vogue Basics is perfect for students looking to begin their vogue journey and understand the fundamentals. The instructor will break down the five elements of vogue to allow students to perfect their technique at a slow and easy-to-follow pace. Beginner Vogue Ailey Extension's beginner vogue is a New Way Vogue-based class. Flexibility, precision, and sharp lines are key to New Way vogue. Arm control shows off a dancers’ ability to create shapes, illusions, and face-framing lines, all to the beat of the music. Students in this class also practice other key vogue elements with an emphasis on expression and confidence. Vogue Fem Vogue Fem is, at its core, self-expression through femininity. Students learn a choreographed combination with a focus on finding their personal, feminine essence. This is an expressive, full-body movement class that will challenge your agility, strength, and spatial awareness while allowing you to tap into your fiercest self."
+    },
+    {
+      "slug": "jazz",
+      "name": "Jazz",
+      "url": "https://www.ailey.org/classes/techniques/jazz",
+      "description": "Jazz technique utilizes the elongated lines and extensions of ballet, the core-driven power of modern dance, and the dynamic syncopation of Broadway dance and street styles. It is a technically demanding style that encourages dancers to find their individual flair within the movement. This class emphasizes musicality, emotional expression, expressive gestures, individuality, sharp isolations, stylized movement, and precision. Jazz at Ailey Extension is a combination of both contemporary and traditional jazz styles with a focus on building on strength, flexibility, and musicality. Class begins with a simple warm-up of isolations and floor stretching before learning combinations across the floor that incorporate jazz pulls, kicks, pirouettes, jumps, and more."
+    },
+    {
+      "slug": "broadway-dance",
+      "name": "Broadway Dance",
+      "url": "https://www.ailey.org/classes/techniques/broadway-dance",
+      "description": "Perfect for students who love Broadway and want to perform with confidence, this class features choreography set to songs from your favorite musicals. In addition to technique and personal style, students will learn about musical theater’s history—the songs, composers, and artists—from Golden Age musicals to today's contemporary hits. Broadway Dance at Ailey Extension can include a wide variety of jazz and street-style techniques that are used in both contemporary and traditional musical theater."
+    },
+    {
+      "slug": "commercial-jazz",
+      "name": "Commercial Jazz",
+      "url": "https://www.ailey.org/classes/techniques/commercial-jazz",
+      "description": "Immerse yourself in the world of commercial dance with a jazz movement style as seen in music videos and other media. Students will learn original lyrically-based choreography with hints of contemporary and hip hop techniques set to hit R&B, pop, and hip hop songs."
+    },
+    {
+      "slug": "afro-brazilian-dance",
+      "name": "Afro-Brazilian Dance",
+      "url": "https://www.ailey.org/classes/techniques/afro-brazilian-dance",
+      "description": "Afro-Brazilian dance is full of spontaneous, soulful, and dynamic movement that will energize your body and spirit. This class presents sequences and exercises to prepare the body for uplifting and exciting dances from northern Brazil. Students will learn to develop rhythm and coordination while exploring the West African and Brazilian cultures that come together to form this unique style. Samba/Afro-Brazilian Samba/Afro-Brazilian is designed for dancers to incorporate the various forms of Samba from Bahia and Rio De Janeiro into Afro-Brazilian movements from Angola, Congo, Benin, and Nigeria. Students will explore samba no pé, miudinho, samba reggae, samba afro, and samba de roda. Delve into samba's roots, rhythm, and cultural essence while exploring self-expression and developing your performance quality."
+    },
+    {
+      "slug": "afro-cuban-dance",
+      "name": "Afro-Cuban Dance",
+      "url": "https://www.ailey.org/classes/techniques/afro-cuban-dance",
+      "description": "Explore the various forms of the Afro-Cuban dance tradition while practicing different movements representing the Orisahas (deities from the African traditions brought to Cuba). In this class, students delve into the dance’s history and the cultural importance behind each movement. Based on each dancer’s skill, knowledge, and experience, the class allows participants to embrace an accessible path to understanding dance through the quality of movement and cultural context."
+    },
+    {
+      "slug": "afrodance",
+      "name": "Afro'Dance",
+      "url": "https://www.ailey.org/classes/techniques/afrodance",
+      "description": "Learn the latest in street dance with Afro'Dance. In the class, dancers will work on musicality heavily influenced by African rhythms and musical influences from the Congo, Ivory Coast, Angola, and beyond. The technique fuses traditional African dances with street styles and popular trends. This cultural, social, and free-spirited class creates an environment where students dance, grow, and form community."
+    },
+    {
+      "slug": "afro-haitian-dance",
+      "name": "Afro-Haitian Dance",
+      "url": "https://www.ailey.org/classes/techniques/afro-haitian-dance",
+      "description": "Journey to the nanm (“soul” in Haitian Kreyol) of Afro-Haitian dance and become acquainted with the different Iwa (gods) in the Vodou religion through their dances, songs, rhythms, and rituals. Students will explore the undulating movements of Yanvalu, the powerful precision of Nago, and the grace and beauty of the Kongo dance, all traditional Haitian dance forms with roots in West Africa and the South American Amazon."
+    },
+    {
+      "slug": "contemporary-indian-dance",
+      "name": "Contemporary Indian Dance",
+      "url": "https://www.ailey.org/classes/techniques/contemporary-indian-dance",
+      "description": "At the core of contemporary Indian dance lies a hybrid of the intricacies of classical Indian dance—footwork, expression, and hand movements—with targeted exercises to provide for a fulfilling and fresh contemporary dance routine at the end of every class. This class attempts to investigate the communicative potential when merging western dance traditions with a classical South Asian foundation. It starts with a vigorous yet meditative warm-up, and proceeds to elaborate on Indian classical and contemporary technique. This leads to a dynamic movement language and exchange which leaves the dancer with a clear understanding of the relevance and importance of South Asian aesthetic in the performing arts."
+    },
+    {
+      "slug": "dancehall",
+      "name": "Dancehall",
+      "url": "https://www.ailey.org/classes/techniques/dancehall",
+      "description": "Dancehall is a vibrant technique that blends Jamaican and Caribbean dance cultures derived from the culture, sayings, and the patois within the Caribbean community. In this class, students learn the basic steps of dancehall with a breakdown of their meaning and history before learning original choreography set to trending reggae music."
+    },
+    {
+      "slug": "ny-style-mambo",
+      "name": "NY Style Mambo",
+      "url": "https://www.ailey.org/classes/techniques/ny-style-mambo",
+      "description": "Originally from Cuba but also inspired by rumba, Broadway dance, swing, jazz, and Latin hustle, the New York style mambo is enjoyed throughout the world because of its high energy and infectious rhythms. New York style mambo was created in Manhattan—notably at the famous midtown Palladium Ballroom—and is also referred to as \"salsa on 2\" since it is danced on the second beat of the bar of music. NY Style Mambo has a flirtatious energy in its partnering, hip movements, and footwork. In this class, students will learn and develop upon the rhythms, footwork, and musicality of NY Style Mambo."
+    },
+    {
+      "slug": "sabar",
+      "name": "Sabar",
+      "url": "https://www.ailey.org/classes/techniques/sabar",
+      "description": "Sabar, a vibrant and energetic dance form that originated from the Wolof people, is the national dance of Senegal and a form of expression within the Senegalese community. The technique involves rhythmic movements of the body accompanied by the beats of the Sabar drums. Class begins with a warm-up to stretch and prepare participants’ bodies, followed by instruction on basic rhythm and terminology of the technique before moving into choreography set to live Sabar drumming. Sabar classes are taught barefoot. Dancers should wear loose-fitting, comfortable dance clothes or a lapa (wrap skirt) if you own one."
+    },
+    {
+      "slug": "salsa",
+      "name": "Salsa",
+      "url": "https://www.ailey.org/classes/techniques/salsa",
+      "description": "There is no better place to learn salsa than New York City, considered by many to be the “mecca” of salsa. Guided by Latin dance rhythms, students in this class learn fundamental salsa footwork, called \"shines\" in New York City, as well as the history and culture of salsa, salsa etiquette, floor craft, and partner safety. No partner required to join class."
+    },
+    {
+      "slug": "west-african-dance",
+      "name": "West African Dance",
+      "url": "https://www.ailey.org/classes/techniques/west-african-dance",
+      "description": "West African classes at Ailey Extension bring together body, mind, and spirit in an energetic union of music, dance, and the oral traditions of West African cultures. Every class is accompanied by live drumming to provide students with an understanding of the relationship between music and dance, the dancers' shared and syncopated rhythm becoming the common language they speak together."
+    },
+    {
+      "slug": "hip-hop-cardio",
+      "name": "Hip Hop Cardio",
+      "url": "https://www.ailey.org/classes/techniques/hip-hop-cardio",
+      "description": "This dance-based cardio fitness class is designed to get students' heart rates up and tone their bodies by utilizing dynamic movements infused with hip hop. Students work up a sweat dancing to their favorite hip hop music while working out with an easy-to-follow sequence of movements."
+    },
+    {
+      "slug": "masala-bhangrar",
+      "name": "Masala Bhangra®",
+      "url": "https://www.ailey.org/classes/techniques/masala-bhangrar",
+      "description": "Derived from two Indian words—“Masala,” which means spicy in Hindi, and “Bhangra,” which is a traditional folk dance from the northern state of Punjab, India—this fitness program modernizes the high-energy folk dance by blending traditional Bhangra dance steps with the exhilaration of Bollywood moves. The movement is easy to follow and can be modified to the comfort level of any student, making it accessible to all. This class is open to all levels."
+    },
+    {
+      "slug": "pilates",
+      "name": "Pilates",
+      "url": "https://www.ailey.org/classes/techniques/pilates",
+      "description": "Pilates is a form of exercise created by Joseph Pilates that targets the body’s core to help stabilize and strengthen the body through movement. Developing the body’s deeper endurance muscles as opposed to the superficial power muscles, Pilates helps prevent injury and brings the body into alignment. We recommend participating in our Pilates classes using a non-slip yoga or Pilates mat. Ailey Extension does not provide mats for students. Pilates Fusion AILEY’s Pilates Fusion is a progressive fitness class designed to condition dancers with exercises rooted in Pilates that also draw from yoga and dance techniques. This class is a mindful workout focused on realigning the body with an emphasis on posture, strength, flexibility, and stability. Pilates Fusion is easily adaptable to students of all ages, abilities, and levels of dance. Romana's Mat Pilates Romana's Mat Pilates is for all levels and is designed to give students a great workout and understanding of the foundations and alignment of the Pilates method. Mat Pilates allows each individual to develop greater flexibility, strength, and control through their mind-body connection without equipment."
+    },
+    {
+      "slug": "restorative-stretches-adults",
+      "name": "Restorative Stretches for Adults",
+      "url": "https://www.ailey.org/classes/techniques/restorative-stretches-adults",
+      "description": "Join world-renowned dancer Sarita Allen for a new way to stay moving and increase flexibility. This class consists of exercises that can be easily adjusted to each individual’s ability while engaging the entire body, and improving flexibility and overall range of motion. Sarita’s specialized technique is for everyone, from adults working at home looking to stay active to seniors looking to increase mobility through movement."
+    },
+    {
+      "slug": "stretch-and-alignment",
+      "name": "Stretch and Alignment",
+      "url": "https://www.ailey.org/classes/techniques/stretch-and-alignment",
+      "description": "Fitness is not a quick fix program—it's a lifestyle based on the personal enjoyment, satisfaction, and benefits of physical activity and growth. This class is designed specifically for dancers to assess your overall fitness and learn exercises that you can carry into class and your daily routines. You'll learn a variety of movements that can be modified to your fitness level that focus on flexibility, stability, and strength in order to find proper alignment, enhance mobility, address muscular imbalances, and reduce risk of injury. This class is open to all levels. We recommend participating in Stretch and Alignment using a non-slip yoga or Pilates mat. Ailey Extension does not provide mats for students."
+    },
+    {
+      "slug": "zumba",
+      "name": "Zumba®",
+      "url": "https://www.ailey.org/classes/techniques/zumba",
+      "description": "Zumba® is a dance-fitness program that combines salsa, samba, merengue, and hip hop dances with a cardio workout creating a dynamic, exciting, and effective fitness system. Zumba® is based on the principle that a workout should be fun and easy to do, combining aerobic and fitness interval training with dancing, so participants can enjoy themselves while keeping fit."
+    }
+  ]
+}
