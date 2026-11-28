@@ -8,6 +8,7 @@ import 'package:nyc_dance_calendar/src/data/database/app_database.dart';
 import 'package:nyc_dance_calendar/src/data/feed.dart';
 import 'package:nyc_dance_calendar/src/domain/models.dart';
 import 'package:nyc_dance_calendar/src/state/providers.dart';
+import 'package:nyc_dance_calendar/src/ui/common.dart';
 import 'package:nyc_dance_calendar/src/ui/detail_sheet.dart';
 import 'package:nyc_dance_calendar/src/ui/teacher_notes.dart';
 import 'package:nyc_dance_calendar/src/ui/views/teachers_view.dart';
@@ -98,6 +99,61 @@ void main() {
     await _openSheet(tester, _ana);
     expect(find.text('Your notes on Ana Lopez'), findsOneWidget);
     expect(find.text('Add a note about Ana Lopez'), findsOneWidget);
+  });
+
+  testWidgets('tapping the teacher on a class opens their page; Back returns to the class', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+    await _openSheet(tester, _kathy);
+
+    final link = find.byKey(const ValueKey('info-row-link'));
+    expect(find.descendant(of: link, matching: find.text('Kathy Sullivan')), findsOneWidget);
+    await tester.tap(link);
+    await tester.pumpAndSettle();
+
+    final page = tester.widget<TeacherDetailPage>(find.byType(TeacherDetailPage));
+    expect(page.teacherKey, 'kathryn sullivan');
+    expect(find.byType(TeacherNotesSection), findsOneWidget);
+
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.byType(TeacherDetailPage), findsNothing);
+    expect(find.byKey(const ValueKey('info-row-link')), findsOneWidget); // back on the class sheet
+    expect(find.byType(TeachersView), findsNothing);
+  });
+
+  testWidgets('class -> teacher -> same class pops back instead of stacking', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+    await _openSheet(tester, _ana);
+
+    await tester.tap(find.byKey(const ValueKey('info-row-link')));
+    await tester.pumpAndSettle();
+    expect(find.byType(TeacherDetailPage), findsOneWidget);
+
+    // Tap the same class on the teacher page: back to the original sheet.
+    await tester.tap(find.descendant(of: find.byType(TeacherDetailPage), matching: find.byType(SessionCard)));
+    await tester.pumpAndSettle();
+    expect(find.byType(TeacherDetailPage), findsNothing);
+    expect(find.byKey(const ValueKey('info-row-link')), findsOneWidget);
+
+    // Teacher again, then Back: lands on the sheet, then the calendar.
+    await tester.tap(find.byKey(const ValueKey('info-row-link')));
+    await tester.pumpAndSettle();
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('info-row-link')), findsOneWidget);
+    Navigator.of(tester.element(find.byType(TeacherNotesSection))).pop();
+    await tester.pumpAndSettle();
+    expect(find.byKey(const ValueKey('info-row-link')), findsNothing);
+    expect(find.byType(CalendarHomeScreen), findsOneWidget);
+  });
+
+  testWidgets('Staff on a class is not a link', (tester) async {
+    await tester.pumpWidget(_app());
+    await tester.pumpAndSettle();
+    await _openSheet(tester, _staff);
+    expect(find.byKey(const ValueKey('info-row-link')), findsNothing);
   });
 
   testWidgets('writing a note from a class autosaves and shows it on the sheet', (tester) async {

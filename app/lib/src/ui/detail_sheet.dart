@@ -7,7 +7,9 @@ import '../domain/models.dart';
 import '../services/calendar_export_service.dart';
 import '../state/providers.dart';
 import 'common.dart';
+import 'route_stack.dart';
 import 'teacher_notes.dart';
+import 'views/teachers_view.dart';
 
 /// Opens the booking URL in the external browser so the Mindbody login
 /// persists between bookings (Q16).
@@ -20,8 +22,11 @@ Future<void> openBooking(BuildContext context, String url) async {
 }
 
 void showSessionDetail(BuildContext context, ClassSession session) {
+  final name = sessionRouteName(session.id);
+  if (popToExisting(context, name)) return;
   showModalBottomSheet<void>(
     context: context,
+    routeSettings: RouteSettings(name: name),
     isScrollControlled: true,
     showDragHandle: true,
     builder: (_) => DraggableScrollableSheet(
@@ -97,21 +102,60 @@ class _Section extends StatelessWidget {
 }
 
 class _InfoRow extends StatelessWidget {
-  const _InfoRow(this.icon, this.text, {this.trailing});
+  const _InfoRow(this.icon, this.text, {this.trailing, this.onTap});
   final IconData icon;
   final String text;
   final Widget? trailing;
 
+  /// When set, the text is styled as a link and the row is tappable.
+  final VoidCallback? onTap;
+
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 3),
-        child: Row(children: [
-          Icon(icon, size: 18, color: Theme.of(context).hintColor),
-          const SizedBox(width: 8),
-          Flexible(child: Text(text)),
-          if (trailing != null) ...[const SizedBox(width: 8), trailing!],
-        ]),
-      );
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final row = Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3),
+      child: Row(children: [
+        Icon(icon, size: 18, color: theme.hintColor),
+        const SizedBox(width: 8),
+        Flexible(
+          child: Text(
+            text,
+            style: onTap == null
+                ? null
+                : TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.w600),
+          ),
+        ),
+        if (onTap != null) Icon(Icons.chevron_right, size: 18, color: theme.colorScheme.primary),
+        if (trailing != null) ...[const SizedBox(width: 8), trailing!],
+      ]),
+    );
+    if (onTap == null) return row;
+    return InkWell(
+      key: const ValueKey('info-row-link'),
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(4),
+      child: row,
+    );
+  }
+}
+
+/// Opens [teacherKey]'s page on top of the class sheet, so Back returns to
+/// the class. If that teacher's page is already in the stack, pops back to it
+/// instead of pushing a duplicate.
+void openTeacherPage(
+  BuildContext context, {
+  required String teacherKey,
+  required String displayName,
+}) {
+  final name = teacherRouteName(teacherKey);
+  if (popToExisting(context, name)) return;
+  Navigator.of(context, rootNavigator: true).push(
+    MaterialPageRoute<void>(
+      settings: RouteSettings(name: name),
+      builder: (_) => TeacherDetailPage(teacherKey: teacherKey, fallbackName: displayName),
+    ),
+  );
 }
 
 class _SessionDetail extends ConsumerWidget {
@@ -188,6 +232,13 @@ class _SessionDetail extends ConsumerWidget {
         _InfoRow(
           Icons.person_outline,
           session.instructor,
+          onTap: ref.watch(teacherResolverProvider).isPlaceholder(session.matchKey)
+              ? null
+              : () => openTeacherPage(
+                    context,
+                    teacherKey: session.matchKey,
+                    displayName: session.instructor,
+                  ),
           trailing: session.isSubstitute
               ? StatusChip(
                   label: () {

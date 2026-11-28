@@ -5,6 +5,7 @@ import '../../domain/models.dart';
 import '../../domain/teachers.dart';
 import '../../state/providers.dart';
 import '../common.dart';
+import '../route_stack.dart';
 import '../teacher_notes.dart';
 
 /// Teachers tab: teachers you have notes on, then everyone on the current
@@ -147,6 +148,7 @@ class _TeacherTile extends StatelessWidget {
       ),
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute<void>(
+          settings: RouteSettings(name: teacherRouteName(entry.key)),
           builder: (_) => TeacherDetailPage(
             teacherKey: entry.key,
             fallbackName: entry.displayName,
