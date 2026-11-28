@@ -5,6 +5,7 @@ import 'src/domain/models.dart';
 import 'src/state/providers.dart';
 import 'src/ui/common.dart';
 import 'src/ui/detail_sheet.dart';
+import 'src/ui/route_stack.dart';
 import 'src/ui/views/genre_agenda_view.dart';
 import 'src/ui/views/my_week_view.dart';
 import 'src/ui/views/studio_columns_view.dart';
@@ -62,6 +63,7 @@ class NYCStudioCalendarApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
+      navigatorObservers: [routeStack],
       home: const CalendarHomeScreen(),
     );
   }
